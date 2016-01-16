@@ -6,6 +6,7 @@ import React, {
   MapView,
   TextInput,
   TouchableHighlight,
+  ActivityIndicatorIOS,
 } from 'react-native'
 
 import RNGeocoder from 'react-native-geocoder'
@@ -20,7 +21,6 @@ export default class SetAddress extends Component {
       latitude: null,
       longitude: null,
       address: null,
-      loadingAddress: true,
     }
   }
 
@@ -38,14 +38,13 @@ export default class SetAddress extends Component {
   }
 
   componentDidUpdate() {
-    const { latitude, longitude } = this.state
-    console.log('antes')
-    console.log(RNGeocoder)
-    RNGeocoder.reverseGeocodeLocation({latitude, longitude}, (error, data) => {
-      console.log('depois')
-      console.log(error)
-      console.log(data)
-    })        
+    if (!this.state.address) {
+      const { latitude, longitude } = this.state
+      RNGeocoder.reverseGeocodeLocation({latitude, longitude}, (error, data) => {
+        if(error) { return }
+        this.setState({address: data && data[0] })
+      })        
+    }
   }
 
   renderMap() {
@@ -77,8 +76,27 @@ export default class SetAddress extends Component {
     )
   }
 
+  renderAddress() {
+    const { address } = this.state
+    return (
+      <Text style={[StyleSheets.label, StyleSheets.marginBottom]}>
+        { address.name } - { address.subLocality } - { address.locality } - { address.administrativeArea }, { address.country }
+      </Text>
+    )
+  }
+
+  renderLoading() {
+    return (
+      <ActivityIndicatorIOS 
+        animating={true}
+        color={Colors.pink}
+        style={StyleSheets.marginBottom}
+      />
+    )
+  }
+
   render() {
-    const { latitude, longitude } = this.state
+    const { latitude, longitude, address } = this.state
     return (
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Complete seu cadastro</Text>
@@ -86,6 +104,7 @@ export default class SetAddress extends Component {
           Precisamos saber onde você mora para descobrir quem são seus vizinhos :)
         </Text>
         { latitude && this.renderMap() }
+        { address ? this.renderAddress() : this.renderLoading() }
         <TouchableHighlight style={StyleSheets.flexEnd}>
           <Text style={StyleSheets.button}>Continuar</Text>
         </TouchableHighlight>
