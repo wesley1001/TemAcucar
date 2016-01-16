@@ -3,9 +3,11 @@ import React, {
   StyleSheet,
   Text,
   View,
+  Image,
   MapView,
   TextInput,
   TouchableHighlight,
+  TouchableOpacity,
   ActivityIndicatorIOS,
 } from 'react-native'
 
@@ -21,6 +23,8 @@ export default class SetAddress extends Component {
       latitude: null,
       longitude: null,
       address: null,
+      search: null,
+      searching: false,
     }
   }
 
@@ -42,8 +46,38 @@ export default class SetAddress extends Component {
       const { latitude, longitude } = this.state
       RNGeocoder.reverseGeocodeLocation({latitude, longitude}, (error, data) => {
         if(error) { return }
-        this.setState({address: data && data[0] })
+        const address = data && data[0]
+        this.setState({
+          address: address,
+        })
       })        
+    }
+  }
+
+  fullAddress(address) {
+    return `${ address.name } - ${ address.subLocality } - ${ address.locality } - ${ address.administrativeArea }, ${ address.country }`
+  }
+
+  handleSearchChange(text) {
+    this.setState({search: text})
+  }
+
+  handleSearch() {
+    const { search } = this.state
+    if (search && search.length > 0) {
+      this.setState({searching: true})
+      RNGeocoder.geocodeAddress(search, (error, data) => {
+        if(error) { return }
+        const address = data && data[0]
+        console.log('aki')
+        console.log(address)
+        this.setState({
+          address: address,
+          latitude: address.location.lat,
+          longitude: address.location.lng,
+          searching: false,
+        })
+      })    
     }
   }
 
@@ -56,7 +90,6 @@ export default class SetAddress extends Component {
           alignSelf: 'stretch',
           borderWidth: 1,
           borderColor: Colors.brown,
-          borderRadius: 4,
         }, StyleSheets.marginBottom]}
         region={{
           latitude: parseFloat(latitude), 
@@ -67,9 +100,8 @@ export default class SetAddress extends Component {
         annotations={[{
           latitude: latitude,
           longitude: longitude,
-          title: 'Você está aqui',
-          subtitle: 'Arraste para alterar sua localização',
-          draggable: true,
+          title: 'É aqui que você mora?',
+          subtitle: 'Edite seu endereço para alterar sua localização',
           image: require('./img/icon.png'),
         }]}
       />
@@ -80,12 +112,12 @@ export default class SetAddress extends Component {
     const { address } = this.state
     return (
       <Text style={[StyleSheets.label, StyleSheets.marginBottom]}>
-        { address.name } - { address.subLocality } - { address.locality } - { address.administrativeArea }, { address.country }
+        {this.fullAddress(address)}
       </Text>
     )
   }
 
-  renderLoading() {
+  renderAddressLoading() {
     return (
       <ActivityIndicatorIOS 
         animating={true}
@@ -95,18 +127,68 @@ export default class SetAddress extends Component {
     )
   }
 
+  renderSearchLoading() {
+    return (
+      <ActivityIndicatorIOS 
+        animating={true}
+        color={Colors.pink}
+        style={{
+          height: 40,
+          width: 40,
+        }}
+      />
+    )
+  }
+
+  renderSearchButton() {
+    return (
+      <TouchableOpacity
+        style={{
+          height: 40,
+          width: 40,
+          padding: 10,
+        }}
+        onPress={this.handleSearch.bind(this)}
+      >
+        <Image source={require('./img/search.png')} />
+      </TouchableOpacity>
+    )    
+  }
+
   render() {
-    const { latitude, longitude, address } = this.state
+    const { latitude, longitude, address, search, searching } = this.state
     return (
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Complete seu cadastro</Text>
         <Text style={[StyleSheets.label, StyleSheets.marginBottom]}>
           Precisamos saber onde você mora para descobrir quem são seus vizinhos :)
         </Text>
-        { latitude && this.renderMap() }
-        { address ? this.renderAddress() : this.renderLoading() }
-        <TouchableHighlight style={StyleSheets.flexEnd}>
-          <Text style={StyleSheets.button}>Continuar</Text>
+        <View style={{
+          alignSelf: 'stretch',
+          borderColor: Colors.brown, 
+          borderWidth: 1,
+          borderBottomWidth: 0,
+          flexDirection: 'row',
+        }}>
+          <TextInput
+            keyboardType={'default'}
+            autoCapitalize={'none'}
+            placeholder={'Procure seu endereço completo'}
+            value={search}
+            onChangeText={this.handleSearchChange.bind(this)}
+            style={{
+              fontSize: 16,
+              height: 40,
+              padding: 10,
+              flex: 1,
+            }}
+          />
+          { searching ? this.renderSearchLoading() : this.renderSearchButton() }
+        </View>
+        { latitude && longitude && this.renderMap() }
+        { address ? this.renderAddress() : this.renderAddressLoading() }
+        <TouchableHighlight style={[StyleSheets.flexEnd, StyleSheets.stretch]}>
+          <Text style={[StyleSheets.button]}>Confirmar endereço e continuar</Text>
         </TouchableHighlight>
       </View>
     )

@@ -33,12 +33,12 @@ export default class Welcome extends Component {
         <Text style={[StyleSheets.headline, StyleSheets.bigMarginVertical]}>
           Compartilhe suas coisas com seus vizinhos
         </Text>
-        <TouchableHighlight onPress={this.handleLogin.bind(this)}>
-          <Text style={StyleSheets.button}>Faça seu login</Text>
-        </TouchableHighlight>
-        <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
         <TouchableHighlight onPress={this.handleCreateAccount.bind(this)}>
           <Text style={StyleSheets.button}>Crie sua conta</Text>
+        </TouchableHighlight>
+        <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
+        <TouchableHighlight onPress={this.handleLogin.bind(this)}>
+          <Text style={StyleSheets.button}>Faça seu login</Text>
         </TouchableHighlight>
       </View>
     )
