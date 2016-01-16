@@ -10,10 +10,9 @@ import React, {
 import Login from "./Login"
 
 export default class Welcome extends Component {
-  handlePress() {
-    console.log(this)
+  handleLogin() {
     this.props.navigator.push({
-      title: 'Faça seu login',
+      title: 'Login',
       component: Login
     })
   }
@@ -49,7 +48,7 @@ export default class Welcome extends Component {
         <Text style={styles.headline}>
           Compartilhe suas coisas com seus vizinhos
         </Text>
-        <TouchableHighlight onPress={this.handlePress.bind(this)}>
+        <TouchableHighlight onPress={this.handleLogin.bind(this)}>
           <Text style={styles.button}>Faça seu login</Text>
         </TouchableHighlight>
         <Text style={styles.text}>ou</Text>

@@ -1,7 +1,6 @@
 import React, {
   Component,
   StyleSheet,
-  Image,
   Text,
   View
 } from 'react-native'
@@ -25,7 +24,6 @@ export default class Login extends Component {
     })
     return (
       <View style={styles.container}>
-        <Image source={require('./img/logo.jpg')} />
         <Text style={styles.headline}>
           Faça seu login
         </Text>

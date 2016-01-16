@@ -13,7 +13,7 @@ class TemAcucar extends Component {
       <NavigatorIOS
         style={{flex: 1}}
         initialRoute={{
-          title: 'Vamos começar?',
+          title: 'Tem Açúcar?',
           component: Welcome
         }}
       />
