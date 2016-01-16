@@ -11,6 +11,19 @@ import StyleSheets from "./StyleSheets"
 import SetAddress from "./SetAddress"
 
 export default class Terms extends Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      scrolledToBottom: false,
+    }
+  }
+
+  handleScroll(event) {
+    if(event.nativeEvent.contentOffset.y == (event.nativeEvent.contentSize.height - event.nativeEvent.layoutMeasurement.height)) {
+      this.setState({scrolledToBottom: true})      
+    }
+  }
+
   handleSetAddress() {
     this.props.navigator.push({
       title: 'Complete seu cadastro',
@@ -18,12 +31,37 @@ export default class Terms extends Component {
     })
   }
 
+  renderInstructions() {
+    return (
+      <Text style={[StyleSheets.label, StyleSheets.marginBottom]}>
+        Para poder continuar, você deve ler os termos de uso até o final.
+      </Text>
+    )
+  }
+
+  renderButton() {
+    return (
+      <View>
+        <Text style={[StyleSheets.label, StyleSheets.marginBottom]}>
+          Ao continuar, você aceita os termos de uso.
+        </Text>
+        <TouchableHighlight style={StyleSheets.flexEnd} onPress={this.handleSetAddress.bind(this)}>
+          <Text style={StyleSheets.button}>Continuar</Text>
+        </TouchableHighlight>
+      </View>
+    )
+  }
+
   render() {
     return (
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Termos de uso</Text>
-        <ScrollView style={[StyleSheets.scrollView, StyleSheets.marginBottom]}>
-          <Text style={StyleSheets.paragraph}>
+        <ScrollView
+          style={[StyleSheets.scrollView, StyleSheets.marginBottom]}
+          scrollEventThrottle={1}
+          onScroll={this.handleScroll.bind(this)}
+        >
+          <Text style={[StyleSheets.paragraph, {marginTop: -40}]}>
             TERMOS E CONDIÇÕES GERAIS
           </Text>
           <Text style={StyleSheets.paragraph}>
@@ -294,12 +332,7 @@ export default class Terms extends Component {
             Todos os itens destes Termos e Condições Gerais estão regidos pelas leis vigentes na República Federativa do Brasil. Para todos os assuntos referentes à interpretação e ao cumprimento deste Contrato, as partes se submetem ao Foro Central da Comarca do Rio de Janeiro , estado do Rio de Janeiro.
           </Text>
         </ScrollView>
-        <Text style={[StyleSheets.label, StyleSheets.marginBottom]}>
-          Ao continuar, você aceita os termos de uso.
-        </Text>
-        <TouchableHighlight style={StyleSheets.flexEnd} onPress={this.handleSetAddress.bind(this)}>
-          <Text style={StyleSheets.button}>Continuar</Text>
-        </TouchableHighlight>
+        { this.state.scrolledToBottom ? this.renderButton() : this.renderInstructions() }
       </View>
     )
   }
