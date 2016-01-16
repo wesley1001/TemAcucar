@@ -28,7 +28,7 @@ export default class Welcome extends Component {
         <TouchableHighlight onPress={this.handleLogin.bind(this)}>
           <Text style={StyleSheets.button}>Faça seu login</Text>
         </TouchableHighlight>
-        <Text style={[StyleSheets.text, StyleSheets.margin]}>ou</Text>
+        <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
         <TouchableHighlight>
           <Text style={StyleSheets.button}>Crie sua conta</Text>
         </TouchableHighlight>

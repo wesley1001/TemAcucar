@@ -19,7 +19,7 @@ const StyleSheets = StyleSheet.create({
     marginBottom: 36,
   },
 
-  text: {
+  label: {
     color: Colors.brown,
     fontSize: 16,
     paddingTop: 4,
@@ -30,16 +30,31 @@ const StyleSheets = StyleSheet.create({
     margin: 10,
   },
 
+  marginTop: {
+    marginTop: 20,
+  },
+
   button: {
-    padding: 10,
-    color: '#fff',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    color: Colors.white,
     backgroundColor: Colors.pink,
+    textAlign: 'center',
+  },
+
+  link: {
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    fontSize: 16,
+    color: Colors.brown,
+    textDecorationLine: 'underline',
   },
 
   input: {
     height: 40, 
     borderColor: Colors.brown, 
     borderWidth: 1,
+    borderRadius: 4,
     padding: 10,
     marginBottom: 20,
   },
