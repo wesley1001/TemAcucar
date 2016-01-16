@@ -15,6 +15,7 @@ import RNGeocoder from 'react-native-geocoder'
 
 import Colors from "./Colors"
 import StyleSheets from "./StyleSheets"
+import Neighborhood from "./Neighborhood"
 
 export default class SetAddress extends Component {
   constructor(props, context) {
@@ -69,8 +70,6 @@ export default class SetAddress extends Component {
       RNGeocoder.geocodeAddress(search, (error, data) => {
         if(error) { return }
         const address = data && data[0]
-        console.log('aki')
-        console.log(address)
         this.setState({
           address: address,
           latitude: address.location.lat,
@@ -79,6 +78,13 @@ export default class SetAddress extends Component {
         })
       })    
     }
+  }
+
+  handleSave() {
+    this.props.navigator.push({
+      title: 'Minha vizinhança',
+      component: Neighborhood,
+    })
   }
 
   renderMap() {
@@ -187,7 +193,10 @@ export default class SetAddress extends Component {
         </View>
         { latitude && longitude && this.renderMap() }
         { address ? this.renderAddress() : this.renderAddressLoading() }
-        <TouchableHighlight style={[StyleSheets.flexEnd, StyleSheets.stretch]}>
+        <TouchableHighlight
+          style={[StyleSheets.flexEnd, StyleSheets.stretch]}
+          onPress={this.handleSave.bind(this)}
+        >
           <Text style={[StyleSheets.button]}>Confirmar endereço e continuar</Text>
         </TouchableHighlight>
       </View>

@@ -14,7 +14,7 @@ export default class Terms extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      scrolledToBottom: true,
+      scrolledToBottom: false,
     }
   }
 

@@ -10,12 +10,20 @@ import React, {
 
 import StyleSheets from "./StyleSheets"
 import ForgotPassword from "./ForgotPassword"
+import Neighborhood from "./Neighborhood"
 
 export default class Login extends Component {
   handleForgotPassword() {
     this.props.navigator.push({
       title: 'Esqueceu sua senha?',
       component: ForgotPassword,
+    })
+  }
+
+  handleLogin() {
+    this.props.navigator.push({
+      title: 'Minha vizinhança',
+      component: Neighborhood,
     })
   }
 
@@ -40,7 +48,7 @@ export default class Login extends Component {
             placeholder={'Digite sua senha'}
           />
         </View>
-        <TouchableHighlight style={StyleSheets.flexEnd}>
+        <TouchableHighlight style={StyleSheets.flexEnd} onPress={this.handleLogin.bind(this)}>
           <Text style={StyleSheets.button}>Fazer login</Text>
         </TouchableHighlight>
         <TouchableOpacity style={StyleSheets.marginTop} onPress={this.handleForgotPassword.bind(this)}>
