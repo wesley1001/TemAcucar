@@ -9,12 +9,20 @@ import React, {
 
 import StyleSheets from "./StyleSheets"
 import Login from "./Login"
+import CreateAccount from "./CreateAccount"
 
 export default class Welcome extends Component {
   handleLogin() {
     this.props.navigator.push({
       title: 'Login',
       component: Login,
+    })
+  }
+
+  handleCreateAccount() {
+    this.props.navigator.push({
+      title: 'Crie sua conta',
+      component: CreateAccount,
     })
   }
 
@@ -29,7 +37,7 @@ export default class Welcome extends Component {
           <Text style={StyleSheets.button}>Faça seu login</Text>
         </TouchableHighlight>
         <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
-        <TouchableHighlight>
+        <TouchableHighlight onPress={this.handleCreateAccount.bind(this)}>
           <Text style={StyleSheets.button}>Crie sua conta</Text>
         </TouchableHighlight>
       </View>
