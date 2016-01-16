@@ -1,6 +1,6 @@
 import React, {
   AppRegistry,
-  Component
+  Component,
 } from 'react-native'
 
 class TemAcucar extends Component {

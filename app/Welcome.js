@@ -4,56 +4,33 @@ import React, {
   Image,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
 } from 'react-native'
 
+import StyleSheets from "./StyleSheets"
 import Login from "./Login"
 
 export default class Welcome extends Component {
   handleLogin() {
     this.props.navigator.push({
       title: 'Login',
-      component: Login
+      component: Login,
     })
   }
 
   render() {
-    const styles = StyleSheet.create({
-      container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff'
-      },
-      headline: {
-        color: '#6b5054',
-        fontWeight: 'bold',
-        fontSize: 24,
-        textAlign: 'center',
-        margin: 48
-      },
-      text: {
-        color: '#6b5054',
-        margin: 10
-      },
-      button: {
-        padding: 10,
-        color: '#fff',
-        backgroundColor: '#ec6f7b'
-      }
-    })
     return (
-      <View style={styles.container}>
+      <View style={StyleSheets.container}>
         <Image source={require('./img/logo.jpg')} />
-        <Text style={styles.headline}>
+        <Text style={StyleSheets.headline}>
           Compartilhe suas coisas com seus vizinhos
         </Text>
         <TouchableHighlight onPress={this.handleLogin.bind(this)}>
-          <Text style={styles.button}>Faça seu login</Text>
+          <Text style={StyleSheets.button}>Faça seu login</Text>
         </TouchableHighlight>
-        <Text style={styles.text}>ou</Text>
+        <Text style={[StyleSheets.text, StyleSheets.margin]}>ou</Text>
         <TouchableHighlight>
-          <Text style={styles.button}>Crie sua conta</Text>
+          <Text style={StyleSheets.button}>Crie sua conta</Text>
         </TouchableHighlight>
       </View>
     )
