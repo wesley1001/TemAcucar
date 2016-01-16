@@ -30,7 +30,7 @@ export default class Welcome extends Component {
     return (
       <View style={StyleSheets.container}>
         <Image source={require('./img/logo.jpg')} />
-        <Text style={StyleSheets.headline}>
+        <Text style={[StyleSheets.headline, StyleSheets.bigMarginVertical]}>
           Compartilhe suas coisas com seus vizinhos
         </Text>
         <TouchableHighlight onPress={this.handleLogin.bind(this)}>

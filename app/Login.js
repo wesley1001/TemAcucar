@@ -22,7 +22,7 @@ export default class Login extends Component {
   render() {
     return (
       <View style={StyleSheets.container}>
-        <Text style={StyleSheets.headline}>Faça seu login</Text>
+        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Faça seu login</Text>
         <View style={StyleSheets.stretch}>
           <Text style={StyleSheets.label}>Email</Text>
           <TextInput

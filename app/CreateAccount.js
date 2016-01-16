@@ -8,7 +8,9 @@ import React, {
   TouchableOpacity,
 } from 'react-native'
 
+import Colors from "./Colors"
 import StyleSheets from "./StyleSheets"
+import Terms from "./Terms"
 import Login from "./Login"
 
 export default class CreateAccount extends Component {
@@ -19,10 +21,17 @@ export default class CreateAccount extends Component {
     })
   }
 
+  handleTerms() {
+    this.props.navigator.push({
+      title: 'Termos de uso',
+      component: Terms,
+    })
+  }
+
   render() {
     return (
       <View style={StyleSheets.container}>
-        <Text style={StyleSheets.headline}>Faça seu cadastro</Text>
+        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Crie sua conta</Text>
         <View style={StyleSheets.stretch}>
           <Text style={StyleSheets.label}>Nome</Text>
           <TextInput
@@ -53,11 +62,11 @@ export default class CreateAccount extends Component {
             placeholder={'Digite sua senha'}
           />
         </View>
-        <TouchableHighlight style={StyleSheets.flexEnd}>
+        <TouchableHighlight style={StyleSheets.flexEnd} onPress={this.handleTerms.bind(this)}>
           <Text style={StyleSheets.button}>Continuar</Text>
         </TouchableHighlight>
         <TouchableOpacity style={StyleSheets.marginTop} onPress={this.handleLogin.bind(this)}>
-          <Text style={StyleSheets.link}>Já possui cadastro?</Text>
+          <Text style={StyleSheets.link}>Já possui uma conta?</Text>
         </TouchableOpacity>
       </View>
     )

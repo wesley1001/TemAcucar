@@ -15,8 +15,6 @@ const StyleSheets = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 24,
     textAlign: 'center',
-    marginTop: 36,
-    marginBottom: 36,
   },
 
   label: {
@@ -26,12 +24,44 @@ const StyleSheets = StyleSheet.create({
     paddingBottom: 4,
   },
 
+  paragraph: {
+    color: Colors.brown,
+    fontSize: 16,
+    marginBottom: 20,
+  },
+
+  scrollView: {
+    alignSelf: 'stretch',
+    backgroundColor: Colors.beige,
+    padding: 10,
+  },
+
   margin: {
     margin: 10,
   },
 
+  noMargin: {
+    margin: 0,
+  },
+
+  marginVertical: {
+    marginVertical: 20,
+  },
+
+  marginBottom: {
+    marginBottom: 20,
+  },
+
   marginTop: {
     marginTop: 20,
+  },
+
+  bigMarginBottom: {
+    marginBottom: 36,
+  },
+
+  bigMarginVertical: {
+    marginVertical: 36,
   },
 
   button: {
