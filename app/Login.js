@@ -24,6 +24,12 @@ export default class Login extends Component {
     this.props.navigator.push({
       title: 'Minha vizinhança',
       component: Neighborhood,
+      passProps: {
+        user: {
+          latitude: -30.034162,
+          longitude: -51.209485
+        },
+      },
     })
   }
 

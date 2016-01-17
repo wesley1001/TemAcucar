@@ -96,6 +96,13 @@ const StyleSheets = StyleSheet.create({
   flexEnd: {
     alignSelf: 'flex-end',
   },
+
+  map: {
+    height: 200,
+    alignSelf: 'stretch',
+    borderWidth: 1,
+    borderColor: Colors.brown,
+  },
 })
 
 export default StyleSheets

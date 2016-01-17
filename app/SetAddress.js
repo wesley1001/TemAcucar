@@ -84,6 +84,12 @@ export default class SetAddress extends Component {
     this.props.navigator.push({
       title: 'Minha vizinhança',
       component: Neighborhood,
+      passProps: {
+        user: {
+          latitude: -30.034162,
+          longitude: -51.209485
+        },
+      },
     })
   }
 
@@ -91,12 +97,7 @@ export default class SetAddress extends Component {
     const { latitude, longitude } = this.state
     return (
       <MapView
-        style={[{
-          height: 200,
-          alignSelf: 'stretch',
-          borderWidth: 1,
-          borderColor: Colors.brown,
-        }, StyleSheets.marginBottom]}
+        style={[StyleSheets.map, StyleSheets.marginBottom]}
         region={{
           latitude: parseFloat(latitude), 
           longitude: parseFloat(longitude),
