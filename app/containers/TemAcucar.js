@@ -1,10 +1,24 @@
-import React, { Component, Text } from 'react-native'
-import { Provider } from 'react-redux'
+import React, { Component, View, Text } from 'react-native'
+import { connect } from 'react-redux'
+import { fetchCurrentUser } from '../actions'
 
-export default class TemAcucar extends Component {
+import StyleSheets from "../stylesheets/StyleSheets"
+
+class TemAcucar extends Component {
+  componentDidMount() {
+    const { dispatch, currentUser } = this.props
+    dispatch(fetchCurrentUser())
+  }
+
   render() {
     return (
-      <Text>Aki</Text>
+      <View style={StyleSheets.container}>
+        <Text>Aki</Text>
+      </View>
     )
   }
 }
+
+export default connect(state => ({
+  currentUser: state.currentUser,
+}))(TemAcucar)
