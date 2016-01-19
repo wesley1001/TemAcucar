@@ -46,7 +46,10 @@ export default class SetAddress extends Component {
     if (!this.state.address) {
       const { latitude, longitude } = this.state
       RNGeocoder.reverseGeocodeLocation({latitude, longitude}, (error, data) => {
-        if(error) { return }
+        if(error) { 
+          console.log(error)
+          return
+        }
         const address = data && data[0]
         this.setState({
           address: address,
@@ -68,8 +71,14 @@ export default class SetAddress extends Component {
     if (search && search.length > 0) {
       this.setState({searching: true})
       RNGeocoder.geocodeAddress(search, (error, data) => {
-        if(error) { return }
+        if(error) { 
+          console.log(error)
+          this.setState({searching: false})
+          alert('Não encontramos este endereço. Por favor, tente novamente.')
+          return
+        }
         const address = data && data[0]
+        console.log(address)
         this.setState({
           address: address,
           latitude: address.location.lat,
