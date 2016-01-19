@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-function currentUser(state = {}, action) {
+function currentUser(state = null, action) {
   switch (action.type) {
     case 'RECEIVE_CURRENT_USER':
       return action.user
@@ -9,8 +9,16 @@ function currentUser(state = {}, action) {
   }
 }
 
+function credentials(state = null, action) {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
 const reducer = combineReducers({
   currentUser,
+  credentials,
 })
 
 export default reducer
