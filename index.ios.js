@@ -1,23 +1,3 @@
-import React, {
-  AppRegistry,
-  Component,
-  NavigatorIOS,
-} from 'react-native'
-
-import Welcome from "./app/Welcome"
-
-class TemAcucar extends Component {
-  render() {
-    return (
-      <NavigatorIOS
-        style={{flex: 1}}
-        initialRoute={{
-          title: 'Tem Açúcar?',
-          component: Welcome,
-        }}
-      />
-    )
-  }
-}
-
-AppRegistry.registerComponent('TemAcucar', () => TemAcucar)
+import { AppRegistry } from 'react-native'
+import Root from './app/containers/Root'
+AppRegistry.registerComponent('TemAcucar', () => Root)
