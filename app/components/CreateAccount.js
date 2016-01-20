@@ -16,7 +16,7 @@ import SignIn from "./SignIn"
 export default class CreateAccount extends Component {
   handleSignIn() {
     this.props.navigator.push({
-      title: 'SignIn',
+      title: 'Login',
       component: SignIn,
       passProps: { onSignInSubmit: this.props.onSignInSubmit },
     })

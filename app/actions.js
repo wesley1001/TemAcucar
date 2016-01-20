@@ -8,16 +8,16 @@ export function authFetchUser(currentUser) {
     // TODO fetch from iOS keychain or Android Keystore INSTEAD of setTimeout
     setTimeout(() => {
       // TODO dispatch something like this if have a saved current user
-      dispatch({
-        type: 'AUTH_FETCH_USER_SUCCESS',
-        user: {
-          id: 23429,
-          email: 'danielweinmann@gmail.com',
-          password: 'danielweinmann!',
-        },
-      })
+      // dispatch({
+      //   type: 'AUTH_FETCH_USER_SUCCESS',
+      //   user: {
+      //     id: 23429,
+      //     email: 'danielweinmann@gmail.com',
+      //     password: 'danielweinmann',
+      //   },
+      // })
       // TODO dispatch this if we don't have a saved current user
-      // dispatch({ type: 'AUTH_FETCH_USER_FAILURE' })
+      dispatch({ type: 'AUTH_FETCH_USER_FAILURE' })
     }, 30)
   }
 }

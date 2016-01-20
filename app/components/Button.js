@@ -11,10 +11,10 @@ import StyleSheets from "../styles/StyleSheets"
 export default class Button extends Component {
 
   render() {
-    const { style, onPress, children } = this.props
+    const { viewStyle, textStyle, onPress, children } = this.props
     return (
-      <TouchableHighlight style={style} onPress={onPress}>
-        <Text style={StyleSheets.button}>{children}</Text>
+      <TouchableHighlight style={viewStyle} onPress={onPress}>
+        <Text style={[StyleSheets.button, textStyle]}>{children}</Text>
       </TouchableHighlight>
     )
   }

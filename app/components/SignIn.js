@@ -69,7 +69,7 @@ class SignIn extends Component {
             {...password}
           />
         </View>
-        <Button disabled={!dirty || !valid || submitting} style={StyleSheets.flexEnd, StyleSheets.marginBottom} onPress={handleSubmit(onSignInSubmit)}>
+        <Button disabled={!dirty || !valid || submitting} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignInSubmit)}>
           Fazer login
         </Button>
         <Link onPress={this.handleResetPassword.bind(this)}>
