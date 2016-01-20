@@ -21,6 +21,11 @@ class TemAcucar extends Component {
     }
   }
 
+  handleLoginSubmit(user) {
+    const { dispatch } = this.props
+    dispatch(authSignIn(user))
+  }
+
   render() {
     const { dispatch, auth } = this.props
     const { fetchingUser, signingIn, credentials } = auth
@@ -29,7 +34,7 @@ class TemAcucar extends Component {
     if (signingIn)
       return (<SigningIn />)
     if (!credentials)
-      return (<SignedOut {...this.props} authSignIn={authSignIn} />)
+      return (<SignedOut onLoginSubmit={this.handleLoginSubmit.bind(this)} />)
     return (
       <View style={StyleSheets.container}>
         <Text style={StyleSheets.label}>ABC</Text>

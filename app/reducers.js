@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { reducer as form } from 'redux-form'
 
 const initialAuth = {
   user: null,
@@ -58,6 +59,7 @@ function auth(state = initialAuth, action) {
 
 const reducer = combineReducers({
   auth,
+  form
 })
 
 export default reducer

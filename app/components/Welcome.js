@@ -4,10 +4,10 @@ import React, {
   Image,
   Text,
   View,
-  TouchableHighlight,
 } from 'react-native'
 
 import StyleSheets from "../styles/StyleSheets"
+import Button from "./Button"
 import Login from "./Login"
 import CreateAccount from "./CreateAccount"
 
@@ -16,7 +16,7 @@ export default class Welcome extends Component {
     this.props.navigator.push({
       title: 'Login',
       component: Login,
-      passProps: {...this.props},
+      passProps: { onLoginSubmit: this.props.onLoginSubmit },
     })
   }
 
@@ -34,13 +34,13 @@ export default class Welcome extends Component {
         <Text style={[StyleSheets.headline, StyleSheets.bigMarginVertical]}>
           Compartilhe suas coisas com seus vizinhos
         </Text>
-        <TouchableHighlight onPress={this.handleCreateAccount.bind(this)}>
-          <Text style={StyleSheets.button}>Crie sua conta</Text>
-        </TouchableHighlight>
+        <Button onPress={this.handleCreateAccount.bind(this)}>
+          Crie sua conta
+        </Button>
         <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
-        <TouchableHighlight onPress={this.handleLogin.bind(this)}>
-          <Text style={StyleSheets.button}>Faça seu login</Text>
-        </TouchableHighlight>
+        <Button onPress={this.handleLogin.bind(this)}>
+          Faça seu login
+        </Button>
       </View>
     )
   }

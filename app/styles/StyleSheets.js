@@ -103,6 +103,13 @@ const StyleSheets = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.brown,
   },
+
+  error: {
+    color: Colors.pink,
+    fontSize: 16,
+    paddingTop: 4,
+    paddingBottom: 4,
+  }
 })
 
 export default StyleSheets
