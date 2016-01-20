@@ -16,7 +16,7 @@ export default class Welcome extends Component {
     this.props.navigator.push({
       title: 'Login',
       component: SignIn,
-      passProps: { onSignInSubmit: this.props.onSignInSubmit },
+      passProps: { onSignIn: this.props.onSignIn },
     })
   }
 

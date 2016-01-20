@@ -1,6 +1,6 @@
 import React, { Component, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { authGetUser, authSignIn } from '../actions'
+import { authGetUser, authSignIn, authSignOut } from '../actions'
 
 import StyleSheets from "../styles/StyleSheets"
 import Loading from "../components/Loading"
@@ -16,27 +16,33 @@ class TemAcucar extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, auth } = nextProps
-    const { user, credentials, signingIn, gettingUser, error } = auth
-    if (user && !credentials && !signingIn && !gettingUser && !error) {
+    const { user, credentials, signingIn, signingOut, gettingUser, signInError, signOutError } = auth
+    if (user && !credentials && !signingIn && !signingOut && !gettingUser && !signInError && !signOutError) {
       dispatch(authSignIn(user))
     }
   }
 
-  handleSignInSubmit(user) {
+  handleSignIn(user) {
     const { dispatch } = this.props
     dispatch(authSignIn(user))
   }
 
+  handleSignOut() {
+    const { dispatch, auth } = this.props
+    const { credentials } = auth
+    dispatch(authSignOut(credentials))
+  }
+
   render() {
     const { dispatch, auth } = this.props
-    const { user, gettingUser, signingIn, credentials, error } = auth
-    if (gettingUser || signingIn)
+    const { user, gettingUser, signingIn, signingOut, credentials, signInError } = auth
+    if (gettingUser || signingIn || signingOut)
       return (<Loading />)
-    if (error)
-      return (<SignInFailed onSignInSubmit={this.handleSignInSubmit.bind(this)} />)
+    if (signInError)
+      return (<SignInFailed onSignIn={this.handleSignIn.bind(this)} />)
     if (!credentials)
-      return (<SignedOut onSignInSubmit={this.handleSignInSubmit.bind(this)} />)
-    return (<Neighborhood user={user} />)
+      return (<SignedOut onSignIn={this.handleSignIn.bind(this)} />)
+    return (<Neighborhood user={user} onSignOut={this.handleSignOut.bind(this)} />)
   }
 }
 

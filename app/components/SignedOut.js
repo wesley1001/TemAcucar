@@ -17,7 +17,7 @@ export default class SignedOut extends Component {
         initialRoute={{
           title: 'Tem Açúcar?',
           component: Welcome,
-          passProps: { onSignInSubmit: this.props.onSignInSubmit },
+          passProps: { onSignIn: this.props.onSignIn },
         }}
       />
     )

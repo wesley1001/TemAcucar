@@ -1,14 +1,17 @@
 import { combineReducers } from 'redux'
 import { reducer as form } from 'redux-form'
 
-const initialAuth = {
+const initialAuthState = {
   user: null,
   credentials: null,
   gettingUser: true,
   signingIn: false,
+  signingOut: false,
+  signInError: null,
+  signOutError: null,
 }
 
-function auth(state = initialAuth, action) {
+function auth(state = initialAuthState, action) {
   switch (action.type) {
     case 'AUTH_GET_USER_REQUEST':
       return {
@@ -51,13 +54,34 @@ function auth(state = initialAuth, action) {
         },
         credentials: action.credentials,
         signingIn: false,
-        error: null,
+        signInError: null,
       }
     case 'AUTH_SIGN_IN_FAILURE':
       return {
         ...state, 
         signingIn: false,
-        error: action.error,
+        signInError: action.error,
+      }
+    case 'AUTH_SIGN_OUT_REQUEST':
+      return {
+        ...state, 
+        signingOut: true,
+      }
+    case 'AUTH_SIGN_OUT_SUCCESS':
+      return {
+        ...state, 
+        user: null,
+        credentials: null,
+        signingOut: false,
+        signOutError: null,
+      }
+    case 'AUTH_SIGN_OUT_FAILURE':
+      return {
+        ...state, 
+        user: null,
+        credentials: null,
+        signingOut: false,
+        signOutError: action.error,
       }
     default:
       return state

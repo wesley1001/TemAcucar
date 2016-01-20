@@ -11,6 +11,7 @@ import React, {
 
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
+import Button from "./Button"
 
 export default class Neighborhood extends Component {
   constructor(props, context) {
@@ -24,7 +25,12 @@ export default class Neighborhood extends Component {
     this.setState({delta: -value})
   }
 
+  handleSignOut() {
+
+  }
+
   render() {
+    const { onSignOut } = this.props
     const { latitude, longitude } = this.props.user
     const { delta } = this.state
     return (
@@ -52,9 +58,12 @@ export default class Neighborhood extends Component {
           maximumValue={-0.001}
           step={0.001}
           value={-delta}
-          style={StyleSheets.stretch}
+          style={[StyleSheets.stretch, StyleSheets.marginBottom]}
           onValueChange={this.handleSlide.bind(this)}
         />
+        <Button onPress={onSignOut}>
+          Logout
+        </Button>
       </View>
     )
   }

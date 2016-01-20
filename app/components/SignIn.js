@@ -42,12 +42,12 @@ class SignIn extends Component {
     this.props.navigator.push({
       title: 'Crie sua conta',
       component: CreateAccount,
-      passProps: { onSignInSubmit: this.props.onSignInSubmit },
+      passProps: { onSignIn: this.props.onSignIn },
     })
   }
 
   render() {
-    const { fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignInSubmit } = this.props
+    const { fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignIn } = this.props
     console.log(this.props)
     return (
       <View style={StyleSheets.container}>
@@ -71,7 +71,7 @@ class SignIn extends Component {
             {...password}
           />
         </View>
-        <Button disabled={!dirty || !valid || submitting} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignInSubmit)}>
+        <Button disabled={!dirty || !valid || submitting} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignIn)}>
           Fazer login
         </Button>
         <Link onPress={this.handleResetPassword.bind(this)}>

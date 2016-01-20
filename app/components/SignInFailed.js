@@ -17,7 +17,7 @@ export default class SignInFailed extends Component {
         initialRoute={{
           title: 'Tem Açúcar?',
           component: SignInInstructions,
-          passProps: { onSignInSubmit: this.props.onSignInSubmit },
+          passProps: { onSignIn: this.props.onSignIn },
         }}
       />
     )

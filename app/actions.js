@@ -2,6 +2,18 @@ import Keychain from 'react-native-keychain'
 
 import Config from "./Config"
 
+function authHeaders(credentials) {
+  return {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Access-Token': credentials.accessToken,
+    'Expiry': credentials.expiry,
+    'Token-Type': credentials.tokenType,
+    'Uid': credentials.uid,
+    'Client': credentials.client,
+  }
+}
+
 export function authGetUser(user) {
   return dispatch => {
     if (user) 
@@ -53,12 +65,7 @@ function authSetUser(dispatch, user) {
 function authResetUser(dispatch) {
   dispatch({ type: 'AUTH_RESET_USER_REQUEST'})
   Keychain
-  .resetInternetCredentials(Config.apiUrl, (error) => {
-    dispatch({
-      type: 'AUTH_RESET_USER_FAILURE',
-      error,
-    })
-  })
+  .resetInternetCredentials(Config.apiUrl)
   .then(() => dispatch({ type: 'AUTH_RESET_USER_SUCCESS' }))
   .catch(error => {
     dispatch({
@@ -78,7 +85,7 @@ export function authSignIn(user) {
       method: 'post',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: user.email,
@@ -120,6 +127,40 @@ export function authSignIn(user) {
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_IN_FAILURE',
+        error,
+      })
+    })
+  }  
+}
+
+export function authSignOut(credentials) {
+  return dispatch => {
+    dispatch({ type: 'AUTH_SIGN_OUT_REQUEST' })
+    fetch(`${Config.apiUrl}/auth/sign_out`, {
+      method: 'delete',
+      headers: authHeaders(credentials)
+    })
+    .then(response => {
+      const contentType = response.headers.get('content-type')
+      if(response.ok) {
+        dispatch({ type: 'AUTH_SIGN_OUT_SUCCESS' })
+      } else {
+        let error
+        if (contentType.match(/application\/json/)) {
+          error = JSON.parse(response._bodyText)
+        } else {
+          error = response.status
+        }
+        dispatch({
+          type: 'AUTH_SIGN_OUT_FAILURE',
+          error,
+        })
+      }
+    })
+    .then(() => authResetUser(dispatch))
+    .catch(error => {
+      dispatch({
+        type: 'AUTH_SIGN_OUT_FAILURE',
         error,
       })
     })
