@@ -3,24 +3,19 @@ import Config from "./Config"
 export function fetchCurrentUser() {
   return dispatch => {
     // TODO fetch from iOS keychain or Android Keystore
-    dispatch(receiveCurrentUser({
-      id: 23429,
-      email: 'danielweinmann@gmail.com',
-      password: 'teste',
-    }))
+    dispatch({
+      type: 'RECEIVE_CURRENT_USER',
+      user: {
+        id: 23429,
+        email: 'danielweinmann@gmail.com',
+        password: 'danielweinmann',
+      },
+    })
   }
 }
 
-function receiveCurrentUser(user) {
-  return {
-    type: 'RECEIVE_CURRENT_USER',
-    user,
-  }
-}
-
-export function login(email, password) {
+export function login(user) {
   return dispatch => {
-    console.log(`${Config.apiUrl}/auth/sign_in`)
     dispatch({ type: 'AUTH_LOGIN_REQUEST' })
     fetch(`${Config.apiUrl}/auth/sign_in`, {
       method: 'post',
@@ -29,22 +24,39 @@ export function login(email, password) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: email,
-        password: password,
+        email: user.email,
+        password: user.password,
       })
     })
     .then(response => {
+      const json = JSON.parse(response._bodyText)
       if(response.ok) {
+        const credentials = {
+          accessToken: response.headers.get('access-token'),
+          client: response.headers.get('client'),
+          expiry: response.headers.get('expiry'),
+          tokenType: response.headers.get('token-type'),
+          uid: response.headers.get('uid'),
+        }
+        const user = json.data
         dispatch({
           type: 'AUTH_LOGIN_SUCCESS',
-          response,
+          user,
+          credentials,
         })
+        return response
       } else {
         dispatch({
           type: 'AUTH_LOGIN_FAILURE',
-          response,
+          json: json,
         })
       }
+    })
+    .catch(error => {
+      dispatch({
+        type: 'AUTH_LOGIN_ERROR',
+        error: error,
+      })
     })
   }  
 }
