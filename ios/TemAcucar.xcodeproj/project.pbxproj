@@ -22,6 +22,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		937F65C61C4FD77D002D091D /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 937F65C51C4FD755002D091D /* libRNKeychain.a */; };
 		938260DD1C4AC4FA005AB6AD /* libRNGeocoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F0A8A01C4AB88000557F7C /* libRNGeocoder.a */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		937F65C41C4FD755002D091D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 937F65B51C4FD755002D091D /* RNKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D82366F1B0CE05B005A9EF3;
+			remoteInfo = RNKeychain;
+		};
 		93F0A89F1C4AB88000557F7C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 93F0A8911C4AB87F00557F7C /* RNGeocoder.xcodeproj */;
@@ -134,6 +142,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		937F65B51C4FD755002D091D /* RNKeychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKeychain.xcodeproj; path = "../node_modules/react-native-keychain/RNKeychain.xcodeproj"; sourceTree = "<group>"; };
 		93F0A8911C4AB87F00557F7C /* RNGeocoder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGeocoder.xcodeproj; path = "../node_modules/react-native-geocoder/RNGeocoder.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +169,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				938260DD1C4AC4FA005AB6AD /* libRNGeocoder.a in Frameworks */,
+				937F65C61C4FD77D002D091D /* libRNKeychain.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +282,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				937F65B51C4FD755002D091D /* RNKeychain.xcodeproj */,
 				93F0A8911C4AB87F00557F7C /* RNGeocoder.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -312,6 +323,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* TemAcucar.app */,
 				00E356EE1AD99517003FC87E /* TemAcucarTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		937F65B61C4FD755002D091D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				937F65C51C4FD755002D091D /* libRNKeychain.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -434,6 +453,10 @@
 					ProductGroup = 93F0A8921C4AB87F00557F7C /* Products */;
 					ProjectRef = 93F0A8911C4AB87F00557F7C /* RNGeocoder.xcodeproj */;
 				},
+				{
+					ProductGroup = 937F65B61C4FD755002D091D /* Products */;
+					ProjectRef = 937F65B51C4FD755002D091D /* RNKeychain.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -512,6 +535,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		937F65C51C4FD755002D091D /* libRNKeychain.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNKeychain.a;
+			remoteRef = 937F65C41C4FD755002D091D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		93F0A8A01C4AB88000557F7C /* libRNGeocoder.a */ = {

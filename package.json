@@ -12,6 +12,7 @@
     "fbjs": "^0.6.1",
     "react-native": "0.18.0-rc",
     "react-native-geocoder": "^0.2.0",
+    "react-native-keychain": "^0.2.7",
     "react-redux": "4.0.6",
     "redux": "3.0.5",
     "redux-form": "^4.1.4",

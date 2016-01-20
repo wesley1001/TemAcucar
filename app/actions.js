@@ -1,30 +1,79 @@
+import Keychain from 'react-native-keychain'
+
 import Config from "./Config"
 
-export function authFetchUser(currentUser) {
+export function authGetUser(user) {
   return dispatch => {
-    if (currentUser) 
+    if (user) 
       return
-    dispatch({ type: 'AUTH_FETCH_USER_REQUEST' })
-    // TODO fetch from iOS keychain or Android Keystore INSTEAD of setTimeout
-    setTimeout(() => {
-      // TODO dispatch something like this if have a saved current user
-      // dispatch({
-      //   type: 'AUTH_FETCH_USER_SUCCESS',
-      //   user: {
-      //     id: 23429,
-      //     email: 'danielweinmann@gmail.com',
-      //     password: 'danielweinmann',
-      //   },
-      // })
-      // TODO dispatch this if we don't have a saved current user
-      dispatch({ type: 'AUTH_FETCH_USER_FAILURE' })
-    }, 30)
+    dispatch({ type: 'AUTH_GET_USER_REQUEST' })
+    Keychain
+    .getInternetCredentials(Config.apiUrl)
+    .then((credentials) => {
+      dispatch({
+        type: 'AUTH_GET_USER_SUCCESS',
+        user: {
+          email: credentials.username,
+          password: credentials.password,
+        },
+      })
+    })
+    .catch(error => {
+      dispatch({
+        type: 'AUTH_GET_USER_FAILURE',
+        error,
+      })
+    })
   }
+}
+
+function authSetUser(dispatch, user) {
+  if (user) {
+    dispatch({
+      type: 'AUTH_SET_USER_REQUEST',
+      user,
+    })
+    Keychain
+    .setInternetCredentials(Config.apiUrl, user.email, user.password)
+    .then(() => {
+      dispatch({
+        type: 'AUTH_SET_USER_SUCCESS',
+        user,
+      })
+    })
+    .catch(error => {
+      dispatch({
+        type: 'AUTH_SET_USER_FAILURE',
+        error,
+      })
+    })
+  }
+}
+
+function authResetUser(dispatch) {
+  dispatch({ type: 'AUTH_RESET_USER_REQUEST'})
+  Keychain
+  .resetInternetCredentials(Config.apiUrl, (error) => {
+    dispatch({
+      type: 'AUTH_RESET_USER_FAILURE',
+      error,
+    })
+  })
+  .then(() => dispatch({ type: 'AUTH_RESET_USER_SUCCESS' }))
+  .catch(error => {
+    dispatch({
+      type: 'AUTH_RESET_USER_FAILURE',
+      error,
+    })
+  })
 }
 
 export function authSignIn(user) {
   return dispatch => {
-    dispatch({ type: 'AUTH_SIGN_IN_REQUEST' })
+    dispatch({
+      type: 'AUTH_SIGN_IN_REQUEST',
+      user,
+    })
     fetch(`${Config.apiUrl}/auth/sign_in`, {
       method: 'post',
       headers: {
@@ -47,13 +96,13 @@ export function authSignIn(user) {
           uid: response.headers.get('uid'),
         }
         const json = JSON.parse(response._bodyText)
-        const user = json.data
-        console.log('aqui')
+        const userData = json.data
         dispatch({
           type: 'AUTH_SIGN_IN_SUCCESS',
-          user,
+          user: userData,
           credentials,
         })
+        return user
       } else {
         let error
         if (contentType.match(/application\/json/)) {
@@ -67,10 +116,11 @@ export function authSignIn(user) {
         })
       }
     })
+    .then((user) => authSetUser(dispatch, user))
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_IN_FAILURE',
-        error
+        error,
       })
     })
   }  

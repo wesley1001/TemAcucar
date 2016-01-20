@@ -1,9 +1,8 @@
 import React, { Component, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { authFetchUser, authSignIn } from '../actions'
+import { authGetUser, authSignIn } from '../actions'
 
 import StyleSheets from "../styles/StyleSheets"
-import FetchingUser from "../components/FetchingUser"
 import SigningIn from "../components/SigningIn"
 import SignInFailed from "../components/SignInFailed"
 import SignedOut from "../components/SignedOut"
@@ -12,13 +11,13 @@ import Neighborhood from "../components/Neighborhood"
 class TemAcucar extends Component {
   componentDidMount() {
     const { dispatch, auth: { user } } = this.props
-    dispatch(authFetchUser(user))
+    dispatch(authGetUser(user))
   }
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, auth } = nextProps
-    const { user, credentials, signingIn, fetchingUser, error } = auth
-    if (user && !credentials && !signingIn && !fetchingUser && !error) {
+    const { user, credentials, signingIn, gettingUser, error } = auth
+    if (user && !credentials && !signingIn && !gettingUser && !error) {
       dispatch(authSignIn(user))
     }
   }
@@ -30,9 +29,7 @@ class TemAcucar extends Component {
 
   render() {
     const { dispatch, auth } = this.props
-    const { user, fetchingUser, signingIn, credentials, error } = auth
-    if (fetchingUser)
-      return (<FetchingUser />)
+    const { user, gettingUser, signingIn, credentials, error } = auth
     if (signingIn)
       return (<SigningIn />)
     if (error)
