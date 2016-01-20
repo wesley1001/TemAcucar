@@ -76,6 +76,10 @@ const StyleSheets = StyleSheet.create({
     textAlign: 'center',
   },
 
+  disabled: {
+    backgroundColor: Colors.gray,
+  },
+
   link: {
     paddingHorizontal: 20,
     paddingVertical: 12,

@@ -9,13 +9,27 @@ import React, {
 import StyleSheets from "../styles/StyleSheets"
 
 export default class Button extends Component {
+  renderText() {
+    const { disabled, textStyle, children } = this.props
+    return (
+      <Text style={[StyleSheets.button, textStyle, (disabled && StyleSheets.disabled)]}>{children}</Text>
+    )
+  }
 
   render() {
-    const { viewStyle, textStyle, onPress, children } = this.props
-    return (
-      <TouchableHighlight style={viewStyle} onPress={onPress}>
-        <Text style={[StyleSheets.button, textStyle]}>{children}</Text>
-      </TouchableHighlight>
-    )
+    const { disabled, viewStyle, onPress } = this.props
+    if (disabled) {
+      return (
+        <View style={viewStyle}>
+          { this.renderText() }
+        </View>
+      )
+    } else {
+      return (
+        <TouchableHighlight style={viewStyle} onPress={onPress}>
+          { this.renderText() }
+        </TouchableHighlight>
+      )
+    }
   }
 }

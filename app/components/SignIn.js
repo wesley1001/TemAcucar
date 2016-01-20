@@ -19,6 +19,8 @@ const validate = values => {
   const errors = {}
   if (!values.password) {
     errors.password = 'Preencha sua senha'
+  } else if (values.password.length < 8) {
+    errors.password = 'Senha muito curta'
   }
   if (!values.email) {
     errors.email = 'Preencha seu email';
