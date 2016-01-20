@@ -11,13 +11,14 @@ import React, {
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
 import Terms from "./Terms"
-import Login from "./Login"
+import SignIn from "./SignIn"
 
 export default class CreateAccount extends Component {
-  handleLogin() {
+  handleSignIn() {
     this.props.navigator.push({
-      title: 'Login',
-      component: Login,
+      title: 'SignIn',
+      component: SignIn,
+      passProps: { onSignInSubmit: this.props.onSignInSubmit },
     })
   }
 
@@ -65,7 +66,7 @@ export default class CreateAccount extends Component {
         <TouchableHighlight style={StyleSheets.flexEnd} onPress={this.handleTerms.bind(this)}>
           <Text style={StyleSheets.button}>Continuar</Text>
         </TouchableHighlight>
-        <TouchableOpacity style={StyleSheets.marginTop} onPress={this.handleLogin.bind(this)}>
+        <TouchableOpacity style={StyleSheets.marginTop} onPress={this.handleSignIn.bind(this)}>
           <Text style={StyleSheets.link}>Já possui uma conta?</Text>
         </TouchableOpacity>
       </View>

@@ -9,9 +9,9 @@ import React, {
 import StyleSheets from "../styles/StyleSheets"
 import Button from "./Button"
 import SignIn from "./SignIn"
-import CreateAccount from "./CreateAccount"
+import ResetPassword from "./ResetPassword"
 
-export default class Welcome extends Component {
+export default class SignInInstructions extends Component {
   handleSignIn() {
     this.props.navigator.push({
       title: 'Login',
@@ -20,10 +20,11 @@ export default class Welcome extends Component {
     })
   }
 
-  handleCreateAccount() {
+  handleResetPassword() {
     this.props.navigator.push({
-      title: 'Crie sua conta',
-      component: CreateAccount,
+      title: 'Criar uma nova senha',
+      component: ResetPassword,
+      passProps: { headline: 'Criar uma nova senha' },
     })
   }
 
@@ -32,14 +33,17 @@ export default class Welcome extends Component {
       <View style={StyleSheets.container}>
         <Image source={require('../img/logo.jpg')} />
         <Text style={[StyleSheets.headline, StyleSheets.bigMarginVertical]}>
-          Compartilhe suas coisas com seus vizinhos
+          Não foi possível fazer seu login com sucesso
         </Text>
-        <Button onPress={this.handleCreateAccount.bind(this)}>
-          Crie sua conta
+        <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
+          Se você é usuário da versão antiga do Tem Açucar, vai ser preciso criar uma nova senha.
+        </Text>
+        <Button onPress={this.handleResetPassword.bind(this)}>
+          Criar uma nova senha
         </Button>
         <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
         <Button onPress={this.handleSignIn.bind(this)}>
-          Faça seu login
+          Tentar uma vez mais
         </Button>
       </View>
     )

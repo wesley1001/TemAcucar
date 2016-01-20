@@ -9,11 +9,12 @@ import React, {
 
 import StyleSheets from "../styles/StyleSheets"
 
-export default class ForgotPassword extends Component {
+export default class ResetPassword extends Component {
   render() {
+    const { headline } = this.props
     return (
       <View style={StyleSheets.container}>
-        <Text style={StyleSheets.headline}>Esqueceu sua senha?</Text>
+        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>{headline || 'Esqueceu sua senha?'}</Text>
         <View style={StyleSheets.stretch}>
           <Text style={StyleSheets.label}>Email</Text>
           <TextInput

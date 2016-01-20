@@ -41,16 +41,13 @@ function auth(state = initialAuth, action) {
         },
         credentials: action.credentials,
         signingIn: false,
+        error: null,
       }
     case 'AUTH_SIGN_IN_FAILURE':
       return {
         ...state, 
         signingIn: false,
-      }
-    case 'AUTH_SIGN_IN_ERROR':
-      return {
-        ...state, 
-        signingIn: false,
+        error: action.error,
       }
     default:
       return state

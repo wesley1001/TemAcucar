@@ -12,7 +12,8 @@ import StyleSheets from "../styles/StyleSheets"
 import Label from "./Label"
 import Button from "./Button"
 import Link from "./Link"
-import ForgotPassword from "./ForgotPassword"
+import ResetPassword from "./ResetPassword"
+import CreateAccount from "./CreateAccount"
 
 const validate = values => {
   const errors = {}
@@ -27,16 +28,25 @@ const validate = values => {
   return errors
 }
 
-class Login extends Component {
-  handleForgotPassword() {
+class SignIn extends Component {
+  handleResetPassword() {
     this.props.navigator.push({
       title: 'Esqueceu sua senha?',
-      component: ForgotPassword,
+      component: ResetPassword,
+    })
+  }
+
+  handleCreateAccount() {
+    this.props.navigator.push({
+      title: 'Crie sua conta',
+      component: CreateAccount,
+      passProps: { onSignInSubmit: this.props.onSignInSubmit },
     })
   }
 
   render() {
-    const { fields: { email, password }, dirty, valid, submitting, handleSubmit, onLoginSubmit } = this.props
+    const { fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignInSubmit } = this.props
+    console.log(this.props)
     return (
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Faça seu login</Text>
@@ -59,21 +69,24 @@ class Login extends Component {
             {...password}
           />
         </View>
-        <Button disabled={!dirty || !valid || submitting} style={StyleSheets.flexEnd} onPress={handleSubmit(onLoginSubmit)}>
+        <Button disabled={!dirty || !valid || submitting} style={StyleSheets.flexEnd, StyleSheets.marginBottom} onPress={handleSubmit(onSignInSubmit)}>
           Fazer login
         </Button>
-        <Link style={StyleSheets.marginTop} onPress={this.handleForgotPassword.bind(this)}>
+        <Link onPress={this.handleResetPassword.bind(this)}>
           Esqueceu sua senha?
+        </Link>
+        <Link onPress={this.handleCreateAccount.bind(this)}>
+          Crie sua conta
         </Link>
       </View>
     )
   }
 }
 
-Login = reduxForm({
+SignIn = reduxForm({
   form: 'login',
   fields: ['email', 'password'],
   validate,
-})(Login)
+})(SignIn)
 
-export default Login
+export default SignIn

@@ -8,16 +8,16 @@ export function authFetchUser(currentUser) {
     // TODO fetch from iOS keychain or Android Keystore INSTEAD of setTimeout
     setTimeout(() => {
       // TODO dispatch something like this if have a saved current user
-      // dispatch({
-      //   type: 'AUTH_FETCH_USER_SUCCESS',
-      //   user: {
-      //     id: 23429,
-      //     email: 'danielweinmann@gmail.com',
-      //     password: 'danielweinmann',
-      //   },
-      // })
+      dispatch({
+        type: 'AUTH_FETCH_USER_SUCCESS',
+        user: {
+          id: 23429,
+          email: 'danielweinmann@gmail.com',
+          password: 'danielweinmann!',
+        },
+      })
       // TODO dispatch this if we don't have a saved current user
-      dispatch({ type: 'AUTH_FETCH_USER_FAILURE' })
+      // dispatch({ type: 'AUTH_FETCH_USER_FAILURE' })
     }, 30)
   }
 }
@@ -37,6 +37,7 @@ export function authSignIn(user) {
       })
     })
     .then(response => {
+      const contentType = response.headers.get('content-type')
       if(response.ok) {
         const credentials = {
           accessToken: response.headers.get('access-token'),
@@ -47,23 +48,29 @@ export function authSignIn(user) {
         }
         const json = JSON.parse(response._bodyText)
         const user = json.data
+        console.log('aqui')
         dispatch({
           type: 'AUTH_SIGN_IN_SUCCESS',
           user,
           credentials,
         })
       } else {
+        let error
+        if (contentType.match(/application\/json/)) {
+          error = JSON.parse(response._bodyText)
+        } else {
+          error = response.status
+        }
         dispatch({
           type: 'AUTH_SIGN_IN_FAILURE',
-          response,
+          error,
         })
       }
     })
     .catch(error => {
       dispatch({
-        type: 'AUTH_SIGN_IN_ERROR',
-        error,
-        response,
+        type: 'AUTH_SIGN_IN_FAILURE',
+        error
       })
     })
   }  

@@ -56,6 +56,10 @@ const StyleSheets = StyleSheet.create({
     marginTop: 20,
   },
 
+  bigMarginTop: {
+    marginTop: 36,
+  },
+
   bigMarginBottom: {
     marginBottom: 36,
   },

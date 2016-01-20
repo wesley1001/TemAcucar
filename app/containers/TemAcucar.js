@@ -5,7 +5,9 @@ import { authFetchUser, authSignIn } from '../actions'
 import StyleSheets from "../styles/StyleSheets"
 import FetchingUser from "../components/FetchingUser"
 import SigningIn from "../components/SigningIn"
+import SignInFailed from "../components/SignInFailed"
 import SignedOut from "../components/SignedOut"
+import Neighborhood from "../components/Neighborhood"
 
 class TemAcucar extends Component {
   componentDidMount() {
@@ -15,31 +17,29 @@ class TemAcucar extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, auth } = nextProps
-    const { user, credentials, signingIn, fetchingUser } = auth
-    if (user && !credentials && !signingIn && !fetchingUser) {
+    const { user, credentials, signingIn, fetchingUser, error } = auth
+    if (user && !credentials && !signingIn && !fetchingUser && !error) {
       dispatch(authSignIn(user))
     }
   }
 
-  handleLoginSubmit(user) {
+  handleSignInSubmit(user) {
     const { dispatch } = this.props
     dispatch(authSignIn(user))
   }
 
   render() {
     const { dispatch, auth } = this.props
-    const { fetchingUser, signingIn, credentials } = auth
+    const { user, fetchingUser, signingIn, credentials, error } = auth
     if (fetchingUser)
       return (<FetchingUser />)
     if (signingIn)
       return (<SigningIn />)
+    if (error)
+      return (<SignInFailed onSignInSubmit={this.handleSignInSubmit.bind(this)} />)
     if (!credentials)
-      return (<SignedOut onLoginSubmit={this.handleLoginSubmit.bind(this)} />)
-    return (
-      <View style={StyleSheets.container}>
-        <Text style={StyleSheets.label}>ABC</Text>
-      </View>
-    )
+      return (<SignedOut onSignInSubmit={this.handleSignInSubmit.bind(this)} />)
+    return (<Neighborhood user={user} />)
   }
 }
 
