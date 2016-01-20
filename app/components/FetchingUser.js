@@ -11,7 +11,7 @@ export default class FetchingUser extends Component {
   render() {
     return (
       <View style={StyleSheets.container}>
-        <Text style={StyleSheets.label}>Carregando dados do usuário...</Text>
+        <Text style={StyleSheets.label}>Carregando dados de usuário...</Text>
       </View>
     )
   }

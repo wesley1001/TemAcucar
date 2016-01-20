@@ -13,8 +13,8 @@ import React, {
 
 import RNGeocoder from 'react-native-geocoder'
 
-import Colors from "./Colors"
-import StyleSheets from "./StyleSheets"
+import Colors from "../styles/Colors"
+import StyleSheets from "../styles/StyleSheets"
 import Neighborhood from "./Neighborhood"
 
 export default class SetAddress extends Component {
@@ -118,7 +118,7 @@ export default class SetAddress extends Component {
           longitude: longitude,
           title: 'É aqui que você mora?',
           subtitle: 'Edite seu endereço para alterar sua localização',
-          image: require('./img/icon.png'),
+          image: require('../img/icon.png'),
         }]}
       />
     )
@@ -166,7 +166,7 @@ export default class SetAddress extends Component {
         }}
         onPress={this.handleSearch.bind(this)}
       >
-        <Image source={require('./img/search.png')} />
+        <Image source={require('../img/search.png')} />
       </TouchableOpacity>
     )    
   }

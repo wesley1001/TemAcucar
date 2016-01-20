@@ -9,8 +9,8 @@ import React, {
   SliderIOS,
 } from 'react-native'
 
-import Colors from "./Colors"
-import StyleSheets from "./StyleSheets"
+import Colors from "../styles/Colors"
+import StyleSheets from "../styles/StyleSheets"
 
 export default class Neighborhood extends Component {
   constructor(props, context) {
@@ -43,7 +43,7 @@ export default class Neighborhood extends Component {
           annotations={[{
             latitude: latitude,
             longitude: longitude,
-            image: require('./img/icon.png'),
+            image: require('../img/icon.png'),
           }]}
         />
         <SliderIOS

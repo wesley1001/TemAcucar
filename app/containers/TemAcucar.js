@@ -5,6 +5,7 @@ import { authFetchUser, authSignIn } from '../actions'
 import StyleSheets from "../styles/StyleSheets"
 import FetchingUser from "../components/FetchingUser"
 import SigningIn from "../components/SigningIn"
+import SignedOut from "../components/SignedOut"
 
 class TemAcucar extends Component {
   componentDidMount() {
@@ -22,11 +23,13 @@ class TemAcucar extends Component {
 
   render() {
     const { dispatch, auth } = this.props
-    const { fetchingUser, signingIn } = auth
+    const { fetchingUser, signingIn, credentials } = auth
     if (fetchingUser)
       return (<FetchingUser />)
     if (signingIn)
       return (<SigningIn />)
+    if (!credentials)
+      return (<SignedOut {...this.props} authSignIn={authSignIn} />)
     return (
       <View style={StyleSheets.container}>
         <Text style={StyleSheets.label}>ABC</Text>

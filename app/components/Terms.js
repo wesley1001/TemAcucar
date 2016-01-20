@@ -7,7 +7,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native'
 
-import StyleSheets from "./StyleSheets"
+import StyleSheets from "../styles/StyleSheets"
 import SetAddress from "./SetAddress"
 
 export default class Terms extends Component {

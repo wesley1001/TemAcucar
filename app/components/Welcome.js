@@ -7,7 +7,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native'
 
-import StyleSheets from "./StyleSheets"
+import StyleSheets from "../styles/StyleSheets"
 import Login from "./Login"
 import CreateAccount from "./CreateAccount"
 
@@ -16,6 +16,7 @@ export default class Welcome extends Component {
     this.props.navigator.push({
       title: 'Login',
       component: Login,
+      passProps: {...this.props},
     })
   }
 
@@ -29,7 +30,7 @@ export default class Welcome extends Component {
   render() {
     return (
       <View style={StyleSheets.container}>
-        <Image source={require('./img/logo.jpg')} />
+        <Image source={require('../img/logo.jpg')} />
         <Text style={[StyleSheets.headline, StyleSheets.bigMarginVertical]}>
           Compartilhe suas coisas com seus vizinhos
         </Text>

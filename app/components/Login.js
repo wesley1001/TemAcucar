@@ -8,9 +8,8 @@ import React, {
   TouchableOpacity,
 } from 'react-native'
 
-import StyleSheets from "./StyleSheets"
+import StyleSheets from "../styles/StyleSheets"
 import ForgotPassword from "./ForgotPassword"
-import Neighborhood from "./Neighborhood"
 
 export default class Login extends Component {
   handleForgotPassword() {
@@ -21,16 +20,8 @@ export default class Login extends Component {
   }
 
   handleLogin() {
-    this.props.navigator.push({
-      title: 'Minha vizinhança',
-      component: Neighborhood,
-      passProps: {
-        user: {
-          latitude: -30.034162,
-          longitude: -51.209485
-        },
-      },
-    })
+    const { dispatch, authSignIn } = this.props
+    dispatch(authSignIn(user))
   }
 
   render() {

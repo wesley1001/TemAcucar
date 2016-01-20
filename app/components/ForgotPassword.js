@@ -7,7 +7,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native'
 
-import StyleSheets from "./StyleSheets"
+import StyleSheets from "../styles/StyleSheets"
 
 export default class ForgotPassword extends Component {
   render() {

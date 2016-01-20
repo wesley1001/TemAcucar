@@ -8,8 +8,8 @@ import React, {
   TouchableOpacity,
 } from 'react-native'
 
-import Colors from "./Colors"
-import StyleSheets from "./StyleSheets"
+import Colors from "../styles/Colors"
+import StyleSheets from "../styles/StyleSheets"
 import Terms from "./Terms"
 import Login from "./Login"
 
