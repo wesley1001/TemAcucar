@@ -4,7 +4,7 @@ import { reducer as form } from 'redux-form'
 const initialAuth = {
   user: null,
   credentials: null,
-  gettingUser: false,
+  gettingUser: true,
   signingIn: false,
 }
 

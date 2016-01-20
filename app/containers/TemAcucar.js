@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { authGetUser, authSignIn } from '../actions'
 
 import StyleSheets from "../styles/StyleSheets"
-import SigningIn from "../components/SigningIn"
+import Loading from "../components/Loading"
 import SignInFailed from "../components/SignInFailed"
 import SignedOut from "../components/SignedOut"
 import Neighborhood from "../components/Neighborhood"
@@ -30,8 +30,8 @@ class TemAcucar extends Component {
   render() {
     const { dispatch, auth } = this.props
     const { user, gettingUser, signingIn, credentials, error } = auth
-    if (signingIn)
-      return (<SigningIn />)
+    if (gettingUser || signingIn)
+      return (<Loading />)
     if (error)
       return (<SignInFailed onSignInSubmit={this.handleSignInSubmit.bind(this)} />)
     if (!credentials)
