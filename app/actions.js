@@ -93,7 +93,6 @@ export function authSignIn(user) {
       })
     })
     .then(response => {
-      const contentType = response.headers.get('content-type')
       if(response.ok) {
         const credentials = {
           accessToken: response.headers.get('access-token'),
@@ -111,6 +110,7 @@ export function authSignIn(user) {
         })
         return user
       } else {
+        const contentType = response.headers.get('content-type')
         let error
         if (contentType.match(/application\/json/)) {
           error = JSON.parse(response._bodyText)
@@ -141,10 +141,10 @@ export function authSignOut(credentials) {
       headers: authHeaders(credentials)
     })
     .then(response => {
-      const contentType = response.headers.get('content-type')
       if(response.ok) {
         dispatch({ type: 'AUTH_SIGN_OUT_SUCCESS' })
       } else {
+        const contentType = response.headers.get('content-type')
         let error
         if (contentType.match(/application\/json/)) {
           error = JSON.parse(response._bodyText)
