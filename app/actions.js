@@ -87,38 +87,42 @@ function authResetUser(dispatch) {
 export function authFacebook() {
   return dispatch => {
     dispatch({ type: 'AUTH_FACEBOOK_REQUEST' })
-    fetch(`${Config.apiUrl}/auth/facebook`, {
+    fetch(`${Config.apiUrl}/auth/facebook_access_token?t=${Date.now()}`, {
       method: 'get',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
     })
     .then(response => {
-      console.log('aki')
+      console.log('aki1')
       console.log(response)
-      if(response.ok) {
-        const json = JSON.parse(response._bodyText)
-        const userData = json.data
-        // dispatch({
-        //   type: 'AUTH_SIGN_IN_SUCCESS',
-        //   user: userData,
-        //   credentials,
-        // })
-        return user
-      } else {
-        const error = parseError(response)
+      fetch(`${Config.apiUrl}/omniauth/facebook_access_token/callback?`, {
+        method: 'post',
+        body: "access_token=1234"
+      })
+      .then(response => {
+        console.log('aki2')
+        console.log(response)
+        if(response.ok) {
+          const json = JSON.parse(response._bodyText)
+          const userData = json.data
+          // dispatch({
+          //   type: 'AUTH_SIGN_IN_SUCCESS',
+          //   user: userData,
+          //   credentials,
+          // })
+          return user
+        } else {
+          const error = parseError(response)
+          dispatch({
+            type: 'AUTH_SIGN_IN_FAILURE',
+            error,
+          })
+        }
+      })
+      // .then((user) => authSetUser(dispatch, user))
+      .catch(error => {
         dispatch({
           type: 'AUTH_SIGN_IN_FAILURE',
           error,
         })
-      }
-    })
-    // .then((user) => authSetUser(dispatch, user))
-    .catch(error => {
-      dispatch({
-        type: 'AUTH_SIGN_IN_FAILURE',
-        error,
       })
     })
   }  

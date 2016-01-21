@@ -31,7 +31,6 @@ export default class SignIn extends Component {
 
   render() {
     const { onFacebook } = this.props
-    console.log(onFacebook)
     return (
       <View style={StyleSheets.container}>
         <Image source={require('../img/logo.jpg')} style={StyleSheets.bigMarginBottom} />
