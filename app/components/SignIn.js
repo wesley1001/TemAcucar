@@ -1,94 +1,51 @@
 import React, {
   Component,
-  PropTypes,
   StyleSheet,
   Text,
   View,
-  TextInput,
+  Image,
 } from 'react-native'
-import {reduxForm} from 'redux-form'
 
 import StyleSheets from "../styles/StyleSheets"
-import Label from "./Label"
 import Button from "./Button"
 import Link from "./Link"
-import ResetPassword from "./ResetPassword"
-import CreateAccount from "./CreateAccount"
+import SignInForm from "./SignInForm"
+import SignUp from "./SignUp"
 
-const validate = values => {
-  const errors = {}
-  if (!values.password) {
-    errors.password = 'Preencha sua senha'
-  } else if (values.password.length < 8) {
-    errors.password = 'Senha muito curta'
-  }
-  if (!values.email) {
-    errors.email = 'Preencha seu email';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Preencha um email válido'
-  }
-  return errors
-}
-
-class SignIn extends Component {
-  handleResetPassword() {
+export default class SignIn extends Component {
+  handleSignIn() {
     this.props.navigator.push({
-      title: 'Esqueceu sua senha?',
-      component: ResetPassword,
+      title: 'Login',
+      component: SignInForm,
+      passProps: { onSignIn: this.props.onSignIn },
     })
   }
 
-  handleCreateAccount() {
+  handleSignUp() {
     this.props.navigator.push({
       title: 'Crie sua conta',
-      component: CreateAccount,
+      component: SignUp,
       passProps: { onSignIn: this.props.onSignIn },
     })
   }
 
   render() {
-    const { fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignIn } = this.props
-    console.log(this.props)
+    const { onFacebook } = this.props
+    console.log(onFacebook)
     return (
       <View style={StyleSheets.container}>
-        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Faça seu login</Text>
-        <View style={StyleSheets.stretch}>
-          <Label field={email}>Email</Label>
-          <TextInput
-            style={StyleSheets.input}
-            autoCapitalize={'none'}
-            keyboardType={'email-address'}
-            placeholder={'Digite seu e-mail'}
-            {...email}
-          />
-          <Label field={password}>Senha</Label>
-          <TextInput
-            style={StyleSheets.input}
-            autoCapitalize={'none'}
-            keyboardType={'default'}
-            secureTextEntry={true}
-            placeholder={'Digite sua senha'}
-            {...password}
-          />
-        </View>
-        <Button disabled={!dirty || !valid || submitting} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignIn)}>
-          Fazer login
+        <Image source={require('../img/logo.jpg')} style={StyleSheets.bigMarginBottom} />
+        <Button onPress={onFacebook} textStyle={StyleSheets.facebook}>
+          Faça login com seu Facebook
         </Button>
-        <Link onPress={this.handleResetPassword.bind(this)}>
-          Esqueceu sua senha?
-        </Link>
-        <Link onPress={this.handleCreateAccount.bind(this)}>
-          Crie sua conta
+        <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
+        <Button onPress={this.handleSignIn.bind(this)} viewStyle={StyleSheets.marginBottom}>
+          Entre com seu email e senha
+        </Button>
+        <Link onPress={this.handleSignUp.bind(this)}>
+          Não possui cadastro?
         </Link>
       </View>
     )
   }
 }
-
-SignIn = reduxForm({
-  form: 'login',
-  fields: ['email', 'password'],
-  validate,
-})(SignIn)
-
-export default SignIn

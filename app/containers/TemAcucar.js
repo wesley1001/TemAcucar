@@ -1,6 +1,6 @@
 import React, { Component, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { authGetUser, authSignIn, authSignOut } from '../actions'
+import { authGetUser, authSignIn, authSignOut, authFacebook } from '../actions'
 
 import StyleSheets from "../styles/StyleSheets"
 import Loading from "../components/Loading"
@@ -22,6 +22,11 @@ class TemAcucar extends Component {
     }
   }
 
+  handleFacebook() {
+    const { dispatch } = this.props
+    dispatch(authFacebook())
+  }
+
   handleSignIn(user) {
     const { dispatch } = this.props
     dispatch(authSignIn(user))
@@ -39,9 +44,9 @@ class TemAcucar extends Component {
     if (gettingUser || signingIn || signingOut)
       return (<Loading />)
     if (signInError)
-      return (<SignInFailed onSignIn={this.handleSignIn.bind(this)} />)
+      return (<SignInFailed onSignIn={this.handleSignIn.bind(this)} onFacebook={this.handleFacebook.bind(this)} />)
     if (!credentials)
-      return (<SignedOut onSignIn={this.handleSignIn.bind(this)} />)
+      return (<SignedOut onSignIn={this.handleSignIn.bind(this)} onFacebook={this.handleFacebook.bind(this)} />)
     return (<Neighborhood user={user} onSignOut={this.handleSignOut.bind(this)} />)
   }
 }

@@ -13,7 +13,7 @@ import StyleSheets from "../styles/StyleSheets"
 import Terms from "./Terms"
 import SignIn from "./SignIn"
 
-export default class CreateAccount extends Component {
+export default class SignUp extends Component {
   handleSignIn() {
     this.props.navigator.push({
       title: 'Login',

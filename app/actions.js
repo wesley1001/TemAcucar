@@ -14,6 +14,15 @@ function authHeaders(credentials) {
   }
 }
 
+function parseError(response) {
+  const contentType = response.headers.get('content-type')
+  if (contentType.match(/application\/json/)) {
+    return JSON.parse(response._bodyText)
+  } else {
+    return response.status
+  }
+}
+
 export function authGetUser(user) {
   return dispatch => {
     if (user) 
@@ -75,6 +84,46 @@ function authResetUser(dispatch) {
   })
 }
 
+export function authFacebook() {
+  return dispatch => {
+    dispatch({ type: 'AUTH_FACEBOOK_REQUEST' })
+    fetch(`${Config.apiUrl}/auth/facebook`, {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => {
+      console.log('aki')
+      console.log(response)
+      if(response.ok) {
+        const json = JSON.parse(response._bodyText)
+        const userData = json.data
+        // dispatch({
+        //   type: 'AUTH_SIGN_IN_SUCCESS',
+        //   user: userData,
+        //   credentials,
+        // })
+        return user
+      } else {
+        const error = parseError(response)
+        dispatch({
+          type: 'AUTH_SIGN_IN_FAILURE',
+          error,
+        })
+      }
+    })
+    // .then((user) => authSetUser(dispatch, user))
+    .catch(error => {
+      dispatch({
+        type: 'AUTH_SIGN_IN_FAILURE',
+        error,
+      })
+    })
+  }  
+}
+
 export function authSignIn(user) {
   return dispatch => {
     dispatch({
@@ -110,13 +159,7 @@ export function authSignIn(user) {
         })
         return user
       } else {
-        const contentType = response.headers.get('content-type')
-        let error
-        if (contentType.match(/application\/json/)) {
-          error = JSON.parse(response._bodyText)
-        } else {
-          error = response.status
-        }
+        const error = parseError(response)
         dispatch({
           type: 'AUTH_SIGN_IN_FAILURE',
           error,
@@ -144,13 +187,7 @@ export function authSignOut(credentials) {
       if(response.ok) {
         dispatch({ type: 'AUTH_SIGN_OUT_SUCCESS' })
       } else {
-        const contentType = response.headers.get('content-type')
-        let error
-        if (contentType.match(/application\/json/)) {
-          error = JSON.parse(response._bodyText)
-        } else {
-          error = response.status
-        }
+        const error = parseError(response)
         dispatch({
           type: 'AUTH_SIGN_OUT_FAILURE',
           error,

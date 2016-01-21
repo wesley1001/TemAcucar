@@ -80,6 +80,10 @@ const StyleSheets = StyleSheet.create({
     backgroundColor: Colors.gray,
   },
 
+  facebook: {
+    backgroundColor: Colors.facebook,
+  },
+
   link: {
     paddingHorizontal: 20,
     paddingVertical: 12,

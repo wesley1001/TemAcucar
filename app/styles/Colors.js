@@ -4,6 +4,7 @@ const Colors = {
   white: '#ffffff',
   beige: '#f4f0e7',
   gray: '#999',
+  facebook: '#516dac',
 }
 
 export default Colors
