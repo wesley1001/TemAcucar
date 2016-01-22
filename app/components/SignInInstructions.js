@@ -16,7 +16,11 @@ export default class SignInInstructions extends Component {
     this.props.navigator.push({
       title: 'Login',
       component: SignIn,
-      passProps: { onSignIn: this.props.onSignIn },
+      passProps: {
+        onSignIn: this.props.onSignIn,
+        onSignUp: this.props.onSignUp,
+        onFacebook: this.props.onFacebook,
+      },
     })
   }
 

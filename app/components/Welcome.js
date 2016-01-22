@@ -18,6 +18,7 @@ export default class Welcome extends Component {
       component: SignIn,
       passProps: {
         onSignIn: this.props.onSignIn,
+        onSignUp: this.props.onSignUp,
         onFacebook: this.props.onFacebook,
       },
     })
@@ -25,8 +26,13 @@ export default class Welcome extends Component {
 
   handleSignUp() {
     this.props.navigator.push({
-      title: 'Crie sua conta',
+      title: 'Cadastre-se',
       component: SignUp,
+      passProps: {
+        onSignIn: this.props.onSignIn,
+        onSignUp: this.props.onSignUp,
+        onFacebook: this.props.onFacebook,
+      },
     })
   }
 

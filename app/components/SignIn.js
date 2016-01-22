@@ -17,7 +17,11 @@ export default class SignIn extends Component {
     this.props.navigator.push({
       title: 'Login',
       component: SignInForm,
-      passProps: { onSignIn: this.props.onSignIn },
+      passProps: { 
+        onSignUp: this.props.onSignUp,
+        onSignIn: this.props.onSignIn,
+        onFacebook: this.props.onFacebook,
+      },
     })
   }
 
@@ -25,7 +29,11 @@ export default class SignIn extends Component {
     this.props.navigator.push({
       title: 'Crie sua conta',
       component: SignUp,
-      passProps: { onSignIn: this.props.onSignIn },
+      passProps: { 
+        onSignUp: this.props.onSignUp,
+        onSignIn: this.props.onSignIn,
+        onFacebook: this.props.onFacebook,
+      },
     })
   }
 

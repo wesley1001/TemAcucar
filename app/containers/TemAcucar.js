@@ -1,6 +1,6 @@
 import React, { Component, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { authGetUser, authSignIn, authSignOut, authFacebook } from '../actions'
+import { authGetUser, authSignIn, authSignUp, authSignOut, authFacebook } from '../actions'
 
 import StyleSheets from "../styles/StyleSheets"
 import Loading from "../components/Loading"
@@ -16,8 +16,8 @@ class TemAcucar extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, auth } = nextProps
-    const { user, credentials, signingIn, signingOut, gettingUser, signInError, signOutError } = auth
-    if (user && !credentials && !signingIn && !signingOut && !gettingUser && !signInError && !signOutError) {
+    const { user, credentials, signingIn, signingUp, signingOut, gettingUser, signInError, signUpError, signOutError } = auth
+    if (user && !credentials && !signingIn && !signingUp && !signingOut && !gettingUser && !signInError && !signUpError && !signOutError) {
       dispatch(authSignIn(user))
     }
   }
@@ -32,6 +32,11 @@ class TemAcucar extends Component {
     dispatch(authSignIn(user))
   }
 
+  handleSignUp(user) {
+    const { dispatch } = this.props
+    dispatch(authSignUp(user))
+  }
+
   handleSignOut() {
     const { dispatch, auth } = this.props
     const { credentials } = auth
@@ -40,13 +45,13 @@ class TemAcucar extends Component {
 
   render() {
     const { dispatch, auth } = this.props
-    const { user, startingUp, gettingUser, signingIn, signingOut, credentials, signInError } = auth
-    if (startingUp || gettingUser || signingIn || signingOut)
+    const { user, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError } = auth
+    if (startingUp || gettingUser || signingIn || signingUp || signingOut)
       return (<Loading />)
     if (signInError)
-      return (<SignInFailed onSignIn={this.handleSignIn.bind(this)} onFacebook={this.handleFacebook.bind(this)} />)
+      return (<SignInFailed onSignIn={this.handleSignIn.bind(this)} onSignUp={this.handleSignUp.bind(this)} onFacebook={this.handleFacebook.bind(this)} />)
     if (!credentials)
-      return (<SignedOut onSignIn={this.handleSignIn.bind(this)} onFacebook={this.handleFacebook.bind(this)} />)
+      return (<SignedOut onSignIn={this.handleSignIn.bind(this)} onSignUp={this.handleSignUp.bind(this)} onFacebook={this.handleFacebook.bind(this)} />)
     return (<Neighborhood user={user} onSignOut={this.handleSignOut.bind(this)} />)
   }
 }

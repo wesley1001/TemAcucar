@@ -3,72 +3,55 @@ import React, {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  TouchableHighlight,
-  TouchableOpacity,
+  Image,
 } from 'react-native'
 
-import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
-import Terms from "./Terms"
+import Button from "./Button"
+import Link from "./Link"
+import SignUpForm from "./SignUpForm"
 import SignIn from "./SignIn"
 
 export default class SignUp extends Component {
+  handleSignUp() {
+    this.props.navigator.push({
+      title: 'Cadastre-se',
+      component: SignUpForm,
+      passProps: {
+        onSignIn: this.props.onSignIn,
+        onSignUp: this.props.onSignUp,
+        onFacebook: this.props.onFacebook,
+      },
+    })
+  }
+
   handleSignIn() {
     this.props.navigator.push({
       title: 'Login',
       component: SignIn,
-      passProps: { onSignIn: this.props.onSignIn },
-    })
-  }
-
-  handleTerms() {
-    this.props.navigator.push({
-      title: 'Termos de uso',
-      component: Terms,
+      passProps: {
+        onSignIn: this.props.onSignIn,
+        onSignUp: this.props.onSignUp,
+        onFacebook: this.props.onFacebook,
+      },
     })
   }
 
   render() {
+    const { onFacebook } = this.props
     return (
       <View style={StyleSheets.container}>
-        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Crie sua conta</Text>
-        <View style={StyleSheets.stretch}>
-          <Text style={StyleSheets.label}>Nome</Text>
-          <TextInput
-            style={StyleSheets.input}
-            keyboardType={'default'}
-            autoCapitalize={'words'}
-            placeholder={'Digite seu primeiro nome'}
-          />
-          <Text style={StyleSheets.label}>Sobrenome</Text>
-          <TextInput
-            style={StyleSheets.input}
-            keyboardType={'default'}
-            autoCapitalize={'words'}
-            placeholder={'Digite seu sobrenome'}
-          />
-          <Text style={StyleSheets.label}>Email</Text>
-          <TextInput
-            style={StyleSheets.input}
-            autoCapitalize={'none'}
-            keyboardType={'email-address'}
-            placeholder={'Digite seu e-mail'}
-          />
-          <Text style={StyleSheets.label}>Senha</Text>
-          <TextInput
-            style={StyleSheets.input}
-            autoCapitalize={'none'}
-            keyboardType={'default'}
-            placeholder={'Digite sua senha'}
-          />
-        </View>
-        <TouchableHighlight style={StyleSheets.flexEnd} onPress={this.handleTerms.bind(this)}>
-          <Text style={StyleSheets.button}>Continuar</Text>
-        </TouchableHighlight>
-        <TouchableOpacity style={StyleSheets.marginTop} onPress={this.handleSignIn.bind(this)}>
-          <Text style={StyleSheets.link}>Já possui uma conta?</Text>
-        </TouchableOpacity>
+        <Image source={require('../img/logo.jpg')} style={StyleSheets.bigMarginBottom} />
+        <Button onPress={onFacebook} textStyle={StyleSheets.facebook}>
+          Cadastre-se com o Facebook
+        </Button>
+        <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
+        <Button onPress={this.handleSignUp.bind(this)} viewStyle={StyleSheets.marginBottom}>
+          Crie sua conta com seu email
+        </Button>
+        <Link onPress={this.handleSignIn.bind(this)}>
+          Já possui cadastro?
+        </Link>
       </View>
     )
   }

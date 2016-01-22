@@ -117,6 +117,61 @@ export function authSignIn(user) {
   }
 }
 
+export function authSignUp(user) {
+  return dispatch => {
+    dispatch({
+      type: 'AUTH_SIGN_UP_REQUEST',
+      user,
+    })
+    fetch(`${Config.apiUrl}/auth/`, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        password: user.password,
+        password_confirmation: user.password,
+      })
+    })
+    .then(response => {
+      if(response.ok) {
+        const credentials = {
+          accessToken: response.headers.get('access-token'),
+          client: response.headers.get('client'),
+          expiry: response.headers.get('expiry'),
+          tokenType: response.headers.get('token-type'),
+          uid: response.headers.get('uid'),
+        }
+        const json = JSON.parse(response._bodyText)
+        const userData = json.data
+        dispatch({
+          type: 'AUTH_SIGN_UP_SUCCESS',
+          user: userData,
+          credentials,
+        })
+        return user
+      } else {
+        const error = parseError(response)
+        dispatch({
+          type: 'AUTH_SIGN_UP_FAILURE',
+          error,
+        })
+      }
+    })
+    .then((user) => authSetUser(dispatch, user))
+    .catch(error => {
+      dispatch({
+        type: 'AUTH_SIGN_UP_FAILURE',
+        error,
+      })
+    })
+  }  
+}
+
 export function authFacebook() {
   return dispatch => {
     FBLoginManager.loginWithPermissions(["public_profile", "email", "user_friends", "user_about_me"], (facebookError, data) => {

@@ -11,11 +11,16 @@ import StyleSheets from "../styles/StyleSheets"
 import Label from "./Label"
 import Button from "./Button"
 import Link from "./Link"
-import ResetPassword from "./ResetPassword"
-import SignUp from "./SignUp"
+import SignIn from "./SignIn"
 
 const validate = values => {
   const errors = {}
+  if (!values.first_name) {
+    errors.first_name = 'Preencha seu nome'
+  }
+  if (!values.last_name) {
+    errors.last_name = 'Preencha seu sobrenome'
+  }
   if (!values.password) {
     errors.password = 'Preencha sua senha'
   } else if (values.password.length < 8) {
@@ -29,18 +34,11 @@ const validate = values => {
   return errors
 }
 
-class SignInForm extends Component {
-  handleResetPassword() {
-    this.props.navigator.push({
-      title: 'Esqueceu sua senha?',
-      component: ResetPassword,
-    })
-  }
-
-  handleSignUp() {
+class SignUpForm extends Component {
+  handleSignIn() {
     this.props.navigator.push({
       title: 'Crie sua conta',
-      component: SignUp,
+      component: SignIn,
       passProps: {
         onSignIn: this.props.onSignIn,
         onSignUp: this.props.onSignUp,
@@ -50,11 +48,27 @@ class SignInForm extends Component {
   }
 
   render() {
-    const { fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignIn } = this.props
+    const { fields: { first_name, last_name, email, password }, dirty, valid, submitting, handleSubmit, onSignUp } = this.props
     return (
       <View style={StyleSheets.container}>
-        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Faça seu login</Text>
+        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Cadastre-se</Text>
         <View style={StyleSheets.stretch}>
+          <Label field={first_name}>Nome</Label>
+          <TextInput
+            style={StyleSheets.input}
+            keyboardType={'default'}
+            autoCapitalize={'words'}
+            placeholder={'Digite seu primeiro nome'}
+            {...first_name}
+          />
+          <Label field={last_name}>Sobrenome</Label>
+          <TextInput
+            style={StyleSheets.input}
+            keyboardType={'default'}
+            autoCapitalize={'words'}
+            placeholder={'Digite seu sobrenome'}
+            {...last_name}
+          />
           <Label field={email}>Email</Label>
           <TextInput
             style={StyleSheets.input}
@@ -73,24 +87,21 @@ class SignInForm extends Component {
             {...password}
           />
         </View>
-        <Button disabled={!dirty || !valid || submitting} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignIn)}>
-          Fazer login
+        <Button disabled={!dirty || !valid || submitting} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignUp)}>
+          Fazer cadastro
         </Button>
-        <Link onPress={this.handleResetPassword.bind(this)}>
-          Esqueceu sua senha?
-        </Link>
-        <Link onPress={this.handleSignUp.bind(this)}>
-          Não possui cadastro?
+        <Link onPress={this.handleSignIn.bind(this)}>
+          Já possui cadastro?
         </Link>
       </View>
     )
   }
 }
 
-SignInForm = reduxForm({
-  form: 'signIn',
-  fields: ['email', 'password'],
+SignUpForm = reduxForm({
+  form: 'signUp',
+  fields: ['first_name', 'last_name', 'email', 'password'],
   validate,
-})(SignInForm)
+})(SignUpForm)
 
-export default SignInForm
+export default SignUpForm
