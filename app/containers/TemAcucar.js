@@ -22,9 +22,9 @@ class TemAcucar extends Component {
     }
   }
 
-  handleFacebook() {
+  handleFacebookSuccess(data) {
     const { dispatch } = this.props
-    dispatch(authFacebook())
+    dispatch(authFacebook(data))
   }
 
   handleSignIn(user) {
@@ -44,9 +44,9 @@ class TemAcucar extends Component {
     if (gettingUser || signingIn || signingOut)
       return (<Loading />)
     if (signInError)
-      return (<SignInFailed onSignIn={this.handleSignIn.bind(this)} onFacebook={this.handleFacebook.bind(this)} />)
+      return (<SignInFailed onSignIn={this.handleSignIn.bind(this)} onFacebookSuccess={this.handleFacebookSuccess.bind(this)} />)
     if (!credentials)
-      return (<SignedOut onSignIn={this.handleSignIn.bind(this)} onFacebook={this.handleFacebook.bind(this)} />)
+      return (<SignedOut onSignIn={this.handleSignIn.bind(this)} onFacebookSuccess={this.handleFacebookSuccess.bind(this)} />)
     return (<Neighborhood user={user} onSignOut={this.handleSignOut.bind(this)} />)
   }
 }

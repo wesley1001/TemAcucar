@@ -19,7 +19,8 @@ export default class SignedOut extends Component {
           component: Welcome,
           passProps: {
             onSignIn: this.props.onSignIn,
-            onFacebook: this.props.onFacebook,
+            onFacebookSuccess: this.props.onFacebookSuccess,
+            onFacebookFailure: this.props.onFacebookFailure,
           },
         }}
       />

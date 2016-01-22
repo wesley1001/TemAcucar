@@ -18,7 +18,8 @@ export default class Welcome extends Component {
       component: SignIn,
       passProps: {
         onSignIn: this.props.onSignIn,
-        onFacebook: this.props.onFacebook,
+        onFacebookSuccess: this.props.onFacebookSuccess,
+        onFacebookFailure: this.props.onFacebookFailure,
       },
     })
   }

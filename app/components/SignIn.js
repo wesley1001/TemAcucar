@@ -11,6 +11,7 @@ import Button from "./Button"
 import Link from "./Link"
 import SignInForm from "./SignInForm"
 import SignUp from "./SignUp"
+import FacebookButton from "./FacebookButton"
 
 export default class SignIn extends Component {
   handleSignIn() {
@@ -30,13 +31,11 @@ export default class SignIn extends Component {
   }
 
   render() {
-    const { onFacebook } = this.props
+    const { onFacebookSuccess, onFacebookFailure } = this.props
     return (
       <View style={StyleSheets.container}>
         <Image source={require('../img/logo.jpg')} style={StyleSheets.bigMarginBottom} />
-        <Button onPress={onFacebook} textStyle={StyleSheets.facebook}>
-          Faça login com seu Facebook
-        </Button>
+        <FacebookButton onFacebookSuccess={onFacebookSuccess} onFacebookFailure={onFacebookFailure} />
         <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
         <Button onPress={this.handleSignIn.bind(this)} viewStyle={StyleSheets.marginBottom}>
           Entre com seu email e senha

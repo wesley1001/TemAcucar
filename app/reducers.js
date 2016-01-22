@@ -39,17 +39,16 @@ function auth(state = initialAuthState, action) {
       return {
         ...state, 
         user: {
-          ...user, 
+          ...state.user, 
           ...action.user,
         },
         signingIn: true,
       }
     case 'AUTH_SIGN_IN_SUCCESS':
-      const { user } = state
       return {
         ...state, 
         user: {
-          ...user, 
+          ...state.user, 
           ...action.user,
         },
         credentials: action.credentials,
@@ -82,6 +81,32 @@ function auth(state = initialAuthState, action) {
         credentials: null,
         signingOut: false,
         signOutError: action.error,
+      }
+    case 'AUTH_FACEBOOK_REQUEST':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.user,
+        },
+        signingIn: true,
+      }
+    case 'AUTH_FACEBOOK_SUCCESS':
+      return {
+        ...state, 
+        user: {
+          ...state.user, 
+          ...action.user,
+        },
+        credentials: action.credentials,
+        signingIn: false,
+        signInError: null,
+      }
+    case 'AUTH_FACEBOOK_FAILURE':
+      return {
+        ...state, 
+        signingIn: false,
+        signInError: action.error,
       }
     default:
       return state
