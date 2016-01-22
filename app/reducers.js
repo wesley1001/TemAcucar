@@ -4,6 +4,7 @@ import { reducer as form } from 'redux-form'
 const initialAuthState = {
   user: null,
   credentials: null,
+  facebook: null,
   gettingUser: true,
   signingIn: false,
   signingOut: false,

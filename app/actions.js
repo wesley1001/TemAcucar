@@ -1,3 +1,5 @@
+import React, { NativeModules } from 'react-native'
+const FBLoginManager = NativeModules.FBLoginManager
 import Keychain from 'react-native-keychain'
 
 import Config from "./Config"
@@ -40,9 +42,20 @@ export function authGetUser(user) {
       })
     })
     .catch(error => {
-      dispatch({
-        type: 'AUTH_GET_USER_FAILURE',
-        error,
+      FBLoginManager.getCredentials(function(facebookError, data){
+        if (!facebookError) {
+          dispatch({
+            type: 'AUTH_GET_USER_SUCCESS',
+            user: {
+              facebook: data.credentials,
+            },
+          })
+        } else {
+          dispatch({
+            type: 'AUTH_GET_USER_FAILURE',
+            error,
+          })
+        }
       })
     })
   }
@@ -75,6 +88,16 @@ function authResetUser(dispatch) {
   dispatch({ type: 'AUTH_RESET_USER_REQUEST'})
   Keychain
   .resetInternetCredentials(Config.apiUrl)
+  .then(() => {
+    FBLoginManager.logout((error, data) => {
+      if (error) {
+        dispatch({
+          type: 'AUTH_RESET_USER_FAILURE',
+          error,
+        })
+      }
+    })
+  })
   .then(() => dispatch({ type: 'AUTH_RESET_USER_SUCCESS' }))
   .catch(error => {
     dispatch({
@@ -84,48 +107,75 @@ function authResetUser(dispatch) {
   })
 }
 
-export function authFacebook(data) {
+export function authSignIn(user) {
   return dispatch => {
-    const facebook = data.credentials
-    dispatch({
-      type: 'AUTH_FACEBOOK_REQUEST',
-      user: { facebook },
-    })
-    fetch(`${Config.apiUrl}/users/facebook_access_token?t=${Date.now()}`, {
-      method: 'post',
-      body: JSON.stringify({
-        access_token: facebook.token,
-      })
-    })
-    .then(response => {
-      console.log('aki')
-      console.log(response)
-      if(response.ok) {
-        const json = JSON.parse(response._bodyText)
-        const userData = json.data
-        // dispatch({
-        //   type: 'AUTH_FACEBOOK_SUCCESS',
-        //   user: userData,
-        //   credentials,
-        // })
+    if (user.email && user.password) {
+      dispatch(authEmail(user))
+    } else if (user.facebook) {
+      dispatch(authFacebook())
+    }
+  }
+}
+
+export function authFacebook() {
+  return dispatch => {
+    FBLoginManager.loginWithPermissions(["public_profile", "email", "user_friends", "user_about_me"], (facebookError, data) => {
+      if (!facebookError) {
+        const facebook = data.credentials
+        dispatch({
+          type: 'AUTH_FACEBOOK_REQUEST',
+          user: { facebook },
+        })
+        fetch(`${Config.apiUrl}/users/facebook_access_token?t=${Date.now()}`, {
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            access_token: facebook.token,
+          })
+        })
+        .then(response => {
+          if(response.ok) {
+            const credentials = {
+              accessToken: response.headers.get('access-token'),
+              client: response.headers.get('client'),
+              expiry: response.headers.get('expiry'),
+              tokenType: response.headers.get('token-type'),
+              uid: response.headers.get('uid'),
+            }
+            const user = JSON.parse(response._bodyText)
+            dispatch({
+              type: 'AUTH_FACEBOOK_SUCCESS',
+              user,
+              credentials,
+            })
+          } else {
+            const error = parseError(response)
+            dispatch({
+              type: 'AUTH_FACEBOOK_FAILURE',
+              error,
+            })
+          }
+        })
+        .catch(error => {
+          dispatch({
+            type: 'AUTH_FACEBOOK_FAILURE',
+            error,
+          })
+        })
       } else {
-        const error = parseError(response)
         dispatch({
           type: 'AUTH_FACEBOOK_FAILURE',
           error,
         })
       }
     })
-    .catch(error => {
-      dispatch({
-        type: 'AUTH_FACEBOOK_FAILURE',
-        error,
-      })
-    })
   }  
 }
 
-export function authSignIn(user) {
+function authEmail(user) {
   return dispatch => {
     dispatch({
       type: 'AUTH_SIGN_IN_REQUEST',
