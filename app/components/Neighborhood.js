@@ -29,29 +29,39 @@ export default class Neighborhood extends Component {
 
   }
 
+  renderMap() {
+    const { latitude, longitude } = this.props.user
+    const { delta } = this.state
+
+    return (
+      <MapView
+        scrollEnabled={false}
+        zoomEnabled={false}
+        style={[StyleSheets.map, StyleSheets.marginBottom]}
+        region={{
+          latitude: parseFloat(latitude), 
+          longitude: parseFloat(longitude),
+          latitudeDelta: parseFloat(delta),
+          longitudeDelta: parseFloat(delta),
+        }}
+        annotations={[{
+          latitude: latitude,
+          longitude: longitude,
+          image: require('../img/icon.png'),
+        }]}
+      />
+    )
+  }
+
   render() {
     const { onSignOut } = this.props
     const { latitude, longitude } = this.props.user
     const { delta } = this.state
+
     return (
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Minha vizinhança</Text>
-        <MapView
-          scrollEnabled={false}
-          zoomEnabled={false}
-          style={[StyleSheets.map, StyleSheets.marginBottom]}
-          region={{
-            latitude: parseFloat(latitude), 
-            longitude: parseFloat(longitude),
-            latitudeDelta: parseFloat(delta),
-            longitudeDelta: parseFloat(delta),
-          }}
-          annotations={[{
-            latitude: latitude,
-            longitude: longitude,
-            image: require('../img/icon.png'),
-          }]}
-        />
+        { latitude && longitude && this.renderMap() }
         <SliderIOS
           disabled={false}
           minimumValue={-0.1}
