@@ -5,6 +5,7 @@ const initialAuthState = {
   user: null,
   credentials: null,
   facebook: null,
+  startingUp: true,
   gettingUser: true,
   signingIn: false,
   signingOut: false,
@@ -30,6 +31,7 @@ function auth(state = initialAuthState, action) {
       return {
         ...state, 
         gettingUser: false,
+        startingUp: false,
       }
     case 'AUTH_RESET_USER_SUCCESS':
       return {
@@ -55,12 +57,14 @@ function auth(state = initialAuthState, action) {
         credentials: action.credentials,
         signingIn: false,
         signInError: null,
+        startingUp: false,
       }
     case 'AUTH_SIGN_IN_FAILURE':
       return {
         ...state, 
         signingIn: false,
         signInError: action.error,
+        startingUp: false,
       }
     case 'AUTH_SIGN_OUT_REQUEST':
       return {
@@ -102,12 +106,14 @@ function auth(state = initialAuthState, action) {
         credentials: action.credentials,
         signingIn: false,
         signInError: null,
+        startingUp: false,
       }
     case 'AUTH_FACEBOOK_FAILURE':
       return {
         ...state, 
         signingIn: false,
         signInError: action.error,
+        startingUp: false,
       }
     default:
       return state

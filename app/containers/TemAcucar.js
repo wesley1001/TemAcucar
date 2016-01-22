@@ -40,8 +40,8 @@ class TemAcucar extends Component {
 
   render() {
     const { dispatch, auth } = this.props
-    const { user, gettingUser, signingIn, signingOut, credentials, signInError } = auth
-    if (gettingUser || signingIn || signingOut)
+    const { user, startingUp, gettingUser, signingIn, signingOut, credentials, signInError } = auth
+    if (startingUp || gettingUser || signingIn || signingOut)
       return (<Loading />)
     if (signInError)
       return (<SignInFailed onSignIn={this.handleSignIn.bind(this)} onFacebook={this.handleFacebook.bind(this)} />)
