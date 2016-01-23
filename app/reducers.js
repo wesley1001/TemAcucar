@@ -11,8 +11,9 @@ const initialAuthState = {
   signingIn: false,
   signingOut: false,
   signInError: null,
-  signUpError: null,
-  signOutError: null,
+  requestingPassword: false,
+  resetPassword: false,
+  requestPasswordError: null,
 }
 
 function auth(state = initialAuthState, action) {
@@ -20,7 +21,6 @@ function auth(state = initialAuthState, action) {
     case 'AUTH_GET_USER_REQUEST':
       return {
         ...state, 
-        user: action.user,
         gettingUser: true,
       }
     case 'AUTH_GET_USER_SUCCESS':
@@ -86,13 +86,12 @@ function auth(state = initialAuthState, action) {
         },
         credentials: action.credentials,
         signingUp: false,
-        signUpError: null,
       }
     case 'AUTH_SIGN_UP_FAILURE':
       return {
         ...state, 
+        user: null,
         signingUp: false,
-        signUpError: action.error,
       }
     case 'AUTH_SIGN_OUT_REQUEST':
       return {
@@ -105,7 +104,6 @@ function auth(state = initialAuthState, action) {
         user: null,
         credentials: null,
         signingOut: false,
-        signOutError: null,
       }
     case 'AUTH_SIGN_OUT_FAILURE':
       return {
@@ -113,7 +111,6 @@ function auth(state = initialAuthState, action) {
         user: null,
         credentials: null,
         signingOut: false,
-        signOutError: action.error,
       }
     case 'AUTH_FACEBOOK_REQUEST':
       return {
@@ -142,6 +139,54 @@ function auth(state = initialAuthState, action) {
         signingIn: false,
         signInError: action.error,
         startingUp: false,
+      }
+    case 'AUTH_REQUEST_PASSWORD_REQUEST':
+      return {
+        ...state, 
+        user: {
+          ...state.user, 
+          ...action.user,
+        },
+        requestingPassword: true,
+        resetPassword: false,
+        requestPasswordError: null,
+      }
+    case 'AUTH_REQUEST_PASSWORD_SUCCESS':
+      return {
+        ...state, 
+        requestingPassword: false,
+        resetPassword: true,
+        requestPasswordError: null,
+      }
+    case 'AUTH_REQUEST_PASSWORD_FAILURE':
+      return {
+        ...state, 
+        requestingPassword: false,
+        resetPassword: false,
+        requestPasswordError: action.error,
+      }
+    case 'AUTH_RESET_PASSWORD_REQUEST':
+      return {
+        ...state, 
+        user: {
+          ...state.user, 
+          ...action.user,
+        },
+        resetingPassword: true,
+        resetPasswordError: null,
+      }
+    case 'AUTH_RESET_PASSWORD_SUCCESS':
+      return {
+        ...state, 
+        resetingPassword: false,
+        resetPasswordError: null,
+        resetPassword: false,
+      }
+    case 'AUTH_RESET_PASSWORD_FAILURE':
+      return {
+        ...state, 
+        resetingPassword: false,
+        resetPasswordError: action.error,
       }
     default:
       return state

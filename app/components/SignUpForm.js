@@ -42,7 +42,8 @@ class SignUpForm extends Component {
       passProps: {
         onSignIn: this.props.onSignIn,
         onSignUp: this.props.onSignUp,
-        onFacebook: this.props.onFacebook,
+        onSignOut: this.props.onSignOut,
+        onRequestPassword: this.props.onRequestPassword,
       },
     })
   }

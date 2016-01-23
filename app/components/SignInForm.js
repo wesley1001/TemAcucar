@@ -11,7 +11,7 @@ import StyleSheets from "../styles/StyleSheets"
 import Label from "./Label"
 import Button from "./Button"
 import Link from "./Link"
-import ResetPassword from "./ResetPassword"
+import RequestPassword from "./RequestPassword"
 import SignUp from "./SignUp"
 
 const validate = values => {
@@ -30,10 +30,13 @@ const validate = values => {
 }
 
 class SignInForm extends Component {
-  handleResetPassword() {
+  handleRequestPassword() {
     this.props.navigator.push({
       title: 'Esqueceu sua senha?',
-      component: ResetPassword,
+      component: RequestPassword,
+      passProps: {
+        onRequestPassword: this.props.onRequestPassword,
+      },
     })
   }
 
@@ -44,7 +47,8 @@ class SignInForm extends Component {
       passProps: {
         onSignIn: this.props.onSignIn,
         onSignUp: this.props.onSignUp,
-        onFacebook: this.props.onFacebook,
+        onSignOut: this.props.onSignOut,
+        onRequestPassword: this.props.onRequestPassword,
       },
     })
   }
@@ -76,7 +80,7 @@ class SignInForm extends Component {
         <Button disabled={!dirty || !valid || submitting} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignIn)}>
           Fazer login
         </Button>
-        <Link onPress={this.handleResetPassword.bind(this)}>
+        <Link onPress={this.handleRequestPassword.bind(this)}>
           Esqueceu sua senha?
         </Link>
         <Link onPress={this.handleSignUp.bind(this)}>

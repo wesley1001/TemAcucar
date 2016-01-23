@@ -1,11 +1,12 @@
 import React, { Component, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { authGetUser, authSignIn, authSignUp, authSignOut, authFacebook } from '../actions'
+import { authGetUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword } from '../actions'
 
 import StyleSheets from "../styles/StyleSheets"
 import Loading from "../components/Loading"
 import SignInFailed from "../components/SignInFailed"
 import SignedOut from "../components/SignedOut"
+import ResetPassword from "../components/ResetPassword"
 import Neighborhood from "../components/Neighborhood"
 
 class TemAcucar extends Component {
@@ -16,8 +17,8 @@ class TemAcucar extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, auth } = nextProps
-    const { user, credentials, signingIn, signingUp, signingOut, gettingUser, signInError, signUpError, signOutError } = auth
-    if (user && !credentials && !signingIn && !signingUp && !signingOut && !gettingUser && !signInError && !signUpError && !signOutError) {
+    const { user, credentials, signingIn, signingUp, signingOut, gettingUser, signInError, requestingPassword, resetingPassword, resetPassword } = auth
+    if (user && !credentials && !signingIn && !signingUp && !signingOut && !gettingUser && !signInError && !requestingPassword && !resetingPassword && !resetPassword) {
       dispatch(authSignIn(user))
     }
   }
@@ -43,16 +44,40 @@ class TemAcucar extends Component {
     dispatch(authSignOut(credentials))
   }
 
+  handleRequestPassword(user) {
+    const { dispatch } = this.props
+    dispatch(authRequestPassword(user))
+  }
+
+  handleResetPassword(data) {
+    const { dispatch, auth } = this.props
+    const { user } = auth
+    dispatch(authResetPassword({
+      ...user,
+      ...data,
+    }))
+  }
+
   render() {
     const { dispatch, auth } = this.props
-    const { user, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError } = auth
+    const { user, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError, resetPassword } = auth
+    const authEvents = {
+      onSignIn: this.handleSignIn.bind(this),
+      onSignUp: this.handleSignUp.bind(this),
+      onSignOut: this.handleSignOut.bind(this),
+      onFacebook: this.handleFacebook.bind(this),
+      onRequestPassword: this.handleRequestPassword.bind(this),
+      onResetPassword: this.handleResetPassword.bind(this),
+    }
     if (startingUp || gettingUser || signingIn || signingUp || signingOut)
       return (<Loading />)
     if (signInError)
-      return (<SignInFailed onSignIn={this.handleSignIn.bind(this)} onSignUp={this.handleSignUp.bind(this)} onFacebook={this.handleFacebook.bind(this)} />)
+      return (<SignInFailed auth={auth} {...authEvents} />)
+    if (resetPassword)
+      return (<ResetPassword auth={auth} {...authEvents} />)
     if (!credentials)
-      return (<SignedOut onSignIn={this.handleSignIn.bind(this)} onSignUp={this.handleSignUp.bind(this)} onFacebook={this.handleFacebook.bind(this)} />)
-    return (<Neighborhood user={user} onSignOut={this.handleSignOut.bind(this)} />)
+      return (<SignedOut auth={auth} {...authEvents} />)
+    return (<Neighborhood auth={auth} {...authEvents} user={user} />)
   }
 }
 

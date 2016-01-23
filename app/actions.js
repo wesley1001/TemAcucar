@@ -33,13 +33,20 @@ export function authGetUser(user) {
     Keychain
     .getInternetCredentials(Config.apiUrl)
     .then((credentials) => {
-      dispatch({
-        type: 'AUTH_GET_USER_SUCCESS',
-        user: {
-          email: credentials.username,
-          password: credentials.password,
-        },
-      })
+      if (credentials.username && credentials.username.length > 0 && credentials.password && credentials.password.length > 0) {
+        dispatch({
+          type: 'AUTH_GET_USER_SUCCESS',
+          user: {
+            email: credentials.username,
+            password: credentials.password,
+          },
+        })
+      } else {
+        dispatch({
+          type: 'AUTH_GET_USER_FAILURE',
+          error: 'Credenciais inválidas.',
+        })
+      }
     })
     .catch(error => {
       FBLoginManager.getCredentials(function(facebookError, data){
@@ -304,6 +311,97 @@ export function authSignOut(credentials) {
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_OUT_FAILURE',
+        error,
+      })
+    })
+  }  
+}
+
+export function authRequestPassword(user) {
+  return dispatch => {
+    dispatch({
+      type: 'AUTH_REQUEST_PASSWORD_REQUEST',
+      user,
+    })
+    fetch(`${Config.apiUrl}/auth/password`, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: user.email,
+        redirect_url: Config.apiUrl,
+      })
+    })
+    .then(response => {
+      if(response.ok) {
+        dispatch({ type: 'AUTH_REQUEST_PASSWORD_SUCCESS' })
+      } else {
+        const error = parseError(response).errors[0]
+        dispatch({
+          type: 'AUTH_REQUEST_PASSWORD_FAILURE',
+          error,
+        })
+      }
+    })
+    .catch(error => {
+      dispatch({
+        type: 'AUTH_REQUEST_PASSWORD_FAILURE',
+        error,
+      })
+    })
+  }  
+}
+
+export function authResetPassword(user) {
+  return dispatch => {
+    dispatch({
+      type: 'AUTH_RESET_PASSWORD_REQUEST',
+      user,
+    })
+    console.log(user)
+    fetch(`${Config.apiUrl}/users/password`, {
+      method: 'put',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: user.email,
+        password: user.password,
+        token: user.resetPasswordToken,
+      })
+    })
+    .then(response => {
+      if(response.ok) {
+        const credentials = {
+          accessToken: response.headers.get('access-token'),
+          client: response.headers.get('client'),
+          expiry: response.headers.get('expiry'),
+          tokenType: response.headers.get('token-type'),
+          uid: response.headers.get('uid'),
+        }
+        const json = JSON.parse(response._bodyText)
+        const userData = json.data
+        dispatch({
+          type: 'AUTH_RESET_PASSWORD_SUCCESS',
+          user: userData,
+          credentials,
+        })
+        return user
+      } else {
+        const error = parseError(response).errors[0]
+        dispatch({
+          type: 'AUTH_RESET_PASSWORD_FAILURE',
+          error,
+        })
+      }
+    })
+    .then((user) => authSetUser(dispatch, user))
+    .catch(error => {
+      dispatch({
+        type: 'AUTH_RESET_PASSWORD_FAILURE',
         error,
       })
     })

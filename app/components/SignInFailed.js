@@ -17,11 +17,7 @@ export default class SignInFailed extends Component {
         initialRoute={{
           title: 'Tem Açúcar?',
           component: SignInInstructions,
-          passProps: {
-            onSignIn: this.props.onSignIn,
-            onSignUp: this.props.onSignUp,
-            onFacebook: this.props.onFacebook,
-          },
+          passProps: this.props,
         }}
       />
     )

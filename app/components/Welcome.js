@@ -16,11 +16,7 @@ export default class Welcome extends Component {
     this.props.navigator.push({
       title: 'Login',
       component: SignIn,
-      passProps: {
-        onSignIn: this.props.onSignIn,
-        onSignUp: this.props.onSignUp,
-        onFacebook: this.props.onFacebook,
-      },
+      passProps: this.props,
     })
   }
 
@@ -28,11 +24,7 @@ export default class Welcome extends Component {
     this.props.navigator.push({
       title: 'Cadastre-se',
       component: SignUp,
-      passProps: {
-        onSignIn: this.props.onSignIn,
-        onSignUp: this.props.onSignUp,
-        onFacebook: this.props.onFacebook,
-      },
+      passProps: this.props,
     })
   }
 

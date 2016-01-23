@@ -9,26 +9,25 @@ import React, {
 import StyleSheets from "../styles/StyleSheets"
 import Button from "./Button"
 import SignIn from "./SignIn"
-import ResetPassword from "./ResetPassword"
+import RequestPassword from "./RequestPassword"
 
 export default class SignInInstructions extends Component {
   handleSignIn() {
     this.props.navigator.push({
       title: 'Login',
       component: SignIn,
-      passProps: {
-        onSignIn: this.props.onSignIn,
-        onSignUp: this.props.onSignUp,
-        onFacebook: this.props.onFacebook,
-      },
+      passProps: this.props,
     })
   }
 
-  handleResetPassword() {
+  handleRequestPassword() {
     this.props.navigator.push({
       title: 'Criar uma nova senha',
-      component: ResetPassword,
-      passProps: { headline: 'Criar uma nova senha' },
+      component: RequestPassword,
+      passProps: { 
+        ...this.props,
+        headline: 'Criar uma nova senha',
+      },
     })
   }
 
@@ -42,7 +41,7 @@ export default class SignInInstructions extends Component {
         <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
           Se você é usuário da versão antiga do Tem Açucar, vai ser preciso criar uma nova senha.
         </Text>
-        <Button onPress={this.handleResetPassword.bind(this)}>
+        <Button onPress={this.handleRequestPassword.bind(this)}>
           Criar uma nova senha
         </Button>
         <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
