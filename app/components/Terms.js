@@ -4,64 +4,39 @@ import React, {
   Text,
   View,
   ScrollView,
-  TouchableHighlight,
 } from 'react-native'
 
 import StyleSheets from "../styles/StyleSheets"
-import SetAddress from "./SetAddress"
+import Button from "./Button"
 
 export default class Terms extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      scrolledToBottom: true,
+      scrolledToBottom: false,
     }
   }
 
   handleScroll(event) {
-    if(event.nativeEvent.contentOffset.y == (event.nativeEvent.contentSize.height - event.nativeEvent.layoutMeasurement.height)) {
+    if (this.state.scrolledToBottom)
+      return
+    const { nativeEvent } = event
+    if(nativeEvent.contentOffset.y >= (nativeEvent.contentSize.height - nativeEvent.layoutMeasurement.height - 1)) {
       this.setState({scrolledToBottom: true})      
     }
   }
 
-  handleSetAddress() {
-    this.props.navigator.push({
-      title: 'Complete seu cadastro',
-      component: SetAddress,
-    })
-  }
-
-  renderInstructions() {
-    return (
-      <Text style={[StyleSheets.label, StyleSheets.marginBottom]}>
-        Para poder continuar, você deve ler os termos de uso até o final.
-      </Text>
-    )
-  }
-
-  renderButton() {
-    return (
-      <View>
-        <Text style={[StyleSheets.label, StyleSheets.marginBottom]}>
-          Ao continuar, você aceita os termos de uso.
-        </Text>
-        <TouchableHighlight style={StyleSheets.flexEnd} onPress={this.handleSetAddress.bind(this)}>
-          <Text style={StyleSheets.button}>Continuar</Text>
-        </TouchableHighlight>
-      </View>
-    )
-  }
-
   render() {
+    const { scrolledToBottom } = this.state
     return (
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Termos de uso</Text>
         <ScrollView
           style={[StyleSheets.scrollView, StyleSheets.marginBottom]}
-          scrollEventThrottle={1}
+          scrollEventThrottle={16}
           onScroll={this.handleScroll.bind(this)}
         >
-          <Text style={[StyleSheets.paragraph, {marginTop: -40}]}>
+          <Text style={StyleSheets.paragraph}>
             TERMOS E CONDIÇÕES GERAIS
           </Text>
           <Text style={StyleSheets.paragraph}>
@@ -332,7 +307,20 @@ export default class Terms extends Component {
             Todos os itens destes Termos e Condições Gerais estão regidos pelas leis vigentes na República Federativa do Brasil. Para todos os assuntos referentes à interpretação e ao cumprimento deste Contrato, as partes se submetem ao Foro Central da Comarca do Rio de Janeiro , estado do Rio de Janeiro.
           </Text>
         </ScrollView>
-        { this.state.scrolledToBottom ? this.renderButton() : this.renderInstructions() }
+        <Text style={[StyleSheets.label, {height: 60}]}>
+          { (scrolledToBottom ? 'Para poder continuar, você deve aceitar os termos de uso.' : 'Para poder continuar, você deve ler os termos de uso até o final.') }
+        </Text>
+        <View style={{
+          alignSelf: 'stretch',
+          flexDirection: 'row',
+        }}>
+          <Button disabled={!scrolledToBottom} viewStyle={{flex: 1, marginRight: 4}}>
+            Eu aceito
+          </Button>
+          <Button viewStyle={{flex: 1}} textStyle={StyleSheets.beige}>
+            Eu não aceito
+          </Button>
+        </View>
       </View>
     )
   }

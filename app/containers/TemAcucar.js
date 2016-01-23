@@ -7,6 +7,7 @@ import Loading from "../components/Loading"
 import SignInFailed from "../components/SignInFailed"
 import SignedOut from "../components/SignedOut"
 import ResetPassword from "../components/ResetPassword"
+import Terms from "../components/Terms"
 import Neighborhood from "../components/Neighborhood"
 
 class TemAcucar extends Component {
@@ -77,6 +78,8 @@ class TemAcucar extends Component {
       return (<ResetPassword auth={auth} {...authEvents} />)
     if (!credentials)
       return (<SignedOut auth={auth} {...authEvents} />)
+    if (!user.accepted_terms)
+      return (<Terms user={user} />)
     return (<Neighborhood auth={auth} {...authEvents} user={user} />)
   }
 }

@@ -360,7 +360,6 @@ export function authResetPassword(user) {
       type: 'AUTH_RESET_PASSWORD_REQUEST',
       user,
     })
-    console.log(user)
     fetch(`${Config.apiUrl}/users/password`, {
       method: 'put',
       headers: {

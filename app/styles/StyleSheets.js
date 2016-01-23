@@ -76,6 +76,11 @@ const StyleSheets = StyleSheet.create({
     textAlign: 'center',
   },
 
+  beige: {
+    color: Colors.brown,
+    backgroundColor: Colors.beige,
+  },
+
   disabled: {
     backgroundColor: Colors.gray,
   },

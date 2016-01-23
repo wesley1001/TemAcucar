@@ -12,9 +12,11 @@ const initialAuthState = {
   signingOut: false,
   requestingPassword: false,
   resetPassword: false,
+  resetingPassword: false,
   signInError: null,
   signUpError: null,
   requestPasswordError: null,
+  rejectedTerms: false,
 }
 
 function auth(state = initialAuthState, action) {
