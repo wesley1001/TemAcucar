@@ -25,6 +25,7 @@ const StyleSheets = StyleSheet.create({
   },
 
   paragraph: {
+    alignSelf: 'stretch',
     color: Colors.brown,
     fontSize: 16,
     marginBottom: 20,

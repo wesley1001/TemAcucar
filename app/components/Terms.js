@@ -28,6 +28,7 @@ export default class Terms extends Component {
 
   render() {
     const { scrolledToBottom } = this.state
+    const { onRejectTerms } = this.props
     return (
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Termos de uso</Text>
@@ -317,7 +318,7 @@ export default class Terms extends Component {
           <Button disabled={!scrolledToBottom} viewStyle={{flex: 1, marginRight: 4}}>
             Eu aceito
           </Button>
-          <Button viewStyle={{flex: 1}} textStyle={StyleSheets.beige}>
+          <Button viewStyle={{flex: 1}} textStyle={StyleSheets.beige} onPress={onRejectTerms}>
             Eu não aceito
           </Button>
         </View>

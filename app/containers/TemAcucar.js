@@ -1,12 +1,13 @@
 import React, { Component, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { authGetUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword } from '../actions'
+import { authGetUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword, authRejectTerms, authCancelRejectTerms } from '../actions'
 
 import StyleSheets from "../styles/StyleSheets"
 import Loading from "../components/Loading"
 import SignInFailed from "../components/SignInFailed"
 import SignedOut from "../components/SignedOut"
 import ResetPassword from "../components/ResetPassword"
+import RejectedTerms from "../components/RejectedTerms"
 import Terms from "../components/Terms"
 import Neighborhood from "../components/Neighborhood"
 
@@ -59,9 +60,19 @@ class TemAcucar extends Component {
     }))
   }
 
+  handleRejectTerms() {
+    const { dispatch } = this.props
+    dispatch(authRejectTerms())
+  }
+
+  handleCancelRejectTerms() {
+    const { dispatch } = this.props
+    dispatch(authCancelRejectTerms())
+  }
+
   render() {
     const { dispatch, auth } = this.props
-    const { user, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError, signUpError, resetPassword } = auth
+    const { user, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError, signUpError, resetPassword, rejectedTerms } = auth
     const authEvents = {
       onSignIn: this.handleSignIn.bind(this),
       onSignUp: this.handleSignUp.bind(this),
@@ -78,8 +89,10 @@ class TemAcucar extends Component {
       return (<ResetPassword auth={auth} {...authEvents} />)
     if (!credentials)
       return (<SignedOut auth={auth} {...authEvents} />)
+    if (rejectedTerms)
+      return (<RejectedTerms onCancelRejectTerms={this.handleCancelRejectTerms.bind(this)} />)
     if (!user.accepted_terms)
-      return (<Terms user={user} />)
+      return (<Terms user={user} onRejectTerms={this.handleRejectTerms.bind(this)} />)
     return (<Neighborhood auth={auth} {...authEvents} user={user} />)
   }
 }

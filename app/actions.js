@@ -406,3 +406,15 @@ export function authResetPassword(user) {
     })
   }  
 }
+
+export function authRejectTerms() {
+  return dispatch => {
+    dispatch({ type: 'AUTH_REJECT_TERMS' })
+  }
+}
+
+export function authCancelRejectTerms() {
+  return dispatch => {
+    dispatch({ type: 'AUTH_CANCEL_REJECT_TERMS' })
+  }
+}

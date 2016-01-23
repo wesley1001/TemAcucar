@@ -193,6 +193,16 @@ function auth(state = initialAuthState, action) {
         resetingPassword: false,
         resetPasswordError: action.error,
       }
+    case 'AUTH_REJECT_TERMS':
+      return {
+        ...state, 
+        rejectedTerms: true,
+      }
+    case 'AUTH_CANCEL_REJECT_TERMS':
+      return {
+        ...state, 
+        rejectedTerms: false,
+      }
     default:
       return state
   }
