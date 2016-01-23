@@ -17,8 +17,8 @@ class TemAcucar extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, auth } = nextProps
-    const { user, credentials, signingIn, signingUp, signingOut, gettingUser, signInError, requestingPassword, resetingPassword, resetPassword } = auth
-    if (user && !credentials && !signingIn && !signingUp && !signingOut && !gettingUser && !signInError && !requestingPassword && !resetingPassword && !resetPassword) {
+    const { user, credentials, signingIn, signingUp, signingOut, gettingUser, signInError, signUpError, requestingPassword, resetingPassword, resetPassword } = auth
+    if (user && !credentials && !signingIn && !signingUp && !signingOut && !gettingUser && !signInError && !signUpError && !requestingPassword && !resetingPassword && !resetPassword) {
       dispatch(authSignIn(user))
     }
   }
@@ -60,7 +60,7 @@ class TemAcucar extends Component {
 
   render() {
     const { dispatch, auth } = this.props
-    const { user, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError, resetPassword } = auth
+    const { user, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError, signUpError, resetPassword } = auth
     const authEvents = {
       onSignIn: this.handleSignIn.bind(this),
       onSignUp: this.handleSignUp.bind(this),
@@ -69,7 +69,7 @@ class TemAcucar extends Component {
       onRequestPassword: this.handleRequestPassword.bind(this),
       onResetPassword: this.handleResetPassword.bind(this),
     }
-    if (startingUp || gettingUser || signingIn || signingUp || signingOut)
+    if (startingUp || gettingUser || signingIn || signingOut)
       return (<Loading />)
     if (signInError)
       return (<SignInFailed auth={auth} {...authEvents} />)

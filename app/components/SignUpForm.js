@@ -5,6 +5,7 @@ import React, {
   View,
   TextInput,
 } from 'react-native'
+import { connect } from 'react-redux'
 import {reduxForm} from 'redux-form'
 
 import StyleSheets from "../styles/StyleSheets"
@@ -49,7 +50,9 @@ class SignUpForm extends Component {
   }
 
   render() {
-    const { fields: { first_name, last_name, email, password }, dirty, valid, submitting, handleSubmit, onSignUp } = this.props
+    const { auth: {signingUp, signUpError}, fields: { first_name, last_name, email, password }, dirty, valid, submitting, handleSubmit, onSignUp } = this.props
+    const errors = signUpError && signUpError.errors
+    const emailError = errors && errors.email && `Email ${errors.email[0]}`
     return (
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Cadastre-se</Text>
@@ -70,7 +73,7 @@ class SignUpForm extends Component {
             placeholder={'Digite seu sobrenome'}
             {...last_name}
           />
-          <Label field={email}>Email</Label>
+          <Label field={email} error={emailError}>Email</Label>
           <TextInput
             style={StyleSheets.input}
             autoCapitalize={'none'}
@@ -88,8 +91,8 @@ class SignUpForm extends Component {
             {...password}
           />
         </View>
-        <Button disabled={!dirty || !valid || submitting} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignUp)}>
-          Fazer cadastro
+        <Button disabled={!dirty || !valid || submitting || signingUp} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignUp)}>
+          { (signingUp ? 'Enviando cadastro...' : 'Fazer cadastro') }
         </Button>
         <Link onPress={this.handleSignIn.bind(this)}>
           Já possui cadastro?
@@ -105,4 +108,6 @@ SignUpForm = reduxForm({
   validate,
 })(SignUpForm)
 
-export default SignUpForm
+export default connect(state => ({
+  auth: state.auth,
+}))(SignUpForm)

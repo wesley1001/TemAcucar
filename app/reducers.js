@@ -10,9 +10,10 @@ const initialAuthState = {
   signingIn: false,
   signingIn: false,
   signingOut: false,
-  signInError: null,
   requestingPassword: false,
   resetPassword: false,
+  signInError: null,
+  signUpError: null,
   requestPasswordError: null,
 }
 
@@ -86,12 +87,14 @@ function auth(state = initialAuthState, action) {
         },
         credentials: action.credentials,
         signingUp: false,
+        signUpError: null,
       }
     case 'AUTH_SIGN_UP_FAILURE':
       return {
         ...state, 
         user: null,
         signingUp: false,
+        signUpError: action.error,
       }
     case 'AUTH_SIGN_OUT_REQUEST':
       return {
