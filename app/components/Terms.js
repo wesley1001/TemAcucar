@@ -305,7 +305,7 @@ export default class Terms extends Component {
             18 – Legislação Aplicável e Foro de eleição
           </Text>
           <Text style={StyleSheets.paragraph}>
-            Todos os itens destes Termos e Condições Gerais estão regidos pelas leis vigentes na República Federativa do Brasil. Para todos os assuntos referentes à interpretação e ao cumprimento deste Contrato, as partes se submetem ao Foro Central da Comarca do Rio de Janeiro , estado do Rio de Janeiro.
+            Todos os itens destes Termos e Condições Gerais estão regidos pelas leis vigentes na República Federativa do Brasil. Para todos os assuntos referentes à interpretação e ao cumprimento deste Contrato, as partes se submetem ao Foro Central da Comarca do Rio de Janeiro, estado do Rio de Janeiro.
           </Text>
         </ScrollView>
         <Text style={[StyleSheets.label, {height: 60}]}>

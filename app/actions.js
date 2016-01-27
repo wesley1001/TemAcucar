@@ -130,7 +130,7 @@ export function authSignUp(user) {
       type: 'AUTH_SIGN_UP_REQUEST',
       user,
     })
-    fetch(`${Config.apiUrl}/auth/`, {
+    fetch(`${Config.apiUrl}/users`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -141,7 +141,6 @@ export function authSignUp(user) {
         last_name: user.last_name,
         email: user.email,
         password: user.password,
-        password_confirmation: user.password,
       })
     })
     .then(response => {
@@ -243,7 +242,7 @@ function authEmail(user) {
       type: 'AUTH_SIGN_IN_REQUEST',
       user,
     })
-    fetch(`${Config.apiUrl}/auth/sign_in`, {
+    fetch(`${Config.apiUrl}/authentications`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
