@@ -2,28 +2,25 @@ import Config from "../Config"
 import { authHeaders, authCredentials } from './AuthActions'
 import { parseError } from './BasicActions'
 
-export function termsAccept(user) {
+export function termsAccept(credentials) {
   return dispatch => {
-    dispatch({
-      type: 'TERMS_ACCEPT_REQUEST',
-      user,
-    })
-    fetch(`${Config.apiUrl}/users/${user.id}`, {
+    dispatch({ type: 'TERMS_ACCEPT_REQUEST' })
+    fetch(`${Config.apiUrl}/users/${credentials.uid}`, {
       method: 'patch',
-      headers: authHeaders(user.credentials),
+      headers: authHeaders(credentials),
       body: JSON.stringify({
         accepted_terms: true,
       })
     })
     .then(response => {
       if(response.ok) {
+        console.log(response)
         const credentials = authCredentials(response)
         dispatch({
           type: 'TERMS_ACCEPT_SUCCESS',
           user: JSON.parse(response._bodyText),
           credentials,
         })
-        return user
       } else {
         const error = parseError(response)
         dispatch({
@@ -32,7 +29,6 @@ export function termsAccept(user) {
         })
       }
     })
-    .then((user) => authSetUser(dispatch, user))
     .catch(error => {
       dispatch({
         type: 'TERMS_ACCEPT_FAILURE',

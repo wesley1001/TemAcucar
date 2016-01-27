@@ -63,8 +63,8 @@ class TemAcucar extends Component {
 
   handleAcceptTerms() {
     const { dispatch, auth } = this.props
-    const { user } = auth
-    dispatch(termsAccept(user))
+    const { credentials } = auth
+    dispatch(termsAccept(credentials))
   }
 
   handleRejectTerms() {
