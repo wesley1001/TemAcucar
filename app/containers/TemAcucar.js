@@ -1,6 +1,7 @@
 import React, { Component, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { authGetUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword, authRejectTerms, authCancelRejectTerms } from '../actions'
+import { authGetUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword } from '../actions/AuthActions'
+import { termsAccept, termsReject, termsCancelReject, termsScrollToBottom } from '../actions/TermsActions'
 
 import StyleSheets from "../styles/StyleSheets"
 import Loading from "../components/Loading"
@@ -60,19 +61,31 @@ class TemAcucar extends Component {
     }))
   }
 
+  handleAcceptTerms() {
+    const { dispatch, auth } = this.props
+    const { user } = auth
+    dispatch(termsAccept(user))
+  }
+
   handleRejectTerms() {
     const { dispatch } = this.props
-    dispatch(authRejectTerms())
+    dispatch(termsReject())
   }
 
   handleCancelRejectTerms() {
     const { dispatch } = this.props
-    dispatch(authCancelRejectTerms())
+    dispatch(termsCancelReject())
+  }
+
+  handleScrollToBottomTerms() {
+    const { dispatch } = this.props
+    dispatch(termsScrollToBottom())
   }
 
   render() {
-    const { dispatch, auth } = this.props
-    const { user, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError, signUpError, resetPassword, rejectedTerms } = auth
+    const { dispatch, auth, terms } = this.props
+    const { user, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError, signUpError, resetPassword } = auth
+    const { acceptingTerms, rejectedTerms } = terms
     const authEvents = {
       onSignIn: this.handleSignIn.bind(this),
       onSignUp: this.handleSignUp.bind(this),
@@ -81,7 +94,7 @@ class TemAcucar extends Component {
       onRequestPassword: this.handleRequestPassword.bind(this),
       onResetPassword: this.handleResetPassword.bind(this),
     }
-    if (startingUp || gettingUser || signingIn || signingOut)
+    if (startingUp || gettingUser || signingIn || signingOut || acceptingTerms)
       return (<Loading />)
     if (signInError)
       return (<SignInFailed auth={auth} {...authEvents} />)
@@ -92,11 +105,12 @@ class TemAcucar extends Component {
     if (rejectedTerms)
       return (<RejectedTerms onCancelRejectTerms={this.handleCancelRejectTerms.bind(this)} />)
     if (!user.accepted_terms)
-      return (<Terms user={user} onRejectTerms={this.handleRejectTerms.bind(this)} />)
+      return (<Terms user={user} onAcceptTerms={this.handleAcceptTerms.bind(this)} onRejectTerms={this.handleRejectTerms.bind(this)} onScrollToBottom={this.handleScrollToBottomTerms.bind(this)} />)
     return (<Neighborhood auth={auth} {...authEvents} user={user} />)
   }
 }
 
 export default connect(state => ({
   auth: state.auth,
+  terms: state.terms,
 }))(TemAcucar)

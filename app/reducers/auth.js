@@ -1,7 +1,4 @@
-import { combineReducers } from 'redux'
-import { reducer as form } from 'redux-form'
-
-const initialAuthState = {
+const initialState = {
   user: null,
   credentials: null,
   facebook: null,
@@ -16,10 +13,9 @@ const initialAuthState = {
   signInError: null,
   signUpError: null,
   requestPasswordError: null,
-  rejectedTerms: false,
 }
 
-function auth(state = initialAuthState, action) {
+export default function auth(state = initialState, action) {
   switch (action.type) {
     case 'AUTH_GET_USER_REQUEST':
       return {
@@ -195,24 +191,7 @@ function auth(state = initialAuthState, action) {
         resetingPassword: false,
         resetPasswordError: action.error,
       }
-    case 'AUTH_REJECT_TERMS':
-      return {
-        ...state, 
-        rejectedTerms: true,
-      }
-    case 'AUTH_CANCEL_REJECT_TERMS':
-      return {
-        ...state, 
-        rejectedTerms: false,
-      }
     default:
       return state
   }
 }
-
-const reducer = combineReducers({
-  auth,
-  form
-})
-
-export default reducer

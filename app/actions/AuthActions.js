@@ -2,9 +2,10 @@ import React, { NativeModules } from 'react-native'
 const FBLoginManager = NativeModules.FBLoginManager
 import Keychain from 'react-native-keychain'
 
-import Config from "./Config"
+import Config from "../Config"
+import { parseError } from './BasicActions'
 
-function authHeaders(credentials) {
+export function authHeaders(credentials) {
   return {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -16,12 +17,13 @@ function authHeaders(credentials) {
   }
 }
 
-function parseError(response) {
-  const contentType = response.headers.get('content-type')
-  if (contentType.match(/application\/json/)) {
-    return JSON.parse(response._bodyText)
-  } else {
-    return response.status
+export function authCredentials(response) {
+  return {
+    accessToken: response.headers.get('access-token'),
+    client: response.headers.get('client'),
+    expiry: response.headers.get('expiry'),
+    tokenType: response.headers.get('token-type'),
+    uid: response.headers.get('uid'),
   }
 }
 
@@ -145,18 +147,10 @@ export function authSignUp(user) {
     })
     .then(response => {
       if(response.ok) {
-        const credentials = {
-          accessToken: response.headers.get('access-token'),
-          client: response.headers.get('client'),
-          expiry: response.headers.get('expiry'),
-          tokenType: response.headers.get('token-type'),
-          uid: response.headers.get('uid'),
-        }
-        const json = JSON.parse(response._bodyText)
-        const userData = json
+        const credentials = authCredentials(response)
         dispatch({
           type: 'AUTH_SIGN_UP_SUCCESS',
-          user: userData,
+          user: JSON.parse(response._bodyText),
           credentials,
         })
         return user
@@ -199,13 +193,7 @@ export function authFacebook() {
         })
         .then(response => {
           if(response.ok) {
-            const credentials = {
-              accessToken: response.headers.get('access-token'),
-              client: response.headers.get('client'),
-              expiry: response.headers.get('expiry'),
-              tokenType: response.headers.get('token-type'),
-              uid: response.headers.get('uid'),
-            }
+            const credentials = authCredentials(response)
             const user = JSON.parse(response._bodyText)
             dispatch({
               type: 'AUTH_FACEBOOK_SUCCESS',
@@ -255,18 +243,10 @@ function authEmail(user) {
     })
     .then(response => {
       if(response.ok) {
-        const credentials = {
-          accessToken: response.headers.get('access-token'),
-          client: response.headers.get('client'),
-          expiry: response.headers.get('expiry'),
-          tokenType: response.headers.get('token-type'),
-          uid: response.headers.get('uid'),
-        }
-        const json = JSON.parse(response._bodyText)
-        const userData = json
+        const credentials = authCredentials(response)
         dispatch({
           type: 'AUTH_SIGN_IN_SUCCESS',
-          user: userData,
+          user: JSON.parse(response._bodyText),
           credentials,
         })
         return user
@@ -373,18 +353,10 @@ export function authResetPassword(user) {
     })
     .then(response => {
       if(response.ok) {
-        const credentials = {
-          accessToken: response.headers.get('access-token'),
-          client: response.headers.get('client'),
-          expiry: response.headers.get('expiry'),
-          tokenType: response.headers.get('token-type'),
-          uid: response.headers.get('uid'),
-        }
-        const json = JSON.parse(response._bodyText)
-        const userData = json.data
+        const credentials = authCredentials(response)
         dispatch({
           type: 'AUTH_RESET_PASSWORD_SUCCESS',
-          user: userData,
+          user: JSON.parse(response._bodyText),
           credentials,
         })
         return user
@@ -404,16 +376,4 @@ export function authResetPassword(user) {
       })
     })
   }  
-}
-
-export function authRejectTerms() {
-  return dispatch => {
-    dispatch({ type: 'AUTH_REJECT_TERMS' })
-  }
-}
-
-export function authCancelRejectTerms() {
-  return dispatch => {
-    dispatch({ type: 'AUTH_CANCEL_REJECT_TERMS' })
-  }
 }

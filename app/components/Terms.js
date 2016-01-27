@@ -5,30 +5,26 @@ import React, {
   View,
   ScrollView,
 } from 'react-native'
+import { connect } from 'react-redux'
 
 import StyleSheets from "../styles/StyleSheets"
 import Button from "./Button"
 
-export default class Terms extends Component {
-  constructor(props, context) {
-    super(props, context)
-    this.state = {
-      scrolledToBottom: false,
-    }
-  }
-
+class Terms extends Component {
   handleScroll(event) {
-    if (this.state.scrolledToBottom)
+    const { scrolledToBottom } = this.props.terms
+    const { onScrollToBottom } = this.props
+    if (scrolledToBottom)
       return
     const { nativeEvent } = event
     if(nativeEvent.contentOffset.y >= (nativeEvent.contentSize.height - nativeEvent.layoutMeasurement.height - 1)) {
-      this.setState({scrolledToBottom: true})      
+      onScrollToBottom()
     }
   }
 
   render() {
-    const { scrolledToBottom } = this.state
-    const { onRejectTerms } = this.props
+    const { scrolledToBottom } = this.props.terms
+    const { onAcceptTerms, onRejectTerms } = this.props
     return (
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Termos de uso</Text>
@@ -315,7 +311,7 @@ export default class Terms extends Component {
           alignSelf: 'stretch',
           flexDirection: 'row',
         }}>
-          <Button disabled={!scrolledToBottom} viewStyle={{flex: 1, marginRight: 4}}>
+          <Button disabled={!scrolledToBottom} viewStyle={{flex: 1, marginRight: 4}} onPress={onAcceptTerms}>
             Eu aceito
           </Button>
           <Button viewStyle={{flex: 1}} textStyle={StyleSheets.beige} onPress={onRejectTerms}>
@@ -326,3 +322,7 @@ export default class Terms extends Component {
     )
   }
 }
+
+export default connect(state => ({
+  terms: state.terms,
+}))(Terms)
