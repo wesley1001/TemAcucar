@@ -153,7 +153,7 @@ export function authSignUp(user) {
           uid: response.headers.get('uid'),
         }
         const json = JSON.parse(response._bodyText)
-        const userData = json.data
+        const userData = json
         dispatch({
           type: 'AUTH_SIGN_UP_SUCCESS',
           user: userData,
@@ -263,7 +263,7 @@ function authEmail(user) {
           uid: response.headers.get('uid'),
         }
         const json = JSON.parse(response._bodyText)
-        const userData = json.data
+        const userData = json
         dispatch({
           type: 'AUTH_SIGN_IN_SUCCESS',
           user: userData,

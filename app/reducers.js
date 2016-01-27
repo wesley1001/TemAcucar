@@ -62,6 +62,7 @@ function auth(state = initialAuthState, action) {
         credentials: action.credentials,
         signingIn: false,
         signInError: null,
+        signUpError: null,
         startingUp: false,
       }
     case 'AUTH_SIGN_IN_FAILURE':
@@ -88,8 +89,9 @@ function auth(state = initialAuthState, action) {
           ...action.user,
         },
         credentials: action.credentials,
-        signingUp: false,
+        signInError: null,
         signUpError: null,
+        signingUp: false,
       }
     case 'AUTH_SIGN_UP_FAILURE':
       return {
