@@ -26,6 +26,15 @@ const validate = values => {
 }
 
 class ResetPassword extends Component {
+  errorMessage(error) {
+    switch (error.id) {
+      case 'unauthorized':
+        return 'Código inválido. Confira novamente seu email ;)'
+      default:
+        return 'Oops! Ocorreu um erro ao cadastrar sua nova senha.'
+    }
+  }
+
   render() {
     const { auth: {resetingPassword, resetPasswordError}, fields: { resetPasswordToken, password }, dirty, valid, submitting, handleSubmit, onResetPassword, headline } = this.props
     return (
@@ -53,7 +62,7 @@ class ResetPassword extends Component {
         <Button disabled={!dirty || !valid || submitting || resetingPassword} viewStyle={[StyleSheets.stretch, StyleSheets.marginBottom]} onPress={handleSubmit(onResetPassword)}>
           { (resetingPassword ? 'Enviando nova senha...' : 'Criar nova senha') }
         </Button>
-        <Text style={[StyleSheets.error, {height: 50}]}>{resetPasswordError || ' '}</Text>
+        <Text style={[StyleSheets.error, {height: 50}]}>{resetPasswordError && this.errorMessage(resetPasswordError)}</Text>
       </View>
     )
   }

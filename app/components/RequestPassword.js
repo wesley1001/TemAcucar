@@ -23,6 +23,15 @@ const validate = values => {
 }
 
 class RequestPassword extends Component {
+  errorMessage(error) {
+    switch (error.id) {
+      case 'not_found':
+        return 'Este email não é cadastrado.'
+      default:
+        return 'Oops! Ocorreu um erro ao solicitar instruções para nova senha.'
+    }
+  }
+
   render() {
     const { auth: {requestingPassword, requestPasswordError}, fields: { email }, dirty, valid, submitting, handleSubmit, onRequestPassword, headline } = this.props
     return (
@@ -41,7 +50,7 @@ class RequestPassword extends Component {
         <Button disabled={!dirty || !valid || submitting || requestingPassword} viewStyle={[StyleSheets.stretch, StyleSheets.marginBottom]} onPress={handleSubmit(onRequestPassword)}>
           { (requestingPassword ? 'Solicitando instruções para nova senha...' : 'Enviar instruções para nova senha') }
         </Button>
-        <Text style={[StyleSheets.error, {height: 50}]}>{requestPasswordError}</Text>
+        <Text style={[StyleSheets.error, {height: 50}]}>{requestPasswordError && this.errorMessage(requestPasswordError)}</Text>
       </View>
     )
   }

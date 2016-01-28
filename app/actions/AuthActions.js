@@ -305,7 +305,7 @@ export function authRequestPassword(user) {
       type: 'AUTH_REQUEST_PASSWORD_REQUEST',
       user,
     })
-    fetch(`${Config.apiUrl}/auth/password`, {
+    fetch(`${Config.apiUrl}/password`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -313,7 +313,6 @@ export function authRequestPassword(user) {
       },
       body: JSON.stringify({
         email: user.email,
-        redirect_url: Config.apiUrl,
       })
     })
     .then(response => {
@@ -342,8 +341,8 @@ export function authResetPassword(user) {
       type: 'AUTH_RESET_PASSWORD_REQUEST',
       user,
     })
-    fetch(`${Config.apiUrl}/users/password`, {
-      method: 'put',
+    fetch(`${Config.apiUrl}/password`, {
+      method: 'patch',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',

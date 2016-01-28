@@ -160,6 +160,8 @@ export default function auth(state = initialState, action) {
         requestingPassword: false,
         resetPassword: true,
         requestPasswordError: null,
+        signInError: null,
+        signUpError: null,
       }
     case 'AUTH_REQUEST_PASSWORD_FAILURE':
       return {
