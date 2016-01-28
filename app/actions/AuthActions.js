@@ -46,7 +46,10 @@ export function authGetUser(user) {
       } else {
         dispatch({
           type: 'AUTH_GET_USER_FAILURE',
-          error: 'Credenciais inválidas.',
+          error: {
+            id: 'invalid_internet_credentials',
+            message: 'Invalid internet credentials.',
+          },
         })
       }
     })
@@ -317,7 +320,7 @@ export function authRequestPassword(user) {
       if(response.ok) {
         dispatch({ type: 'AUTH_REQUEST_PASSWORD_SUCCESS' })
       } else {
-        const error = parseError(response).errors[0]
+        const error = parseError(response)
         dispatch({
           type: 'AUTH_REQUEST_PASSWORD_FAILURE',
           error,
@@ -361,7 +364,7 @@ export function authResetPassword(user) {
         })
         return user
       } else {
-        const error = parseError(response).errors[0]
+        const error = parseError(response)
         dispatch({
           type: 'AUTH_RESET_PASSWORD_FAILURE',
           error,
