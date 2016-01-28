@@ -181,14 +181,14 @@ export function authFacebook() {
           type: 'AUTH_FACEBOOK_REQUEST',
           user: { facebook },
         })
-        fetch(`${Config.apiUrl}/users/facebook_access_token?t=${Date.now()}`, {
+        fetch(`${Config.apiUrl}/authentications`, {
           method: 'post',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            access_token: facebook.token,
+            facebook_token: facebook.token,
           })
         })
         .then(response => {
