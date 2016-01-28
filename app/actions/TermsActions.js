@@ -14,7 +14,6 @@ export function termsAccept(credentials) {
     })
     .then(response => {
       if(response.ok) {
-        console.log(response)
         const credentials = authCredentials(response)
         dispatch({
           type: 'TERMS_ACCEPT_SUCCESS',

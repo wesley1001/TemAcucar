@@ -271,7 +271,7 @@ function authEmail(user) {
 export function authSignOut(credentials) {
   return dispatch => {
     dispatch({ type: 'AUTH_SIGN_OUT_REQUEST' })
-    fetch(`${Config.apiUrl}/auth/sign_out`, {
+    fetch(`${Config.apiUrl}/authentications`, {
       method: 'delete',
       headers: authHeaders(credentials)
     })
