@@ -191,6 +191,15 @@ export default function auth(state = initialState, action) {
         resetingPassword: false,
         resetPasswordError: action.error,
       }
+    case 'TERMS_ACCEPT_SUCCESS':
+      return {
+        ...state, 
+        user: {
+          ...state.user, 
+          ...action.user,
+        },
+        credentials: action.credentials,
+      }
     default:
       return state
   }
