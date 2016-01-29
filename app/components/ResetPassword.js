@@ -39,9 +39,9 @@ class ResetPassword extends Component {
     const { auth: {resetingPassword, resetPasswordError}, fields: { resetPasswordToken, password }, dirty, valid, submitting, handleSubmit, onResetPassword, headline } = this.props
     return (
       <View style={StyleSheets.container}>
-        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Crie sua nova senha</Text>
+        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Confira seu email para criar sua nova senha</Text>
         <View style={StyleSheets.stretch}>
-          <Label field={resetPasswordToken}>Código</Label>
+          <Label field={resetPasswordToken}>Código enviado para seu email</Label>
           <TextInput
             style={StyleSheets.input}
             autoCapitalize={'none'}
