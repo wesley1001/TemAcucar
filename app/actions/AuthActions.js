@@ -27,9 +27,9 @@ export function authCredentials(response) {
   }
 }
 
-export function authGetUser(user) {
+export function authGetUser(currentUser) {
   return dispatch => {
-    if (user) 
+    if (currentUser) 
       return
     dispatch({ type: 'AUTH_GET_USER_REQUEST' })
     Keychain
@@ -38,7 +38,7 @@ export function authGetUser(user) {
       if (credentials.username && credentials.username.length > 0 && credentials.password && credentials.password.length > 0) {
         dispatch({
           type: 'AUTH_GET_USER_SUCCESS',
-          user: {
+          currentUser: {
             email: credentials.username,
             password: credentials.password,
           },
@@ -58,7 +58,7 @@ export function authGetUser(user) {
         if (!facebookError) {
           dispatch({
             type: 'AUTH_GET_USER_SUCCESS',
-            user: {
+            currentUser: {
               facebook: data.credentials,
             },
           })
@@ -73,18 +73,18 @@ export function authGetUser(user) {
   }
 }
 
-function authSetUser(dispatch, user) {
-  if (user) {
+function authSetUser(dispatch, currentUser) {
+  if (currentUser) {
     dispatch({
       type: 'AUTH_SET_USER_REQUEST',
-      user,
+      currentUser,
     })
     Keychain
     .setInternetCredentials(Config.apiUrl, user.email, user.password)
     .then(() => {
       dispatch({
         type: 'AUTH_SET_USER_SUCCESS',
-        user,
+        currentUser,
       })
     })
     .catch(error => {
@@ -119,21 +119,21 @@ function authResetUser(dispatch) {
   })
 }
 
-export function authSignIn(user) {
+export function authSignIn(currentUser) {
   return dispatch => {
-    if (user.email && user.password) {
-      dispatch(authEmail(user))
-    } else if (user.facebook) {
+    if (currentUser.email && currentUser.password) {
+      dispatch(authEmail(currentUser))
+    } else if (currentUser.facebook) {
       dispatch(authFacebook())
     }
   }
 }
 
-export function authSignUp(user) {
+export function authSignUp(currentUser) {
   return dispatch => {
     dispatch({
       type: 'AUTH_SIGN_UP_REQUEST',
-      user,
+      currentUser,
     })
     fetch(`${Config.apiUrl}/users`, {
       method: 'post',
@@ -142,21 +142,21 @@ export function authSignUp(user) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
-        password: user.password,
+        first_name: currentUser.first_name,
+        last_name: currentUser.last_name,
+        email: currentUser.email,
+        password: currentUser.password,
       })
     })
     .then(response => {
       if(response.ok) {
-        const credentials = authCredentials(response)
+        const currentUser = JSON.parse(response._bodyText)
         dispatch({
           type: 'AUTH_SIGN_UP_SUCCESS',
-          user: JSON.parse(response._bodyText),
-          credentials,
+          currentUser,
+          credentials: authCredentials(response),
         })
-        return user
+        return currentUser
       } else {
         dispatch({
           type: 'AUTH_SIGN_UP_FAILURE',
@@ -164,7 +164,7 @@ export function authSignUp(user) {
         })
       }
     })
-    .then((user) => authSetUser(dispatch, user))
+    .then((currentUser) => authSetUser(dispatch, currentUser))
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_UP_FAILURE',
@@ -181,7 +181,7 @@ export function authFacebook() {
         const facebook = data.credentials
         dispatch({
           type: 'AUTH_FACEBOOK_REQUEST',
-          user: { facebook },
+          currentUser: { facebook },
         })
         fetch(`${Config.apiUrl}/authentications`, {
           method: 'post',
@@ -195,12 +195,10 @@ export function authFacebook() {
         })
         .then(response => {
           if(response.ok) {
-            const credentials = authCredentials(response)
-            const user = JSON.parse(response._bodyText)
             dispatch({
               type: 'AUTH_FACEBOOK_SUCCESS',
-              user,
-              credentials,
+              currentUser: JSON.parse(response._bodyText),
+              credentials: authCredentials(response),
             })
           } else {
             dispatch({
@@ -225,11 +223,11 @@ export function authFacebook() {
   }  
 }
 
-function authEmail(user) {
+function authEmail(currentUser) {
   return dispatch => {
     dispatch({
       type: 'AUTH_SIGN_IN_REQUEST',
-      user,
+      currentUser,
     })
     fetch(`${Config.apiUrl}/authentications`, {
       method: 'post',
@@ -238,19 +236,19 @@ function authEmail(user) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: user.email,
-        password: user.password,
+        email: currentUser.email,
+        password: currentUser.password,
       })
     })
     .then(response => {
       if(response.ok) {
-        const credentials = authCredentials(response)
+        const currentUser = JSON.parse(response._bodyText)
         dispatch({
           type: 'AUTH_SIGN_IN_SUCCESS',
-          user: JSON.parse(response._bodyText),
-          credentials,
+          currentUser,
+          credentials: authCredentials(response),
         })
-        return user
+        return currentUser
       } else {
         dispatch({
           type: 'AUTH_SIGN_IN_FAILURE',
@@ -258,7 +256,7 @@ function authEmail(user) {
         })
       }
     })
-    .then((user) => authSetUser(dispatch, user))
+    .then((currentUser) => authSetUser(dispatch, currentUser))
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_IN_FAILURE',
@@ -295,11 +293,11 @@ export function authSignOut(credentials) {
   }  
 }
 
-export function authRequestPassword(user) {
+export function authRequestPassword(currentUser) {
   return dispatch => {
     dispatch({
       type: 'AUTH_REQUEST_PASSWORD_REQUEST',
-      user,
+      currentUser,
     })
     fetch(`${Config.apiUrl}/password`, {
       method: 'post',
@@ -308,7 +306,7 @@ export function authRequestPassword(user) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: user.email,
+        email: currentUser.email,
       })
     })
     .then(response => {
@@ -330,11 +328,11 @@ export function authRequestPassword(user) {
   }  
 }
 
-export function authResetPassword(user) {
+export function authResetPassword(currentUser) {
   return dispatch => {
     dispatch({
       type: 'AUTH_RESET_PASSWORD_REQUEST',
-      user,
+      currentUser,
     })
     fetch(`${Config.apiUrl}/password`, {
       method: 'patch',
@@ -343,20 +341,20 @@ export function authResetPassword(user) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: user.email,
-        password: user.password,
-        token: user.resetPasswordToken,
+        email: currentUser.email,
+        password: currentUser.password,
+        token: currentUser.resetPasswordToken,
       })
     })
     .then(response => {
       if(response.ok) {
-        const credentials = authCredentials(response)
+        const currentUser = JSON.parse(response._bodyText)
         dispatch({
           type: 'AUTH_RESET_PASSWORD_SUCCESS',
-          user: JSON.parse(response._bodyText),
-          credentials,
+          currentUser,
+          credentials: authCredentials(response),
         })
-        return user
+        return currentUser
       } else {
         dispatch({
           type: 'AUTH_RESET_PASSWORD_FAILURE',
@@ -364,7 +362,7 @@ export function authResetPassword(user) {
         })
       }
     })
-    .then((user) => authSetUser(dispatch, user))
+    .then((currentUser) => authSetUser(dispatch, currentUser))
     .catch(error => {
       dispatch({
         type: 'AUTH_RESET_PASSWORD_FAILURE',

@@ -1,5 +1,5 @@
 const initialState = {
-  user: null,
+  currentUser: null,
   credentials: null,
   facebook: null,
   startingUp: true,
@@ -25,7 +25,7 @@ export default function auth(state = initialState, action) {
     case 'AUTH_GET_USER_SUCCESS':
       return {
         ...state, 
-        user: action.user,
+        currentUser: action.currentUser,
         gettingUser: false,
       }
     case 'AUTH_GET_USER_FAILURE':
@@ -37,23 +37,23 @@ export default function auth(state = initialState, action) {
     case 'AUTH_RESET_USER_SUCCESS':
       return {
         ...state, 
-        user: null,
+        currentUser: null,
       }
     case 'AUTH_SIGN_IN_REQUEST':
       return {
         ...state, 
-        user: {
-          ...state.user, 
-          ...action.user,
+        currentUser: {
+          ...state.currentUser, 
+          ...action.currentUser,
         },
         signingIn: true,
       }
     case 'AUTH_SIGN_IN_SUCCESS':
       return {
         ...state, 
-        user: {
-          ...state.user, 
-          ...action.user,
+        currentUser: {
+          ...state.currentUser, 
+          ...action.currentUser,
         },
         credentials: action.credentials,
         signingIn: false,
@@ -71,18 +71,18 @@ export default function auth(state = initialState, action) {
     case 'AUTH_SIGN_UP_REQUEST':
       return {
         ...state, 
-        user: {
-          ...state.user, 
-          ...action.user,
+        currentUser: {
+          ...state.currentUser, 
+          ...action.currentUser,
         },
         signingUp: true,
       }
     case 'AUTH_SIGN_UP_SUCCESS':
       return {
         ...state, 
-        user: {
-          ...state.user, 
-          ...action.user,
+        currentUser: {
+          ...state.currentUser, 
+          ...action.currentUser,
         },
         credentials: action.credentials,
         signInError: null,
@@ -92,7 +92,7 @@ export default function auth(state = initialState, action) {
     case 'AUTH_SIGN_UP_FAILURE':
       return {
         ...state, 
-        user: null,
+        currentUser: null,
         signingUp: false,
         signUpError: action.error,
       }
@@ -104,32 +104,32 @@ export default function auth(state = initialState, action) {
     case 'AUTH_SIGN_OUT_SUCCESS':
       return {
         ...state, 
-        user: null,
+        currentUser: null,
         credentials: null,
         signingOut: false,
       }
     case 'AUTH_SIGN_OUT_FAILURE':
       return {
         ...state, 
-        user: null,
+        currentUser: null,
         credentials: null,
         signingOut: false,
       }
     case 'AUTH_FACEBOOK_REQUEST':
       return {
         ...state,
-        user: {
-          ...state.user,
-          ...action.user,
+        currentUser: {
+          ...state.currentUser,
+          ...action.currentUser,
         },
         signingIn: true,
       }
     case 'AUTH_FACEBOOK_SUCCESS':
       return {
         ...state, 
-        user: {
-          ...state.user, 
-          ...action.user,
+        currentUser: {
+          ...state.currentUser, 
+          ...action.currentUser,
         },
         credentials: action.credentials,
         signingIn: false,
@@ -146,9 +146,9 @@ export default function auth(state = initialState, action) {
     case 'AUTH_REQUEST_PASSWORD_REQUEST':
       return {
         ...state, 
-        user: {
-          ...state.user, 
-          ...action.user,
+        currentUser: {
+          ...state.currentUser, 
+          ...action.currentUser,
         },
         requestingPassword: true,
         resetPassword: false,
@@ -173,9 +173,9 @@ export default function auth(state = initialState, action) {
     case 'AUTH_RESET_PASSWORD_REQUEST':
       return {
         ...state, 
-        user: {
-          ...state.user, 
-          ...action.user,
+        currentUser: {
+          ...state.currentUser, 
+          ...action.currentUser,
         },
         resetingPassword: true,
         resetPasswordError: null,
@@ -193,16 +193,21 @@ export default function auth(state = initialState, action) {
         resetingPassword: false,
         resetPasswordError: action.error,
       }
-    case 'TERMS_ACCEPT_SUCCESS':
-      return {
-        ...state, 
-        user: {
-          ...state.user, 
-          ...action.user,
-        },
-        credentials: action.credentials,
-      }
     default:
-      return state
+      // Here I defined a standard for the whole app. If an action passes a credentials object, it will update BOTH auth.credentials AND auth.currentUser states.
+      // WARNING: do not pass action.credentials object to any action unless it contains real and current auth credentials for the current user.
+      // WARNING: do not pass action.currentUser object to any action unless it contains pertinent information of the current user.
+      if (action.credentials) {
+        return {
+          ...state, 
+          currentUser: {
+            ...state.currentUser, 
+            ...action.currentUser,
+          },
+          credentials: action.credentials,
+        }
+      } else {
+        return state
+      }
   }
 }

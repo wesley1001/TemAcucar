@@ -7,21 +7,19 @@ import Loading from "../components/Loading"
 import SignInFailed from "../components/SignInFailed"
 import SignedOut from "../components/SignedOut"
 import ResetPassword from "../components/ResetPassword"
-import RejectedTerms from "../components/RejectedTerms"
-import Terms from "../components/Terms"
-import Neighborhood from "../components/Neighborhood"
+import Configurator from "./Configurator"
 
-class Authorizator extends Component {
+class Authorizer extends Component {
   componentDidMount() {
-    const { dispatch, auth: { user } } = this.props
-    dispatch(authGetUser(user))
+    const { dispatch, auth: { currentUser } } = this.props
+    dispatch(authGetUser(currentUser))
   }
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, auth } = nextProps
-    const { user, credentials, signingIn, signingUp, signingOut, gettingUser, signInError, signUpError, requestingPassword, resetingPassword, resetPassword } = auth
-    if (user && !credentials && !signingIn && !signingUp && !signingOut && !gettingUser && !signInError && !signUpError && !requestingPassword && !resetingPassword && !resetPassword) {
-      dispatch(authSignIn(user))
+    const { currentUser, credentials, signingIn, signingUp, signingOut, gettingUser, signInError, signUpError, requestingPassword, resetingPassword, resetPassword } = auth
+    if (currentUser && !credentials && !signingIn && !signingUp && !signingOut && !gettingUser && !signInError && !signUpError && !requestingPassword && !resetingPassword && !resetPassword) {
+      dispatch(authSignIn(currentUser))
     }
   }
 
@@ -30,14 +28,14 @@ class Authorizator extends Component {
     dispatch(authFacebook())
   }
 
-  handleSignIn(user) {
+  handleSignIn(currentUser) {
     const { dispatch } = this.props
-    dispatch(authSignIn(user))
+    dispatch(authSignIn(currentUser))
   }
 
-  handleSignUp(user) {
+  handleSignUp(currentUser) {
     const { dispatch } = this.props
-    dispatch(authSignUp(user))
+    dispatch(authSignUp(currentUser))
   }
 
   handleSignOut() {
@@ -46,44 +44,23 @@ class Authorizator extends Component {
     dispatch(authSignOut(credentials))
   }
 
-  handleRequestPassword(user) {
+  handleRequestPassword(currentUser) {
     const { dispatch } = this.props
-    dispatch(authRequestPassword(user))
+    dispatch(authRequestPassword(currentUser))
   }
 
   handleResetPassword(data) {
     const { dispatch, auth } = this.props
-    const { user } = auth
+    const { currentUser } = auth
     dispatch(authResetPassword({
-      ...user,
+      ...currentUser,
       ...data,
     }))
   }
 
-  handleAcceptTerms() {
-    const { dispatch, auth } = this.props
-    const { credentials } = auth
-    dispatch(termsAccept(credentials))
-  }
-
-  handleRejectTerms() {
-    const { dispatch } = this.props
-    dispatch(termsReject())
-  }
-
-  handleCancelRejectTerms() {
-    const { dispatch } = this.props
-    dispatch(termsCancelReject())
-  }
-
-  handleScrollToBottomTerms() {
-    const { dispatch } = this.props
-    dispatch(termsScrollToBottom())
-  }
-
   render() {
-    const { dispatch, auth, terms } = this.props
-    const { user, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError, signUpError, resetPassword } = auth
+    const { auth, terms } = this.props
+    const { currentUser, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError, signUpError, resetPassword } = auth
     const { acceptingTerms, rejectedTerms } = terms
     const authEvents = {
       onSignIn: this.handleSignIn.bind(this),
@@ -101,15 +78,11 @@ class Authorizator extends Component {
       return (<ResetPassword auth={auth} {...authEvents} />)
     if (!credentials)
       return (<SignedOut auth={auth} {...authEvents} />)
-    if (rejectedTerms)
-      return (<RejectedTerms onCancelRejectTerms={this.handleCancelRejectTerms.bind(this)} />)
-    if (!user.accepted_terms)
-      return (<Terms user={user} onAcceptTerms={this.handleAcceptTerms.bind(this)} onRejectTerms={this.handleRejectTerms.bind(this)} onScrollToBottom={this.handleScrollToBottomTerms.bind(this)} />)
-    return (<Neighborhood auth={auth} {...authEvents} user={user} />)
+    return (<Configurator auth={auth} {...authEvents} currentUser={currentUser} />)
   }
 }
 
 export default connect(state => ({
   auth: state.auth,
   terms: state.terms,
-}))(Authorizator)
+}))(Authorizer)

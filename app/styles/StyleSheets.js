@@ -17,6 +17,10 @@ const StyleSheets = StyleSheet.create({
     textAlign: 'center',
   },
 
+  strong: {
+    fontWeight: 'bold',
+  },
+
   label: {
     color: Colors.brown,
     fontSize: 16,

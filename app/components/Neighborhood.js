@@ -30,7 +30,7 @@ export default class Neighborhood extends Component {
   }
 
   renderMap() {
-    const { latitude, longitude } = this.props.user
+    const { latitude, longitude } = this.props.currentUser
     const { delta } = this.state
 
     return (
@@ -55,7 +55,7 @@ export default class Neighborhood extends Component {
 
   render() {
     const { onSignOut } = this.props
-    const { latitude, longitude } = this.props.user
+    const { latitude, longitude } = this.props.currentUser
     const { delta } = this.state
 
     return (
