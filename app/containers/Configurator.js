@@ -1,7 +1,7 @@
 import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import { termsAccept, termsReject, termsCancelReject, termsScrollToBottom } from '../actions/TermsActions'
-import { usersConfirmEmail } from '../actions/UsersActions'
+import { configConfirmEmail } from '../actions/ConfigActions'
 
 import Loading from "../components/Loading"
 import RejectedTerms from "../components/RejectedTerms"
@@ -34,7 +34,7 @@ class Configurator extends Component {
   handleConfirmEmail() {
     const { dispatch, auth } = this.props
     const { credentials } = auth
-    dispatch(usersConfirmEmail(credentials))
+    dispatch(configConfirmEmail(credentials))
   }
 
   handleUpdateEmail() {
@@ -42,9 +42,10 @@ class Configurator extends Component {
   }
 
   render() {
-    const { currentUser, terms } = this.props
+    const { currentUser, terms, config } = this.props
     const { acceptingTerms, rejectedTerms } = terms
-    if (acceptingTerms)
+    const { confirmingEmail } = config
+    if (acceptingTerms || confirmingEmail)
       return (<Loading />)
     if (rejectedTerms)
       return (<RejectedTerms onCancelRejectTerms={this.handleCancelRejectTerms.bind(this)} />)
@@ -57,5 +58,6 @@ class Configurator extends Component {
 }
 
 export default connect(state => ({
+  config: state.config,
   terms: state.terms,
 }))(Configurator)

@@ -1,5 +1,6 @@
 const initialState = {
   acceptingTerms: false,
+  acceptTermsError: null,
   rejectedTerms: false,
   scrolledToBottom: false,
 }
@@ -20,6 +21,7 @@ export default function terms(state = initialState, action) {
       return {
         ...state, 
         acceptingTerms: false,
+        acceptTermsError: action.error,
       }
     case 'TERMS_REJECT':
       return {

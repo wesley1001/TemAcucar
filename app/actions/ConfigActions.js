@@ -2,9 +2,9 @@ import Config from "../Config"
 import { authHeaders, authCredentials } from './AuthActions'
 import { parseError } from './BasicActions'
 
-export function usersConfirmEmail(credentials) {
+export function configConfirmEmail(credentials) {
   return dispatch => {
-    dispatch({ type: 'USERS_CONFIRM_EMAIL_REQUEST' })
+    dispatch({ type: 'CONFIG_CONFIRM_EMAIL_REQUEST' })
     fetch(`${Config.apiUrl}/users/${credentials.uid}`, {
       method: 'patch',
       headers: authHeaders(credentials),
@@ -15,20 +15,20 @@ export function usersConfirmEmail(credentials) {
     .then(response => {
       if(response.ok) {
         dispatch({
-          type: 'USERS_CONFIRM_EMAIL_SUCCESS',
+          type: 'CONFIG_CONFIRM_EMAIL_SUCCESS',
           currentUser: JSON.parse(response._bodyText),
           credentials: authCredentials(response),
         })
       } else {
         dispatch({
-          type: 'USERS_CONFIRM_EMAIL_FAILURE',
+          type: 'CONFIG_CONFIRM_EMAIL_FAILURE',
           error: parseError(response),
         })
       }
     })
     .catch(error => {
       dispatch({
-        type: 'USERS_CONFIRM_EMAIL_FAILURE',
+        type: 'CONFIG_CONFIRM_EMAIL_FAILURE',
         error: parseError(error),
       })
     })
