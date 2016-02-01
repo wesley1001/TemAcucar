@@ -1,7 +1,6 @@
 const initialState = {
   currentUser: null,
   credentials: null,
-  facebook: null,
   startingUp: true,
   gettingUser: false,
   signingIn: false,
