@@ -80,7 +80,7 @@ function authSetUser(dispatch, currentUser) {
       currentUser,
     })
     Keychain
-    .setInternetCredentials(Config.apiUrl, user.email, user.password)
+    .setInternetCredentials(Config.apiUrl, currentUser.email, currentUser.password)
     .then(() => {
       dispatch({
         type: 'AUTH_SET_USER_SUCCESS',
