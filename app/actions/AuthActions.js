@@ -155,6 +155,7 @@ export function authSignUp(currentUser) {
           currentUser: JSON.parse(response._bodyText),
           credentials: authCredentials(response),
         })
+        return true
       } else {
         dispatch({
           type: 'AUTH_SIGN_UP_FAILURE',
@@ -162,7 +163,10 @@ export function authSignUp(currentUser) {
         })
       }
     })
-    .then(() => authSetUser(dispatch, currentUser))
+    .then((shouldSetUser) => {
+      if (shouldSetUser)
+        authSetUser(dispatch, currentUser)
+    })
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_UP_FAILURE',
@@ -245,6 +249,7 @@ function authEmail(currentUser) {
           currentUser: JSON.parse(response._bodyText),
           credentials: authCredentials(response),
         })
+        return true
       } else {
         dispatch({
           type: 'AUTH_SIGN_IN_FAILURE',
@@ -252,7 +257,10 @@ function authEmail(currentUser) {
         })
       }
     })
-    .then(() => authSetUser(dispatch, currentUser))
+    .then((shouldSetUser) => {
+      if (shouldSetUser)
+        authSetUser(dispatch, currentUser)
+    })
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_IN_FAILURE',
@@ -349,7 +357,7 @@ export function authResetPassword(currentUser) {
           currentUser: JSON.parse(response._bodyText),
           credentials: authCredentials(response),
         })
-        return currentUser
+        return true
       } else {
         dispatch({
           type: 'AUTH_RESET_PASSWORD_FAILURE',
@@ -357,7 +365,10 @@ export function authResetPassword(currentUser) {
         })
       }
     })
-    .then(() => authSetUser(dispatch, currentUser))
+    .then((shouldSetUser) => {
+      if (shouldSetUser)
+        authSetUser(dispatch, currentUser)
+    })
     .catch(error => {
       dispatch({
         type: 'AUTH_RESET_PASSWORD_FAILURE',
