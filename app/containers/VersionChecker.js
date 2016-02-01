@@ -4,6 +4,7 @@ import Package from '../../package.json'
 import { versionsList, versionsIgnoreUpdate } from '../actions/VersionsActions'
 
 import Loading from "../components/Loading"
+import NetworkError from "../components/NetworkError"
 import ExpiredVersion from "../components/ExpiredVersion"
 import UpdateVersion from "../components/UpdateVersion"
 import Authorizator from './Authorizator'
@@ -41,12 +42,19 @@ class VersionChecker extends Component {
     dispatch(versionsIgnoreUpdate())
   }
 
+  handleTryAgain() {
+    const { dispatch } = this.props
+    dispatch(versionsList())
+  }
+
   render() {
     const { dispatch, versions } = this.props
-    const { startingUp, listing, ignoreUpdate } = versions
+    const { startingUp, listing, listError, ignoreUpdate } = versions
 
     if (startingUp || listing)
       return (<Loading />)
+    if (listError)
+      return (<NetworkError error={listError} onTryAgain={this.handleTryAgain.bind(this)} />)
     if (this.isExpired())
       return (<ExpiredVersion />)
     if (!this.isCurrent() && !ignoreUpdate)

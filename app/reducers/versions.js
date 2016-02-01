@@ -12,6 +12,7 @@ export default function versions(state = initialState, action) {
       return {
         ...state, 
         listing: true,
+        listError: null,
       }
     case 'VERSIONS_LIST_SUCCESS':
       return {
@@ -25,6 +26,7 @@ export default function versions(state = initialState, action) {
         ...state, 
         listing: false,
         startingUp: false,
+        listError: action.error,
       }
     case 'VERSIONS_IGNORE_UPDATE':
       return {

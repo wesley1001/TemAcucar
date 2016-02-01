@@ -4,7 +4,7 @@ import { parseError } from './BasicActions'
 export function versionsList() {
   return dispatch => {
     dispatch({ type: 'VERSIONS_LIST_REQUEST' })
-    fetch(`${Config.apiUrl}/versions`, {
+    fetch(`${Config.apiUrl}/versions?platform=ios`, {
       method: 'get',
     })
     .then(response => {
@@ -14,17 +14,16 @@ export function versionsList() {
           list: JSON.parse(response._bodyText),
         })
       } else {
-        const error = parseError(response)
         dispatch({
           type: 'VERSIONS_LIST_FAILURE',
-          error,
+          error: parseError(response),
         })
       }
     })
     .catch(error => {
       dispatch({
         type: 'VERSIONS_LIST_FAILURE',
-        error,
+        error: parseError(error),
       })
     })
   }  

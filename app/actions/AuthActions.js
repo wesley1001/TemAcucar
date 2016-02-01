@@ -65,7 +65,7 @@ export function authGetUser(user) {
         } else {
           dispatch({
             type: 'AUTH_GET_USER_FAILURE',
-            error,
+            error: parseError(error),
           })
         }
       })
@@ -90,7 +90,7 @@ function authSetUser(dispatch, user) {
     .catch(error => {
       dispatch({
         type: 'AUTH_SET_USER_FAILURE',
-        error,
+        error: parseError(error),
       })
     })
   }
@@ -114,7 +114,7 @@ function authResetUser(dispatch) {
   .catch(error => {
     dispatch({
       type: 'AUTH_RESET_USER_FAILURE',
-      error,
+      error: parseError(error),
     })
   })
 }
@@ -158,10 +158,9 @@ export function authSignUp(user) {
         })
         return user
       } else {
-        const error = parseError(response)
         dispatch({
           type: 'AUTH_SIGN_UP_FAILURE',
-          error,
+          error: parseError(response),
         })
       }
     })
@@ -169,7 +168,7 @@ export function authSignUp(user) {
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_UP_FAILURE',
-        error,
+        error: parseError(error),
       })
     })
   }  
@@ -204,23 +203,22 @@ export function authFacebook() {
               credentials,
             })
           } else {
-            const error = parseError(response)
             dispatch({
               type: 'AUTH_FACEBOOK_FAILURE',
-              error,
+              error: parseError(response),
             })
           }
         })
         .catch(error => {
           dispatch({
             type: 'AUTH_FACEBOOK_FAILURE',
-            error,
+            error: parseError(error),
           })
         })
       } else {
         dispatch({
           type: 'AUTH_FACEBOOK_FAILURE',
-          error,
+          error: facebookError,
         })
       }
     })
@@ -254,10 +252,9 @@ function authEmail(user) {
         })
         return user
       } else {
-        const error = parseError(response)
         dispatch({
           type: 'AUTH_SIGN_IN_FAILURE',
-          error,
+          error: parseError(response),
         })
       }
     })
@@ -265,7 +262,7 @@ function authEmail(user) {
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_IN_FAILURE',
-        error,
+        error: parseError(error),
       })
     })
   }  
@@ -282,10 +279,9 @@ export function authSignOut(credentials) {
       if(response.ok) {
         dispatch({ type: 'AUTH_SIGN_OUT_SUCCESS' })
       } else {
-        const error = parseError(response)
         dispatch({
           type: 'AUTH_SIGN_OUT_FAILURE',
-          error,
+          error: parseError(response),
         })
       }
     })
@@ -293,7 +289,7 @@ export function authSignOut(credentials) {
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_OUT_FAILURE',
-        error,
+        error: parseError(error),
       })
     })
   }  
@@ -319,17 +315,16 @@ export function authRequestPassword(user) {
       if(response.ok) {
         dispatch({ type: 'AUTH_REQUEST_PASSWORD_SUCCESS' })
       } else {
-        const error = parseError(response)
         dispatch({
           type: 'AUTH_REQUEST_PASSWORD_FAILURE',
-          error,
+          error: parseError(response),
         })
       }
     })
     .catch(error => {
       dispatch({
         type: 'AUTH_REQUEST_PASSWORD_FAILURE',
-        error,
+        error: parseError(error),
       })
     })
   }  
@@ -363,10 +358,9 @@ export function authResetPassword(user) {
         })
         return user
       } else {
-        const error = parseError(response)
         dispatch({
           type: 'AUTH_RESET_PASSWORD_FAILURE',
-          error,
+          error: parseError(response),
         })
       }
     })
@@ -374,7 +368,7 @@ export function authResetPassword(user) {
     .catch(error => {
       dispatch({
         type: 'AUTH_RESET_PASSWORD_FAILURE',
-        error,
+        error: parseError(error),
       })
     })
   }  

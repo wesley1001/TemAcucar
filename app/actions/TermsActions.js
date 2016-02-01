@@ -21,17 +21,16 @@ export function termsAccept(credentials) {
           credentials,
         })
       } else {
-        const error = parseError(response)
         dispatch({
           type: 'TERMS_ACCEPT_FAILURE',
-          error,
+          error: parseError(response),
         })
       }
     })
     .catch(error => {
       dispatch({
         type: 'TERMS_ACCEPT_FAILURE',
-        error,
+        error: parseError(error),
       })
     })
   }  
