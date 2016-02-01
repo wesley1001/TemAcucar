@@ -1,5 +1,5 @@
 import Config from "../Config"
-import { authHeaders, authCredentials } from './AuthActions'
+import { authHeaders, authCredentials, authSetUser } from './AuthActions'
 import { parseError } from './BasicActions'
 
 export function configConfirmEmail(credentials) {
@@ -41,7 +41,7 @@ export function configDoUpdateEmail() {
   }
 }
 
-export function configUpdateEmail(email, secondaryEmail, credentials) {
+export function configUpdateEmail(email, secondaryEmail, credentials, password) {
   return dispatch => {
     dispatch({ type: 'CONFIG_UPDATE_EMAIL_REQUEST' })
     fetch(`${Config.apiUrl}/users/${credentials.uid}`, {
@@ -50,6 +50,7 @@ export function configUpdateEmail(email, secondaryEmail, credentials) {
       body: JSON.stringify({
         email,
         secondary_email: secondaryEmail,
+        reviewed_email: true,
       })
     })
     .then(response => {
@@ -59,12 +60,17 @@ export function configUpdateEmail(email, secondaryEmail, credentials) {
           currentUser: JSON.parse(response._bodyText),
           credentials: authCredentials(response),
         })
+        return true
       } else {
         dispatch({
           type: 'CONFIG_UPDATE_EMAIL_FAILURE',
           error: parseError(response),
         })
       }
+    })
+    .then((shouldSetUser) => {
+      if (shouldSetUser)
+        authSetUser(dispatch, {email, password})
     })
     .catch(error => {
       dispatch({

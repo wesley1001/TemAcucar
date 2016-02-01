@@ -73,8 +73,8 @@ export function authGetUser(currentUser) {
   }
 }
 
-function authSetUser(dispatch, currentUser) {
-  if (currentUser) {
+export function authSetUser(dispatch, currentUser) {
+  if (currentUser && currentUser.email && currentUser.email.length > 0 && currentUser.password && currentUser.password.length > 0) {
     dispatch({
       type: 'AUTH_SET_USER_REQUEST',
       currentUser,
