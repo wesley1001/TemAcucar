@@ -11,7 +11,7 @@ import RejectedTerms from "../components/RejectedTerms"
 import Terms from "../components/Terms"
 import Neighborhood from "../components/Neighborhood"
 
-class TemAcucar extends Component {
+class Authorizator extends Component {
   componentDidMount() {
     const { dispatch, auth: { user } } = this.props
     dispatch(authGetUser(user))
@@ -112,4 +112,4 @@ class TemAcucar extends Component {
 export default connect(state => ({
   auth: state.auth,
   terms: state.terms,
-}))(TemAcucar)
+}))(Authorizator)

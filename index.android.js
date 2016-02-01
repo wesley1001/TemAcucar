@@ -1,9 +1,3 @@
-import React, {
-  AppRegistry,
-  Component,
-} from 'react-native'
-
-class TemAcucar extends Component {
-}
-
-AppRegistry.registerComponent('TemAcucar', () => TemAcucar)
+import { AppRegistry } from 'react-native'
+import Root from './app/containers/Root'
+AppRegistry.registerComponent('TemAcucar', () => Root)

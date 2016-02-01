@@ -6,7 +6,7 @@ import { versionsList, versionsIgnoreUpdate } from '../actions/VersionsActions'
 import Loading from "../components/Loading"
 import ExpiredVersion from "../components/ExpiredVersion"
 import UpdateVersion from "../components/UpdateVersion"
-import TemAcucar from './TemAcucar'
+import Authorizator from './Authorizator'
 
 class VersionChecker extends Component {
   componentDidMount() {
@@ -51,7 +51,7 @@ class VersionChecker extends Component {
       return (<ExpiredVersion />)
     if (!this.isCurrent() && !ignoreUpdate)
       return (<UpdateVersion version={this.version()} onIgnore={this.handleIgnoreUpdate.bind(this)} />)
-    return (<TemAcucar />)
+    return (<Authorizator />)
   }
 }
 

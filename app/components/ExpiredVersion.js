@@ -24,7 +24,7 @@ export default class ExpiredVersion extends Component {
           Sua versão está expirada ;)
         </Text>
         <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
-          Vai ser preciso atualizar sua versão para continuar utilizando o app do Tem Açucar.
+          Vai ser preciso atualizar sua versão para continuar utilizando o app do Tem Açúcar.
         </Text>
         <Button onPress={this.handleUpdate.bind(this)}>
           Atualizar versão

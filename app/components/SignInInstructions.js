@@ -39,7 +39,7 @@ export default class SignInInstructions extends Component {
           Não foi possível fazer seu login com sucesso
         </Text>
         <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
-          Se você é usuário da versão antiga do Tem Açucar, vai ser preciso criar uma nova senha.
+          Se você é usuário da versão antiga do Tem Açúcar, vai ser preciso criar uma nova senha.
         </Text>
         <Button onPress={this.handleRequestPassword.bind(this)}>
           Criar uma nova senha

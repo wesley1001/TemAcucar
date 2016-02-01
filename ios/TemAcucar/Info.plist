@@ -56,7 +56,7 @@
 	<key>FacebookAppID</key>
 	<string>590253407789297</string>
 	<key>FacebookDisplayName</key>
-	<string>Tem Açucar Testes</string>
+	<string>Tem Açúcar</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 	  <string>fbapi</string>
