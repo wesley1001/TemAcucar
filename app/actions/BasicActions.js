@@ -7,7 +7,7 @@ export function parseError(error) {
   }
   const response = error
   const contentType = response.headers.get('content-type')
-  if (contentType.match(/application\/json/)) {
+  if (contentType && contentType.match(/application\/json/)) {
     return JSON.parse(response._bodyText)
   } else {
     return {
