@@ -22,7 +22,7 @@ export default class ReviewEmail extends Component {
           <Text style={StyleSheets.strong}>
             { `${email} ` }
           </Text>
-          é o email que você usa no dia-a-dia?
+          é o email que você usa no dia-a-dia? Não vamos mandar spam, mas precisamos do seu email para colocar você em contato com seus vizinhos :)
         </Text>
         <Button onPress={onConfirm}>
           Sim, é este mesmo
