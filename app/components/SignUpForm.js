@@ -36,6 +36,15 @@ const validate = values => {
 }
 
 class SignUpForm extends Component {
+  errorMessage(error) {
+    switch (error.id) {
+      case 'email_is_already_taken':
+        return 'Email já cadastrado'
+      default:
+        return 'Oops!'
+    }
+  }
+
   handleSignIn() {
     this.props.navigator.push({
       title: 'Crie sua conta',
@@ -51,8 +60,7 @@ class SignUpForm extends Component {
 
   render() {
     const { auth: {signingUp, signUpError}, fields: { first_name, last_name, email, password }, dirty, valid, submitting, handleSubmit, onSignUp } = this.props
-    const errors = signUpError && signUpError.errors
-    const emailError = errors && errors.email && `Email ${errors.email[0]}`
+    const emailError = signUpError && this.errorMessage(signUpError)
     return (
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Cadastre-se</Text>
