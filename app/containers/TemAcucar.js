@@ -1,9 +1,8 @@
-import React, { Component, View, Text } from 'react-native'
+import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import { authGetUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword } from '../actions/AuthActions'
 import { termsAccept, termsReject, termsCancelReject, termsScrollToBottom } from '../actions/TermsActions'
 
-import StyleSheets from "../styles/StyleSheets"
 import Loading from "../components/Loading"
 import SignInFailed from "../components/SignInFailed"
 import SignedOut from "../components/SignedOut"

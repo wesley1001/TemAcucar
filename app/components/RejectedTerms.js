@@ -9,7 +9,7 @@ import React, {
 import StyleSheets from "../styles/StyleSheets"
 import Button from "./Button"
 
-export default class SignUp extends Component {
+export default class RejectedTerms extends Component {
   render() {
     const { onCancelRejectTerms } = this.props
     return (
