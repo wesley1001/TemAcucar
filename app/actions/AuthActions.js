@@ -150,13 +150,11 @@ export function authSignUp(currentUser) {
     })
     .then(response => {
       if(response.ok) {
-        const currentUser = JSON.parse(response._bodyText)
         dispatch({
           type: 'AUTH_SIGN_UP_SUCCESS',
-          currentUser,
+          currentUser: JSON.parse(response._bodyText),
           credentials: authCredentials(response),
         })
-        return currentUser
       } else {
         dispatch({
           type: 'AUTH_SIGN_UP_FAILURE',
@@ -164,7 +162,7 @@ export function authSignUp(currentUser) {
         })
       }
     })
-    .then((currentUser) => authSetUser(dispatch, currentUser))
+    .then(() => authSetUser(dispatch, currentUser))
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_UP_FAILURE',
@@ -242,13 +240,11 @@ function authEmail(currentUser) {
     })
     .then(response => {
       if(response.ok) {
-        const currentUser = JSON.parse(response._bodyText)
         dispatch({
           type: 'AUTH_SIGN_IN_SUCCESS',
-          currentUser,
+          currentUser: JSON.parse(response._bodyText),
           credentials: authCredentials(response),
         })
-        return currentUser
       } else {
         dispatch({
           type: 'AUTH_SIGN_IN_FAILURE',
@@ -256,7 +252,7 @@ function authEmail(currentUser) {
         })
       }
     })
-    .then((currentUser) => authSetUser(dispatch, currentUser))
+    .then(() => authSetUser(dispatch, currentUser))
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_IN_FAILURE',
@@ -348,10 +344,9 @@ export function authResetPassword(currentUser) {
     })
     .then(response => {
       if(response.ok) {
-        const currentUser = JSON.parse(response._bodyText)
         dispatch({
           type: 'AUTH_RESET_PASSWORD_SUCCESS',
-          currentUser,
+          currentUser: JSON.parse(response._bodyText),
           credentials: authCredentials(response),
         })
         return currentUser
@@ -362,7 +357,7 @@ export function authResetPassword(currentUser) {
         })
       }
     })
-    .then((currentUser) => authSetUser(dispatch, currentUser))
+    .then(() => authSetUser(dispatch, currentUser))
     .catch(error => {
       dispatch({
         type: 'AUTH_RESET_PASSWORD_FAILURE',
