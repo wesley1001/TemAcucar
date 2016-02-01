@@ -218,7 +218,7 @@ export function authFacebook() {
       } else {
         dispatch({
           type: 'AUTH_FACEBOOK_FAILURE',
-          error: facebookError,
+          error: { id: 'facebook_auth_error', message: facebookError },
         })
       }
     })
