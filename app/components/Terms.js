@@ -29,7 +29,7 @@ class Terms extends Component {
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Termos de uso</Text>
         <ScrollView
-          style={[StyleSheets.scrollView, StyleSheets.marginBottom]}
+          style={[StyleSheets.scrollText, StyleSheets.marginBottom]}
           scrollEventThrottle={16}
           onScroll={this.handleScroll.bind(this)}
         >

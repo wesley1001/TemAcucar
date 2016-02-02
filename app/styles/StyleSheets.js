@@ -35,10 +35,14 @@ const StyleSheets = StyleSheet.create({
     marginBottom: 20,
   },
 
-  scrollView: {
+  scrollText: {
     alignSelf: 'stretch',
     backgroundColor: Colors.beige,
     padding: 10,
+  },
+
+  noPadding: {
+    padding: 0,
   },
 
   margin: {

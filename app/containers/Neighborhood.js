@@ -7,7 +7,11 @@ import React, {
   TouchableHighlight,
   MapView,
   SliderIOS,
+  Image,
+  ScrollView,
+  TabBarIOS,
 } from 'react-native'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
@@ -33,7 +37,10 @@ export default class Neighborhood extends Component {
       <MapView
         scrollEnabled={false}
         zoomEnabled={false}
-        style={[StyleSheets.map, StyleSheets.marginBottom]}
+        style={{
+          height: 200,
+          alignSelf: 'stretch',
+        }}
         region={{
           latitude: parseFloat(latitude), 
           longitude: parseFloat(longitude),
@@ -55,22 +62,24 @@ export default class Neighborhood extends Component {
     const { delta } = this.state
 
     return (
-      <View style={StyleSheets.container}>
-        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Minha vizinhança</Text>
-        { latitude && longitude && this.renderMap() }
-        <SliderIOS
-          disabled={false}
-          minimumValue={-0.1}
-          maximumValue={-0.001}
-          step={0.001}
-          value={-delta}
-          style={[StyleSheets.stretch, StyleSheets.marginBottom]}
-          onValueChange={this.handleSlide.bind(this)}
-        />
-        <Button onPress={onSignOut}>
-          Logout
-        </Button>
+      <View style={[StyleSheets.container, StyleSheets.noPadding]}>
+        <Text>ABC</Text>
       </View>
     )
   }
 }
+              // { latitude && longitude && this.renderMap() }
+              // <SliderIOS
+              //   disabled={false}
+              //   minimumValue={-0.05}
+              //   maximumValue={-0.001}
+              //   step={0.001}
+              //   value={-delta}
+              //   style={{
+
+              //   }}
+              //   onValueChange={this.handleSlide.bind(this)}
+              // />
+              // <Button onPress={onSignOut}>
+              //   Logout
+              // </Button>
