@@ -4,8 +4,8 @@ import React, {
   Text,
   View,
   Image,
-  ActivityIndicatorIOS,
 } from 'react-native'
+import GiftedSpinner from 'react-native-gifted-spinner'
 
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
@@ -15,9 +15,7 @@ export default class Loading extends Component {
     return (
       <View style={StyleSheets.container}>
         <Image source={require('../img/logo.jpg')} style={StyleSheets.bigMarginBottom} />
-        <ActivityIndicatorIOS 
-          animating={true}
-          color={Colors.pink}
+        <GiftedSpinner 
           style={StyleSheets.marginBottom}
         />
       </View>

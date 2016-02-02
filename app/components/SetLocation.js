@@ -7,8 +7,9 @@ import React, {
   MapView,
   TextInput,
   TouchableOpacity,
-  ActivityIndicatorIOS,
 } from 'react-native'
+import GiftedSpinner from 'react-native-gifted-spinner'
+
 import { connect } from 'react-redux'
 import { locationGetCoordinates, locationSetCoordinates, locationGetAddress, locationSetSearch, locationSearch, locationSetLocation } from '../actions/LocationActions'
 
@@ -90,9 +91,7 @@ class SetLocation extends Component {
 
   renderAddressLoading() {
     return (
-      <ActivityIndicatorIOS 
-        animating={true}
-        color={Colors.pink}
+      <GiftedSpinner 
         style={[StyleSheets.marginBottom, {height: 40}]}
       />
     )
@@ -100,9 +99,7 @@ class SetLocation extends Component {
 
   renderSearchLoading() {
     return (
-      <ActivityIndicatorIOS 
-        animating={true}
-        color={Colors.pink}
+      <GiftedSpinner 
         style={{
           height: 40,
           width: 40,
