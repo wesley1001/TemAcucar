@@ -8,6 +8,7 @@ import RejectedTerms from "../components/RejectedTerms"
 import Terms from "../components/Terms"
 import ReviewEmail from "../components/ReviewEmail"
 import UpdateEmail from "../components/UpdateEmail"
+import SetLocation from "../components/SetLocation"
 import Neighborhood from "../components/Neighborhood"
 
 class Configurator extends Component {
@@ -64,6 +65,8 @@ class Configurator extends Component {
       return (<UpdateEmail onUpdate={this.handleUpdateEmail.bind(this)} />)
     if (!currentUser.reviewed_email)
       return (<ReviewEmail currentUser={currentUser} onConfirm={this.handleConfirmEmail.bind(this)} onUpdate={this.handleDoUpdateEmail.bind(this)} />)
+    if (!currentUser.latitude || !currentUser.longitude || !currentUser.reviewed_address)
+      return (<SetLocation currentUser={currentUser} />)
     return (<Neighborhood {...this.props} />)
   }
 }
