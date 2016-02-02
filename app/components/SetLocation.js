@@ -28,9 +28,11 @@ class SetLocation extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, location } = nextProps
-    const { latitude, longitude, address, gettingCoordinates, getCoordinatesError, gettingAddress, getAddressError } = location
+    const { latitude, longitude, address, gettingCoordinates, getCoordinatesError, gettingAddress, getAddressError, search, searchSet } = location
     if (latitude && longitude && !address && !gettingAddress && !getAddressError) {
       dispatch(locationGetAddress(latitude, longitude))
+    } else if (address && latitude && longitude && !search && !searchSet) {
+      dispatch(locationSetSearch(this.fullAddress(address)))
     } else if (getCoordinatesError) {
       dispatch(locationSetCoordinates(-22.9029278, -43.2096521))
     }

@@ -2,6 +2,7 @@ const initialState = {
   latitude: null,
   longitude: null,
   address: null,
+  searchSet: false,
   search: null,
   searching: false,
   searchError: null,
@@ -62,6 +63,7 @@ export default function location(state = initialState, action) {
       return {
         ...state, 
         search: action.search,
+        searchSet: true,
       }
     case 'LOCATION_SEARCH_REQUEST':
       return {
