@@ -9,7 +9,7 @@ import Terms from "../components/Terms"
 import ReviewEmail from "../components/ReviewEmail"
 import UpdateEmail from "../components/UpdateEmail"
 import SetLocation from "../components/SetLocation"
-import Neighborhood from "../components/Neighborhood"
+import Neighborhood from "./Neighborhood"
 
 class Configurator extends Component {
   handleAcceptTerms() {
@@ -52,7 +52,7 @@ class Configurator extends Component {
   }
 
   render() {
-    const { currentUser, terms, config } = this.props
+    const { auth, currentUser, terms, config } = this.props
     const { acceptingTerms, rejectedTerms } = terms
     const { confirmingEmail, updateEmail } = config
     if (acceptingTerms || confirmingEmail)
@@ -65,8 +65,8 @@ class Configurator extends Component {
       return (<UpdateEmail onUpdate={this.handleUpdateEmail.bind(this)} />)
     if (!currentUser.reviewed_email)
       return (<ReviewEmail currentUser={currentUser} onConfirm={this.handleConfirmEmail.bind(this)} onUpdate={this.handleDoUpdateEmail.bind(this)} />)
-    if (!currentUser.latitude || !currentUser.longitude || !currentUser.reviewed_address)
-      return (<SetLocation currentUser={currentUser} />)
+    if (!currentUser.latitude || !currentUser.longitude || !currentUser.reviewed_location)
+      return (<SetLocation auth={auth} currentUser={currentUser} />)
     return (<Neighborhood {...this.props} />)
   }
 }

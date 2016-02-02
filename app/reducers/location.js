@@ -10,6 +10,8 @@ const initialState = {
   getCoordinatesError: null,
   gettingAddress: false,
   getAddressError: null,
+  settingLocation: false,
+  setLocationError: null,
 }
 
 export default function location(state = initialState, action) {
@@ -84,6 +86,23 @@ export default function location(state = initialState, action) {
         ...state, 
         searching: false,
         searchError: action.error,
+      }
+    case 'LOCATION_SET_LOCATION_REQUEST':
+      return {
+        ...state, 
+        settingLocation: true,
+      }
+    case 'LOCATION_SET_LOCATION_SUCCESS':
+      return {
+        ...state, 
+        settingLocation: false,
+        setLocationError: null,
+      }
+    case 'LOCATION_SET_LOCATION_FAILURE':
+      return {
+        ...state, 
+        settingLocation: false,
+        setLocationError: action.error,
       }
     default:
       return state

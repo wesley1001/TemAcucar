@@ -11,7 +11,7 @@ import React, {
 
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
-import Button from "./Button"
+import Button from "../components/Button"
 
 export default class Neighborhood extends Component {
   constructor(props, context) {
@@ -23,10 +23,6 @@ export default class Neighborhood extends Component {
 
   handleSlide(value) {
     this.setState({delta: -value})
-  }
-
-  handleSignOut() {
-
   }
 
   renderMap() {

@@ -88,3 +88,48 @@ export function locationSearch(search) {
     })        
   }  
 }
+
+export function locationSetLocation(location, credentials) {
+  return dispatch => {
+    const { latitude, longitude, address } = location
+    dispatch({ type: 'LOCATION_SET_LOCATION_REQUEST' })
+    fetch(`${Config.apiUrl}/users/${credentials.uid}`, {
+      method: 'patch',
+      headers: authHeaders(credentials),
+      body: JSON.stringify({
+        reviewed_location: true,
+        latitude,
+        longitude,
+        address_name: address.name,
+        address_thoroughfare: address.thoroughfare,
+        address_sub_thoroughfare: address.subThoroughfare,
+        address_sub_locality: address.subLocality,
+        address_locality: address.locality,
+        address_sub_administrative_area: address.subAdministrativeArea,
+        address_administrative_area: address.administrativeArea,
+        address_country: address.country,
+        address_postal_code: address.postalCode,
+      })
+    })
+    .then(response => {
+      if(response.ok) {
+        dispatch({
+          type: 'LOCATION_SET_LOCATION_SUCCESS',
+          currentUser: JSON.parse(response._bodyText),
+          credentials: authCredentials(response),
+        })
+      } else {
+        dispatch({
+          type: 'LOCATION_SET_LOCATION_FAILURE',
+          error: parseError(response),
+        })
+      }
+    })
+    .catch(error => {
+      dispatch({
+        type: 'LOCATION_SET_LOCATION_FAILURE',
+        error: parseError(error),
+      })
+    })
+  }  
+}

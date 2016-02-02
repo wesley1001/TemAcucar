@@ -3,6 +3,7 @@ import React, {
   StyleSheet,
   Text,
   View,
+  Image,
   ActivityIndicatorIOS,
 } from 'react-native'
 
@@ -13,6 +14,7 @@ export default class Loading extends Component {
   render() {
     return (
       <View style={StyleSheets.container}>
+        <Image source={require('../img/logo.jpg')} style={StyleSheets.bigMarginBottom} />
         <ActivityIndicatorIOS 
           animating={true}
           color={Colors.pink}

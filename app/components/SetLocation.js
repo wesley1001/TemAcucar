@@ -10,7 +10,7 @@ import React, {
   ActivityIndicatorIOS,
 } from 'react-native'
 import { connect } from 'react-redux'
-import { locationGetCoordinates, locationSetCoordinates, locationGetAddress, locationSetSearch, locationSearch } from '../actions/LocationActions'
+import { locationGetCoordinates, locationSetCoordinates, locationGetAddress, locationSetSearch, locationSearch, locationSetLocation } from '../actions/LocationActions'
 
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
@@ -53,6 +53,8 @@ class SetLocation extends Component {
   }
 
   handleSetLocation() {
+    const { dispatch, location, auth: {credentials} } = this.props
+    dispatch(locationSetLocation(location, credentials))
   }
 
   renderMap() {
@@ -61,8 +63,8 @@ class SetLocation extends Component {
       <MapView
         style={[StyleSheets.map, StyleSheets.marginBottom]}
         region={{
-          latitude: parseFloat(latitude || -22.9029278), 
-          longitude: parseFloat(longitude || -43.2096521),
+          latitude: parseFloat(latitude), 
+          longitude: parseFloat(longitude),
           latitudeDelta: parseFloat(0.005),
           longitudeDelta: parseFloat(0.005),
         }}
@@ -125,7 +127,7 @@ class SetLocation extends Component {
   }
 
   render() {
-    const { latitude, longitude, address, search, searching, gettingAddress } = this.props.location
+    const { latitude, longitude, address, search, searching, gettingAddress, settingLocation } = this.props.location
     if (!(latitude && longitude))
       return(<Loading />)
     return (
@@ -159,7 +161,7 @@ class SetLocation extends Component {
         { this.renderMap() }
         { address && this.renderAddress() }
         { gettingAddress && this.renderAddressLoading() }
-        <Button disabled={!(latitude && longitude && address)} viewStyle={StyleSheets.stretch} onPress={this.handleSetLocation.bind(this)}>Confirmar endereço e continuar</Button>
+        <Button disabled={!(latitude && longitude && address) || settingLocation} viewStyle={StyleSheets.stretch} onPress={this.handleSetLocation.bind(this)}>{ settingLocation ? 'Confirmando endereço...' : 'Confirmar endereço e continuar' }</Button>
       </View>
     )
   }
