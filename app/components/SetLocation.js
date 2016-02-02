@@ -29,17 +29,17 @@ class SetLocation extends Component {
   componentWillReceiveProps(nextProps) {
     const { dispatch, location } = nextProps
     const { latitude, longitude, address, gettingCoordinates, getCoordinatesError, gettingAddress, getAddressError, search, searchSet } = location
-    if (latitude && longitude && !address && !gettingAddress && !getAddressError) {
+    if (latitude && longitude && !address && !gettingAddress && !getAddressError)
       dispatch(locationGetAddress(latitude, longitude))
-    } else if (address && latitude && longitude && !search && !searchSet) {
+    else if (address && latitude && longitude && !search && !searchSet)
       dispatch(locationSetSearch(this.fullAddress(address)))
-    } else if (getCoordinatesError) {
+    else if (getCoordinatesError)
       dispatch(locationSetCoordinates(-22.9029278, -43.2096521))
-    }
   }
 
   fullAddress(address) {
-    return `${ address.name }${ (address.subLocality ? ` - ${ address.subLocality }` : '') }${ (address.locality ? ` - ${ address.locality }` : '') }${ (address.administrativeArea ? ` - ${ address.administrativeArea }` : '') }, ${ address.country }`
+    // In the future, when we need this in other places, we should have an Address component that localizes and displays this information
+    return `${ address.name }${ (address.subLocality ? ` - ${ address.subLocality }` : '') }${ (address.locality ? ` - ${ address.locality }` : '') }${ (address.administrativeArea ? ` - ${ address.administrativeArea }` : '') }, ${ (address.country == 'Brazil' ? 'Brasil' : address.country) }`
   }
 
   handleSearchChange(search) {
