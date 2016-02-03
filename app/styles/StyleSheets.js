@@ -135,7 +135,16 @@ const StyleSheets = StyleSheet.create({
     fontSize: 16,
     paddingTop: 4,
     paddingBottom: 4,
-  }
+  },
+
+  tabContainer: {
+    flex: 1,
+    marginTop: 30,
+  },
+
+  tab: {
+    flex: 1,
+  },
 })
 
 export default StyleSheets
