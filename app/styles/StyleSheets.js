@@ -144,6 +144,13 @@ const StyleSheets = StyleSheet.create({
   tab: {
     flex: 1,
   },
+
+  menu: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.darkGray,
+  }
 })
 
 export default StyleSheets

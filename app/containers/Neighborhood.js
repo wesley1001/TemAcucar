@@ -3,37 +3,57 @@ import React, {
   StyleSheet,
   Text,
   View,
+  TouchableWithoutFeedback,
 } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
+var DrawerLayout = require('react-native-drawer-layout')
 
 import StyleSheets from "../styles/StyleSheets"
 import TopBar from "../components/TopBar"
+import UserMenu from "../components/UserMenu"
 import TabBar from "../components/TabBar"
 import Tab from "../components/Tab"
 import Requests from "../components/Requests"
 
 export default class Neighborhood extends Component {
+  handleMenuOpen() {
+    this.drawer.openDrawer()
+  }
+
+  handleMenuClose() {
+    this.drawer.closeDrawer()
+  }
+
   render() {
+    const userMenu = (<UserMenu onClose={this.handleMenuClose.bind(this)} />)
     return (
-      <View>
-        <TopBar />
-        <View style={StyleSheets.tabContainer}>
-          <ScrollableTabView renderTabBar={() => <TabBar />}>
-            <Tab tabLabel="paper-plane">
-              <Requests {...this.props} />
-            </Tab>
-            <Tab tabLabel="fort-awesome">
-              <Text>Vizinhos</Text>
-            </Tab>
-            <Tab tabLabel="comments">
-              <Text>Chats</Text>
-            </Tab>
-            <Tab tabLabel="bell">
-              <Text>Notificações</Text>
-            </Tab>
-          </ScrollableTabView>
-        </View>
-      </View>
+      <DrawerLayout
+        drawerWidth={300}
+        ref={(drawer) => { return this.drawer = drawer  }}
+        keyboardDismissMode="on-drag"
+        drawerPosition="right"
+        renderNavigationView={() => userMenu}
+      >
+        <TopBar onMenuOpen={this.handleMenuOpen.bind(this)} />
+        <TouchableWithoutFeedback onPress={this.handleMenuClose.bind(this)}>
+          <View style={StyleSheets.tabContainer}>
+            <ScrollableTabView renderTabBar={() => <TabBar />}>
+              <Tab tabLabel="paper-plane">
+                <Requests {...this.props} />
+              </Tab>
+              <Tab tabLabel="fort-awesome">
+                <Text>Vizinhos</Text>
+              </Tab>
+              <Tab tabLabel="comments">
+                <Text>Chats</Text>
+              </Tab>
+              <Tab tabLabel="bell">
+                <Text>Notificações</Text>
+              </Tab>
+            </ScrollableTabView>
+          </View>
+        </TouchableWithoutFeedback>
+      </DrawerLayout>
     )
   }
 }

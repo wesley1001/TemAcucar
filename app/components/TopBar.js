@@ -12,6 +12,7 @@ import StyleSheets from "../styles/StyleSheets"
 
 export default class TopBar extends Component {
   render() {
+    const { onMenuOpen } = this.props
     return (
       <View style={{
         marginTop: 20,
@@ -33,7 +34,7 @@ export default class TopBar extends Component {
           <Image source={require('../img/icon.png')} style={{marginRight: 10}} />
           <Text style={StyleSheets.label}>Tem Açúcar</Text>
         </View>
-        <TouchableOpacity style={{
+        <TouchableOpacity onPress={onMenuOpen} style={{
           flex: 0.05,
         }}>
           <Icon name="bars" style={{

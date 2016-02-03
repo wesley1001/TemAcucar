@@ -9,6 +9,7 @@ import React, {
   TouchableOpacity,
 } from 'react-native'
 import GiftedSpinner from 'react-native-gifted-spinner'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { connect } from 'react-redux'
 import { locationGetCoordinates, locationSetCoordinates, locationGetAddress, locationSetSearch, locationSearch, locationSetLocation } from '../actions/LocationActions'
@@ -118,7 +119,9 @@ class SetLocation extends Component {
         }}
         onPress={this.handleSearch.bind(this)}
       >
-        <Image source={require('../img/search.png')} />
+        <Icon name="search" size={18} style={{
+          color: Colors.lightGray,
+        }} />
       </TouchableOpacity>
     )    
   }
