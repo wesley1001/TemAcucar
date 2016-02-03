@@ -3,7 +3,7 @@ import React, {
   StyleSheet,
   Text,
   View,
-  TouchableWithoutFeedback,
+  PanResponder,
 } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
@@ -16,6 +16,32 @@ import Tab from "../components/Tab"
 import Requests from "../components/Requests"
 
 export default class Neighborhood extends Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      drawerOpen: false,
+    }
+  }
+
+  componentWillMount() {
+    this.panResponder = PanResponder.create({
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => {
+        return this.state.drawerOpen
+      },
+      onPanResponderRelease: (evt, gestureState) => {
+        this.drawer.closeDrawer()
+      },
+    })
+  }
+
+  handleDrawerOpen() {
+    this.setState({drawerOpen: true})
+  }
+
+  handleDrawerClose() {
+    this.setState({drawerOpen: false})
+  }
+
   handleMenuOpen() {
     this.drawer.openDrawer()
   }
@@ -25,6 +51,7 @@ export default class Neighborhood extends Component {
   }
 
   render() {
+    const { drawerOpen } = this.state
     const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
     return (
       <DrawerLayout
@@ -33,9 +60,11 @@ export default class Neighborhood extends Component {
         keyboardDismissMode="on-drag"
         drawerPosition="right"
         renderNavigationView={() => userMenu}
+        onDrawerOpen={this.handleDrawerOpen.bind(this)}
+        onDrawerClose={this.handleDrawerClose.bind(this)}
       >
-        <TopBar onMenuOpen={this.handleMenuOpen.bind(this)} />
-        <TouchableWithoutFeedback onPress={this.handleMenuClose.bind(this)}>
+        <View {...this.panResponder.panHandlers} style={{flex: 1, alignSelf: 'stretch'}} >
+          <TopBar onMenuOpen={this.handleMenuOpen.bind(this)} />
           <View style={StyleSheets.tabContainer}>
             <ScrollableTabView
               locked={true}
@@ -55,7 +84,7 @@ export default class Neighborhood extends Component {
               </Tab>
             </ScrollableTabView>
           </View>
-        </TouchableWithoutFeedback>
+        </View>
       </DrawerLayout>
     )
   }
