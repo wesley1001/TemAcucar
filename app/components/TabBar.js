@@ -31,7 +31,7 @@ export default class TabBar extends Component {
     var numberOfTabs = this.props.tabs.length
     var tabUnderlineStyle = {
       position: 'absolute',
-      width: containerWidth / numberOfTabs - 18,
+      width: containerWidth / numberOfTabs,
       height: 2,
       backgroundColor: Colors.pink,
       bottom: 0,
@@ -62,24 +62,14 @@ var styles = StyleSheet.create({
   tab: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 10,
   },
   tabs: {
+    backgroundColor: Colors.beige,
     height: 45,
     flexDirection: 'row',
-    paddingTop: 5,
-    borderWidth: 1,
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
+    justifyContent: 'center',
+    paddingTop: 10,
+    borderBottomWidth: 1,
     borderBottomColor: 'rgba(0,0,0,0.05)',
-  },
-  icon: {
-    width: 30,
-    height: 30,
-    position: 'absolute',
-    top: 0,
-    left: 20,
   },
 })

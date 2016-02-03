@@ -139,7 +139,6 @@ const StyleSheets = StyleSheet.create({
 
   tabContainer: {
     flex: 1,
-    marginTop: 30,
   },
 
   tab: {
