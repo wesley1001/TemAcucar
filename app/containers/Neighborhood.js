@@ -25,10 +25,10 @@ export default class Neighborhood extends Component {
 
   componentWillMount() {
     this.panResponder = PanResponder.create({
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => {
+      onStartShouldSetPanResponderCapture: () => {
         return this.state.drawerOpen
       },
-      onPanResponderRelease: (evt, gestureState) => {
+      onPanResponderRelease: () => {
         this.drawer.closeDrawer()
       },
     })

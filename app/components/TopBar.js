@@ -36,6 +36,7 @@ export default class TopBar extends Component {
         </View>
         <TouchableOpacity onPress={onMenuOpen} style={{
           flex: 0.05,
+          padding: 10,
         }}>
           <Icon name="bars" style={{
             color: Colors.gray,

@@ -150,7 +150,7 @@ const StyleSheets = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
     backgroundColor: Colors.darkGray,
-    paddingTop: 24,
+    paddingTop: 20,
   },
 
   menuItem: {
