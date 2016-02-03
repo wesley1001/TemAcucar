@@ -4,8 +4,8 @@ import React, {
   Text,
   View,
   MapView,
-  SliderIOS,
 } from 'react-native'
+import Slider from 'react-native-slider'
 
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
@@ -20,7 +20,7 @@ export default class Requests extends Component {
   }
 
   handleSlide(value) {
-    this.setState({delta: -value})
+    this.setState({delta: -(value / 1000)})
   }
 
   renderMap() {
@@ -51,26 +51,35 @@ export default class Requests extends Component {
   }
 
   render() {
-    const { onSignOut } = this.props
     const { latitude, longitude } = this.props.currentUser
-    const { delta } = this.state
+    const delta = this.state.delta * 1000
     return (
       <View>
         { latitude && longitude && this.renderMap() }
-        <SliderIOS
+        <Slider
           disabled={false}
-          minimumValue={-0.05}
-          maximumValue={-0.001}
-          step={0.001}
+          minimumValue={-50}
+          maximumValue={-1}
+          step={1}
           value={-delta}
-          style={{
-
-          }}
           onValueChange={this.handleSlide.bind(this)}
+          style={{marginHorizontal: 40}}
+          minimumTrackTintColor={Colors.pink}
+          trackStyle={{
+            height: 2,
+            backgroundColor: Colors.gray,
+          }}
+          thumbStyle={{
+            width: 10,
+            height: 10,
+            backgroundColor: Colors.pink,
+            borderRadius: 10 / 2,
+            shadowColor: Colors.pink,
+            shadowOffset: {width: 0, height: 0},
+            shadowRadius: 2,
+            shadowOpacity: 1,
+          }}
         />
-        <Button onPress={onSignOut}>
-          Logout
-        </Button>
       </View>
     )
   }

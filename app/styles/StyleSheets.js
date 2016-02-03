@@ -147,10 +147,18 @@ const StyleSheets = StyleSheet.create({
 
   menu: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
     backgroundColor: Colors.darkGray,
-  }
+    paddingTop: 24,
+  },
+
+  menuItem: {
+    alignSelf: 'stretch',
+    textAlign: 'right',
+    color: Colors.lightGray,
+    padding: 10,
+  },
 })
 
 export default StyleSheets

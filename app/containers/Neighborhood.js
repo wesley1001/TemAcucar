@@ -6,7 +6,7 @@ import React, {
   TouchableWithoutFeedback,
 } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
-var DrawerLayout = require('react-native-drawer-layout')
+import DrawerLayout from 'react-native-drawer-layout'
 
 import StyleSheets from "../styles/StyleSheets"
 import TopBar from "../components/TopBar"
@@ -25,10 +25,10 @@ export default class Neighborhood extends Component {
   }
 
   render() {
-    const userMenu = (<UserMenu onClose={this.handleMenuClose.bind(this)} />)
+    const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
     return (
       <DrawerLayout
-        drawerWidth={300}
+        drawerWidth={180}
         ref={(drawer) => { return this.drawer = drawer  }}
         keyboardDismissMode="on-drag"
         drawerPosition="right"
@@ -37,7 +37,10 @@ export default class Neighborhood extends Component {
         <TopBar onMenuOpen={this.handleMenuOpen.bind(this)} />
         <TouchableWithoutFeedback onPress={this.handleMenuClose.bind(this)}>
           <View style={StyleSheets.tabContainer}>
-            <ScrollableTabView renderTabBar={() => <TabBar />}>
+            <ScrollableTabView
+              locked={true}
+              renderTabBar={() => <TabBar />}
+            >
               <Tab tabLabel="paper-plane">
                 <Requests {...this.props} />
               </Tab>
