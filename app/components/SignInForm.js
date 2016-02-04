@@ -30,13 +30,6 @@ const validate = values => {
 }
 
 class SignInForm extends Component {
-  componentWillReceiveProps(nextProps) {
-    const { auth: {signInError} } = nextProps
-    if (signInError && (signInError != this.props.auth.signInError)) {
-      Actions.signInFailed()
-    }
-  }
-
   render() {
     const { auth: { signingIn }, fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignIn } = this.props
     return (
@@ -75,12 +68,8 @@ class SignInForm extends Component {
   }
 }
 
-SignInForm = reduxForm({
+export default SignInForm = reduxForm({
   form: 'signIn',
   fields: ['email', 'password'],
   validate,
 })(SignInForm)
-
-export default connect(state => ({
-  auth: state.auth,
-}))(SignInForm)

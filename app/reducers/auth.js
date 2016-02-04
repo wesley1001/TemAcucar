@@ -47,6 +47,8 @@ export default function auth(state = initialState, action) {
           ...action.currentUser,
         },
         signInError: null,
+        signUpError: null,
+        facebookError: null,
         signingIn: true,
       }
     case 'AUTH_SIGN_IN_SUCCESS':
@@ -60,6 +62,7 @@ export default function auth(state = initialState, action) {
         signingIn: false,
         signInError: null,
         signUpError: null,
+        facebookError: null,
         startingUp: false,
       }
     case 'AUTH_SIGN_IN_FAILURE':
@@ -76,6 +79,9 @@ export default function auth(state = initialState, action) {
           ...state.currentUser, 
           ...action.currentUser,
         },
+        signInError: null,
+        signUpError: null,
+        facebookError: null,
         signingUp: true,
       }
     case 'AUTH_SIGN_UP_SUCCESS':
@@ -88,6 +94,7 @@ export default function auth(state = initialState, action) {
         credentials: action.credentials,
         signInError: null,
         signUpError: null,
+        facebookError: null,
         signingUp: false,
       }
     case 'AUTH_SIGN_UP_FAILURE':
@@ -123,6 +130,9 @@ export default function auth(state = initialState, action) {
           ...state.currentUser,
           ...action.currentUser,
         },
+        signInError: null,
+        signUpError: null,
+        facebookError: null,
         facebookSigningIn: true,
       }
     case 'AUTH_FACEBOOK_SUCCESS':
@@ -134,6 +144,8 @@ export default function auth(state = initialState, action) {
         },
         credentials: action.credentials,
         facebookSigningIn: false,
+        signInError: null,
+        signUpError: null,
         facebookError: null,
         startingUp: false,
       }

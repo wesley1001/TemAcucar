@@ -21,7 +21,7 @@ export default class SignInFailed extends Component {
         <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
           Se você é usuário da versão antiga do Tem Açúcar, vai ser preciso criar uma nova senha.
         </Text>
-        <Button onPress={Actions.requestPassword}>
+        <Button onPress={() => Actions.requestPassword({headline: 'Criar nova senha'})}>
           Criar uma nova senha
         </Button>
         <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
