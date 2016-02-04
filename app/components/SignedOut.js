@@ -5,7 +5,7 @@ import React, {
   View,
   Navigator,
 } from 'react-native'
-import { Router, Route, Schema } from 'react-native-router-flux'
+import { Router, Route, Schema, Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
 import Welcome from "../components/Welcome"
@@ -18,6 +18,10 @@ import RequestPassword from "../components/RequestPassword"
 import ResetPassword from "../components/ResetPassword"
 
 export default class SignedOut extends Component {
+  componentWillUnmount() {
+    Actions.currentRouter = null
+  }
+
   render() {
     return (
       <Router 
@@ -27,7 +31,7 @@ export default class SignedOut extends Component {
         barButtonTextStyle={StyleSheets.navBarIconText}
       >
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-        <Route {...this.props} name="welcome" component={Welcome} initial={true} title="Tem Açúcar?" schema="default"/>
+        <Route {...this.props} name="welcome" component={Welcome} initial={true} title="Tem Açúcar?" schema="default" />
         <Route {...this.props} name="signIn" component={SignIn} title="Login" schema="default" />
         <Route {...this.props} name="signUp" component={SignUp} title="Cadastre-se" schema="default" />
         <Route {...this.props} name="signInForm" component={SignInForm} title="Login" schema="default" />

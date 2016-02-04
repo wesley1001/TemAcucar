@@ -12,6 +12,7 @@ export default function terms(state = initialState, action) {
       return {
         ...state, 
         confirmingEmail: true,
+        updateEmail: false,
       }
     case 'CONFIG_CONFIRM_EMAIL_SUCCESS':
       return {
