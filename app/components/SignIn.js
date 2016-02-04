@@ -14,8 +14,8 @@ import Link from "./Link"
 
 class SignIn extends Component {
   componentWillReceiveProps(nextProps) {
-    const { auth: {signInError} } = nextProps
-    if (signInError && (signInError != this.props.auth.signInError)) {
+    const { auth: {facebookError} } = nextProps
+    if (facebookError && (facebookError != this.props.auth.facebookError)) {
       Actions.signInFailed()
     }
   }

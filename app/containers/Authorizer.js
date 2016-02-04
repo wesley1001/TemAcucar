@@ -16,8 +16,8 @@ class Authorizer extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, auth } = nextProps
-    const { currentUser, credentials, signingIn, signingUp, signingOut, gettingUser, signInError, signUpError, requestingPassword, resetingPassword, resetPassword } = auth
-    if (currentUser && !credentials && !signingIn && !signingUp && !signingOut && !gettingUser && !signInError && !signUpError && !requestingPassword && !resetingPassword && !resetPassword) {
+    const { currentUser, credentials, facebookSigningIn, signingIn, signingUp, signingOut, gettingUser, signInError, signUpError, requestingPassword, resetingPassword, resetPassword } = auth
+    if (currentUser && !credentials && !facebookSigningIn && !signingIn && !signingUp && !signingOut && !gettingUser && !signInError && !signUpError && !requestingPassword && !resetingPassword && !resetPassword) {
       dispatch(authSignIn(currentUser))
     }
   }
@@ -59,7 +59,7 @@ class Authorizer extends Component {
 
   render() {
     const { auth, terms } = this.props
-    const { currentUser, startingUp, gettingUser, signingIn, signingUp, signingOut, credentials, signInError, signUpError, resetPassword } = auth
+    const { currentUser, startingUp, gettingUser, facebookSigningIn, signingUp, signingOut, credentials, signInError, signUpError, resetPassword } = auth
     const { acceptingTerms, rejectedTerms } = terms
     const authEvents = {
       onSignIn: this.handleSignIn.bind(this),
@@ -69,7 +69,7 @@ class Authorizer extends Component {
       onRequestPassword: this.handleRequestPassword.bind(this),
       onResetPassword: this.handleResetPassword.bind(this),
     }
-    if (startingUp || gettingUser || signingOut || acceptingTerms)
+    if (startingUp || gettingUser || facebookSigningIn || signingOut || acceptingTerms)
       return (<Loading />)
     if (!credentials)
       return (<SignedOut auth={auth} {...authEvents} />)
