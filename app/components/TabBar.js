@@ -21,7 +21,7 @@ export default class TabBar extends Component {
     const isActive = (this.props.activeTab === page)
     return (
       <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} style={styles.tab}>
-        <Icon name={name} size={24} color={isActive ? Colors.pink : Colors.lightGray} style={styles.icon} />
+        <Icon name={name} size={24} color={isActive ? Colors.pink : Colors.lightGray} />
       </TouchableOpacity>
     );
   }

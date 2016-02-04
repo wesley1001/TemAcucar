@@ -6,6 +6,7 @@ const Colors = {
   darkGray: '#333',
   gray: '#999',
   lightGray: '#ccc',
+  ice: '#eee',
   facebook: '#516dac',
 }
 

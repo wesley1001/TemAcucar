@@ -7,7 +7,6 @@ const StyleSheets = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.white,
-    padding: 40,
   },
 
   headline: {
@@ -15,6 +14,7 @@ const StyleSheets = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 24,
     textAlign: 'center',
+    paddingHorizontal: 40,
   },
 
   strong: {
