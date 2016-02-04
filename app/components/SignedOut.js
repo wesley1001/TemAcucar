@@ -18,10 +18,6 @@ import RequestPassword from "../components/RequestPassword"
 import ResetPassword from "../components/ResetPassword"
 
 export default class SignedOut extends Component {
-  componentWillUnmount() {
-    Actions.currentRouter = null
-  }
-
   render() {
     return (
       <Router 
