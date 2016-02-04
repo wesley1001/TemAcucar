@@ -28,13 +28,13 @@ export default class SignedOut extends Component {
       >
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
         <Route {...this.props} name="welcome" component={Welcome} initial={true} title="Tem Açúcar?" schema="default"/>
-        <Route {...this.props} name="signInFailed" component={SignInFailed} title="Tem Açúcar" schema="default" />
         <Route {...this.props} name="signIn" component={SignIn} title="Login" schema="default" />
         <Route {...this.props} name="signUp" component={SignUp} title="Cadastre-se" schema="default" />
         <Route {...this.props} name="signInForm" component={SignInForm} title="Login" schema="default" />
         <Route {...this.props} name="signUpForm" component={SignUpForm} title="Cadastre-se" schema="default" />
         <Route {...this.props} name="requestPassword" component={RequestPassword} title="Esqueceu, né?" schema="default" />
         <Route {...this.props} name="resetPassword" component={ResetPassword} title="Confira seu email" schema="default" />
+        <Route {...this.props} name="signInFailed" component={SignInFailed} title="Tem Açúcar" schema="default" />
       </Router>
     )
   }

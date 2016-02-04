@@ -5,6 +5,7 @@ import React, {
   View,
   Image,
 } from 'react-native'
+import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
@@ -12,6 +13,13 @@ import Button from "./Button"
 import Link from "./Link"
 
 export default class SignUp extends Component {
+  componentWillReceiveProps(nextProps) {
+    const { auth: {signInError} } = nextProps
+    if (signInError && (signInError != this.props.auth.signInError)) {
+      Actions.signInFailed()
+    }
+  }
+
   render() {
     const { onFacebook } = this.props
     return (
@@ -31,3 +39,7 @@ export default class SignUp extends Component {
     )
   }
 }
+
+export default connect(state => ({
+  auth: state.auth,
+}))(SignUp)
