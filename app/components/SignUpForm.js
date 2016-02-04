@@ -69,6 +69,7 @@ class SignUpForm extends Component {
           borderTopWidth: 0.5,
         }}>
           <GiftedForm
+            scrollEnabled={false}
             formStyles={{
               containerView: {
                 backgroundColor: Colors.ice,
@@ -152,13 +153,22 @@ class SignUpForm extends Component {
               widgetStyles={{
                 submitButton: {
                   backgroundColor: Colors.pink,
-                }
+                },
+                errorContainer: {
+                  marginTop: 10,
+                },
+                errorText: {
+                  color: Colors.pink,
+                  textAlign: 'center',
+                  fontSize: 16,
+                },
               }}
               onSubmit={(isValid, values, validationResults, postSubmit = null, modalNavigator = null) => {
                 if (isValid === true) {
+                  postSubmit(['Email já cadastrado para outro usuário.'])
                   // prepare object
-                  values.gender = values.gender[0];
-                  values.birthday = moment(values.birthday).format('YYYY-MM-DD');
+                  // values.gender = values.gender[0];
+                  // values.birthday = moment(values.birthday).format('YYYY-MM-DD');
           
                   /* Implement the request to your server using values variable
                   ** then you can do:
