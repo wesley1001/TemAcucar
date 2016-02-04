@@ -2,12 +2,11 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View,
-  Image,
 } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
+import SimplePage from "./SimplePage"
 import Button from "./Button"
 import Link from "./Link"
 
@@ -15,8 +14,7 @@ export default class SignUp extends Component {
   render() {
     const { onFacebook } = this.props
     return (
-      <View style={StyleSheets.container}>
-        <Image source={require('../img/logo.jpg')} style={StyleSheets.bigMarginBottom} />
+      <SimplePage>
         <Button onPress={onFacebook} textStyle={StyleSheets.facebook}>
           Cadastre-se com o Facebook
         </Button>
@@ -27,7 +25,7 @@ export default class SignUp extends Component {
         <Link onPress={Actions.signIn}>
           Já possui cadastro?
         </Link>
-      </View>
+      </SimplePage>
     )
   }
 }

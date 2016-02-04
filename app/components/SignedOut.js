@@ -43,7 +43,7 @@ class SignedOut extends Component {
         <Route {...this.props} name="signUp" component={SignUp} title="Cadastre-se" schema="default" />
         <Route {...this.props} name="signInForm" component={SignInForm} title="Login" schema="default" />
         <Route {...this.props} name="signUpForm" component={SignUpForm} title="Cadastre-se" schema="default" />
-        <Route {...this.props} name="requestPassword" component={RequestPassword} title="Nova senha" schema="default" />
+        <Route {...this.props} name="requestPassword" component={RequestPassword} title="Criar nova senha" schema="default" />
         <Route {...this.props} name="resetPassword" component={ResetPassword} title="Confira seu email" schema="default" />
       </Router>
     )

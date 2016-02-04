@@ -35,12 +35,6 @@ export function configConfirmEmail(credentials) {
   }  
 }
 
-export function configDoUpdateEmail() {
-  return dispatch => {
-    dispatch({ type: 'CONFIG_DO_UPDATE_EMAIL' })
-  }
-}
-
 export function configUpdateEmail(email, secondaryEmail, credentials, password) {
   return dispatch => {
     dispatch({ type: 'CONFIG_UPDATE_EMAIL_REQUEST' })

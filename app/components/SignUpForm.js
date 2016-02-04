@@ -14,6 +14,7 @@ var {GiftedForm, GiftedFormManager} = require('react-native-gifted-form')
 
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
+import SimplePage from "./SimplePage"
 import Label from "./Label"
 import Button from "./Button"
 import Link from "./Link"
@@ -167,8 +168,7 @@ class SignUpForm extends Component {
     const { auth: {signingUp, signUpError}, fields: { first_name, last_name, email, password }, dirty, valid, submitting, handleSubmit, onSignUp } = this.props
     const emailError = signUpError && this.errorMessage(signUpError)
     return (
-      <View style={StyleSheets.container}>
-        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Cadastre-se</Text>
+      <SimplePage>
         <View style={StyleSheets.stretch}>
           <Label field={first_name}>Nome</Label>
           <TextInput
@@ -210,7 +210,7 @@ class SignUpForm extends Component {
         <Link onPress={Actions.signIn}>
           Já possui cadastro?
         </Link>
-      </View>
+      </SimplePage>
     )
   }
 }

@@ -10,6 +10,7 @@ import {reduxForm} from 'redux-form'
 import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
+import SimplePage from "./SimplePage"
 import Label from "./Label"
 import Button from "./Button"
 import Link from "./Link"
@@ -33,8 +34,7 @@ class SignInForm extends Component {
   render() {
     const { auth: { signingIn }, fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignIn } = this.props
     return (
-      <View style={StyleSheets.container}>
-        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Faça seu login</Text>
+      <SimplePage>
         <View style={StyleSheets.stretch}>
           <Label field={email}>Email</Label>
           <TextInput
@@ -63,7 +63,7 @@ class SignInForm extends Component {
         <Link onPress={Actions.signUp}>
           Não possui cadastro?
         </Link>
-      </View>
+      </SimplePage>
     )
   }
 }
