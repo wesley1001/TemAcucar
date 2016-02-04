@@ -4,7 +4,6 @@ import { authGetUser, authSignIn, authSignUp, authSignOut, authFacebook, authReq
 import { termsAccept, termsReject, termsCancelReject, termsScrollToBottom } from '../actions/TermsActions'
 
 import Loading from "../components/Loading"
-import SignInFailed from "../components/SignInFailed"
 import SignedOut from "../components/SignedOut"
 import ResetPassword from "../components/ResetPassword"
 import Configurator from "./Configurator"
@@ -70,12 +69,8 @@ class Authorizer extends Component {
       onRequestPassword: this.handleRequestPassword.bind(this),
       onResetPassword: this.handleResetPassword.bind(this),
     }
-    if (startingUp || gettingUser || signingIn || signingOut || acceptingTerms)
+    if (startingUp || gettingUser || signingOut || acceptingTerms)
       return (<Loading />)
-    if (signInError)
-      return (<SignInFailed auth={auth} {...authEvents} />)
-    if (resetPassword)
-      return (<ResetPassword auth={auth} {...authEvents} />)
     if (!credentials)
       return (<SignedOut auth={auth} {...authEvents} />)
     return (<Configurator auth={auth} {...authEvents} currentUser={currentUser} />)

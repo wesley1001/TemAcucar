@@ -7,6 +7,7 @@ import React, {
 } from 'react-native'
 import { connect } from 'react-redux'
 import {reduxForm} from 'redux-form'
+import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
 import Label from "./Label"
@@ -23,6 +24,13 @@ const validate = values => {
 }
 
 class RequestPassword extends Component {
+  componentWillReceiveProps(nextProps) {
+    const { auth: {resetPassword} } = nextProps
+    if (resetPassword && (resetPassword != this.props.auth.resetPassword)) {
+      Actions.resetPassword()
+    }
+  }
+
   errorMessage(error) {
     switch (error.id) {
       case 'not_found':

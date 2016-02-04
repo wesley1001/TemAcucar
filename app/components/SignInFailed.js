@@ -1,25 +1,34 @@
 import React, {
   Component,
   StyleSheet,
+  Image,
   Text,
   View,
-  NavigatorIOS
 } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
-import SignInInstructions from "../components/SignInInstructions"
+import Button from "./Button"
 
 export default class SignInFailed extends Component {
   render() {
     return (
-      <NavigatorIOS
-        style={{flex: 1}}
-        initialRoute={{
-          title: 'Tem Açúcar?',
-          component: SignInInstructions,
-          passProps: this.props,
-        }}
-      />
+      <View style={StyleSheets.container}>
+        <Image source={require('../img/logo.jpg')} />
+        <Text style={[StyleSheets.headline, StyleSheets.bigMarginVertical]}>
+          Não foi possível fazer seu login com sucesso
+        </Text>
+        <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
+          Se você é usuário da versão antiga do Tem Açúcar, vai ser preciso criar uma nova senha.
+        </Text>
+        <Button onPress={Actions.requestPassword}>
+          Criar uma nova senha
+        </Button>
+        <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
+        <Button onPress={Actions.signIn}>
+          Tentar uma vez mais
+        </Button>
+      </View>
     )
   }
 }

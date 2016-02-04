@@ -5,6 +5,7 @@ import React, {
   View,
   TextInput,
 } from 'react-native'
+import { connect } from 'react-redux'
 import {reduxForm} from 'redux-form'
 import { Actions } from 'react-native-router-flux'
 
@@ -29,8 +30,15 @@ const validate = values => {
 }
 
 class SignInForm extends Component {
+  componentWillReceiveProps(nextProps) {
+    const { auth: {signInError} } = nextProps
+    if (signInError && (signInError != this.props.auth.signInError)) {
+      Actions.signInFailed()
+    }
+  }
+
   render() {
-    const { fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignIn } = this.props
+    const { auth: { signingIn }, fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignIn } = this.props
     return (
       <View style={StyleSheets.container}>
         <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Faça seu login</Text>
@@ -53,8 +61,8 @@ class SignInForm extends Component {
             {...password}
           />
         </View>
-        <Button disabled={!dirty || !valid || submitting} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignIn)}>
-          Fazer login
+        <Button disabled={!dirty || !valid || submitting || signingIn} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignIn)}>
+          { signingIn ? 'Fazendo login...' : 'Fazer login' }
         </Button>
         <Link onPress={Actions.requestPassword}>
           Esqueceu sua senha?
@@ -73,4 +81,6 @@ SignInForm = reduxForm({
   validate,
 })(SignInForm)
 
-export default SignInForm
+export default connect(state => ({
+  auth: state.auth,
+}))(SignInForm)

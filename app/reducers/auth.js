@@ -45,6 +45,7 @@ export default function auth(state = initialState, action) {
           ...state.currentUser, 
           ...action.currentUser,
         },
+        signInError: null,
         signingIn: true,
       }
     case 'AUTH_SIGN_IN_SUCCESS':
