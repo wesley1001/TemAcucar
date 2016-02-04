@@ -159,6 +159,22 @@ const StyleSheets = StyleSheet.create({
     color: Colors.lightGray,
     padding: 10,
   },
+
+  navBar: {
+    backgroundColor: Colors.beige,
+  },
+
+  navBarTitle: {
+    color: Colors.brown,
+  },
+
+  navBarIcon: {
+    tintColor: Colors.brown,
+  },
+
+  navBarIconText: {
+    color: Colors.brown,
+  },
 })
 
 export default StyleSheets

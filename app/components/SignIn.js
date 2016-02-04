@@ -5,30 +5,13 @@ import React, {
   View,
   Image,
 } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
 import Button from "./Button"
 import Link from "./Link"
-import SignInForm from "./SignInForm"
-import SignUp from "./SignUp"
 
 export default class SignIn extends Component {
-  handleSignIn() {
-    this.props.navigator.push({
-      title: 'Login',
-      component: SignInForm,
-      passProps: this.props,
-    })
-  }
-
-  handleSignUp() {
-    this.props.navigator.push({
-      title: 'Crie sua conta',
-      component: SignUp,
-      passProps: this.props,
-    })
-  }
-
   render() {
     const { onFacebook } = this.props
     return (
@@ -38,10 +21,10 @@ export default class SignIn extends Component {
           Faça login com seu Facebook
         </Button>
         <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
-        <Button onPress={this.handleSignIn.bind(this)} viewStyle={StyleSheets.marginBottom}>
+        <Button onPress={Actions.signInForm} viewStyle={StyleSheets.marginBottom}>
           Entre com seu email e senha
         </Button>
-        <Link onPress={this.handleSignUp.bind(this)}>
+        <Link onPress={Actions.signUp}>
           Não possui cadastro?
         </Link>
       </View>

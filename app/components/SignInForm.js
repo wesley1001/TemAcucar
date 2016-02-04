@@ -6,13 +6,12 @@ import React, {
   TextInput,
 } from 'react-native'
 import {reduxForm} from 'redux-form'
+import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
 import Label from "./Label"
 import Button from "./Button"
 import Link from "./Link"
-import RequestPassword from "./RequestPassword"
-import SignUp from "./SignUp"
 
 const validate = values => {
   const errors = {}
@@ -30,29 +29,6 @@ const validate = values => {
 }
 
 class SignInForm extends Component {
-  handleRequestPassword() {
-    this.props.navigator.push({
-      title: 'Esqueceu sua senha?',
-      component: RequestPassword,
-      passProps: {
-        onRequestPassword: this.props.onRequestPassword,
-      },
-    })
-  }
-
-  handleSignUp() {
-    this.props.navigator.push({
-      title: 'Crie sua conta',
-      component: SignUp,
-      passProps: {
-        onSignIn: this.props.onSignIn,
-        onSignUp: this.props.onSignUp,
-        onSignOut: this.props.onSignOut,
-        onRequestPassword: this.props.onRequestPassword,
-      },
-    })
-  }
-
   render() {
     const { fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignIn } = this.props
     return (
@@ -80,10 +56,10 @@ class SignInForm extends Component {
         <Button disabled={!dirty || !valid || submitting} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignIn)}>
           Fazer login
         </Button>
-        <Link onPress={this.handleRequestPassword.bind(this)}>
+        <Link onPress={Actions.requestPassword}>
           Esqueceu sua senha?
         </Link>
-        <Link onPress={this.handleSignUp.bind(this)}>
+        <Link onPress={Actions.signUp}>
           Não possui cadastro?
         </Link>
       </View>
