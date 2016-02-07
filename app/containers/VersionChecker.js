@@ -1,6 +1,9 @@
 import React, { Component } from 'react-native'
+import Libraries, { LinkingIOS } from 'react-native'
 import { connect } from 'react-redux'
 import Package from '../../package.json'
+
+import Config from "../Config"
 import { versionsList, versionsIgnoreUpdate } from '../actions/VersionsActions'
 
 import Loading from "../components/Loading"
@@ -37,6 +40,10 @@ class VersionChecker extends Component {
     return (version && version == list[0])
   }
 
+  handleUpdate() {
+    LinkingIOS.openURL(Config.appStoreUrl)
+  }
+
   handleIgnoreUpdate() {
     const { dispatch } = this.props
     dispatch(versionsIgnoreUpdate())
@@ -56,7 +63,7 @@ class VersionChecker extends Component {
     if (listError)
       return (<NetworkError error={listError} onTryAgain={this.handleTryAgain.bind(this)} />)
     if (this.isExpired())
-      return (<ExpiredVersion />)
+      return (<ExpiredVersion onUpdate={this.handleUpdate.bind(this)} />)
     if (!this.isCurrent() && !ignoreUpdate)
       return (<UpdateVersion version={this.version()} onIgnore={this.handleIgnoreUpdate.bind(this)} />)
     return (<Authorizer />)
