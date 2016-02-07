@@ -1,11 +1,8 @@
 import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import { GiftedForm } from 'react-native-gifted-form'
 
 import Colors from "../styles/Colors"
-import StyleSheets from "../styles/StyleSheets"
-import Label from "./Label"
 import Button from "./Button"
 import Link from "./Link"
 import Form from "./Form"
