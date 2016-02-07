@@ -16,8 +16,8 @@ import { locationGetCoordinates, locationSetCoordinates, locationGetAddress, loc
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
 import Loading from "./Loading"
-import Button from "./Button"
-import Headline from "./Headline"
+import Button from "../components/Button"
+import Headline from "../components/Headline"
 
 class SetLocation extends Component {
   componentWillMount() {

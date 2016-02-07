@@ -3,21 +3,21 @@ import { Actions } from 'react-native-router-flux'
 
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
-import SimpleScreen from "./SimpleScreen"
-import Button from "./Button"
-import Link from "./Link"
+import SimpleScreen from "../components/SimpleScreen"
+import Button from "../components/Button"
+import Link from "../components/Link"
 
-export default SignIn = ({ onFacebook }) => (
+export default SignUp = ({ onFacebook }) => (
   <SimpleScreen>
     <Button onPress={onFacebook} style={{ backgroundColor: Colors.facebook }}>
-      Faça login com seu Facebook
+      Cadastre-se com o Facebook
     </Button>
     <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
-    <Button onPress={Actions.signInForm} style={StyleSheets.marginBottom}>
-      Entre com seu email e senha
+    <Button onPress={Actions.signUpForm} style={StyleSheets.marginBottom}>
+      Crie sua conta com seu email
     </Button>
-    <Link onPress={Actions.signUp}>
-      Não possui cadastro?
+    <Link onPress={Actions.signIn}>
+      Já possui cadastro?
     </Link>
   </SimpleScreen>
 )

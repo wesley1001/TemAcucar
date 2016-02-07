@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { termsAccept, termsReject, termsCancelReject, termsScrollToBottom } from '../actions/TermsActions'
 import { configConfirmEmail, configUpdateEmail } from '../actions/ConfigActions'
 
-import Loading from "../components/Loading"
-import RejectedTerms from "../components/RejectedTerms"
-import Terms from "../components/Terms"
-import UnreviewedEmail from "../components/UnreviewedEmail"
-import SetLocation from "../components/SetLocation"
+import Loading from "../screens/Loading"
+import RejectedTerms from "../screens/RejectedTerms"
+import Terms from "../screens/Terms"
+import SetLocation from "../screens/SetLocation"
+import UnreviewedEmail from "../routers/UnreviewedEmail"
 import Neighborhood from "./Neighborhood"
 
 class Configurator extends Component {

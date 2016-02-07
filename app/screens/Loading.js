@@ -1,6 +1,6 @@
 import React from 'react-native'
 import GiftedSpinner from 'react-native-gifted-spinner'
-import SimpleScreen from "./SimpleScreen"
+import SimpleScreen from "../components/SimpleScreen"
 
 export default Loading = () => (
   <SimpleScreen>

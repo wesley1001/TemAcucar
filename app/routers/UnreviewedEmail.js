@@ -6,9 +6,9 @@ import { connect } from 'react-redux'
 import { Route, Schema, Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
-import ReviewEmail from "../components/ReviewEmail"
-import UpdateEmail from "../components/UpdateEmail"
 import StyledRouter from "../components/StyledRouter"
+import ReviewEmail from "../screens/ReviewEmail"
+import UpdateEmail from "../screens/UpdateEmail"
 
 class UnreviewedEmail extends Component {
   render() {

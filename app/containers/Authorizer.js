@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { authGetUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword } from '../actions/AuthActions'
 import { termsAccept, termsReject, termsCancelReject, termsScrollToBottom } from '../actions/TermsActions'
 
-import Loading from "../components/Loading"
-import SignedOut from "../components/SignedOut"
-import ResetPassword from "../components/ResetPassword"
+import Loading from "../screens/Loading"
+import ResetPassword from "../screens/ResetPassword"
+import SignedOut from "../routers/SignedOut"
 import Configurator from "./Configurator"
 
 class Authorizer extends Component {

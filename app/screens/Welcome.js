@@ -2,8 +2,8 @@ import React, { Text } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimpleScreen from "./SimpleScreen"
-import Button from "./Button"
+import SimpleScreen from "../components/SimpleScreen"
+import Button from "../components/Button"
 
 export default Welcome = () => (
   <SimpleScreen headline="Compartilhe suas coisas com seus vizinhos">

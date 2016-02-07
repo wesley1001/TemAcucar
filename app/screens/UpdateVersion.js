@@ -2,8 +2,8 @@ import React, { Text } from 'react-native'
 
 import Config from "../Config"
 import StyleSheets from "../styles/StyleSheets"
-import SimpleScreen from "./SimpleScreen"
-import Button from "./Button"
+import SimpleScreen from "../components/SimpleScreen"
+import Button from "../components/Button"
 
 export default UpdateVersion = ({ onIgnore, onUpdate, daysRemaining }) => (
   <SimpleScreen headline="Nova versão disponível">

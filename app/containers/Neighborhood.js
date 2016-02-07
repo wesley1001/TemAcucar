@@ -13,7 +13,7 @@ import TopBar from "../components/TopBar"
 import UserMenu from "../components/UserMenu"
 import TabBar from "../components/TabBar"
 import Tab from "../components/Tab"
-import Requests from "../components/Requests"
+import Requests from "../screens/Requests"
 
 export default class Neighborhood extends Component {
   constructor(props, context) {

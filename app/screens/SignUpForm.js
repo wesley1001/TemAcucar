@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
 import Colors from "../styles/Colors"
-import Button from "./Button"
-import Link from "./Link"
-import Form from "./Form"
-import FormTextInput from "./FormTextInput"
-import FormSubmit from "./FormSubmit"
-import FormFooter from "./FormFooter"
+import Button from "../components/Button"
+import Link from "../components/Link"
+import Form from "../components/Form"
+import FormTextInput from "../components/FormTextInput"
+import FormSubmit from "../components/FormSubmit"
+import FormFooter from "../components/FormFooter"
 
 const notPresentMessage = '{TITLE} deve ser preenchido.'
 const validators = {

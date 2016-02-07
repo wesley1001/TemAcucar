@@ -8,9 +8,9 @@ import { connect } from 'react-redux'
 
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
-import Button from "./Button"
-import Headline from "./Headline"
-import Paragraph from "./Paragraph"
+import Button from "../components/Button"
+import Headline from "../components/Headline"
+import Paragraph from "../components/Paragraph"
 
 class Terms extends Component {
   handleScroll(event) {

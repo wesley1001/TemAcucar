@@ -6,10 +6,10 @@ import Package from '../../package.json'
 import Config from "../Config"
 import { versionsList, versionsIgnoreUpdate } from '../actions/VersionsActions'
 
-import Loading from "../components/Loading"
-import NetworkError from "../components/NetworkError"
-import ExpiredVersion from "../components/ExpiredVersion"
-import UpdateVersion from "../components/UpdateVersion"
+import Loading from "../screens/Loading"
+import NetworkError from "../screens/NetworkError"
+import ExpiredVersion from "../screens/ExpiredVersion"
+import UpdateVersion from "../screens/UpdateVersion"
 import Authorizer from './Authorizer'
 
 class VersionChecker extends Component {

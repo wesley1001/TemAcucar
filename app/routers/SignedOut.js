@@ -6,15 +6,15 @@ import { connect } from 'react-redux'
 import { Route, Schema, Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
-import Welcome from "../components/Welcome"
-import SignIn from "../components/SignIn"
-import SignUp from "../components/SignUp"
-import SignInForm from "../components/SignInForm"
-import SignUpForm from "../components/SignUpForm"
-import SignInFailed from "../components/SignInFailed"
-import RequestPassword from "../components/RequestPassword"
-import ResetPassword from "../components/ResetPassword"
 import StyledRouter from "../components/StyledRouter"
+import Welcome from "../screens/Welcome"
+import SignIn from "../screens/SignIn"
+import SignUp from "../screens/SignUp"
+import SignInForm from "../screens/SignInForm"
+import SignUpForm from "../screens/SignUpForm"
+import SignInFailed from "../screens/SignInFailed"
+import RequestPassword from "../screens/RequestPassword"
+import ResetPassword from "../screens/ResetPassword"
 
 class SignedOut extends Component {
   componentWillReceiveProps(nextProps) {

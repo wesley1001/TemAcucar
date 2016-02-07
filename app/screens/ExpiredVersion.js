@@ -1,8 +1,8 @@
 import React, { Text } from 'react-native'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimpleScreen from "./SimpleScreen"
-import Button from "./Button"
+import SimpleScreen from "../components/SimpleScreen"
+import Button from "../components/Button"
 
 export default ExpiredVersion = ({ onUpdate }) => (
   <SimpleScreen headline="Sua versão está expirada ;)">

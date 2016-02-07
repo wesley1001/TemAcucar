@@ -9,9 +9,9 @@ import {reduxForm} from 'redux-form'
 import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimpleScreen from "./SimpleScreen"
-import Label from "./Label"
-import Button from "./Button"
+import SimpleScreen from "../components/SimpleScreen"
+import Label from "../components/Label"
+import Button from "../components/Button"
 
 const validate = values => {
   const errors = {}

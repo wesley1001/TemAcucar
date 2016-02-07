@@ -1,9 +1,9 @@
 import React from 'react-native'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimpleScreen from "./SimpleScreen"
-import Button from "./Button"
-import Paragraph from "./Paragraph"
+import SimpleScreen from "../components/SimpleScreen"
+import Button from "../components/Button"
+import Paragraph from "../components/Paragraph"
 
 export default RejectedTerms = ({ onCancelRejectTerms }) => (
   <SimpleScreen headline="Vamos sentir sua falta :)">
