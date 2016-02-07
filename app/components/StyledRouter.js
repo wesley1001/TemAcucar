@@ -1,21 +1,14 @@
-import React, {
-  Component,
-} from 'react-native'
+import React from 'react-native'
 import { Router } from 'react-native-router-flux'
-
 import Colors from "../styles/Colors"
 
-export default class StyledRouter extends Component {
-  render() {
-    return (
-      <Router 
-        navigationBarStyle={{ backgroundColor: Colors.beige }}
-        titleStyle={{ color: Colors.brown }}
-        barButtonIconStyle={{ tintColor: Colors.brown }}
-        barButtonTextStyle={{ color: Colors.brown }}
-      >
-        {this.props.children}
-      </Router>
-    )
-  }
-}
+export default StyledRouter = ({ children }) => (
+  <Router 
+    navigationBarStyle={{ backgroundColor: Colors.beige }}
+    titleStyle={{ color: Colors.brown }}
+    barButtonIconStyle={{ tintColor: Colors.brown }}
+    barButtonTextStyle={{ color: Colors.brown }}
+  >
+    {children}
+  </Router>
+)

@@ -13,6 +13,10 @@ import UpdateVersion from "../components/UpdateVersion"
 import Authorizer from './Authorizer'
 
 class VersionChecker extends Component {
+  daysRemaining(version) {
+    return Math.round(((new Date(version.expiry)).getTime() - Date.now()) / 1000 / 60 / 60 / 24)
+  }
+
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(versionsList())
@@ -57,6 +61,7 @@ class VersionChecker extends Component {
   render() {
     const { dispatch, versions } = this.props
     const { startingUp, listing, listError, ignoreUpdate } = versions
+    const version = this.version()
 
     if (startingUp || listing)
       return (<Loading />)
@@ -65,7 +70,7 @@ class VersionChecker extends Component {
     if (this.isExpired())
       return (<ExpiredVersion onUpdate={this.handleUpdate.bind(this)} />)
     if (!this.isCurrent() && !ignoreUpdate)
-      return (<UpdateVersion version={this.version()} onIgnore={this.handleIgnoreUpdate.bind(this)} />)
+      return (<UpdateVersion version={version} onIgnore={this.handleIgnoreUpdate.bind(this)} onUpdate={this.handleUpdate.bind(this)} daysRemaining={this.daysRemaining(version)} />)
     return (<Authorizer />)
   }
 }

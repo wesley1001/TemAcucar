@@ -4,7 +4,7 @@ import StyleSheets from "../styles/StyleSheets"
 import SimpleScreen from "./SimpleScreen"
 import Button from "./Button"
 
-export default ExpiredVersion = ({onUpdate}) => (
+export default ExpiredVersion = ({ onUpdate }) => (
   <SimpleScreen headline="Sua versão está expirada ;)">
     <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
       Vai ser preciso atualizar sua versão para continuar utilizando o app do Tem Açúcar.

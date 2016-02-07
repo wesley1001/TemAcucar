@@ -1,7 +1,7 @@
 import React, { Text } from 'react-native'
 import Colors from "../styles/Colors"
 
-export default Headline = ({children}) => (
+export default Headline = ({ children }) => (
   <Text style={{
     color: Colors.brown,
     fontWeight: 'bold',

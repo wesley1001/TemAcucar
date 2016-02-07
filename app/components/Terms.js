@@ -6,6 +6,7 @@ import React, {
 } from 'react-native'
 import { connect } from 'react-redux'
 
+import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
 import Button from "./Button"
 import Headline from "./Headline"

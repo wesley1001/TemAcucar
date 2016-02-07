@@ -1,7 +1,7 @@
 import React, { Text, TouchableOpacity } from 'react-native'
 import Colors from "../styles/Colors"
 
-export default Link = ({style, onPress, children}) => (
+export default Link = ({ style, onPress, children }) => (
   <TouchableOpacity style={style} onPress={onPress}>
     <Text style={{
       paddingHorizontal: 20,
