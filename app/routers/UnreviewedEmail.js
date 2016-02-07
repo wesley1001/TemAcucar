@@ -15,7 +15,7 @@ class UnreviewedEmail extends Component {
     return (
       <StyledRouter>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-        <Route {...this.props} name="reviewEmail" component={ReviewEmail} title="Confirme seu email" schema="default" initial={true} />
+        <Route {...this.props} name="reviewEmail" component={ReviewEmail} title="Confirme seu email" schema="default" initial={true} hideNavBar={true} />
         <Route {...this.props} name="updateEmail" component={UpdateEmail} title="Atualize seu email" schema="default" />
       </StyledRouter>
     )

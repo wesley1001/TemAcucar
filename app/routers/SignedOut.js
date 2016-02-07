@@ -30,8 +30,8 @@ class SignedOut extends Component {
     return (
       <StyledRouter>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-        <Route {...this.props} name="welcome" component={Welcome} title="Tem Açúcar?" schema="default" initial={!signInFailed} />
-        <Route {...this.props} name="signInFailed" component={SignInFailed} title="Tem Açúcar" type="reset" initial={signInFailed} />
+        <Route {...this.props} name="welcome" component={Welcome} title="Tem Açúcar?" schema="default" initial={!signInFailed} hideNavBar={true} />
+        <Route {...this.props} name="signInFailed" component={SignInFailed} title="Tem Açúcar" type="reset" initial={signInFailed} hideNavBar={true} />
         <Route {...this.props} name="signIn" component={SignIn} title="Login" schema="default" />
         <Route {...this.props} name="signUp" component={SignUp} title="Cadastre-se" schema="default" />
         <Route {...this.props} name="signInForm" component={SignInForm} title="Login" schema="default" />
