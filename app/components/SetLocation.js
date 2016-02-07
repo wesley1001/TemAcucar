@@ -172,7 +172,7 @@ class SetLocation extends Component {
         { this.renderMap() }
         { address && this.renderAddress() }
         { gettingAddress && this.renderAddressLoading() }
-        <Button disabled={!(latitude && longitude && address) || settingLocation} viewStyle={{ alignSelf: 'stretch' }} onPress={this.handleSetLocation.bind(this)}>{ settingLocation ? 'Confirmando endereço...' : 'Confirmar endereço e continuar' }</Button>
+        <Button disabled={!(latitude && longitude && address) || settingLocation} style={{ alignSelf: 'stretch' }} onPress={this.handleSetLocation.bind(this)}>{ settingLocation ? 'Confirmando endereço...' : 'Confirmar endereço e continuar' }</Button>
       </View>
     )
   }

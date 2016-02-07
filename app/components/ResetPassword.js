@@ -58,7 +58,7 @@ class ResetPassword extends Component {
             {...password}
           />
         </View>
-        <Button disabled={!dirty || !valid || submitting || resetingPassword} viewStyle={[StyleSheets.stretch, StyleSheets.marginBottom]} onPress={handleSubmit(onResetPassword)}>
+        <Button disabled={!dirty || !valid || submitting || resetingPassword} style={[StyleSheets.stretch, StyleSheets.marginBottom]} onPress={handleSubmit(onResetPassword)}>
           { (resetingPassword ? 'Enviando nova senha...' : 'Criar nova senha') }
         </Button>
         <Text style={[StyleSheets.error, {height: 50}]}>{resetPasswordError && this.errorMessage(resetPasswordError)}</Text>

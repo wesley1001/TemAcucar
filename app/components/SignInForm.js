@@ -52,7 +52,7 @@ class SignInForm extends Component {
             {...password}
           />
         </View>
-        <Button disabled={!dirty || !valid || submitting || signingIn} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignIn)}>
+        <Button disabled={!dirty || !valid || submitting || signingIn} style={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignIn)}>
           { signingIn ? 'Fazendo login...' : 'Fazer login' }
         </Button>
         <Link onPress={Actions.requestPassword}>

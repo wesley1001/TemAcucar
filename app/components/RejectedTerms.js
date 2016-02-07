@@ -13,7 +13,7 @@ export default RejectedTerms = ({ onCancelRejectTerms }) => (
     <Paragraph>
       Caso você tenha recusado sem querer, clique no botão abaixo para ler novamente.
     </Paragraph>
-    <Button onPress={onCancelRejectTerms} viewStyle={StyleSheets.marginBottom}>
+    <Button onPress={onCancelRejectTerms} style={StyleSheets.marginBottom}>
       Ler novamente os termos
     </Button>
   </SimpleScreen>

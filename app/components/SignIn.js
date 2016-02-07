@@ -9,11 +9,11 @@ import Link from "./Link"
 
 export default SignIn = ({ onFacebook }) => (
   <SimpleScreen>
-    <Button onPress={onFacebook} textStyle={{ backgroundColor: Colors.facebook }}>
+    <Button onPress={onFacebook} style={{ backgroundColor: Colors.facebook }}>
       Faça login com seu Facebook
     </Button>
     <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
-    <Button onPress={Actions.signInForm} viewStyle={StyleSheets.marginBottom}>
+    <Button onPress={Actions.signInForm} style={StyleSheets.marginBottom}>
       Entre com seu email e senha
     </Button>
     <Link onPress={Actions.signUp}>

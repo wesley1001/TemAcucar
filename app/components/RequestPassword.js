@@ -56,7 +56,7 @@ class RequestPassword extends Component {
         </View>
         <Button
           disabled={!dirty || !valid || submitting || requestingPassword}
-          viewStyle={{ alignSelf: 'stretch', marginBottom: 20 }}
+          style={{ alignSelf: 'stretch', marginBottom: 20 }}
           onPress={handleSubmit(onRequestPassword)}
         >
           { (requestingPassword ? 'Solicitando instruções para nova senha...' : 'Enviar instruções para nova senha') }

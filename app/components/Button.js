@@ -1,44 +1,25 @@
-import React, {
-  Component,
-  Text,
-  View,
-  TouchableHighlight,
-} from 'react-native'
-
+import React from 'react-native'
+import ReactNativeButton from 'apsl-react-native-button'
 import Colors from "../styles/Colors"
-import StyleSheets from "../styles/StyleSheets"
 
-export default class Button extends Component {
-  renderText() {
-    const { disabled, textStyle, children } = this.props
-    return (
-      <Text style={[{
-        paddingHorizontal: 20,
-        paddingVertical: 12,
-        color: Colors.white,
-        backgroundColor: Colors.pink,
-        textAlign: 'center',
-      }, textStyle, (disabled && { backgroundColor: Colors.gray })
-      ]}>
-        {children}
-      </Text>
-    )
-  }
-
-  render() {
-    const { disabled, viewStyle, onPress } = this.props
-    if (disabled) {
-      return (
-        <View style={viewStyle}>
-          { this.renderText() }
-        </View>
-      )
-    } else {
-      return (
-        <TouchableHighlight style={viewStyle} onPress={onPress}>
-          { this.renderText() }
-        </TouchableHighlight>
-      )
-    }
-  }
-}
+export default Button = (props) => (
+  <ReactNativeButton 
+    textStyle={{
+      textAlign: 'center',
+      color: Colors.white,
+      fontSize: 16,
+    }}
+    {...props}
+    style={[{
+      alignSelf: 'center',
+      borderWidth: 0,
+      borderRadius: 0,
+      paddingHorizontal: 20,
+      paddingVertical: 12,
+      backgroundColor: Colors.pink,
+      marginBottom: 0,
+    }, props.style]}
+  >
+    {props.children}
+  </ReactNativeButton>
+)

@@ -46,7 +46,7 @@ class UpdateEmail extends Component {
             {...email}
           />
         </View>
-        <Button disabled={!dirty || !valid || submitting || updatingEmail} viewStyle={[StyleSheets.stretch, StyleSheets.marginBottom]} onPress={handleSubmit(onUpdate)}>
+        <Button disabled={!dirty || !valid || submitting || updatingEmail} style={[StyleSheets.stretch, StyleSheets.marginBottom]} onPress={handleSubmit(onUpdate)}>
           { (updatingEmail ? 'Atualizando seu email...' : 'Atualizar meu email') }
         </Button>
         <Text style={[StyleSheets.error, {height: 50}]}>{updateEmailError && this.errorMessage(updateEmailError)}</Text>

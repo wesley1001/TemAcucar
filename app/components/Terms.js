@@ -323,14 +323,16 @@ class Terms extends Component {
           alignSelf: 'stretch',
           flexDirection: 'row',
         }}>
-          <Button disabled={!scrolledToBottom} viewStyle={{flex: 1, marginRight: 4}} onPress={onAcceptTerms}>
+          <Button disabled={!scrolledToBottom} style={{flex: 1, marginRight: 4}} onPress={onAcceptTerms}>
             Eu aceito
           </Button>
           <Button
-            viewStyle={{flex: 1}}
+            style={{
+              flex: 1,
+              backgroundColor: Colors.beige,
+            }}
             textStyle={{
               color: Colors.brown,
-              backgroundColor: Colors.beige,
             }}
             onPress={onRejectTerms}
           >
