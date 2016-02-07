@@ -5,14 +5,14 @@ import React, {
 } from 'react-native'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimplePage from "./SimplePage"
+import SimpleScreen from "./SimpleScreen"
 import Button from "./Button"
 
 export default class RejectedTerms extends Component {
   render() {
     const { onCancelRejectTerms } = this.props
     return (
-      <SimplePage headline="Vamos sentir sua falta :)">
+      <SimpleScreen headline="Vamos sentir sua falta :)">
         <Text style={[StyleSheets.paragraph]}>
           Escreva para contato@temacucar.com caso queira compartilhar o motivo de ter recusado os termos. Vai ser um prazer falar com você!
         </Text>
@@ -22,7 +22,7 @@ export default class RejectedTerms extends Component {
         <Button onPress={onCancelRejectTerms} viewStyle={StyleSheets.marginBottom}>
           Ler novamente os termos
         </Button>
-      </SimplePage>
+      </SimpleScreen>
     )
   }
 }

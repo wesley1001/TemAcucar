@@ -7,7 +7,7 @@ import Libraries, { LinkingIOS } from 'react-native'
 
 import Config from "../Config"
 import StyleSheets from "../styles/StyleSheets"
-import SimplePage from "./SimplePage"
+import SimpleScreen from "./SimpleScreen"
 import Button from "./Button"
 
 export default class ExpiredVersion extends Component {
@@ -25,7 +25,7 @@ export default class ExpiredVersion extends Component {
     const daysRemaining = this.daysRemaining()
     const days = ( daysRemaining == 1 ? 'dia' : 'dias')
     return (
-      <SimplePage headline="Nova versão disponível">
+      <SimpleScreen headline="Nova versão disponível">
         <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
           Há uma nova versão disponível. { daysRemaining <= 14 && `Sua versão vai expirar em ${daysRemaining} ${days}. ` }Que tal atualizar?
         </Text>
@@ -36,7 +36,7 @@ export default class ExpiredVersion extends Component {
         <Button onPress={onIgnore}>
           Continuar com a versão atual
         </Button>
-      </SimplePage>
+      </SimpleScreen>
     )
   }
 }

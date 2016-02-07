@@ -8,7 +8,7 @@ import React, {
 
 import StyleSheets from "../styles/StyleSheets"
 
-export default class SimplePage extends Component {
+export default class SimpleScreen extends Component {
   renderHeadline() {
     const { headline } = this.props
     if (!headline)

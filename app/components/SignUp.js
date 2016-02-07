@@ -6,7 +6,7 @@ import React, {
 import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimplePage from "./SimplePage"
+import SimpleScreen from "./SimpleScreen"
 import Button from "./Button"
 import Link from "./Link"
 
@@ -14,7 +14,7 @@ export default class SignUp extends Component {
   render() {
     const { onFacebook } = this.props
     return (
-      <SimplePage>
+      <SimpleScreen>
         <Button onPress={onFacebook} textStyle={StyleSheets.facebook}>
           Cadastre-se com o Facebook
         </Button>
@@ -25,7 +25,7 @@ export default class SignUp extends Component {
         <Link onPress={Actions.signIn}>
           Já possui cadastro?
         </Link>
-      </SimplePage>
+      </SimpleScreen>
     )
   }
 }

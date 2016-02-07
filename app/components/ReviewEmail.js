@@ -6,14 +6,14 @@ import React, {
 import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimplePage from "./SimplePage"
+import SimpleScreen from "./SimpleScreen"
 import Button from "./Button"
 
 export default class ReviewEmail extends Component {
   render() {
     const { currentUser: {email}, onConfirm, onUpdate } = this.props
     return (
-      <SimplePage>
+      <SimpleScreen>
         <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
           <Text style={StyleSheets.strong}>
             { `${email} ` }
@@ -27,7 +27,7 @@ export default class ReviewEmail extends Component {
         <Button onPress={Actions.updateEmail}>
           Não, quero alterar
         </Button>
-      </SimplePage>
+      </SimpleScreen>
     )
   }
 }

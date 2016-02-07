@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import {reduxForm} from 'redux-form'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimplePage from "./SimplePage"
+import SimpleScreen from "./SimpleScreen"
 import Label from "./Label"
 import Button from "./Button"
 
@@ -39,7 +39,7 @@ class ResetPassword extends Component {
   render() {
     const { auth: {resetingPassword, resetPasswordError}, fields: { resetPasswordToken, password }, dirty, valid, submitting, handleSubmit, onResetPassword, headline } = this.props
     return (
-      <SimplePage headline="Confira seu email para criar sua nova senha">
+      <SimpleScreen headline="Confira seu email para criar sua nova senha">
         <View style={StyleSheets.stretch}>
           <Label field={resetPasswordToken}>Código enviado para seu email</Label>
           <TextInput
@@ -63,7 +63,7 @@ class ResetPassword extends Component {
           { (resetingPassword ? 'Enviando nova senha...' : 'Criar nova senha') }
         </Button>
         <Text style={[StyleSheets.error, {height: 50}]}>{resetPasswordError && this.errorMessage(resetPasswordError)}</Text>
-      </SimplePage>
+      </SimpleScreen>
     )
   }
 }

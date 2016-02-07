@@ -6,13 +6,13 @@ import React, {
 import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimplePage from "./SimplePage"
+import SimpleScreen from "./SimpleScreen"
 import Button from "./Button"
 
 export default class SignInFailed extends Component {
   render() {
     return (
-      <SimplePage headline="Ooops! Seu login falhou :(">
+      <SimpleScreen headline="Ooops! Seu login falhou :(">
         <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
           Se você é usuário da versão antiga do Tem Açúcar, vai ser preciso criar uma nova senha.
         </Text>
@@ -23,7 +23,7 @@ export default class SignInFailed extends Component {
         <Button onPress={Actions.signIn}>
           Tentar uma vez mais
         </Button>
-      </SimplePage>
+      </SimpleScreen>
     )
   }
 }

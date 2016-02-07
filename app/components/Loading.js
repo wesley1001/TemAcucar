@@ -6,14 +6,14 @@ import React, {
 import GiftedSpinner from 'react-native-gifted-spinner'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimplePage from "./SimplePage"
+import SimpleScreen from "./SimpleScreen"
 
 export default class Loading extends Component {
   render() {
     return (
-      <SimplePage>
+      <SimpleScreen>
         <GiftedSpinner style={StyleSheets.bigMarginVertical} />
-      </SimplePage>
+      </SimpleScreen>
     )
   }
 }

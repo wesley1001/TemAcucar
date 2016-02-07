@@ -15,7 +15,7 @@ var {GiftedForm, GiftedFormManager} = require('react-native-gifted-form')
 
 import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
-import SimplePage from "./SimplePage"
+import SimpleScreen from "./SimpleScreen"
 import Label from "./Label"
 import Button from "./Button"
 import Link from "./Link"
@@ -57,7 +57,7 @@ class SignUpForm extends Component {
     const emailError = signUpError && this.errorMessage(signUpError)
     const notPresentMessage = '{TITLE} deve ser preenchido.'
     return (
-      <SimplePage viewStyle={{
+      <SimpleScreen viewStyle={{
         alignItems: 'stretch',
         flex: 1,
         paddingTop: 120,
@@ -191,7 +191,7 @@ class SignUpForm extends Component {
             </View>
           </GiftedForm>
         </View>
-      </SimplePage>
+      </SimpleScreen>
     )
   }
 
@@ -199,7 +199,7 @@ class SignUpForm extends Component {
   //   const { auth: {signingUp, signUpError}, fields: { first_name, last_name, email, password }, dirty, valid, submitting, handleSubmit, onSignUp } = this.props
   //   const emailError = signUpError && this.errorMessage(signUpError)
   //   return (
-  //     <SimplePage>
+  //     <SimpleScreen>
   //       <View style={StyleSheets.stretch}>
   //         <Label field={first_name}>Nome</Label>
   //         <TextInput
@@ -241,7 +241,7 @@ class SignUpForm extends Component {
   //       <Link onPress={Actions.signIn}>
   //         Já possui cadastro?
   //       </Link>
-  //     </SimplePage>
+  //     </SimpleScreen>
   //   )
   // }
 }

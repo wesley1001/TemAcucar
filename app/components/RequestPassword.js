@@ -10,7 +10,7 @@ import {reduxForm} from 'redux-form'
 import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimplePage from "./SimplePage"
+import SimpleScreen from "./SimpleScreen"
 import Label from "./Label"
 import Button from "./Button"
 
@@ -44,7 +44,7 @@ class RequestPassword extends Component {
   render() {
     const { auth: {requestingPassword, requestPasswordError}, fields: { email }, dirty, valid, submitting, handleSubmit, onRequestPassword } = this.props
     return (
-      <SimplePage>
+      <SimpleScreen>
         <View style={StyleSheets.stretch}>
           <Label field={email}>Email</Label>
           <TextInput
@@ -59,7 +59,7 @@ class RequestPassword extends Component {
           { (requestingPassword ? 'Solicitando instruções para nova senha...' : 'Enviar instruções para nova senha') }
         </Button>
         <Text style={[StyleSheets.error, {height: 50}]}>{requestPasswordError && this.errorMessage(requestPasswordError)}</Text>
-      </SimplePage>
+      </SimpleScreen>
     )
   }
 }

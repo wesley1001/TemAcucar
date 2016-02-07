@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import {reduxForm} from 'redux-form'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimplePage from "./SimplePage"
+import SimpleScreen from "./SimpleScreen"
 import Label from "./Label"
 import Button from "./Button"
 
@@ -36,7 +36,7 @@ class UpdateEmail extends Component {
   render() {
     const { config: {updatingEmail, updateEmailError}, fields: { email }, dirty, valid, submitting, handleSubmit, onUpdate } = this.props
     return (
-      <SimplePage>
+      <SimpleScreen>
         <View style={StyleSheets.stretch}>
           <Label field={email}>Email do dia-a-dia</Label>
           <TextInput
@@ -51,7 +51,7 @@ class UpdateEmail extends Component {
           { (updatingEmail ? 'Atualizando seu email...' : 'Atualizar meu email') }
         </Button>
         <Text style={[StyleSheets.error, {height: 50}]}>{updateEmailError && this.errorMessage(updateEmailError)}</Text>
-      </SimplePage>
+      </SimpleScreen>
     )
   }
 }

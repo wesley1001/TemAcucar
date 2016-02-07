@@ -6,13 +6,13 @@ import React, {
 import { Actions } from 'react-native-router-flux'
 
 import StyleSheets from "../styles/StyleSheets"
-import SimplePage from "./SimplePage"
+import SimpleScreen from "./SimpleScreen"
 import Button from "./Button"
 
 export default class Welcome extends Component {
   render() {
     return (
-      <SimplePage headline="Compartilhe suas coisas com seus vizinhos">
+      <SimpleScreen headline="Compartilhe suas coisas com seus vizinhos">
         <Button onPress={Actions.signIn}>
           Já possuo cadastro
         </Button>
@@ -20,7 +20,7 @@ export default class Welcome extends Component {
         <Button onPress={Actions.signUp}>
           Quero me cadastrar
         </Button>
-      </SimplePage>
+      </SimpleScreen>
     )
   }
 }
