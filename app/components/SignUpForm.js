@@ -15,7 +15,7 @@ import FormFooter from "./FormFooter"
 
 const notPresentMessage = '{TITLE} deve ser preenchido.'
 const validators = {
-  firstName: {
+  first_name: {
     title: 'Nome',
     validate: [{
       validator: 'isLength',
@@ -23,7 +23,7 @@ const validators = {
       message: notPresentMessage,
     }]
   },
-  lastName: {
+  last_name: {
     title: 'Sobrenome',
     validate: [{
       validator: 'isLength',
@@ -59,40 +59,37 @@ class SignUpForm extends Component {
       case 'email_is_already_taken':
         return 'Email já cadastrado para outro usuário.'
       default:
-        return 'Oops! Ocorreu um erro.'
+        return 'Oops! Ocorreu um erro ao fazer seu cadastro.'
     }
   }
 
-  handleSubmit(isValid, values, validationResults, postSubmit = null, modalNavigator = null) {
-    if (isValid === true) {
-      postSubmit(['Email já cadastrado para outro usuário.'])
-      // prepare object
-      // values.gender = values.gender[0];
-      // values.birthday = moment(values.birthday).format('YYYY-MM-DD');
+  componentWillReceiveProps(nextProps) {
+    const { signUpError } = nextProps.auth
+    if(signUpError) {
+      const error = signUpError && this.errorMessage(signUpError)
+      this.refs.submit.postSubmit(error)
+    }
+  }
 
-      /* Implement the request to your server using values variable
-      ** then you can do:
-      ** postSubmit(); // disable the loader
-      ** postSubmit(['An error occurred, please try again']); // disable the loader and display an error message
-      ** postSubmit(['lastName already taken', 'Email already taken']); // disable the loader and display an error message
-      ** GiftedFormManager.reset('signupForm'); // clear the states of the form manually. 'signupForm' is the formName used
-      */
+  handleSubmit(isValid, values) {
+    if (isValid === true) {
+      this.props.onSignUp(values)
     }
   }
 
   render() {
     const { auth: {signingUp, signUpError}, onSignUp } = this.props
-    const emailError = signUpError && this.errorMessage(signUpError)
+    const error = signUpError && this.errorMessage(signUpError)
     return (
       <Form name="signUpForm" validators={validators}>
         <FormTextInput 
-          name='firstName'
+          name='first_name'
           title='Nome'
           placeholder='Digite seu primeiro nome'
           icon='user'
         />
         <FormTextInput 
-          name='lastName'
+          name='last_name'
           title='Sobrenome'
           placeholder='Digite seu sobrenome'
           icon='pagelines'
@@ -114,7 +111,8 @@ class SignUpForm extends Component {
           secureTextEntry={true}
         />
         <FormSubmit
-          title={ (signingUp ? 'Enviando cadastro...' : 'Fazer cadastro') }
+          ref="submit"
+          title="Fazer cadastro"
           isDisabled={false}
           onSubmit={this.handleSubmit.bind(this)}
         />
@@ -126,16 +124,6 @@ class SignUpForm extends Component {
       </Form>
     )
   }
-
-  // render() {
-  //   const { auth: {signingUp, signUpError}, fields: { first_name, last_name, email, password }, dirty, valid, submitting, handleSubmit, onSignUp } = this.props
-  //   const emailError = signUpError && this.errorMessage(signUpError)
-  //   return (
-  //       <Button disabled={!dirty || !valid || submitting || signingUp} viewStyle={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignUp)}>
-  //         { (signingUp ? 'Enviando cadastro...' : 'Fazer cadastro') }
-  //       </Button>
-  //   )
-  // }
 }
 
 export default connect(state => ({
