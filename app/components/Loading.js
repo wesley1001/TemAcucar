@@ -1,7 +1,5 @@
 import React, {
   Component,
-  StyleSheet,
-  Text,
 } from 'react-native'
 import GiftedSpinner from 'react-native-gifted-spinner'
 
@@ -12,7 +10,7 @@ export default class Loading extends Component {
   render() {
     return (
       <SimpleScreen>
-        <GiftedSpinner style={StyleSheets.bigMarginVertical} />
+        <GiftedSpinner style={{ marginVertical: 36 }} />
       </SimpleScreen>
     )
   }

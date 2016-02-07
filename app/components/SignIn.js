@@ -1,10 +1,10 @@
 import React, {
   Component,
-  StyleSheet,
   Text,
 } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
+import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
 import SimpleScreen from "./SimpleScreen"
 import Button from "./Button"
@@ -15,7 +15,7 @@ export default class SignIn extends Component {
     const { onFacebook } = this.props
     return (
       <SimpleScreen>
-        <Button onPress={onFacebook} textStyle={StyleSheets.facebook}>
+        <Button onPress={onFacebook} textStyle={{ backgroundColor: Colors.facebook }}>
           Faça login com seu Facebook
         </Button>
         <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>

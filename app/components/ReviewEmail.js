@@ -1,6 +1,5 @@
 import React, {
   Component,
-  StyleSheet,
   Text,
 } from 'react-native'
 import { Actions } from 'react-native-router-flux'
@@ -15,7 +14,7 @@ export default class ReviewEmail extends Component {
     return (
       <SimpleScreen>
         <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
-          <Text style={StyleSheets.strong}>
+          <Text style={{fontWeight: 'bold'}}>
             { `${email} ` }
           </Text>
           é o email que você usa no dia-a-dia? Não vamos mandar spam, mas precisamos do seu email para colocar você em contato com seus vizinhos :)

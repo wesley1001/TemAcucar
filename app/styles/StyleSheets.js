@@ -2,25 +2,6 @@ import { StyleSheet } from 'react-native'
 import Colors from "./Colors"
 
 const StyleSheets = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.white,
-  },
-
-  headline: {
-    color: Colors.brown,
-    fontWeight: 'bold',
-    fontSize: 24,
-    textAlign: 'center',
-    paddingHorizontal: 40,
-  },
-
-  strong: {
-    fontWeight: 'bold',
-  },
-
   label: {
     color: Colors.brown,
     fontSize: 16,
@@ -28,33 +9,8 @@ const StyleSheets = StyleSheet.create({
     paddingBottom: 4,
   },
 
-  paragraph: {
-    alignSelf: 'stretch',
-    color: Colors.brown,
-    fontSize: 16,
-    marginBottom: 20,
-  },
-
-  scrollText: {
-    alignSelf: 'stretch',
-    backgroundColor: Colors.beige,
-    padding: 10,
-  },
-
-  noPadding: {
-    padding: 0,
-  },
-
   margin: {
     margin: 10,
-  },
-
-  noMargin: {
-    margin: 0,
-  },
-
-  marginVertical: {
-    marginVertical: 20,
   },
 
   marginBottom: {
@@ -71,39 +27,6 @@ const StyleSheets = StyleSheet.create({
 
   bigMarginBottom: {
     marginBottom: 36,
-  },
-
-  bigMarginVertical: {
-    marginVertical: 36,
-  },
-
-  button: {
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    color: Colors.white,
-    backgroundColor: Colors.pink,
-    textAlign: 'center',
-  },
-
-  beige: {
-    color: Colors.brown,
-    backgroundColor: Colors.beige,
-  },
-
-  disabled: {
-    backgroundColor: Colors.gray,
-  },
-
-  facebook: {
-    backgroundColor: Colors.facebook,
-  },
-
-  link: {
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    fontSize: 16,
-    color: Colors.brown,
-    textDecorationLine: 'underline',
   },
 
   input: {
@@ -123,57 +46,11 @@ const StyleSheets = StyleSheet.create({
     alignSelf: 'flex-end',
   },
 
-  map: {
-    height: 200,
-    alignSelf: 'stretch',
-    borderWidth: 1,
-    borderColor: Colors.brown,
-  },
-
   error: {
     color: Colors.pink,
     fontSize: 16,
     paddingTop: 4,
     paddingBottom: 4,
-  },
-
-  tabContainer: {
-    flex: 1,
-  },
-
-  tab: {
-    flex: 1,
-  },
-
-  menu: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-end',
-    backgroundColor: Colors.darkGray,
-    paddingTop: 20,
-  },
-
-  menuItem: {
-    alignSelf: 'stretch',
-    textAlign: 'right',
-    color: Colors.lightGray,
-    padding: 10,
-  },
-
-  navBar: {
-    backgroundColor: Colors.beige,
-  },
-
-  navBarTitle: {
-    color: Colors.brown,
-  },
-
-  navBarIcon: {
-    tintColor: Colors.brown,
-  },
-
-  navBarIconText: {
-    color: Colors.brown,
   },
 })
 

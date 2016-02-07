@@ -1,7 +1,5 @@
 import React, {
   Component,
-  StyleSheet,
-  Text,
   View,
   TextInput,
 } from 'react-native'
@@ -35,7 +33,7 @@ class SignInForm extends Component {
     const { auth: { signingIn }, fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignIn } = this.props
     return (
       <SimpleScreen>
-        <View style={StyleSheets.stretch}>
+        <View style={{ alignSelf: 'stretch' }}>
           <Label field={email}>Email</Label>
           <TextInput
             style={StyleSheets.input}

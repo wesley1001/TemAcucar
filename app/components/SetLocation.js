@@ -1,6 +1,5 @@
 import React, {
   Component,
-  StyleSheet,
   Text,
   View,
   Image,
@@ -18,6 +17,7 @@ import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
 import Loading from "./Loading"
 import Button from "./Button"
+import Headline from "./Headline"
 
 class SetLocation extends Component {
   componentWillMount() {
@@ -63,7 +63,13 @@ class SetLocation extends Component {
     const { latitude, longitude } = this.props.location
     return (
       <MapView
-        style={[StyleSheets.map, StyleSheets.marginBottom]}
+        style={{
+          height: 200,
+          alignSelf: 'stretch',
+          borderWidth: 1,
+          borderColor: Colors.brown,
+          marginBottom: 20,
+        }}
         region={{
           latitude: parseFloat(latitude), 
           longitude: parseFloat(longitude),
@@ -131,8 +137,13 @@ class SetLocation extends Component {
     if (!(latitude && longitude))
       return(<Loading />)
     return (
-      <View style={StyleSheets.container}>
-        <Text style={[StyleSheets.headline, StyleSheets.marginBottom]}>Complete seu cadastro</Text>
+      <View style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: Colors.white,
+        }}>
+        <Headline>Complete seu cadastro</Headline>
         <Text style={[StyleSheets.label, StyleSheets.marginBottom]}>
           Precisamos saber onde você mora para descobrir quem são seus vizinhos :)
         </Text>
@@ -161,7 +172,7 @@ class SetLocation extends Component {
         { this.renderMap() }
         { address && this.renderAddress() }
         { gettingAddress && this.renderAddressLoading() }
-        <Button disabled={!(latitude && longitude && address) || settingLocation} viewStyle={StyleSheets.stretch} onPress={this.handleSetLocation.bind(this)}>{ settingLocation ? 'Confirmando endereço...' : 'Confirmar endereço e continuar' }</Button>
+        <Button disabled={!(latitude && longitude && address) || settingLocation} viewStyle={{ alignSelf: 'stretch' }} onPress={this.handleSetLocation.bind(this)}>{ settingLocation ? 'Confirmando endereço...' : 'Confirmar endereço e continuar' }</Button>
       </View>
     )
   }

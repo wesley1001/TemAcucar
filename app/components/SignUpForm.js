@@ -1,6 +1,5 @@
 import React, {
   Component,
-  StyleSheet,
   Text,
   View,
   TextInput,
@@ -200,7 +199,7 @@ class SignUpForm extends Component {
   //   const emailError = signUpError && this.errorMessage(signUpError)
   //   return (
   //     <SimpleScreen>
-  //       <View style={StyleSheets.stretch}>
+  //       <View style={{ alignSelf: 'stretch' }}>
   //         <Label field={first_name}>Nome</Label>
   //         <TextInput
   //           style={StyleSheets.input}

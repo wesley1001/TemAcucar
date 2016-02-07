@@ -13,9 +13,20 @@ export default class UserMenu extends Component {
   render() {
     const { onSignOut } = this.props
     return (
-      <View style={StyleSheets.menu}>
-        <TouchableOpacity style={StyleSheets.stretch} onPress={onSignOut}>
-          <Text style={StyleSheets.menuItem}>
+      <View style={{
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-end',
+        backgroundColor: Colors.darkGray,
+        paddingTop: 20,
+      }}>
+        <TouchableOpacity style={{ alignSelf: 'stretch' }} onPress={onSignOut}>
+          <Text style={{
+            alignSelf: 'stretch',
+            textAlign: 'right',
+            color: Colors.lightGray,
+            padding: 10,
+          }}>
             <Icon name="sign-out" />
             { ' Sair' }
           </Text>

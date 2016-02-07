@@ -1,6 +1,5 @@
 import React, {
   Component,
-  StyleSheet,
 } from 'react-native'
 import { GiftedForm } from 'react-native-gifted-form'
 import Icon from 'react-native-vector-icons/FontAwesome'

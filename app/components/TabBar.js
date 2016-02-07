@@ -1,7 +1,5 @@
 import React, {
   Component,
-  StyleSheet,
-  Text,
   View,
   TouchableOpacity,
   Animated,
@@ -20,7 +18,10 @@ export default class TabBar extends Component {
   renderTabOption(name, page) {
     const isActive = (this.props.activeTab === page)
     return (
-      <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} style={styles.tab}>
+      <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} style={{
+        flex: 1,
+        alignItems: 'center',
+      }}>
         <Icon name={name} size={24} color={isActive ? Colors.pink : Colors.lightGray} />
       </TouchableOpacity>
     );
@@ -43,7 +44,15 @@ export default class TabBar extends Component {
 
     return (
       <View>
-        <View style={styles.tabs}>
+        <View style={{
+          backgroundColor: Colors.beige,
+          height: 45,
+          flexDirection: 'row',
+          justifyContent: 'center',
+          paddingTop: 10,
+          borderBottomWidth: 1,
+          borderBottomColor: 'rgba(0,0,0,0.05)',
+        }}>
           {this.props.tabs.map((tab, i) => this.renderTabOption(tab, i))}
         </View>
         <Animated.View style={[tabUnderlineStyle, {left}]} />
@@ -57,19 +66,3 @@ TabBar.propTypes = {
   activeTab: React.PropTypes.number,
   tabs: React.PropTypes.array,
 }
-
-var styles = StyleSheet.create({
-  tab: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  tabs: {
-    backgroundColor: Colors.beige,
-    height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    paddingTop: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(0,0,0,0.05)',
-  },
-})

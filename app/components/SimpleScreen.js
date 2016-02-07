@@ -1,28 +1,32 @@
 import React, {
   Component,
-  StyleSheet,
-  Text,
   View,
   Image,
 } from 'react-native'
 
+import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
+import Headline from "./Headline"
 
 export default class SimpleScreen extends Component {
   renderHeadline() {
     const { headline } = this.props
-    if (!headline)
-      return
+    if (!headline) return
     return (
-      <Text style={[StyleSheets.headline, StyleSheets.bigMarginVertical]}>
-        {headline}
-      </Text>
+      <Headline>{headline}</Headline>
     )
   }
   render() {
     const { children, headline, viewStyle } = this.props
     return (
-      <View style={[StyleSheets.container, viewStyle]}>
+      <View style={
+        [{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: Colors.white,
+        }, viewStyle]
+      }>
         <View style={{
           alignSelf: 'stretch',
           alignItems: 'center',

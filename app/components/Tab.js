@@ -8,7 +8,7 @@ import StyleSheets from "../styles/StyleSheets"
 export default class Tab extends Component {
   render() {
     return (
-      <ScrollView style={StyleSheets.tab}>
+      <ScrollView style={{ flex: 1 }}>
         {this.props.children}
       </ScrollView>
     )

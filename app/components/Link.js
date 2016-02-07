@@ -1,12 +1,10 @@
 import React, {
   Component,
-  StyleSheet,
   Text,
-  View,
   TouchableOpacity,
 } from 'react-native'
 
-import StyleSheets from "../styles/StyleSheets"
+import Colors from "../styles/Colors"
 
 export default class Link extends Component {
 
@@ -14,7 +12,15 @@ export default class Link extends Component {
     const { style, onPress, children } = this.props
     return (
       <TouchableOpacity style={style} onPress={onPress}>
-        <Text style={StyleSheets.link}>{children}</Text>
+        <Text style={{
+          paddingHorizontal: 20,
+          paddingVertical: 12,
+          fontSize: 16,
+          color: Colors.brown,
+          textDecorationLine: 'underline',
+        }}>
+          {children}
+        </Text>
       </TouchableOpacity>
     )
   }

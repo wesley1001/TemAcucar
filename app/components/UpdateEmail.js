@@ -1,6 +1,5 @@
 import React, {
   Component,
-  StyleSheet,
   Text,
   View,
   TextInput,
@@ -37,7 +36,7 @@ class UpdateEmail extends Component {
     const { config: {updatingEmail, updateEmailError}, fields: { email }, dirty, valid, submitting, handleSubmit, onUpdate } = this.props
     return (
       <SimpleScreen>
-        <View style={StyleSheets.stretch}>
+        <View style={{ alignSelf: 'stretch' }}>
           <Label field={email}>Email do dia-a-dia</Label>
           <TextInput
             style={StyleSheets.input}

@@ -1,6 +1,5 @@
 import React, {
   Component,
-  StyleSheet,
   Text,
   View,
   TextInput,
@@ -45,7 +44,7 @@ class RequestPassword extends Component {
     const { auth: {requestingPassword, requestPasswordError}, fields: { email }, dirty, valid, submitting, handleSubmit, onRequestPassword } = this.props
     return (
       <SimpleScreen>
-        <View style={StyleSheets.stretch}>
+        <View style={{ alignSelf: 'stretch' }}>
           <Label field={email}>Email</Label>
           <TextInput
             style={StyleSheets.input}
@@ -55,7 +54,11 @@ class RequestPassword extends Component {
             {...email}
           />
         </View>
-        <Button disabled={!dirty || !valid || submitting || requestingPassword} viewStyle={[StyleSheets.stretch, StyleSheets.marginBottom]} onPress={handleSubmit(onRequestPassword)}>
+        <Button
+          disabled={!dirty || !valid || submitting || requestingPassword}
+          viewStyle={{ alignSelf: 'stretch', marginBottom: 20 }}
+          onPress={handleSubmit(onRequestPassword)}
+        >
           { (requestingPassword ? 'Solicitando instruções para nova senha...' : 'Enviar instruções para nova senha') }
         </Button>
         <Text style={[StyleSheets.error, {height: 50}]}>{requestPasswordError && this.errorMessage(requestPasswordError)}</Text>

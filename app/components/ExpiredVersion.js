@@ -1,6 +1,5 @@
 import React, {
   Component,
-  StyleSheet,
   Text,
 } from 'react-native'
 import Libraries, { LinkingIOS } from 'react-native'
