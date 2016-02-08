@@ -15,17 +15,20 @@ import SignInFailed from "../screens/SignInFailed"
 import RequestPassword from "../screens/RequestPassword"
 import ResetPassword from "../screens/ResetPassword"
 
-class SignedOut extends Component {
+export default class SignedOut extends Component {
   componentWillReceiveProps(nextProps) {
-    const { signInError, facebookError } = nextProps.auth
-    const signInFailed = (signInError || facebookError)
-    if (signInFailed)
+    if (this.signInFailed(nextProps)) {
       Actions.signInFailed()
+    }
+  }
+
+  signInFailed(props) {
+    const { signInError, facebookError } = props.auth
+    return (signInError || facebookError)
   }
 
   render() {
-    const { signInError, facebookError } = this.props.auth
-    const signInFailed = (signInError || facebookError)
+    const signInFailed = this.signInFailed(this.props)
     return (
       <StyledRouter>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
@@ -36,12 +39,8 @@ class SignedOut extends Component {
         <Route {...this.props} name="signInForm" component={SignInForm} title="Login" schema="default" />
         <Route {...this.props} name="signUpForm" component={SignUpForm} title="Cadastre-se" schema="default" />
         <Route {...this.props} name="requestPassword" component={RequestPassword} title="Criar nova senha" schema="default" />
-        <Route {...this.props} name="resetPassword" component={ResetPassword} title="Confira seu email" schema="default" type="replace" />
+        <Route {...this.props} name="resetPassword" component={ResetPassword} title="Confira seu email" schema="default" />
       </StyledRouter>
     )
   }
 }
-
-export default connect(state => ({
-  auth: state.auth,
-}))(SignedOut)

@@ -21,6 +21,7 @@ class RequestPassword extends Component {
     const { resetPassword, requestPasswordError } = nextProps.auth
     const { submit } = this.refs
     if (resetPassword && (resetPassword != this.props.auth.resetPassword)) {
+      submit.postSubmit()
       Actions.resetPassword()
     } else if (requestPasswordError) {
       submit.postSubmit(UserValidators.errorMessage(requestPasswordError))

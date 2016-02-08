@@ -9,7 +9,7 @@ import StyledRouter from "../components/StyledRouter"
 import ReviewEmail from "../screens/ReviewEmail"
 import UpdateEmail from "../screens/UpdateEmail"
 
-class UnreviewedEmail extends Component {
+export default class UnreviewedEmail extends Component {
   render() {
     return (
       <StyledRouter>
@@ -20,7 +20,3 @@ class UnreviewedEmail extends Component {
     )
   }
 }
-
-export default connect(state => ({
-  auth: state.auth,
-}))(UnreviewedEmail)

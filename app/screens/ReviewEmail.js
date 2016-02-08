@@ -8,7 +8,7 @@ import Button from "../components/Button"
 
 export default ReviewEmail = ({ currentUser: { email }, onConfirm, onUpdate }) => (
   <SimpleScreen>
-    <TextBox style={{margiBottom: 36}}>
+    <TextBox style={{marginBottom: 36}}>
       <Text style={{fontWeight: 'bold'}}>
         { `${email} ` }
       </Text>

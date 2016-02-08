@@ -45,7 +45,8 @@ class Configurator extends Component {
   }
 
   render() {
-    const { auth, currentUser, terms, config } = this.props
+    const { auth, terms, config } = this.props
+    const { currentUser } = auth
     const { acceptingTerms, rejectedTerms } = terms
     const { confirmingEmail } = config
     if (acceptingTerms || confirmingEmail)
@@ -58,7 +59,7 @@ class Configurator extends Component {
       return (<UnreviewedEmail currentUser={currentUser} onConfirm={this.handleConfirmEmail.bind(this)} onUpdate={this.handleUpdateEmail.bind(this)} />)
     if (!currentUser.latitude || !currentUser.longitude || !currentUser.reviewed_location)
       return (<SetLocation auth={auth} currentUser={currentUser} />)
-    return (<Neighborhood {...this.props} />)
+    return (<Neighborhood {...this.props} currentUser={currentUser} />)
   }
 }
 

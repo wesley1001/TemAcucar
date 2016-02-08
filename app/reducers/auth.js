@@ -166,6 +166,9 @@ export default function auth(state = initialState, action) {
         requestingPassword: true,
         resetPassword: false,
         requestPasswordError: null,
+        signInError: null,
+        signUpError: null,
+        facebookError: null,
       }
     case 'AUTH_REQUEST_PASSWORD_SUCCESS':
       return {
@@ -175,6 +178,7 @@ export default function auth(state = initialState, action) {
         requestPasswordError: null,
         signInError: null,
         signUpError: null,
+        facebookError: null,
       }
     case 'AUTH_REQUEST_PASSWORD_FAILURE':
       return {
