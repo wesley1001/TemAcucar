@@ -17,7 +17,7 @@ import Colors from "../Colors"
 import Loading from "./Loading"
 import TextBox from "../components/TextBox"
 import Button from "../components/Button"
-import Headline from "../components/Headline"
+import Tip from "../components/Tip"
 
 class SetLocation extends Component {
   componentWillMount() {
@@ -66,9 +66,6 @@ class SetLocation extends Component {
         style={{
           height: 200,
           alignSelf: 'stretch',
-          borderWidth: 1,
-          borderColor: Colors.brown,
-          marginBottom: 20,
         }}
         region={{
           latitude: parseFloat(latitude), 
@@ -141,20 +138,16 @@ class SetLocation extends Component {
       return(<Loading />)
     return (
       <View style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: Colors.white,
-        }}>
-        <Headline>Complete seu cadastro</Headline>
-        <TextBox style={{marginBottom: 20}}>
-          Precisamos saber onde você mora para descobrir quem são seus vizinhos :)
-        </TextBox>
+        flex: 1,
+        alignItems: 'center',
+        marginTop: 20,
+        backgroundColor: Colors.white,
+      }}>
         <View style={{
           alignSelf: 'stretch',
-          borderColor: Colors.brown, 
-          borderWidth: 1,
-          borderBottomWidth: 0,
+          borderColor: Colors.lightGray, 
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
           flexDirection: 'row',
         }}>
           <TextInput
@@ -173,9 +166,19 @@ class SetLocation extends Component {
           { searching ? this.renderSearchLoading() : this.renderSearchButton() }
         </View>
         { this.renderMap() }
+        <Tip>
+          <Text style={{fontWeight: 'bold'}}>É este seu endereço?</Text> Caso não seja, é só digitar o endereço correto na busca acima e clicar na lupinha ;)
+        </Tip>
         { address && this.renderAddress() }
         { gettingAddress && this.renderAddressLoading() }
-        <Button disabled={!(latitude && longitude && address) || settingLocation} style={{ alignSelf: 'stretch' }} onPress={this.handleSetLocation.bind(this)}>{ settingLocation ? 'Confirmando endereço...' : 'Confirmar endereço e continuar' }</Button>
+        <View style={{
+          flex: 1,
+          alignSelf: 'stretch',
+          padding: 10,
+          backgroundColor: Colors.ice,
+        }}>
+          <Button isDisabled={!(latitude && longitude && address) || settingLocation} isLoading={settingLocation} style={{ alignSelf: 'stretch' }} onPress={this.handleSetLocation.bind(this)}>Confirmar endereço e continuar</Button>
+        </View>
       </View>
     )
   }

@@ -1,13 +1,12 @@
-import React, { Text } from 'react-native'
+import React from 'react-native'
 import Colors from "../Colors"
+import Sentence from "./Sentence"
 
 export default Paragraph = ({ children }) => (
-  <Text style={{
+  <Sentence style={{
     alignSelf: 'stretch',
-    color: Colors.brown,
-    fontSize: 16,
     marginBottom: 20,
   }}>
     {children}
-  </Text>
+  </Sentence>
 )
