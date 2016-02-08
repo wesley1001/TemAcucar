@@ -1,6 +1,6 @@
 import React, { Component } from 'react-native'
-import Libraries, { LinkingIOS } from 'react-native'
 import { connect } from 'react-redux'
+import Communications from 'react-native-communications'
 import Package from '../../package.json'
 
 import Config from "../Config"
@@ -45,7 +45,7 @@ class VersionChecker extends Component {
   }
 
   handleUpdate() {
-    LinkingIOS.openURL(Config.appStoreUrl)
+    Communications.web(Config.appStoreUrl)
   }
 
   handleIgnoreUpdate() {

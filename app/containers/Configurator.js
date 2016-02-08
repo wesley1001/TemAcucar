@@ -1,5 +1,7 @@
 import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
+import Communications from 'react-native-communications'
+
 import { termsAccept, termsReject, termsCancelReject, termsScrollToBottom } from '../actions/TermsActions'
 import { configConfirmEmail, configUpdateEmail } from '../actions/ConfigActions'
 
@@ -27,9 +29,19 @@ class Configurator extends Component {
     dispatch(termsCancelReject())
   }
 
-  handleScrollToBottomTerms() {
-    const { dispatch } = this.props
-    dispatch(termsScrollToBottom())
+  handleContact() {
+    Communications.web('mailto:contato@temacucar.com')
+  }
+
+  handleScrollTerms(event) {
+    const { dispatch, terms } = this.props
+    const { scrolledToBottom } = terms
+    if (scrolledToBottom)
+      return
+    const { nativeEvent } = event
+    if(nativeEvent.contentOffset.y >= (nativeEvent.contentSize.height - nativeEvent.layoutMeasurement.height - 1)) {
+      dispatch(termsScrollToBottom())
+    }
   }
 
   handleConfirmEmail() {
@@ -47,14 +59,14 @@ class Configurator extends Component {
   render() {
     const { auth, terms, config } = this.props
     const { currentUser } = auth
-    const { acceptingTerms, rejectedTerms } = terms
+    const { acceptingTerms, rejectedTerms, scrolledToBottom } = terms
     const { confirmingEmail } = config
     if (acceptingTerms || confirmingEmail)
       return (<Loading />)
     if (rejectedTerms)
-      return (<RejectedTerms onCancelRejectTerms={this.handleCancelRejectTerms.bind(this)} />)
+      return (<RejectedTerms onCancelRejectTerms={this.handleCancelRejectTerms.bind(this)} onContact={this.handleContact.bind(this)} />)
     if (!currentUser.accepted_terms)
-      return (<Terms onAcceptTerms={this.handleAcceptTerms.bind(this)} onRejectTerms={this.handleRejectTerms.bind(this)} onScrollToBottom={this.handleScrollToBottomTerms.bind(this)} />)
+      return (<Terms onAcceptTerms={this.handleAcceptTerms.bind(this)} onRejectTerms={this.handleRejectTerms.bind(this)} onScroll={this.handleScrollTerms.bind(this)} scrolledToBottom={scrolledToBottom} />)
     if (!currentUser.reviewed_email)
       return (<UnreviewedEmail currentUser={currentUser} onConfirm={this.handleConfirmEmail.bind(this)} onUpdate={this.handleUpdateEmail.bind(this)} />)
     if (!currentUser.latitude || !currentUser.longitude || !currentUser.reviewed_location)
