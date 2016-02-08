@@ -68,7 +68,7 @@ class Configurator extends Component {
     if (!currentUser.accepted_terms)
       return (<Terms onAcceptTerms={this.handleAcceptTerms.bind(this)} onRejectTerms={this.handleRejectTerms.bind(this)} onScroll={this.handleScrollTerms.bind(this)} scrolledToBottom={scrolledToBottom} />)
     if (!currentUser.reviewed_email)
-      return (<UnreviewedEmail currentUser={currentUser} onConfirm={this.handleConfirmEmail.bind(this)} onUpdate={this.handleUpdateEmail.bind(this)} />)
+      return (<UnreviewedEmail {...this.props} currentUser={currentUser} onConfirm={this.handleConfirmEmail.bind(this)} onUpdate={this.handleUpdateEmail.bind(this)} />)
     if (!currentUser.latitude || !currentUser.longitude || !currentUser.reviewed_location)
       return (<SetLocation auth={auth} currentUser={currentUser} />)
     return (<Neighborhood {...this.props} currentUser={currentUser} />)

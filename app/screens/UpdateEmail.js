@@ -1,5 +1,4 @@
 import React, { Component } from 'react-native'
-import { connect } from 'react-redux'
 
 import UserValidators from '../validators/UserValidators'
 import Form from "../components/Form"
@@ -10,7 +9,7 @@ const validators = {
   email: UserValidators.email,
 }
 
-class UpdateEmail extends Component {
+export default class UpdateEmail extends Component {
   componentWillReceiveProps(nextProps) {
     const { updateEmailError } = nextProps.config
     const { submit } = this.refs
@@ -33,7 +32,3 @@ class UpdateEmail extends Component {
     )
   }
 }
-
-export default connect(state => ({
-  config: state.config,
-}))(UpdateEmail)

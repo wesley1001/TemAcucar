@@ -1,5 +1,4 @@
 import React, { Component } from 'react-native'
-import { connect } from 'react-redux'
 
 import UserValidators from '../validators/UserValidators'
 import Form from "../components/Form"
@@ -12,7 +11,7 @@ const validators = {
   password: UserValidators.password,
 }
 
-class ResetPassword extends Component {
+export default class ResetPassword extends Component {
   componentWillReceiveProps(nextProps) {
     const { resetPasswordError } = nextProps.auth
     const { submit } = this.refs
@@ -44,7 +43,3 @@ class ResetPassword extends Component {
     )
   }
 }
-
-export default connect(state => ({
-  auth: state.auth,
-}))(ResetPassword)

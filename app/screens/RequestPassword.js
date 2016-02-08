@@ -4,7 +4,6 @@ import React, {
   View,
   TextInput,
 } from 'react-native'
-import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
 import UserValidators from '../validators/UserValidators'
@@ -16,7 +15,7 @@ const validators = {
   email: UserValidators.email,
 }
 
-class RequestPassword extends Component {
+export default class RequestPassword extends Component {
   componentWillReceiveProps(nextProps) {
     const { resetPassword, requestPasswordError } = nextProps.auth
     const { submit } = this.refs
@@ -42,7 +41,3 @@ class RequestPassword extends Component {
     )
   }
 }
-
-export default connect(state => ({
-  auth: state.auth,
-}))(RequestPassword)

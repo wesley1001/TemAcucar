@@ -29,16 +29,16 @@ export default class SignedOut extends Component {
   render() {
     const signInFailed = this.signInFailed(this.props)
     return (
-      <StyledRouter>
+      <StyledRouter {...this.props}>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-        <Route {...this.props} name="welcome" component={Welcome} title="Tem Açúcar?" schema="default" initial={!signInFailed} hideNavBar={true} />
-        <Route {...this.props} name="signInFailed" component={SignInFailed} title="Tem Açúcar" type="reset" initial={signInFailed} hideNavBar={true} />
-        <Route {...this.props} name="signIn" component={SignIn} title="Login" schema="default" />
-        <Route {...this.props} name="signUp" component={SignUp} title="Cadastre-se" schema="default" />
-        <Route {...this.props} name="signInForm" component={SignInForm} title="Login" schema="default" />
-        <Route {...this.props} name="signUpForm" component={SignUpForm} title="Cadastre-se" schema="default" />
-        <Route {...this.props} name="requestPassword" component={RequestPassword} title="Criar nova senha" schema="default" />
-        <Route {...this.props} name="resetPassword" component={ResetPassword} title="Confira seu email" schema="default" />
+        <Route name="welcome" component={Welcome} title="Tem Açúcar?" schema="default" initial={!signInFailed} hideNavBar={true} />
+        <Route name="signInFailed" component={SignInFailed} title="Tem Açúcar" type="reset" initial={signInFailed} hideNavBar={true} />
+        <Route name="signIn" component={SignIn} title="Login" schema="default" />
+        <Route name="signUp" component={SignUp} title="Cadastre-se" schema="default" />
+        <Route name="signInForm" component={SignInForm} title="Login" schema="default" />
+        <Route name="signUpForm" component={SignUpForm} title="Cadastre-se" schema="default" />
+        <Route name="requestPassword" component={RequestPassword} title="Criar nova senha" schema="default" />
+        <Route name="resetPassword" component={ResetPassword} title="Confira seu email" schema="default" />
       </StyledRouter>
     )
   }
