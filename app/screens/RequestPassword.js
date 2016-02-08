@@ -5,73 +5,42 @@ import React, {
   TextInput,
 } from 'react-native'
 import { connect } from 'react-redux'
-import {reduxForm} from 'redux-form'
 import { Actions } from 'react-native-router-flux'
 
-import StyleSheets from "../styles/StyleSheets"
-import SimpleScreen from "../components/SimpleScreen"
-import Label from "../components/Label"
-import Button from "../components/Button"
+import UserValidators from '../validators/UserValidators'
+import Form from "../components/Form"
+import EmailInput from "../components/EmailInput"
+import FormSubmit from "../components/FormSubmit"
 
-const validate = values => {
-  const errors = {}
-  if (!values.email) {
-    errors.email = 'Preencha seu email';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Preencha um email válido'
-  }
-  return errors
+const validators = {
+  email: UserValidators.email,
 }
 
 class RequestPassword extends Component {
   componentWillReceiveProps(nextProps) {
-    const { auth: {resetPassword} } = nextProps
+    const { resetPassword, requestPasswordError } = nextProps.auth
+    const { submit } = this.refs
     if (resetPassword && (resetPassword != this.props.auth.resetPassword)) {
       Actions.resetPassword()
-    }
-  }
-
-  errorMessage(error) {
-    switch (error.id) {
-      case 'not_found':
-        return 'Este email não é cadastrado.'
-      default:
-        return 'Oops! Ocorreu um erro ao solicitar instruções para nova senha.'
+    } else if (requestPasswordError) {
+      submit.postSubmit(UserValidators.errorMessage(requestPasswordError))
     }
   }
 
   render() {
-    const { auth: {requestingPassword, requestPasswordError}, fields: { email }, dirty, valid, submitting, handleSubmit, onRequestPassword } = this.props
+    const { onRequestPassword } = this.props
     return (
-      <SimpleScreen>
-        <View style={{ alignSelf: 'stretch' }}>
-          <Label field={email}>Email</Label>
-          <TextInput
-            style={StyleSheets.input}
-            autoCapitalize={'none'}
-            keyboardType={'email-address'}
-            placeholder={'Digite seu e-mail'}
-            {...email}
-          />
-        </View>
-        <Button
-          disabled={!dirty || !valid || submitting || requestingPassword}
-          style={{ alignSelf: 'stretch', marginBottom: 20 }}
-          onPress={handleSubmit(onRequestPassword)}
-        >
-          { (requestingPassword ? 'Solicitando instruções para nova senha...' : 'Enviar instruções para nova senha') }
-        </Button>
-        <Text style={[StyleSheets.error, {height: 50}]}>{requestPasswordError && this.errorMessage(requestPasswordError)}</Text>
-      </SimpleScreen>
+      <Form name="requestPassword" validators={validators}>
+        <EmailInput />
+        <FormSubmit
+          ref="submit"
+          title="Enviar instruções para nova senha"
+          onSubmit={onRequestPassword}
+        />
+      </Form>
     )
   }
 }
-
-RequestPassword = reduxForm({
-  form: 'requestPassword',
-  fields: ['email'],
-  validate,
-})(RequestPassword)
 
 export default connect(state => ({
   auth: state.auth,

@@ -5,7 +5,7 @@ import Colors from "../styles/Colors"
 import StyleSheets from "../styles/StyleSheets"
 import SimpleScreen from "../components/SimpleScreen"
 import Button from "../components/Button"
-import Link from "../components/Link"
+import SignInLink from "../components/SignInLink"
 
 export default SignUp = ({ onFacebook }) => (
   <SimpleScreen>
@@ -16,8 +16,6 @@ export default SignUp = ({ onFacebook }) => (
     <Button onPress={Actions.signUpForm} style={StyleSheets.marginBottom}>
       Crie sua conta com seu email
     </Button>
-    <Link onPress={Actions.signIn}>
-      Já possui cadastro?
-    </Link>
+    <SignInLink />
   </SimpleScreen>
 )

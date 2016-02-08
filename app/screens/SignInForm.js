@@ -1,73 +1,33 @@
-import React, {
-  Component,
-  View,
-  TextInput,
-} from 'react-native'
-import { connect } from 'react-redux'
-import {reduxForm} from 'redux-form'
+import React, { Component } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
-import StyleSheets from "../styles/StyleSheets"
-import SimpleScreen from "../components/SimpleScreen"
-import Label from "../components/Label"
-import Button from "../components/Button"
+import UserValidators from '../validators/UserValidators'
+import Form from "../components/Form"
+import EmailInput from "../components/EmailInput"
+import PasswordInput from "../components/PasswordInput"
+import FormSubmit from "../components/FormSubmit"
+import FormFooter from "../components/FormFooter"
 import Link from "../components/Link"
+import SignUpLink from "../components/SignUpLink"
 
-const validate = values => {
-  const errors = {}
-  if (!values.password) {
-    errors.password = 'Preencha sua senha'
-  } else if (values.password.length < 8) {
-    errors.password = 'Senha muito curta'
-  }
-  if (!values.email) {
-    errors.email = 'Preencha seu email';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Preencha um email válido'
-  }
-  return errors
+const validators = {
+  email: UserValidators.email,
+  password: UserValidators.password,
 }
 
-class SignInForm extends Component {
-  render() {
-    const { auth: { signingIn }, fields: { email, password }, dirty, valid, submitting, handleSubmit, onSignIn } = this.props
-    return (
-      <SimpleScreen>
-        <View style={{ alignSelf: 'stretch' }}>
-          <Label field={email}>Email</Label>
-          <TextInput
-            style={StyleSheets.input}
-            autoCapitalize={'none'}
-            keyboardType={'email-address'}
-            placeholder={'Digite seu e-mail'}
-            {...email}
-          />
-          <Label field={password}>Senha</Label>
-          <TextInput
-            style={StyleSheets.input}
-            autoCapitalize={'none'}
-            keyboardType={'default'}
-            secureTextEntry={true}
-            placeholder={'Digite sua senha'}
-            {...password}
-          />
-        </View>
-        <Button disabled={!dirty || !valid || submitting || signingIn} style={[StyleSheets.flexEnd, StyleSheets.marginBottom]} onPress={handleSubmit(onSignIn)}>
-          { signingIn ? 'Fazendo login...' : 'Fazer login' }
-        </Button>
-        <Link onPress={Actions.requestPassword}>
-          Esqueceu sua senha?
-        </Link>
-        <Link onPress={Actions.signUp}>
-          Não possui cadastro?
-        </Link>
-      </SimpleScreen>
-    )
-  }
-}
-
-export default SignInForm = reduxForm({
-  form: 'signIn',
-  fields: ['email', 'password'],
-  validate,
-})(SignInForm)
+export default SignInForm = ({ onSignIn }) => (
+  <Form name="signInForm" validators={validators}>
+    <EmailInput />
+    <PasswordInput />
+    <FormSubmit
+      title="Fazer login"
+      onSubmit={onSignIn}
+    />
+    <FormFooter>
+      <Link onPress={Actions.requestPassword}>
+        Esqueceu sua senha?
+      </Link>
+      <SignUpLink />
+    </FormFooter>
+  </Form>
+)

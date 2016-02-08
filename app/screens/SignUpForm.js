@@ -2,81 +2,33 @@ import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
-import Colors from "../styles/Colors"
-import Button from "../components/Button"
-import Link from "../components/Link"
+import UserValidators from '../validators/UserValidators'
 import Form from "../components/Form"
 import FormTextInput from "../components/FormTextInput"
+import EmailInput from "../components/EmailInput"
+import PasswordInput from "../components/PasswordInput"
 import FormSubmit from "../components/FormSubmit"
 import FormFooter from "../components/FormFooter"
+import SignInLink from "../components/SignInLink"
 
-const notPresentMessage = '{TITLE} deve ser preenchido.'
 const validators = {
-  first_name: {
-    title: 'Nome',
-    validate: [{
-      validator: 'isLength',
-      arguments: [1, 255],
-      message: notPresentMessage,
-    }]
-  },
-  last_name: {
-    title: 'Sobrenome',
-    validate: [{
-      validator: 'isLength',
-      arguments: [1, 255],
-      message: notPresentMessage,
-    }]
-  },
-  email: {
-    title: 'Email',
-    validate: [{
-      validator: 'isLength',
-      arguments: [1, 255],
-      message: notPresentMessage,
-    },
-    {
-      validator: 'isEmail',
-      message: '{TITLE} deve ser válido',
-    }]
-  },
-  password: {
-    title: 'Senha',
-    validate: [{
-      validator: 'isLength',
-      arguments: [8, 255],
-      message: 'Senha muito curta',
-    }]
-  },
+  first_name: UserValidators.first_name,
+  last_name: UserValidators.last_name,
+  email: UserValidators.email,
+  password: UserValidators.password,
 }
 
 class SignUpForm extends Component {
-  errorMessage(error) {
-    switch (error.id) {
-      case 'email_is_already_taken':
-        return 'Email já cadastrado para outro usuário.'
-      default:
-        return 'Oops! Ocorreu um erro ao fazer seu cadastro.'
-    }
-  }
-
   componentWillReceiveProps(nextProps) {
     const { signUpError } = nextProps.auth
+    const { submit } = this.refs
     if(signUpError) {
-      const error = signUpError && this.errorMessage(signUpError)
-      this.refs.submit.postSubmit(error)
-    }
-  }
-
-  handleSubmit(isValid, values) {
-    if (isValid === true) {
-      this.props.onSignUp(values)
+      submit.postSubmit(UserValidators.errorMessage(signUpError))
     }
   }
 
   render() {
-    const { auth: {signingUp, signUpError}, onSignUp } = this.props
-    const error = signUpError && this.errorMessage(signUpError)
+    const { onSignUp } = this.props
     return (
       <Form name="signUpForm" validators={validators}>
         <FormTextInput 
@@ -91,32 +43,15 @@ class SignUpForm extends Component {
           placeholder='Digite seu sobrenome'
           icon='pagelines'
         />
-        <FormTextInput 
-          name='email'
-          title='Email'
-          placeholder='digite@seu.email'
-          icon='at'
-          autoCapitalize='none'
-          keyboardType='email-address'
-        />
-        <FormTextInput 
-          name='password'
-          title='Senha'
-          placeholder='Digite sua senha'
-          icon='key'
-          autoCapitalize='none'
-          secureTextEntry={true}
-        />
+        <EmailInput />
+        <PasswordInput />
         <FormSubmit
           ref="submit"
           title="Fazer cadastro"
-          isDisabled={false}
-          onSubmit={this.handleSubmit.bind(this)}
+          onSubmit={onSignUp}
         />
         <FormFooter>
-          <Link onPress={Actions.signIn}>
-            Já possui cadastro?
-          </Link>
+          <SignInLink />
         </FormFooter>
       </Form>
     )

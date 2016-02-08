@@ -1,77 +1,49 @@
-import React, {
-  Component,
-  Text,
-  View,
-  TextInput,
-} from 'react-native'
+import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
-import {reduxForm} from 'redux-form'
 
-import StyleSheets from "../styles/StyleSheets"
-import SimpleScreen from "../components/SimpleScreen"
-import Label from "../components/Label"
-import Button from "../components/Button"
+import UserValidators from '../validators/UserValidators'
+import Form from "../components/Form"
+import FormTextInput from "../components/FormTextInput"
+import PasswordInput from "../components/PasswordInput"
+import FormSubmit from "../components/FormSubmit"
 
-const validate = values => {
-  const errors = {}
-  if (!values.resetPasswordToken) {
-    errors.resetPasswordToken = 'Preencha o código enviado';
-  }
-  if (!values.password) {
-    errors.password = 'Preencha sua senha'
-  } else if (values.password.length < 8) {
-    errors.password = 'Senha muito curta'
-  }
-  return errors
+const validators = {
+  reset_password_token: UserValidators.reset_password_token,
+  password: UserValidators.password,
 }
 
 class ResetPassword extends Component {
-  errorMessage(error) {
-    switch (error.id) {
-      case 'unauthorized':
-        return 'Código inválido. Confira novamente seu email ;)'
-      default:
-        return 'Oops! Ocorreu um erro ao cadastrar sua nova senha.'
+  componentWillReceiveProps(nextProps) {
+    const { resetPasswordError } = nextProps.auth
+    const { submit } = this.refs
+    if (resetPasswordError) {
+      submit.postSubmit(UserValidators.errorMessage(resetPasswordError))
     }
   }
 
   render() {
-    const { auth: {resetingPassword, resetPasswordError}, fields: { resetPasswordToken, password }, dirty, valid, submitting, handleSubmit, onResetPassword, headline } = this.props
+    const { onResetPassword } = this.props
     return (
-      <SimpleScreen headline="Confira seu email para criar sua nova senha">
-        <View style={StyleSheets.stretch}>
-          <Label field={resetPasswordToken}>Código enviado para seu email</Label>
-          <TextInput
-            style={StyleSheets.input}
-            autoCapitalize={'none'}
-            keyboardType={'default'}
-            placeholder={'Digite o código recebido por email'}
-            {...resetPasswordToken}
-          />
-          <Label field={password}>Nova senha</Label>
-          <TextInput
-            style={StyleSheets.input}
-            autoCapitalize={'none'}
-            keyboardType={'default'}
-            secureTextEntry={true}
-            placeholder={'Digite sua nova senha'}
-            {...password}
-          />
-        </View>
-        <Button disabled={!dirty || !valid || submitting || resetingPassword} style={[StyleSheets.stretch, StyleSheets.marginBottom]} onPress={handleSubmit(onResetPassword)}>
-          { (resetingPassword ? 'Enviando nova senha...' : 'Criar nova senha') }
-        </Button>
-        <Text style={[StyleSheets.error, {height: 50}]}>{resetPasswordError && this.errorMessage(resetPasswordError)}</Text>
-      </SimpleScreen>
+      <Form name="resetPassword" validators={validators}>
+        <FormTextInput 
+          name='reset_password_token'
+          title='Código'
+          placeholder='Digite o código recebido por email'
+          icon='unlock'
+        />
+        <PasswordInput
+          title='Nova senha'
+          placeholder='Digite sua nova senha'
+        />
+        <FormSubmit
+          ref="submit"
+          title="Criar nova senha"
+          onSubmit={onResetPassword}
+        />
+      </Form>
     )
   }
 }
-
-ResetPassword = reduxForm({
-  form: 'resetPassword',
-  fields: ['resetPasswordToken', 'password'],
-  validate,
-})(ResetPassword)
 
 export default connect(state => ({
   auth: state.auth,

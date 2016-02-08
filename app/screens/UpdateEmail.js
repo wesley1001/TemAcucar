@@ -1,65 +1,38 @@
-import React, {
-  Component,
-  Text,
-  View,
-  TextInput,
-} from 'react-native'
+import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
-import {reduxForm} from 'redux-form'
 
-import StyleSheets from "../styles/StyleSheets"
-import SimpleScreen from "../components/SimpleScreen"
-import Label from "../components/Label"
-import Button from "../components/Button"
+import UserValidators from '../validators/UserValidators'
+import Form from "../components/Form"
+import EmailInput from "../components/EmailInput"
+import FormSubmit from "../components/FormSubmit"
 
-const validate = values => {
-  const errors = {}
-  if (!values.email) {
-    errors.email = 'Preencha seu email';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Preencha um email válido'
-  }
-  return errors
+const validators = {
+  email: UserValidators.email,
 }
 
 class UpdateEmail extends Component {
-  errorMessage(error) {
-    switch (error.id) {
-      case 'email_is_already_taken':
-        return 'Email já cadastrado para outro usuário.'
-      default:
-        return 'Oops! Ocorreu um erro ao atualizar seu email.'
+  componentWillReceiveProps(nextProps) {
+    const { updateEmailError } = nextProps.config
+    const { submit } = this.refs
+    if (updateEmailError) {
+      submit.postSubmit(UserValidators.errorMessage(updateEmailError))
     }
   }
 
   render() {
-    const { config: {updatingEmail, updateEmailError}, fields: { email }, dirty, valid, submitting, handleSubmit, onUpdate } = this.props
+    const { onUpdate } = this.props
     return (
-      <SimpleScreen>
-        <View style={{ alignSelf: 'stretch' }}>
-          <Label field={email}>Email do dia-a-dia</Label>
-          <TextInput
-            style={StyleSheets.input}
-            autoCapitalize={'none'}
-            keyboardType={'email-address'}
-            placeholder={'Digite seu e-mail do dia-a-dia'}
-            {...email}
-          />
-        </View>
-        <Button disabled={!dirty || !valid || submitting || updatingEmail} style={[StyleSheets.stretch, StyleSheets.marginBottom]} onPress={handleSubmit(onUpdate)}>
-          { (updatingEmail ? 'Atualizando seu email...' : 'Atualizar meu email') }
-        </Button>
-        <Text style={[StyleSheets.error, {height: 50}]}>{updateEmailError && this.errorMessage(updateEmailError)}</Text>
-      </SimpleScreen>
+      <Form name="updateEmail" validators={validators}>
+        <EmailInput />
+        <FormSubmit
+          ref="submit"
+          title="Atualizar meu email"
+          onSubmit={onUpdate}
+        />
+      </Form>
     )
   }
 }
-
-UpdateEmail = reduxForm({
-  form: 'updateEmail',
-  fields: ['email'],
-  validate,
-})(UpdateEmail)
 
 export default connect(state => ({
   config: state.config,

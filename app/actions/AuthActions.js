@@ -347,7 +347,7 @@ export function authResetPassword(currentUser) {
       body: JSON.stringify({
         email: currentUser.email,
         password: currentUser.password,
-        token: currentUser.resetPasswordToken,
+        token: currentUser.reset_password_token,
       })
     })
     .then(response => {

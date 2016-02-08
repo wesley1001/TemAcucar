@@ -323,7 +323,7 @@ class Terms extends Component {
           alignSelf: 'stretch',
           flexDirection: 'row',
         }}>
-          <Button disabled={!scrolledToBottom} style={{flex: 1, marginRight: 4}} onPress={onAcceptTerms}>
+          <Button isDisabled={!scrolledToBottom} style={{flex: 1, marginRight: 4}} onPress={onAcceptTerms}>
             Eu aceito
           </Button>
           <Button

@@ -3,6 +3,12 @@ import { GiftedForm } from 'react-native-gifted-form'
 import Colors from "../styles/Colors"
 
 export default class FormSubmit extends Component {
+  handleSubmit(isValid, values) {
+    if (isValid === true) {
+      this.props.onSubmit(values)
+    }
+  }
+
   postSubmit(error) {
     this.refs.submit._postSubmit([error])
   }
@@ -29,6 +35,7 @@ export default class FormSubmit extends Component {
           },
         }}
         {...this.props}
+        onSubmit={this.handleSubmit.bind(this)}
       />
     )
   }

@@ -4,12 +4,15 @@ import Colors from "../styles/Colors"
 
 export default Button = (props) => (
   <ReactNativeButton 
-    textStyle={{
+    {...props}
+    textStyle={[{
       textAlign: 'center',
       color: Colors.white,
       fontSize: 16,
-    }}
-    {...props}
+    }, props.textStyle]}
+    disabledStyle={[{
+      backgroundColor: Colors.gray,
+    }, props.disabledStyle]}
     style={[{
       alignSelf: 'center',
       borderWidth: 0,
