@@ -4,7 +4,6 @@ import React, {
   View,
   ScrollView,
 } from 'react-native'
-import { connect } from 'react-redux'
 
 import Colors from "../Colors"
 import Button from "../components/Button"
