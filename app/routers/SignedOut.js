@@ -2,7 +2,6 @@ import React, {
   Component,
   Navigator,
 } from 'react-native'
-import { connect } from 'react-redux'
 import { Route, Schema, Actions } from 'react-native-router-flux'
 
 import StyledRouter from "../components/StyledRouter"
