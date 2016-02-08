@@ -11,12 +11,15 @@ export default function terms(state = initialState, action) {
       return {
         ...state, 
         confirmingEmail: true,
+        confirmEmailError: null,
+        updateEmailError: null,
       }
     case 'CONFIG_CONFIRM_EMAIL_SUCCESS':
       return {
         ...state, 
         confirmingEmail: false,
         confirmEmailError: null,
+        updateEmailError: null,
       }
     case 'CONFIG_CONFIRM_EMAIL_FAILURE':
       return {
@@ -28,11 +31,14 @@ export default function terms(state = initialState, action) {
       return {
         ...state, 
         updatingEmail: true,
+        confirmEmailError: null,
+        updateEmailError: null,
       }
     case 'CONFIG_UPDATE_EMAIL_SUCCESS':
       return {
         ...state, 
         updatingEmail: false,
+        confirmEmailError: null,
         updateEmailError: null,
       }
     case 'CONFIG_UPDATE_EMAIL_FAILURE':
