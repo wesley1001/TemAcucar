@@ -1,5 +1,5 @@
 import React, { Text } from 'react-native'
-import Colors from "../styles/Colors"
+import Colors from "../Colors"
 
 export default Headline = ({ children }) => (
   <Text style={{

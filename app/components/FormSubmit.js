@@ -1,6 +1,6 @@
 import React, { Component } from 'react-native'
 import { GiftedForm } from 'react-native-gifted-form'
-import Colors from "../styles/Colors"
+import Colors from "../Colors"
 
 export default class FormSubmit extends Component {
   handleSubmit(isValid, values) {

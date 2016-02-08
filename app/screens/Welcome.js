@@ -1,8 +1,8 @@
 import React, { Text } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
-import StyleSheets from "../styles/StyleSheets"
 import SimpleScreen from "../components/SimpleScreen"
+import OrSeparator from "../components/OrSeparator"
 import Button from "../components/Button"
 
 export default Welcome = () => (
@@ -10,7 +10,7 @@ export default Welcome = () => (
     <Button onPress={Actions.signIn}>
       Já possuo cadastro
     </Button>
-    <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
+    <OrSeparator />
     <Button onPress={Actions.signUp}>
       Quero me cadastrar
     </Button>

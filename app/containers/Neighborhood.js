@@ -1,6 +1,5 @@
 import React, {
   Component,
-  StyleSheet,
   Text,
   View,
   PanResponder,
@@ -8,7 +7,6 @@ import React, {
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
 
-import StyleSheets from "../styles/StyleSheets"
 import TopBar from "../components/TopBar"
 import UserMenu from "../components/UserMenu"
 import TabBar from "../components/TabBar"

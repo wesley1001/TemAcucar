@@ -1,6 +1,5 @@
 import React from 'react-native'
 
-import StyleSheets from "../styles/StyleSheets"
 import SimpleScreen from "../components/SimpleScreen"
 import Button from "../components/Button"
 import Paragraph from "../components/Paragraph"
@@ -13,7 +12,7 @@ export default RejectedTerms = ({ onCancelRejectTerms }) => (
     <Paragraph>
       Caso você tenha recusado sem querer, clique no botão abaixo para ler novamente.
     </Paragraph>
-    <Button onPress={onCancelRejectTerms} style={StyleSheets.marginBottom}>
+    <Button onPress={onCancelRejectTerms}>
       Ler novamente os termos
     </Button>
   </SimpleScreen>

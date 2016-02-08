@@ -1,19 +1,19 @@
 import React, { Text } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
-import StyleSheets from "../styles/StyleSheets"
 import SimpleScreen from "../components/SimpleScreen"
+import OrSeparator from "../components/OrSeparator"
 import Button from "../components/Button"
 
 export default SignInFailed = () => (
   <SimpleScreen headline="Ooops! Seu login falhou :(">
-    <Text style={[StyleSheets.label, StyleSheets.bigMarginBottom]}>
+    <TextBox style={{marginBottom: 36}}>
       Se você é usuário da versão antiga do Tem Açúcar, vai ser preciso criar uma nova senha.
-    </Text>
+    </TextBox>
     <Button onPress={Actions.requestPassword}>
       Criar uma nova senha
     </Button>
-    <Text style={[StyleSheets.label, StyleSheets.margin]}>ou</Text>
+    <OrSeparator />
     <Button onPress={Actions.signIn}>
       Tentar uma vez mais
     </Button>

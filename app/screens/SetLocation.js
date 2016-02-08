@@ -13,9 +13,9 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 import { locationGetCoordinates, locationSetCoordinates, locationGetAddress, locationSetSearch, locationSearch, locationSetLocation } from '../actions/LocationActions'
 
-import Colors from "../styles/Colors"
-import StyleSheets from "../styles/StyleSheets"
+import Colors from "../Colors"
 import Loading from "./Loading"
+import TextBox from "../components/TextBox"
 import Button from "../components/Button"
 import Headline from "../components/Headline"
 
@@ -90,16 +90,19 @@ class SetLocation extends Component {
   renderAddress() {
     const { address } = this.props.location
     return (
-      <Text style={[StyleSheets.label, {alignSelf: 'center', height: 60}]}>
+      <TextBox style={{alignSelf: 'center', height: 60}}>
         {this.fullAddress(address)}
-      </Text>
+      </TextBox>
     )
   }
 
   renderAddressLoading() {
     return (
       <GiftedSpinner 
-        style={[StyleSheets.marginBottom, {height: 40}]}
+        style={{
+          marginBottom: 20,
+          height: 40,
+        }}
       />
     )
   }
@@ -144,9 +147,9 @@ class SetLocation extends Component {
           backgroundColor: Colors.white,
         }}>
         <Headline>Complete seu cadastro</Headline>
-        <Text style={[StyleSheets.label, StyleSheets.marginBottom]}>
+        <TextBox style={{marginBottom: 20}}>
           Precisamos saber onde você mora para descobrir quem são seus vizinhos :)
-        </Text>
+        </TextBox>
         <View style={{
           alignSelf: 'stretch',
           borderColor: Colors.brown, 

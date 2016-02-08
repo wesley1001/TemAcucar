@@ -4,8 +4,7 @@ import React, {
   Image,
 } from 'react-native'
 
-import Colors from "../styles/Colors"
-import StyleSheets from "../styles/StyleSheets"
+import Colors from "../Colors"
 import Headline from "./Headline"
 
 export default SimpleScreen = ({ children, headline, viewStyle }) => (
@@ -21,7 +20,7 @@ export default SimpleScreen = ({ children, headline, viewStyle }) => (
       alignSelf: 'stretch',
       alignItems: 'center',
     }}>
-      <Image source={require('../img/logo.jpg')} style={!headline && StyleSheets.bigMarginBottom}/>
+      <Image source={require('../img/logo.jpg')} style={!headline && {marginBottom: 36}}/>
     </View>
     { headline && <Headline>{headline}</Headline> }
     {children}

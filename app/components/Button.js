@@ -1,6 +1,6 @@
 import React from 'react-native'
 import ReactNativeButton from 'apsl-react-native-button'
-import Colors from "../styles/Colors"
+import Colors from "../Colors"
 
 export default Button = (props) => (
   <ReactNativeButton 

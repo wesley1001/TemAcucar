@@ -5,8 +5,7 @@ import React, {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import Colors from "../styles/Colors"
-import StyleSheets from "../styles/StyleSheets"
+import Colors from "../Colors"
 
 export default UserMenu = ({ onSignOut }) => (
   <View style={{

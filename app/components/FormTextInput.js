@@ -2,8 +2,7 @@ import React from 'react-native'
 import { GiftedForm } from 'react-native-gifted-form'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import Colors from "../styles/Colors"
-import StyleSheets from "../styles/StyleSheets"
+import Colors from "../Colors"
 
 export default FormTextInput = (props) => (
   <GiftedForm.TextInputWidget

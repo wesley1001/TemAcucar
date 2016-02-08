@@ -5,8 +5,8 @@ import React, {
   TouchableOpacity,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import Colors from "../styles/Colors"
-import StyleSheets from "../styles/StyleSheets"
+import Colors from "../Colors"
+import Sentence from "./Sentence"
 
 export default TopBar = ({ onMenuOpen }) => (
   <View style={{
@@ -27,7 +27,7 @@ export default TopBar = ({ onMenuOpen }) => (
       justifyContent: 'center'
     }}>
       <Image source={require('../img/icon.png')} style={{marginRight: 10}} />
-      <Text style={StyleSheets.label}>Tem Açúcar</Text>
+      <Sentence>Tem Açúcar</Sentence>
     </View>
     <TouchableOpacity onPress={onMenuOpen} style={{
       flex: 0.05,

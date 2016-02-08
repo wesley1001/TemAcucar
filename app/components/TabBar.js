@@ -6,7 +6,7 @@ import React, {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import Colors from "../styles/Colors"
+import Colors from "../Colors"
 
 export default class TabBar extends Component {
   constructor(props, context) {

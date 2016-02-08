@@ -6,8 +6,7 @@ import React, {
 } from 'react-native'
 import Slider from 'react-native-slider'
 
-import Colors from "../styles/Colors"
-import StyleSheets from "../styles/StyleSheets"
+import Colors from "../Colors"
 import Button from "../components/Button"
 
 export default class Requests extends Component {

@@ -5,7 +5,6 @@ import React, {
 import { connect } from 'react-redux'
 import { Route, Schema, Actions } from 'react-native-router-flux'
 
-import StyleSheets from "../styles/StyleSheets"
 import StyledRouter from "../components/StyledRouter"
 import Welcome from "../screens/Welcome"
 import SignIn from "../screens/SignIn"

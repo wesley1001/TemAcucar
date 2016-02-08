@@ -6,9 +6,9 @@ import React, {
 } from 'react-native'
 import { connect } from 'react-redux'
 
-import Colors from "../styles/Colors"
-import StyleSheets from "../styles/StyleSheets"
+import Colors from "../Colors"
 import Button from "../components/Button"
+import TextBox from "../components/TextBox"
 import Headline from "../components/Headline"
 import Paragraph from "../components/Paragraph"
 
@@ -316,9 +316,9 @@ class Terms extends Component {
             Todos os itens destes Termos e Condições Gerais estão regidos pelas leis vigentes na República Federativa do Brasil. Para todos os assuntos referentes à interpretação e ao cumprimento deste Contrato, as partes se submetem ao Foro Central da Comarca do Rio de Janeiro, estado do Rio de Janeiro.
           </Paragraph>
         </ScrollView>
-        <Text style={[StyleSheets.label, {height: 60}]}>
+        <TextBox style={{height: 60}}>
           { (scrolledToBottom ? 'Para poder continuar, você deve aceitar os termos de uso.' : 'Para poder continuar, você deve ler os termos de uso até o final.') }
-        </Text>
+        </TextBox>
         <View style={{
           alignSelf: 'stretch',
           flexDirection: 'row',

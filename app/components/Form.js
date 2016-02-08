@@ -1,7 +1,7 @@
 import React, { Component, View } from 'react-native'
 import { GiftedForm, GiftedFormManager } from 'react-native-gifted-form'
 
-import Colors from "../styles/Colors"
+import Colors from "../Colors"
 import SimpleScreen from "./SimpleScreen"
 
 export default class Form extends Component {

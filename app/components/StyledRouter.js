@@ -1,6 +1,6 @@
 import React from 'react-native'
 import { Router } from 'react-native-router-flux'
-import Colors from "../styles/Colors"
+import Colors from "../Colors"
 
 export default StyledRouter = ({ children }) => (
   <Router 
