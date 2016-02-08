@@ -24,7 +24,7 @@ export default SignInForm = ({ onSignIn }) => (
       onSubmit={onSignIn}
     />
     <FormFooter>
-      <Link onPress={Actions.requestPassword}>
+      <Link onPress={Actions.requestPassword} style={{marginBottom: 10}}>
         Esqueceu sua senha?
       </Link>
       <SignUpLink />
