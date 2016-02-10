@@ -1,4 +1,5 @@
 import React, {
+  Platform,
   View,
   Text,
   TouchableOpacity,
@@ -13,14 +14,14 @@ export default UserMenu = ({ onSignOut }) => (
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
     backgroundColor: Colors.darkGray,
-    paddingTop: 20,
+    paddingTop: (Platform.OS == 'ios' ? 20 : 0),
   }}>
     <TouchableOpacity style={{ alignSelf: 'stretch' }} onPress={onSignOut}>
       <Text style={{
         alignSelf: 'stretch',
         textAlign: 'right',
         color: Colors.lightGray,
-        padding: 10,
+        margin: 10,
       }}>
         <Icon name="sign-out" />
         { ' Sair' }

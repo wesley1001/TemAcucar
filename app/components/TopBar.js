@@ -1,4 +1,5 @@
 import React, {
+  Platform,
   View,
   Text,
   Image,
@@ -10,7 +11,7 @@ import Sentence from "./Sentence"
 
 export default TopBar = ({ onMenuOpen }) => (
   <View style={{
-    marginTop: 20,
+    marginTop: (Platform.OS == 'ios' ? 20 : 0),
     height: 35,
     backgroundColor: Colors.white,
     alignItems: 'center',
