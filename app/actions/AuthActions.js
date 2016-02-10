@@ -1,4 +1,4 @@
-import React, { NativeModules } from 'react-native'
+import React, { Platform, NativeModules } from 'react-native'
 const FBLoginManager = NativeModules.FBLoginManager
 import Keychain from 'react-native-keychain'
 
@@ -25,6 +25,32 @@ export function authCredentials(response) {
     tokenType: response.headers.get('token-type'),
     uid: response.headers.get('uid'),
   }
+}
+
+function authGetFacebook(callback) {
+  if (Platform.OS == 'ios') {
+    FBLoginManager.getCredentials((facebookError, facebookData) => {
+      callback(facebookData, facebookError)
+    })
+  } else {
+    FBLoginManager.getCurrentToken((token) => {
+      if ((typeof token) === 'string' && token.length > 0) {
+        callback({ credentials: {token} }, null)
+      } else {
+        callback(null, 'LoginNotFound')
+      }
+    })
+  }
+}
+
+function authFacebookLogin(callback) {
+  FBLoginManager.loginWithPermissions(["public_profile", "email", "user_friends"], (facebookError, facebookData) => {
+    if (Platform.OS == 'ios') {
+      callback(facebookData, facebookError)
+    } else {
+      callback({ credentials: facebookData }, facebookError)
+    }
+  })
 }
 
 export function authGetUser(currentUser) {
@@ -54,7 +80,7 @@ export function authGetUser(currentUser) {
       }
     })
     .catch(error => {
-      FBLoginManager.getCredentials(function(facebookError, data){
+      authGetFacebook((data, facebookError) => {
         if (!facebookError) {
           dispatch({
             type: 'AUTH_GET_USER_SUCCESS',
@@ -178,7 +204,7 @@ export function authSignUp(currentUser) {
 
 export function authFacebook() {
   return dispatch => {
-    FBLoginManager.loginWithPermissions(["public_profile", "email", "user_friends", "user_about_me"], (facebookError, data) => {
+    authFacebookLogin((data, facebookError) => {
       if (!facebookError) {
         const facebook = data.credentials
         dispatch({
