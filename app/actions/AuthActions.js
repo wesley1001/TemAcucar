@@ -124,24 +124,25 @@ export function authSetUser(dispatch, currentUser) {
 
 function authResetUser(dispatch) {
   dispatch({ type: 'AUTH_RESET_USER_REQUEST'})
-  Keychain
-  .resetInternetCredentials(Config.apiUrl)
-  .then(() => {
-    FBLoginManager.logout((error, data) => {
-      if (error) {
+  FBLoginManager.logout((error, data) => {
+    if (error) {
+      dispatch({
+        type: 'AUTH_RESET_USER_FAILURE',
+        error,
+      })
+    } else {
+      Keychain
+      .resetInternetCredentials(Config.apiUrl)
+      .then(() => {
+      })
+      .then(() => dispatch({ type: 'AUTH_RESET_USER_SUCCESS' }))
+      .catch(error => {
         dispatch({
           type: 'AUTH_RESET_USER_FAILURE',
-          error,
+          error: parseError(error),
         })
-      }
-    })
-  })
-  .then(() => dispatch({ type: 'AUTH_RESET_USER_SUCCESS' }))
-  .catch(error => {
-    dispatch({
-      type: 'AUTH_RESET_USER_FAILURE',
-      error: parseError(error),
-    })
+      })
+    }
   })
 }
 
