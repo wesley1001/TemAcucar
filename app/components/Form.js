@@ -5,13 +5,34 @@ import Colors from "../Colors"
 import SimpleScreen from "./SimpleScreen"
 
 export default class Form extends Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      isValid: false,
+    }
+  }
+
   componentWillUnmount() {
     const { name } = this.props
     GiftedFormManager.resetValues(name)
   }
 
+  childrenWithProps() {
+    return React.Children.map(this.props.children, (child) => {
+      if (!child.props.onSubmit) return child
+      return React.cloneElement(child, {
+        isDisabled: !this.state.isValid,
+      })
+    })
+  }
+
+  handleValidation(validation) {
+    if (this.state.isValid !== validation.isValid)
+      this.setState({ isValid: validation.isValid })
+  }
+
   render() {
-    const { name, validators, children } = this.props
+    const { name, validators } = this.props
     return (
       <SimpleScreen viewStyle={{
         alignItems: 'stretch',
@@ -33,12 +54,12 @@ export default class Form extends Component {
             }}
             formName={name}
             validators={validators}
+            onValidation={this.handleValidation.bind(this)}
           >
-            {children}
+            {this.childrenWithProps()}
           </GiftedForm>
         </View>
       </SimpleScreen>
     )
   }  
 }
-
