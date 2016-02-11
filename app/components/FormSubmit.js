@@ -17,6 +17,7 @@ export default class FormSubmit extends Component {
     return (
       <GiftedForm.SubmitWidget
         ref="submit"
+        activityIndicatorColor={ Colors.white }
         widgetStyles={{
           submitButton: {
             backgroundColor: Colors.pink,
