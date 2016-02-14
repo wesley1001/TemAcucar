@@ -66,7 +66,7 @@ export function apiAction(options) {
           credentials: newCredentials,
           ...(processResponse && processResponse(response)),
         })
-        if (newCredentials.access_token) {
+        if (newCredentials.accessToken) {
           authSetStoredAuth(dispatch, newCredentials, keyFilter(currentUser(response), ['password', 'facebook']))
         }
       } else {
@@ -75,9 +75,10 @@ export function apiAction(options) {
           error: parseError(response),
         })
       }
+      return response
     })
-    .then(() => {
-      afterAction && afterAction(dispatch)
+    .then((response) => {
+      afterAction && afterAction(dispatch, response)
     })
     .catch(error => {
       dispatch({

@@ -41,6 +41,7 @@ export default function auth(state = initialState, action) {
     case 'AUTH_RESET_STORED_AUTH_SUCCESS':
       return {
         ...state, 
+        credentials: null,
         currentUser: null,
       }
     case 'AUTH_REFRESH_USER_REQUEST':
@@ -181,6 +182,7 @@ export default function auth(state = initialState, action) {
         signUpError: null,
         facebookError: null,
         startingUp: false,
+        refreshedUser: true,
       }
     case 'AUTH_FACEBOOK_FAILURE':
       return {

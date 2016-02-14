@@ -153,6 +153,11 @@ export function authRefreshUser(auth) {
     processResponse: (response) => {
       return { currentUser: JSON.parse(response._bodyText) }
     },
+    afterAction: (dispatch, response) => {
+      if (response.status === 401) {
+        authResetStoredAuth(dispatch)
+      }
+    },
   })
 }
 
