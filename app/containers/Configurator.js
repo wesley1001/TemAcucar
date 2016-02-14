@@ -52,7 +52,7 @@ class Configurator extends Component {
   handleUpdateEmail(data) {
     const { dispatch, auth } = this.props
     const { currentUser, credentials } = auth
-    dispatch(configUpdateEmail(data.email, currentUser.email, credentials, currentUser.password))
+    dispatch(configUpdateEmail(data.email, currentUser.email, credentials))
   }
 
   render() {

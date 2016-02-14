@@ -1,4 +1,5 @@
 import SimpleStore from 'react-native-simple-store'
+import { parseError } from './BasicActions'
 
 export function storedAuthGet(currentUser) {
   return dispatch => {

@@ -1,4 +1,3 @@
-import Config from "../Config"
 import { updateCurrentUser } from './BasicActions'
 
 export function termsAccept(credentials) {

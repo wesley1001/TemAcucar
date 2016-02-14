@@ -1,7 +1,6 @@
 import React, { Platform, NativeModules } from 'react-native'
 const FBLoginManager = NativeModules.FBLoginManager
 
-import Config from "../Config"
 import { apiAction, apiDispatchAction } from './BasicActions'
 import { storedAuthReset } from './StoredAuthActions'
 
