@@ -1,3 +1,5 @@
+import React, { Platform } from 'react-native'
+
 const initialState = {
   latitude: null,
   longitude: null,

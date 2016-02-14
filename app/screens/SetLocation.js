@@ -165,7 +165,7 @@ class SetLocation extends Component {
           />
           { searching ? this.renderSearchLoading() : this.renderSearchButton() }
         </View>
-        { this.renderMap() }
+        { /* this.renderMap() */ }
         <Tip>
           <Text style={{fontWeight: 'bold'}}>É este seu endereço?</Text> Caso não seja, é só digitar o endereço correto na busca acima e clicar na lupinha ;)
         </Tip>

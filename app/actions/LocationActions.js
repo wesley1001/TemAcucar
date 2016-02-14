@@ -1,5 +1,23 @@
+import React, { Platform } from 'react-native'
 import RNGeocoder from 'react-native-geocoder'
 import { updateCurrentUser } from './BasicActions'
+
+function processAddress(address) {
+  if (Platform.OS === 'ios') {
+    return address
+  }
+  return {
+    name: `${address.thoroughfare}, ${address.subThoroughfare}`,
+    thoroughfare: address.thoroughfare,
+    subThoroughfare: address.subThoroughfare,
+    subLocality: address.subLocality,
+    locality: address.locality,
+    subAdministrativeArea: address.subAdminArea,
+    administrativeArea: address.adminArea,
+    country: address.country,
+    postalCode: address.postalCode,
+  }
+}
 
 export function locationGetCoordinates() {
   return dispatch => {
@@ -41,7 +59,7 @@ export function locationGetAddress(latitude, longitude) {
       if(!error && data && data[0]) { 
         dispatch({
           type: 'LOCATION_GET_ADDRESS_SUCCESS',
-          address: data[0],
+          address: processAddress(data[0]),
         })
       } else {
         dispatch({
@@ -70,11 +88,12 @@ export function locationSearch(search) {
     RNGeocoder.geocodeAddress(search, (error, data) => {
       const address = data && data[0]
       if(!error && address) { 
+        const location = (Platform.OS === 'ios' ? address.location : address.position)
         dispatch({
           type: 'LOCATION_SEARCH_SUCCESS',
-          address: address,
-          latitude: address.location.lat,
-          longitude: address.location.lng,
+          address: processAddress(address),
+          latitude: location.lat,
+          longitude: location.lng,
         })
       } else {
         dispatch({
