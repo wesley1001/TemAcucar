@@ -2,7 +2,7 @@ const initialState = {
   currentUser: null,
   credentials: null,
   startingUp: true,
-  gettingUser: false,
+  gettingStoredAuth: false,
   signingIn: false,
   signingOut: false,
   facebookSigningIn: false,
@@ -15,6 +15,7 @@ const initialState = {
   requestPasswordError: null,
   refreshedUser: false,
   refreshingUser: false,
+  refreshUserError: null,
 }
 
 export default function auth(state = initialState, action) {
@@ -22,19 +23,19 @@ export default function auth(state = initialState, action) {
     case 'AUTH_GET_STORED_AUTH_REQUEST':
       return {
         ...state, 
-        gettingUser: true,
+        gettingStoredAuth: true,
       }
     case 'AUTH_GET_STORED_AUTH_SUCCESS':
       return {
         ...state, 
         credentials: action.credentials,
         currentUser: action.currentUser,
-        gettingUser: false,
+        gettingStoredAuth: false,
       }
     case 'AUTH_GET_STORED_AUTH_FAILURE':
       return {
         ...state, 
-        gettingUser: false,
+        gettingStoredAuth: false,
         startingUp: false,
       }
     case 'AUTH_RESET_STORED_AUTH_SUCCESS':
@@ -67,6 +68,7 @@ export default function auth(state = initialState, action) {
       return {
         ...state, 
         refreshingUser: false,
+        refreshUserError: action.error,
         startingUp: false,
       }
     case 'AUTH_SIGN_IN_REQUEST':
@@ -94,6 +96,7 @@ export default function auth(state = initialState, action) {
         signUpError: null,
         facebookError: null,
         startingUp: false,
+        refreshedUser: true,
       }
     case 'AUTH_SIGN_IN_FAILURE':
       return {

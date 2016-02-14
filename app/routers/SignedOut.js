@@ -22,8 +22,8 @@ export default class SignedOut extends Component {
   }
 
   signInFailed(props) {
-    const { signInError, facebookError } = props.auth
-    return (signInError || facebookError)
+    const { signInError, facebookError, refreshUserError } = props.auth
+    return (signInError || facebookError || refreshUserError)
   }
 
   render() {

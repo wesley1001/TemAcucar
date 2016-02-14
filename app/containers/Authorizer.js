@@ -14,19 +14,9 @@ class Authorizer extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, auth } = nextProps
-    if (this.shouldSignIn(nextProps)) {
-      dispatch(authSignIn(auth))
-    } else if (this.shouldRefreshUser(nextProps)) {
+    if (this.shouldRefreshUser(nextProps)) {
       dispatch(authRefreshUser(auth))
     }
-  }
-
-  shouldSignIn(props) {
-    const { currentUser, credentials } = props.auth
-    return (
-      // We have user info but it is signed out, and we're not in the middle of other auth async actions
-      currentUser && !credentials && this.isIdle(props)
-    )
   }
 
   shouldRefreshUser(props) {
@@ -38,13 +28,13 @@ class Authorizer extends Component {
   }
 
   isIdle(props) {
-    const { signingIn, signingUp, signingOut, gettingUser } = props.auth
+    const { signingIn, signingUp, signingOut, gettingStoredAuth } = props.auth
     const { facebookSigningIn, facebookError, signInError, signUpError } = props.auth
     const { requestingPassword, resetingPassword, resetPassword } = props.auth
-    const { requestPasswordError, resetPasswordError, refreshingUser } = props.auth
+    const { requestPasswordError, resetPasswordError, refreshingUser, refreshUserError } = props.auth
     return (
       // We're not getting user info
-      !gettingUser && 
+      !gettingStoredAuth && 
       // We're not in the middle of any kind of sign in/up/out
       !facebookSigningIn && !signingIn && !signingUp && !signingOut && 
       // We're not in the middle of reset password flow
@@ -56,13 +46,13 @@ class Authorizer extends Component {
       // We don't have a request/reset password errors, so RequestPassword and ResetPassword can manage errors by themselves
       !requestPasswordError && !resetPasswordError &&
       // We're not in the middle of refreshing user
-      !refreshingUser
+      !refreshingUser && !refreshUserError
     )
   }
 
   isLoading() {
-    const { startingUp, gettingUser, signingIn, facebookSigningIn, signingOut } = this.props.auth
-    return (startingUp || gettingUser || signingIn|| facebookSigningIn || signingOut)
+    const { startingUp, gettingStoredAuth, signingIn, facebookSigningIn, signingOut } = this.props.auth
+    return (startingUp || gettingStoredAuth || signingIn|| facebookSigningIn || signingOut)
   }
 
   isSignedOut() {

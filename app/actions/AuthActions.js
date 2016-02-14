@@ -142,10 +142,10 @@ function authResetStoredAuth(dispatch) {
 }
 
 export function authRefreshUser(auth) {
-  const { credentials, currentUser } = auth
+  const { credentials } = auth
   return apiAction({
     prefix: 'AUTH_REFRESH_USER',
-    path: `/users/${credentials.uid}`,
+    path: `/me`,
     credentials,
     currentUser: (response) => {
       return JSON.parse(response._bodyText)
@@ -237,71 +237,35 @@ export function authFacebook() {
 }
 
 function authEmail(currentUser) {
-  return dispatch => {
-    dispatch({
-      type: 'AUTH_SIGN_IN_REQUEST',
-      currentUser,
-    })
-    fetch(`${Config.apiUrl}/authentications`, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: currentUser.email,
-        password: currentUser.password,
-      })
-    })
-    .then(response => {
-      if(response.ok) {
-        dispatch({
-          type: 'AUTH_SIGN_IN_SUCCESS',
-          currentUser: JSON.parse(response._bodyText),
-          credentials: authCredentials(response),
-        })
-        return true
-      } else {
-        dispatch({
-          type: 'AUTH_SIGN_IN_FAILURE',
-          error: parseError(response),
-        })
-      }
-    })
-    .catch(error => {
-      dispatch({
-        type: 'AUTH_SIGN_IN_FAILURE',
-        error: parseError(error),
-      })
-    })
-  }  
+  return apiAction({
+    prefix: 'AUTH_SIGN_IN',
+    path: '/authentications',
+    method: 'post',
+    params: {
+      email: currentUser.email,
+      password: currentUser.password,
+    },
+    requestAttributes: { currentUser },
+    currentUser: (response) => {
+      return JSON.parse(response._bodyText)
+    },
+    processResponse: (response) => {
+      return { currentUser: JSON.parse(response._bodyText) }
+    },
+  })
 }
 
 export function authSignOut(credentials) {
-  return dispatch => {
-    dispatch({ type: 'AUTH_SIGN_OUT_REQUEST' })
-    fetch(`${Config.apiUrl}/authentications`, {
-      method: 'delete',
-      headers: authHeaders(credentials)
-    })
-    .then(response => {
-      if(response.ok) {
-        dispatch({ type: 'AUTH_SIGN_OUT_SUCCESS' })
-      } else {
-        dispatch({
-          type: 'AUTH_SIGN_OUT_FAILURE',
-          error: parseError(response),
-        })
-      }
-    })
-    .then(() => authResetStoredAuth(dispatch))
-    .catch(error => {
-      dispatch({
-        type: 'AUTH_SIGN_OUT_FAILURE',
-        error: parseError(error),
-      })
-    })
-  }  
+  return apiAction({
+    prefix: 'AUTH_SIGN_OUT',
+    path: '/authentications',
+    method: 'delete',
+    credentials: credentials,
+    currentUser: (response) => {
+      return JSON.parse(response._bodyText)
+    },
+    afterAction: (dispatch) => authResetStoredAuth(dispatch),
+  })
 }
 
 export function authRequestPassword(currentUser) {

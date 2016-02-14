@@ -39,7 +39,7 @@ export function updateCurrentUser(prefix, auth, user) {
 }
 
 export function apiAction(options) {
-  const { prefix, path, credentials, currentUser, method, params, requestAttributes, processResponse } = options
+  const { prefix, path, credentials, currentUser, method, params, requestAttributes, processResponse, afterAction } = options
   return dispatch => {
     dispatch({
       type: `${prefix}_REQUEST`,
@@ -60,18 +60,24 @@ export function apiAction(options) {
     fetch(`${Config.apiUrl}${path}`, fetchOptions)
     .then(response => {
       if(response.ok) {
+        const newCredentials = authCredentials(response)
         dispatch({
           type: `${prefix}_SUCCESS`,
-          credentials: authCredentials(response),
-          ...processResponse(response),
+          credentials: newCredentials,
+          ...(processResponse && processResponse(response)),
         })
-        authSetStoredAuth(dispatch, authCredentials(response), keyFilter(currentUser(response), ['password', 'facebook']))
+        if (newCredentials.access_token) {
+          authSetStoredAuth(dispatch, newCredentials, keyFilter(currentUser(response), ['password', 'facebook']))
+        }
       } else {
         dispatch({
           type: `${prefix}_FAILURE`,
           error: parseError(response),
         })
       }
+    })
+    .then(() => {
+      afterAction && afterAction(dispatch)
     })
     .catch(error => {
       dispatch({
