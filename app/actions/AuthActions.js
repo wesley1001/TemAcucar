@@ -3,7 +3,7 @@ const FBLoginManager = NativeModules.FBLoginManager
 import SimpleStore from 'react-native-simple-store'
 
 import Config from "../Config"
-import { apiAction, parseError } from './BasicActions'
+import { apiAction, apiDispatchAction, parseError } from './BasicActions'
 
 export function authHeaders(credentials) {
   return {
@@ -141,8 +141,7 @@ function authResetStoredAuth(dispatch) {
   })
 }
 
-export function authRefreshUser(auth) {
-  const { credentials } = auth
+export function authRefreshUser(credentials) {
   return apiAction({
     prefix: 'AUTH_REFRESH_USER',
     path: `/me`,
@@ -197,39 +196,22 @@ export function authFacebook() {
     authFacebookLogin((data, facebookError) => {
       if (!facebookError) {
         const facebook = data.credentials
-        dispatch({
-          type: 'AUTH_FACEBOOK_REQUEST',
-          currentUser: { facebook },
-        })
-        fetch(`${Config.apiUrl}/authentications`, {
+        apiDispatchAction(dispatch, {
+          prefix: 'AUTH_FACEBOOK',
+          path: '/authentications',
           method: 'post',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+          params: {
             facebook_token: facebook.token,
-          })
-        })
-        .then(response => {
-          if(response.ok) {
-            dispatch({
-              type: 'AUTH_FACEBOOK_SUCCESS',
-              currentUser: JSON.parse(response._bodyText),
-              credentials: authCredentials(response),
-            })
-          } else {
-            dispatch({
-              type: 'AUTH_FACEBOOK_FAILURE',
-              error: parseError(response),
-            })
-          }
-        })
-        .catch(error => {
-          dispatch({
-            type: 'AUTH_FACEBOOK_FAILURE',
-            error: parseError(error),
-          })
+          },
+          requestAttributes: {
+            currentUser: { facebook },
+          },
+          currentUser: (response) => {
+            return JSON.parse(response._bodyText)
+          },
+          processResponse: (response) => {
+            return { currentUser: JSON.parse(response._bodyText) }
+          },
         })
       } else {
         dispatch({

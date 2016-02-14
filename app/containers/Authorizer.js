@@ -13,9 +13,9 @@ class Authorizer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, auth } = nextProps
+    const { dispatch, auth: { credentials } } = nextProps
     if (this.shouldRefreshUser(nextProps)) {
-      dispatch(authRefreshUser(auth))
+      dispatch(authRefreshUser(credentials))
     }
   }
 

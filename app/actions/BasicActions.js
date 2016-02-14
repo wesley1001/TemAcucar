@@ -39,53 +39,54 @@ export function updateCurrentUser(prefix, auth, user) {
 }
 
 export function apiAction(options) {
-  const { prefix, path, credentials, currentUser, method, params, requestAttributes, processResponse, afterAction } = options
-  return dispatch => {
-    dispatch({
-      type: `${prefix}_REQUEST`,
-      ...requestAttributes,
-    })
-    let fetchOptions = { method: (method ? method : 'get') }
-    if (credentials) {
-      fetchOptions.headers = authHeaders(credentials)
-    } else {
-      fetchOptions.headers = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      }      
-    }
-    if (params) {
-      fetchOptions.body = JSON.stringify(params)
-    }
-    fetch(`${Config.apiUrl}${path}`, fetchOptions)
-    .then(response => {
-      if(response.ok) {
-        const newCredentials = authCredentials(response)
-        dispatch({
-          type: `${prefix}_SUCCESS`,
-          credentials: newCredentials,
-          ...(processResponse && processResponse(response)),
-        })
-        if (newCredentials.accessToken) {
-          authSetStoredAuth(dispatch, newCredentials, keyFilter(currentUser(response), ['password', 'facebook']))
-        }
-      } else {
-        dispatch({
-          type: `${prefix}_FAILURE`,
-          error: parseError(response),
-        })
-      }
-      return response
-    })
-    .then((response) => {
-      afterAction && afterAction(dispatch, response)
-    })
-    .catch(error => {
-      dispatch({
-        type: `${prefix}_FAILURE`,
-        error: parseError(error),
-      })
-    })
-  }  
+  return dispatch => apiDispatchAction(dispatch, options)
 }
 
+export function apiDispatchAction(dispatch, options) {
+  const { prefix, path, credentials, currentUser, method, params, requestAttributes, processResponse, afterAction } = options
+  dispatch({
+    type: `${prefix}_REQUEST`,
+    ...requestAttributes,
+  })
+  let fetchOptions = { method: (method ? method : 'get') }
+  if (credentials) {
+    fetchOptions.headers = authHeaders(credentials)
+  } else {
+    fetchOptions.headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }      
+  }
+  if (params) {
+    fetchOptions.body = JSON.stringify(params)
+  }
+  fetch(`${Config.apiUrl}${path}`, fetchOptions)
+  .then(response => {
+    if(response.ok) {
+      const newCredentials = authCredentials(response)
+      dispatch({
+        type: `${prefix}_SUCCESS`,
+        credentials: newCredentials,
+        ...(processResponse && processResponse(response)),
+      })
+      if (newCredentials.accessToken) {
+        authSetStoredAuth(dispatch, newCredentials, keyFilter(currentUser(response), ['password', 'facebook']))
+      }
+    } else {
+      dispatch({
+        type: `${prefix}_FAILURE`,
+        error: parseError(response),
+      })
+    }
+    return response
+  })
+  .then((response) => {
+    afterAction && afterAction(dispatch, response)
+  })
+  .catch(error => {
+    dispatch({
+      type: `${prefix}_FAILURE`,
+      error: parseError(error),
+    })
+  })
+}
