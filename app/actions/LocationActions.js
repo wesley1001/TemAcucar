@@ -94,7 +94,7 @@ export function locationSetLocation(location, credentials) {
     const { latitude, longitude, address } = location
     dispatch({ type: 'LOCATION_SET_LOCATION_REQUEST' })
     fetch(`${Config.apiUrl}/users/${credentials.uid}`, {
-      method: 'patch',
+      method: 'put',
       headers: authHeaders(credentials),
       body: JSON.stringify({
         reviewed_location: true,

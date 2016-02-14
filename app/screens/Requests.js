@@ -48,12 +48,12 @@ export default class Requests extends Component {
     )
   }
 
+  //      { latitude && longitude && this.renderMap() }
   render() {
     const { latitude, longitude } = this.props.currentUser
     const delta = this.state.delta * 1000
     return (
       <View>
-        { latitude && longitude && this.renderMap() }
         <Slider
           disabled={false}
           minimumValue={-50}

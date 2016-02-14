@@ -1,6 +1,6 @@
 import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
-import { authGetUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword } from '../actions/AuthActions'
+import { authGetStoredAuth, authRefreshUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword } from '../actions/AuthActions'
 
 import Loading from "../screens/Loading"
 import SignedOut from "../routers/SignedOut"
@@ -9,25 +9,40 @@ import Configurator from "./Configurator"
 class Authorizer extends Component {
   componentDidMount() {
     const { dispatch, auth: { currentUser } } = this.props
-    dispatch(authGetUser(currentUser))
+    dispatch(authGetStoredAuth(currentUser))
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, auth: { currentUser } } = nextProps
+    const { dispatch, auth } = nextProps
     if (this.shouldSignIn(nextProps)) {
-      dispatch(authSignIn(currentUser))
+      dispatch(authSignIn(auth))
+    } else if (this.shouldRefreshUser(nextProps)) {
+      dispatch(authRefreshUser(auth))
     }
   }
 
   shouldSignIn(props) {
-    const { currentUser, credentials, facebookSigningIn } = props.auth
-    const { signingIn, signingUp, signingOut, gettingUser } = props.auth
-    const { facebookError, signInError, signUpError } = props.auth
-    const { requestingPassword, resetingPassword, resetPassword } = props.auth
-    const { requestPasswordError, resetPasswordError } = props.auth
+    const { currentUser, credentials } = props.auth
     return (
-      // We have user info but it is signed out
-      currentUser && !credentials && 
+      // We have user info but it is signed out, and we're not in the middle of other auth async actions
+      currentUser && !credentials && this.isIdle(props)
+    )
+  }
+
+  shouldRefreshUser(props) {
+    const { currentUser, credentials, refreshedUser } = props.auth
+    return (
+      // We have user info but it might be out of date, and we're not in the middle of other auth async actions
+      currentUser && credentials && !refreshedUser && this.isIdle(props)
+    )
+  }
+
+  isIdle(props) {
+    const { signingIn, signingUp, signingOut, gettingUser } = props.auth
+    const { facebookSigningIn, facebookError, signInError, signUpError } = props.auth
+    const { requestingPassword, resetingPassword, resetPassword } = props.auth
+    const { requestPasswordError, resetPasswordError, refreshingUser } = props.auth
+    return (
       // We're not getting user info
       !gettingUser && 
       // We're not in the middle of any kind of sign in/up/out
@@ -39,7 +54,9 @@ class Authorizer extends Component {
       // We don't have a sign up error, so SignUpForm can manage errors by itself
       !signUpError && 
       // We don't have a request/reset password errors, so RequestPassword and ResetPassword can manage errors by themselves
-      !requestPasswordError && !resetPasswordError
+      !requestPasswordError && !resetPasswordError &&
+      // We're not in the middle of refreshing user
+      !refreshingUser
     )
   }
 

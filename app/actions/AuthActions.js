@@ -1,9 +1,9 @@
 import React, { Platform, NativeModules } from 'react-native'
 const FBLoginManager = NativeModules.FBLoginManager
-import Keychain from 'react-native-keychain'
+import SimpleStore from 'react-native-simple-store'
 
 import Config from "../Config"
-import { parseError } from './BasicActions'
+import { apiAction, parseError } from './BasicActions'
 
 export function authHeaders(credentials) {
   return {
@@ -53,28 +53,25 @@ function authFacebookLogin(callback) {
   })
 }
 
-export function authGetUser(currentUser) {
+export function authGetStoredAuth(currentUser) {
   return dispatch => {
     if (currentUser) 
       return
-    dispatch({ type: 'AUTH_GET_USER_REQUEST' })
-    Keychain
-    .getInternetCredentials(Config.apiUrl)
-    .then((credentials) => {
-      if (credentials.username && credentials.username.length > 0 && credentials.password && credentials.password.length > 0) {
+    dispatch({ type: 'AUTH_GET_STORED_AUTH_REQUEST' })
+    SimpleStore.get('auth')
+    .then((auth) => {
+      if (auth) {
         dispatch({
-          type: 'AUTH_GET_USER_SUCCESS',
-          currentUser: {
-            email: credentials.username,
-            password: credentials.password,
-          },
+          type: 'AUTH_GET_STORED_AUTH_SUCCESS',
+          credentials: auth.credentials,
+          currentUser: auth.currentUser,
         })
       } else {
         dispatch({
-          type: 'AUTH_GET_USER_FAILURE',
+          type: 'AUTH_GET_STORED_AUTH_FAILURE',
           error: {
-            id: 'invalid_internet_credentials',
-            message: 'Invalid internet credentials.',
+            id: 'no_stored_credentials',
+            message: 'Could not find stored credentials.',
           },
         })
       }
@@ -83,14 +80,14 @@ export function authGetUser(currentUser) {
       authGetFacebook((data, facebookError) => {
         if (!facebookError) {
           dispatch({
-            type: 'AUTH_GET_USER_SUCCESS',
+            type: 'AUTH_GET_STORED_AUTH_SUCCESS',
             currentUser: {
               facebook: data.credentials,
             },
           })
         } else {
           dispatch({
-            type: 'AUTH_GET_USER_FAILURE',
+            type: 'AUTH_GET_STORED_AUTH_FAILURE',
             error: parseError(error),
           })
         }
@@ -99,50 +96,63 @@ export function authGetUser(currentUser) {
   }
 }
 
-export function authSetUser(dispatch, currentUser) {
-  if (currentUser && currentUser.email && currentUser.email.length > 0 && currentUser.password && currentUser.password.length > 0) {
+export function authSetStoredAuth(dispatch, credentials, currentUser) {
+  if (credentials && currentUser) {
     dispatch({
-      type: 'AUTH_SET_USER_REQUEST',
+      type: 'AUTH_SET_STORED_AUTH_REQUEST',
+      credentials,
       currentUser,
     })
-    Keychain
-    .setInternetCredentials(Config.apiUrl, currentUser.email, currentUser.password)
+    SimpleStore.save('auth', { credentials, currentUser })
     .then(() => {
       dispatch({
-        type: 'AUTH_SET_USER_SUCCESS',
+        type: 'AUTH_SET_STORED_AUTH_SUCCESS',
+        credentials,
         currentUser,
       })
     })
     .catch(error => {
       dispatch({
-        type: 'AUTH_SET_USER_FAILURE',
+        type: 'AUTH_SET_STORED_AUTH_FAILURE',
         error: parseError(error),
       })
     })
   }
 }
 
-function authResetUser(dispatch) {
-  dispatch({ type: 'AUTH_RESET_USER_REQUEST'})
+function authResetStoredAuth(dispatch) {
+  dispatch({ type: 'AUTH_RESET_STORED_AUTH_REQUEST'})
   FBLoginManager.logout((error, data) => {
     if (error) {
       dispatch({
-        type: 'AUTH_RESET_USER_FAILURE',
+        type: 'AUTH_RESET_STORED_AUTH_FAILURE',
         error,
       })
     } else {
-      Keychain
-      .resetInternetCredentials(Config.apiUrl)
-      .then(() => {
-      })
-      .then(() => dispatch({ type: 'AUTH_RESET_USER_SUCCESS' }))
+      SimpleStore.delete('auth')
+      .then(() => dispatch({ type: 'AUTH_RESET_STORED_AUTH_SUCCESS' }))
       .catch(error => {
         dispatch({
-          type: 'AUTH_RESET_USER_FAILURE',
+          type: 'AUTH_RESET_STORED_AUTH_FAILURE',
           error: parseError(error),
         })
       })
     }
+  })
+}
+
+export function authRefreshUser(auth) {
+  const { credentials, currentUser } = auth
+  return apiAction({
+    prefix: 'AUTH_REFRESH_USER',
+    path: `/users/${credentials.uid}`,
+    credentials,
+    currentUser: (response) => {
+      return JSON.parse(response._bodyText)
+    },
+    processResponse: (response) => {
+      return { currentUser: JSON.parse(response._bodyText) }
+    },
   })
 }
 
@@ -157,50 +167,24 @@ export function authSignIn(currentUser) {
 }
 
 export function authSignUp(currentUser) {
-  return dispatch => {
-    dispatch({
-      type: 'AUTH_SIGN_UP_REQUEST',
-      currentUser,
-    })
-    fetch(`${Config.apiUrl}/users`, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        first_name: currentUser.first_name,
-        last_name: currentUser.last_name,
-        email: currentUser.email,
-        password: currentUser.password,
-      })
-    })
-    .then(response => {
-      if(response.ok) {
-        dispatch({
-          type: 'AUTH_SIGN_UP_SUCCESS',
-          currentUser: JSON.parse(response._bodyText),
-          credentials: authCredentials(response),
-        })
-        return true
-      } else {
-        dispatch({
-          type: 'AUTH_SIGN_UP_FAILURE',
-          error: parseError(response),
-        })
-      }
-    })
-    .then((shouldSetUser) => {
-      if (shouldSetUser)
-        authSetUser(dispatch, currentUser)
-    })
-    .catch(error => {
-      dispatch({
-        type: 'AUTH_SIGN_UP_FAILURE',
-        error: parseError(error),
-      })
-    })
-  }  
+  return apiAction({
+    prefix: 'AUTH_SIGN_UP',
+    path: '/users',
+    method: 'post',
+    params: {
+      first_name: currentUser.first_name,
+      last_name: currentUser.last_name,
+      email: currentUser.email,
+      password: currentUser.password,
+    },
+    requestAttributes: { currentUser },
+    currentUser: (response) => {
+      return JSON.parse(response._bodyText)
+    },
+    processResponse: (response) => {
+      return { currentUser: JSON.parse(response._bodyText) }
+    },
+  })
 }
 
 export function authFacebook() {
@@ -284,10 +268,6 @@ function authEmail(currentUser) {
         })
       }
     })
-    .then((shouldSetUser) => {
-      if (shouldSetUser)
-        authSetUser(dispatch, currentUser)
-    })
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_IN_FAILURE',
@@ -314,7 +294,7 @@ export function authSignOut(credentials) {
         })
       }
     })
-    .then(() => authResetUser(dispatch))
+    .then(() => authResetStoredAuth(dispatch))
     .catch(error => {
       dispatch({
         type: 'AUTH_SIGN_OUT_FAILURE',
@@ -366,7 +346,7 @@ export function authResetPassword(currentUser) {
       currentUser,
     })
     fetch(`${Config.apiUrl}/password`, {
-      method: 'patch',
+      method: 'put',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -391,10 +371,6 @@ export function authResetPassword(currentUser) {
           error: parseError(response),
         })
       }
-    })
-    .then((shouldSetUser) => {
-      if (shouldSetUser)
-        authSetUser(dispatch, currentUser)
     })
     .catch(error => {
       dispatch({

@@ -13,31 +13,61 @@ const initialState = {
   signUpError: null,
   facebookError: null,
   requestPasswordError: null,
+  refreshedUser: false,
+  refreshingUser: false,
 }
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
-    case 'AUTH_GET_USER_REQUEST':
+    case 'AUTH_GET_STORED_AUTH_REQUEST':
       return {
         ...state, 
         gettingUser: true,
       }
-    case 'AUTH_GET_USER_SUCCESS':
+    case 'AUTH_GET_STORED_AUTH_SUCCESS':
       return {
         ...state, 
+        credentials: action.credentials,
         currentUser: action.currentUser,
         gettingUser: false,
       }
-    case 'AUTH_GET_USER_FAILURE':
+    case 'AUTH_GET_STORED_AUTH_FAILURE':
       return {
         ...state, 
         gettingUser: false,
         startingUp: false,
       }
-    case 'AUTH_RESET_USER_SUCCESS':
+    case 'AUTH_RESET_STORED_AUTH_SUCCESS':
       return {
         ...state, 
         currentUser: null,
+      }
+    case 'AUTH_REFRESH_USER_REQUEST':
+      return {
+        ...state, 
+        currentUser: {
+          ...state.currentUser, 
+          ...action.currentUser,
+        },
+        refreshingUser: true,
+      }
+    case 'AUTH_REFRESH_USER_SUCCESS':
+      return {
+        ...state, 
+        currentUser: {
+          ...state.currentUser, 
+          ...action.currentUser,
+        },
+        credentials: action.credentials,
+        refreshingUser: false,
+        refreshedUser: true,
+        startingUp: false,
+      }
+    case 'AUTH_REFRESH_USER_FAILURE':
+      return {
+        ...state, 
+        refreshingUser: false,
+        startingUp: false,
       }
     case 'AUTH_SIGN_IN_REQUEST':
       return {
