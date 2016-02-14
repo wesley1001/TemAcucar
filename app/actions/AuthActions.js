@@ -1,145 +1,9 @@
 import React, { Platform, NativeModules } from 'react-native'
 const FBLoginManager = NativeModules.FBLoginManager
-import SimpleStore from 'react-native-simple-store'
 
 import Config from "../Config"
-import { apiAction, apiDispatchAction, parseError } from './BasicActions'
-
-export function authHeaders(credentials) {
-  return {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Access-Token': credentials.accessToken,
-    'Expiry': credentials.expiry,
-    'Token-Type': credentials.tokenType,
-    'Uid': credentials.uid,
-    'Client': credentials.client,
-  }
-}
-
-export function authCredentials(response) {
-  return {
-    accessToken: response.headers.get('access-token'),
-    client: response.headers.get('client'),
-    expiry: response.headers.get('expiry'),
-    tokenType: response.headers.get('token-type'),
-    uid: response.headers.get('uid'),
-  }
-}
-
-function authGetFacebook(callback) {
-  if (Platform.OS == 'ios') {
-    FBLoginManager.getCredentials((facebookError, facebookData) => {
-      callback(facebookData, facebookError)
-    })
-  } else {
-    FBLoginManager.getCurrentToken((token) => {
-      if ((typeof token) === 'string' && token.length > 0) {
-        callback({ credentials: {token} }, null)
-      } else {
-        callback(null, 'LoginNotFound')
-      }
-    })
-  }
-}
-
-function authFacebookLogin(callback) {
-  FBLoginManager.loginWithPermissions(["public_profile", "email", "user_friends"], (facebookError, facebookData) => {
-    if (Platform.OS == 'ios') {
-      callback(facebookData, facebookError)
-    } else {
-      callback({ credentials: facebookData }, facebookError)
-    }
-  })
-}
-
-export function authGetStoredAuth(currentUser) {
-  return dispatch => {
-    if (currentUser) 
-      return
-    dispatch({ type: 'AUTH_GET_STORED_AUTH_REQUEST' })
-    SimpleStore.get('auth')
-    .then((auth) => {
-      if (auth) {
-        dispatch({
-          type: 'AUTH_GET_STORED_AUTH_SUCCESS',
-          credentials: auth.credentials,
-          currentUser: auth.currentUser,
-        })
-      } else {
-        dispatch({
-          type: 'AUTH_GET_STORED_AUTH_FAILURE',
-          error: {
-            id: 'no_stored_credentials',
-            message: 'Could not find stored credentials.',
-          },
-        })
-      }
-    })
-    .catch(error => {
-      authGetFacebook((data, facebookError) => {
-        if (!facebookError) {
-          dispatch({
-            type: 'AUTH_GET_STORED_AUTH_SUCCESS',
-            currentUser: {
-              facebook: data.credentials,
-            },
-          })
-        } else {
-          dispatch({
-            type: 'AUTH_GET_STORED_AUTH_FAILURE',
-            error: parseError(error),
-          })
-        }
-      })
-    })
-  }
-}
-
-export function authSetStoredAuth(dispatch, credentials, currentUser) {
-  if (credentials && currentUser) {
-    dispatch({
-      type: 'AUTH_SET_STORED_AUTH_REQUEST',
-      credentials,
-      currentUser,
-    })
-    SimpleStore.save('auth', { credentials, currentUser })
-    .then(() => {
-      dispatch({
-        type: 'AUTH_SET_STORED_AUTH_SUCCESS',
-        credentials,
-        currentUser,
-      })
-    })
-    .catch(error => {
-      dispatch({
-        type: 'AUTH_SET_STORED_AUTH_FAILURE',
-        error: parseError(error),
-      })
-    })
-  }
-}
-
-function authResetStoredAuth(dispatch) {
-  dispatch({ type: 'AUTH_RESET_STORED_AUTH_REQUEST'})
-  FBLoginManager.logout((error, data) => {
-    if (error) {
-      dispatch({
-        type: 'AUTH_RESET_STORED_AUTH_FAILURE',
-        error,
-      })
-    } else {
-      SimpleStore.delete('auth')
-      .then(() => dispatch({ type: 'AUTH_RESET_STORED_AUTH_SUCCESS' }))
-      .catch(error => {
-        dispatch({
-          type: 'AUTH_RESET_STORED_AUTH_FAILURE',
-          error: parseError(error),
-        })
-      })
-    }
-  })
-}
+import { apiAction, apiDispatchAction } from './BasicActions'
+import { storedAuthReset } from './StoredAuthActions'
 
 export function authRefreshUser(credentials) {
   return apiAction({
@@ -154,7 +18,7 @@ export function authRefreshUser(credentials) {
     },
     afterAction: (dispatch, response) => {
       if (response.status === 401) {
-        authResetStoredAuth(dispatch)
+        storedAuthReset(dispatch)
       }
     },
   })
@@ -188,6 +52,16 @@ export function authSignUp(currentUser) {
     processResponse: (response) => {
       return { currentUser: JSON.parse(response._bodyText) }
     },
+  })
+}
+
+function authFacebookLogin(callback) {
+  FBLoginManager.loginWithPermissions(["public_profile", "email", "user_friends"], (facebookError, facebookData) => {
+    if (Platform.OS == 'ios') {
+      callback(facebookData, facebookError)
+    } else {
+      callback({ credentials: facebookData }, facebookError)
+    }
   })
 }
 
@@ -251,7 +125,7 @@ export function authSignOut(credentials) {
     currentUser: (response) => {
       return JSON.parse(response._bodyText)
     },
-    afterAction: (dispatch) => authResetStoredAuth(dispatch),
+    afterAction: (dispatch) => storedAuthReset(dispatch),
   })
 }
 

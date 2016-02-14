@@ -1,6 +1,28 @@
 import keyFilter from 'object-key-filter'
 import Config from "../Config"
-import { authHeaders, authCredentials, authSetStoredAuth } from './AuthActions'
+import { storedAuthSet } from './StoredAuthActions'
+
+function requestHeaders(credentials) {
+  return {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Access-Token': credentials.accessToken,
+    'Expiry': credentials.expiry,
+    'Token-Type': credentials.tokenType,
+    'Uid': credentials.uid,
+    'Client': credentials.client,
+  }
+}
+
+function responseCredentials(response) {
+  return {
+    accessToken: response.headers.get('access-token'),
+    client: response.headers.get('client'),
+    expiry: response.headers.get('expiry'),
+    tokenType: response.headers.get('token-type'),
+    uid: response.headers.get('uid'),
+  }
+}
 
 export function parseError(error) {
   if (error instanceof Error) {
@@ -49,7 +71,7 @@ export function apiDispatchAction(dispatch, options) {
   })
   let fetchOptions = { method: (method ? method : 'get') }
   if (credentials) {
-    fetchOptions.headers = authHeaders(credentials)
+    fetchOptions.headers = requestHeaders(credentials)
   } else {
     fetchOptions.headers = {
       'Accept': 'application/json',
@@ -62,14 +84,14 @@ export function apiDispatchAction(dispatch, options) {
   fetch(`${Config.apiUrl}${path}`, fetchOptions)
   .then(response => {
     if(response.ok) {
-      const newCredentials = authCredentials(response)
+      const newCredentials = responseCredentials(response)
       let successAction = {
         type: `${prefix}_SUCCESS`,
         ...(processResponse && processResponse(response)),
       }
       if (newCredentials.accessToken) {
         successAction.credentials = newCredentials
-        authSetStoredAuth(dispatch, newCredentials, keyFilter(currentUser(response), ['password', 'facebook']))
+        storedAuthSet(dispatch, newCredentials, keyFilter(currentUser(response), ['password', 'facebook']))
       }
       dispatch(successAction)
     } else {

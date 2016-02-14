@@ -1,6 +1,7 @@
 import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
-import { authGetStoredAuth, authRefreshUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword } from '../actions/AuthActions'
+import { authRefreshUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword } from '../actions/AuthActions'
+import { storedAuthGet } from '../actions/StoredAuthActions'
 
 import Loading from "../screens/Loading"
 import SignedOut from "../routers/SignedOut"
@@ -9,7 +10,7 @@ import Configurator from "./Configurator"
 class Authorizer extends Component {
   componentDidMount() {
     const { dispatch, auth: { currentUser } } = this.props
-    dispatch(authGetStoredAuth(currentUser))
+    dispatch(storedAuthGet(currentUser))
   }
 
   componentWillReceiveProps(nextProps) {

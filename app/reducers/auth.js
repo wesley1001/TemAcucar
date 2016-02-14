@@ -20,25 +20,25 @@ const initialState = {
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
-    case 'AUTH_GET_STORED_AUTH_REQUEST':
+    case 'STORED_AUTH_GET_REQUEST':
       return {
         ...state, 
         gettingStoredAuth: true,
       }
-    case 'AUTH_GET_STORED_AUTH_SUCCESS':
+    case 'STORED_AUTH_GET_SUCCESS':
       return {
         ...state, 
         credentials: action.credentials,
         currentUser: action.currentUser,
         gettingStoredAuth: false,
       }
-    case 'AUTH_GET_STORED_AUTH_FAILURE':
+    case 'STORED_AUTH_GET_FAILURE':
       return {
         ...state, 
         gettingStoredAuth: false,
         startingUp: false,
       }
-    case 'AUTH_RESET_STORED_AUTH_SUCCESS':
+    case 'STORED_AUTH_RESET_SUCCESS':
       return {
         ...state, 
         credentials: null,
