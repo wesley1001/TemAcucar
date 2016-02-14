@@ -46,7 +46,7 @@ export default UserValidators = {
       case 'email_is_already_taken':
         return 'Email já cadastrado para outro usuário.'
       case 'unauthorized':
-        return 'Código inválido. Confira novamente seu email ;)'
+        return 'Código inválido. Confira seu email ;)'
       default:
         return 'Oops! Ocorreu um erro. Tente novamente.'
     }

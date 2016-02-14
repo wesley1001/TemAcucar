@@ -14,8 +14,8 @@ import Neighborhood from "./Neighborhood"
 
 class Configurator extends Component {
   handleAcceptTerms() {
-    const { dispatch, auth } = this.props
-    dispatch(termsAccept(auth))
+    const { dispatch, auth: { credentials } } = this.props
+    dispatch(termsAccept(credentials))
   }
 
   handleRejectTerms() {

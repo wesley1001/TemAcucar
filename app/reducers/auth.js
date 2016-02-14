@@ -130,6 +130,7 @@ export default function auth(state = initialState, action) {
         signUpError: null,
         facebookError: null,
         signingUp: false,
+        refreshedUser: true,
       }
     case 'AUTH_SIGN_UP_FAILURE':
       return {
@@ -238,6 +239,7 @@ export default function auth(state = initialState, action) {
         resetingPassword: false,
         resetPasswordError: null,
         resetPassword: false,
+        refreshedUser: true,
       }
     case 'AUTH_RESET_PASSWORD_FAILURE':
       return {

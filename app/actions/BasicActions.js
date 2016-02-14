@@ -21,13 +21,12 @@ export function parseError(error) {
   }
 }
 
-export function updateCurrentUser(prefix, auth, user) {
-  const { credentials, currentUser } = auth
+export function updateCurrentUser(prefix, credentials, attributes) {
   return apiAction({
     prefix,
     path: `/users/${credentials.uid}`,
     method: 'put',
-    params: user,
+    params: attributes,
     credentials,
     currentUser: (response) => {
       return JSON.parse(response._bodyText)
@@ -64,14 +63,15 @@ export function apiDispatchAction(dispatch, options) {
   .then(response => {
     if(response.ok) {
       const newCredentials = authCredentials(response)
-      dispatch({
+      let successAction = {
         type: `${prefix}_SUCCESS`,
-        credentials: newCredentials,
         ...(processResponse && processResponse(response)),
-      })
+      }
       if (newCredentials.accessToken) {
+        successAction.credentials = newCredentials
         authSetStoredAuth(dispatch, newCredentials, keyFilter(currentUser(response), ['password', 'facebook']))
       }
+      dispatch(successAction)
     } else {
       dispatch({
         type: `${prefix}_FAILURE`,

@@ -256,78 +256,34 @@ export function authSignOut(credentials) {
 }
 
 export function authRequestPassword(currentUser) {
-  return dispatch => {
-    dispatch({
-      type: 'AUTH_REQUEST_PASSWORD_REQUEST',
-      currentUser,
-    })
-    fetch(`${Config.apiUrl}/password`, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: currentUser.email,
-      })
-    })
-    .then(response => {
-      if(response.ok) {
-        dispatch({ type: 'AUTH_REQUEST_PASSWORD_SUCCESS' })
-      } else {
-        dispatch({
-          type: 'AUTH_REQUEST_PASSWORD_FAILURE',
-          error: parseError(response),
-        })
-      }
-    })
-    .catch(error => {
-      dispatch({
-        type: 'AUTH_REQUEST_PASSWORD_FAILURE',
-        error: parseError(error),
-      })
-    })
-  }  
+  return apiAction({
+    prefix: 'AUTH_REQUEST_PASSWORD',
+    path: '/password',
+    method: 'post',
+    params: {
+      email: currentUser.email,
+    },
+    requestAttributes: { currentUser },
+    currentUser: () => currentUser,
+  })
 }
 
 export function authResetPassword(currentUser) {
-  return dispatch => {
-    dispatch({
-      type: 'AUTH_RESET_PASSWORD_REQUEST',
-      currentUser,
-    })
-    fetch(`${Config.apiUrl}/password`, {
-      method: 'put',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: currentUser.email,
-        password: currentUser.password,
-        token: currentUser.reset_password_token,
-      })
-    })
-    .then(response => {
-      if(response.ok) {
-        dispatch({
-          type: 'AUTH_RESET_PASSWORD_SUCCESS',
-          currentUser: JSON.parse(response._bodyText),
-          credentials: authCredentials(response),
-        })
-        return true
-      } else {
-        dispatch({
-          type: 'AUTH_RESET_PASSWORD_FAILURE',
-          error: parseError(response),
-        })
-      }
-    })
-    .catch(error => {
-      dispatch({
-        type: 'AUTH_RESET_PASSWORD_FAILURE',
-        error: parseError(error),
-      })
-    })
-  }  
+  return apiAction({
+    prefix: 'AUTH_RESET_PASSWORD',
+    path: '/password',
+    method: 'put',
+    params: {
+      email: currentUser.email,
+      password: currentUser.password,
+      token: currentUser.reset_password_token,
+    },
+    requestAttributes: { currentUser },
+    currentUser: (response) => {
+      return JSON.parse(response._bodyText)
+    },
+    processResponse: (response) => {
+      return { currentUser: JSON.parse(response._bodyText) }
+    },
+  })
 }

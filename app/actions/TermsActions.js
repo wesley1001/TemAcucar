@@ -1,8 +1,8 @@
 import Config from "../Config"
 import { updateCurrentUser } from './BasicActions'
 
-export function termsAccept(auth) {
-  return updateCurrentUser('TERMS_ACCEPT', auth, {
+export function termsAccept(credentials) {
+  return updateCurrentUser('TERMS_ACCEPT', credentials, {
     accepted_terms: true,
   })
 }
