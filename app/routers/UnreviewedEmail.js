@@ -11,7 +11,7 @@ import UpdateEmail from "../screens/UpdateEmail"
 export default UnreviewedEmail = (props) => (
   <StyledRouter {...props}>
     <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-    <Route name="reviewEmail" component={ReviewEmail} title="Confirme seu email" schema="default" initial={true} hideNavBar={true} />
-    <Route name="updateEmail" component={UpdateEmail} title="Atualize seu email" schema="default" />
+    <Route name="reviewEmail" component={ReviewEmail} schema="default" initial={true} hideNavBar={true} />
+    <Route name="updateEmail" component={UpdateEmail} schema="default" />
   </StyledRouter>
 )

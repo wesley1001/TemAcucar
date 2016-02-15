@@ -31,14 +31,14 @@ export default class SignedOut extends Component {
     return (
       <StyledRouter {...this.props}>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-        <Route name="welcome" component={Welcome} title="Tem Açúcar?" schema="default" initial={!signInFailed} hideNavBar={true} />
-        <Route name="signInFailed" component={SignInFailed} title="Tem Açúcar" type="reset" initial={signInFailed} hideNavBar={true} />
-        <Route name="signIn" component={SignIn} title="Login" schema="default" />
-        <Route name="signUp" component={SignUp} title="Cadastre-se" schema="default" />
-        <Route name="signInForm" component={SignInForm} title="Login" schema="default" />
-        <Route name="signUpForm" component={SignUpForm} title="Cadastre-se" schema="default" />
-        <Route name="requestPassword" component={RequestPassword} title="Criar nova senha" schema="default" />
-        <Route name="resetPassword" component={ResetPassword} title="Confira seu email" schema="default" />
+        <Route name="welcome" component={Welcome} schema="default" initial={!signInFailed} hideNavBar={true} />
+        <Route name="signInFailed" component={SignInFailed} type="reset" initial={signInFailed} hideNavBar={true} />
+        <Route name="signIn" component={SignIn} schema="default" />
+        <Route name="signUp" component={SignUp} schema="default" />
+        <Route name="signInForm" component={SignInForm} schema="default" />
+        <Route name="signUpForm" component={SignUpForm} schema="default" />
+        <Route name="requestPassword" component={RequestPassword} schema="default" />
+        <Route name="resetPassword" component={ResetPassword} schema="default" />
       </StyledRouter>
     )
   }
