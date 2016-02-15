@@ -1,4 +1,4 @@
-import React from 'react-native'
+import React, { Platform } from 'react-native'
 import { Router } from 'react-native-router-flux'
 import Colors from "../Colors"
 
@@ -8,7 +8,7 @@ export default StyledRouter = (props) => (
     titleStyle={{ color: Colors.brown }}
     barButtonIconStyle={{ 
       tintColor: Colors.brown,
-      marginTop: 16,
+      marginTop: (Platform.OS === 'ios' ? 12 : 18),
       marginLeft: 12,
     }}
     barButtonTextStyle={{ color: Colors.brown }}
