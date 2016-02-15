@@ -1,6 +1,5 @@
 import React, { Text } from 'react-native'
 
-import Config from "../Config"
 import SimpleScreen from "../components/SimpleScreen"
 import OrSeparator from "../components/OrSeparator"
 import Button from "../components/Button"
