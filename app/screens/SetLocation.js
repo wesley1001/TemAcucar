@@ -9,10 +9,11 @@ import React, {
 } from 'react-native'
 import MapView from 'react-native-maps'
 import GiftedSpinner from 'react-native-gifted-spinner'
+import { GiftedForm, GiftedFormManager } from 'react-native-gifted-form'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { connect } from 'react-redux'
-import { locationGetCoordinates, locationSetCoordinates, locationGetAddress, locationSetSearch, locationSearch, locationSetLocation } from '../actions/LocationActions'
+import { locationGetCoordinates, locationSetCoordinates, locationGetAddress, locationSetSearch, locationSearch, locationSetLocation, locationResetJustSearched, locationSetForm } from '../actions/LocationActions'
 
 import UserValidators from '../validators/UserValidators'
 import Colors from "../Colors"
@@ -25,12 +26,12 @@ import FormTextInput from "../components/FormTextInput"
 import FormSubmit from "../components/FormSubmit"
 
 const validators = {
-  address_thoroughfare: UserValidators.address_thoroughfare,
-  address_sub_thoroughfare: UserValidators.address_sub_thoroughfare,
-  address_complement: UserValidators.address_complement,
-  address_sub_locality: UserValidators.address_sub_locality,
-  address_locality: UserValidators.address_locality,
-  address_administrative_area: UserValidators.address_administrative_area,
+  thoroughfare: UserValidators.address_thoroughfare,
+  subThoroughfare: UserValidators.address_sub_thoroughfare,
+  complement: UserValidators.address_complement,
+  subLocality: UserValidators.address_sub_locality,
+  locality: UserValidators.address_locality,
+  administrativeArea: UserValidators.address_administrative_area,
 }
 
 class SetLocation extends Component {
@@ -44,23 +45,23 @@ class SetLocation extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, location } = nextProps
-    const { latitude, longitude, address, gettingCoordinates, getCoordinatesError, gettingAddress, getAddressError, search, searchSet } = location
-    if (latitude && longitude && !address && !gettingAddress && !getAddressError)
+    const { latitude, longitude, address, getCoordinatesError, gettingAddress, getAddressError, startingUp, searching, settingLocation } = location
+    const { submit } = this.refs
+    if (latitude && longitude && !address && !gettingAddress && !getAddressError && startingUp) {
       dispatch(locationGetAddress(latitude, longitude))
-    else if (address && latitude && longitude && !search && !searchSet)
-      dispatch(locationSetSearch(this.fullAddress(address)))
-    else if (getCoordinatesError)
+    }
+    else if (getCoordinatesError) {
       dispatch(locationSetCoordinates(-22.9029278, -43.2096521))
+    }
+    else if (!searching && !settingLocation){
+      submit && submit.postSubmit()
+    }
   }
 
   fullAddress(address) {
     // In the future, when we need this in other places, we should have an Address component that localizes and displays this information
-    return `${ address.name }${ (address.subLocality ? ` - ${ address.subLocality }` : '') }${ (address.locality ? ` - ${ address.locality }` : '') }${ (address.administrativeArea ? ` - ${ address.administrativeArea }` : '') }, ${ (address.country == 'Brazil' ? 'Brasil' : address.country) }`
-  }
-
-  handleSearchChange(search) {
-    const { dispatch } = this.props
-    dispatch(locationSetSearch(search))
+    const country = (address.country === 'Brazil' ? 'Brasil' : (address.country || 'Brasil'))
+    return `${ address.thoroughfare }${ (address.subThoroughfare ? `, ${ address.subThoroughfare }` : '') }${ (address.subLocality ? ` - ${ address.subLocality }` : '') }${ (address.locality ? ` - ${ address.locality }` : '') }${ (address.administrativeArea ? ` - ${ address.administrativeArea }` : '') }${ country ? `, ${country}` : '' }`
   }
 
   handleSearch() {
@@ -98,67 +99,40 @@ class SetLocation extends Component {
     )
   }
 
-  renderAddress() {
-    const { address } = this.props.location
-    return (
-      <View style={{
-        backgroundColor: Colors.white,
-      }}>
-        <TextBox style={{
-          alignSelf: 'center',
-          height: 60,
-        }}>
-          {this.fullAddress(address)}
-        </TextBox>
-      </View>
-    )
-  }
-
-  renderAddressLoading() {
-    return (
-      <GiftedSpinner 
-        style={{
-          marginBottom: 20,
-          height: 40,
-        }}
-      />
-    )
-  }
-
-  renderSearchLoading() {
-    return (
-      <GiftedSpinner 
-        style={{
-          height: 40,
-          width: 40,
-        }}
-      />
-    )
-  }
-
-  renderSearchButton() {
-    return (
-      <TouchableOpacity
-        style={{
-          height: 40,
-          width: 40,
-          padding: 10,
-        }}
-        onPress={this.handleSearch.bind(this)}
-      >
-        <Icon name="search" size={18} style={{
-          color: Colors.lightGray,
-        }} />
-      </TouchableOpacity>
-    )    
+  handleValidation(validation) {
+    const { dispatch, location: { search, justSearched } } = this.props
+    const values = GiftedFormManager.getValues('setLocation')
+    dispatch(locationSetForm(values))
+    if (validation.isValid) {
+      if (justSearched) {
+        return dispatch(locationResetJustSearched())
+      }
+      const newSearch = this.fullAddress(values)
+      if (newSearch !== search) {
+        dispatch(locationSetSearch(newSearch))
+      }
+    }
   }
 
   handleSubmit() {
-    console.log('aki')
+    const { dispatch, location, auth: { credentials } } = this.props
+    const { search, searchChanged } = location
+    if (searchChanged)
+      return dispatch(locationSearch(search))
+    dispatch(locationSetLocation(location, credentials))
+  }
+
+  submitText() {
+    const { searching, gettingAddress, searchChanged } = this.props.location
+    if (searching || gettingAddress)
+      return "Buscando endereço..."
+    if (searchChanged)
+      return "Buscar endereço e confirmar"
+    return "Confirmar endereço e continuar"
   }
 
   render() {
-    const { latitude, longitude, address, search, searching, gettingAddress, settingLocation } = this.props.location
+    const { latitude, longitude, address, search, searching, gettingAddress, settingLocation, form } = this.props.location
     if (!(latitude && longitude))
       return(<Loading />)
     return (
@@ -180,45 +154,45 @@ class SetLocation extends Component {
           <Headline style={{marginTop: 15, marginBottom: 15}}>Onde você mora?</Headline>
         </View>
         { this.renderMap() }
-        <Form name="setLocation" validators={validators}>
+        <Form name="setLocation" validators={validators} onValidation={this.handleValidation.bind(this)}>
           <FormTextInput 
-            name='address_thoroughfare'
+            name='thoroughfare'
             title='Logradouro'
             placeholder='Sua rua, avenida, etc'
-            value={ address && address.thoroughfare }
+            value={ form && form.thoroughfare }
           />
           <FormTextInput 
-            name='address_sub_thoroughfare'
+            name='subThoroughfare'
             title='Número'
             placeholder='Número de sua casa ou edifício'
-            value={ address && address.subThoroughfare }
+            value={ form && form.subThoroughfare }
           />
           <FormTextInput 
-            name='address_complement'
+            name='complement'
             title='Complemento'
             placeholder='Número de seu apto, bloco, etc'
           />
           <FormTextInput 
-            name='address_sub_locality'
+            name='subLocality'
             title='Bairro'
             placeholder='Seu bairro'
-            value={ address && address.subLocality }
+            value={ form && form.subLocality }
           />
           <FormTextInput 
-            name='address_locality'
+            name='locality'
             title='Cidade'
             placeholder='Sua cidade'
-            value={ address && address.locality }
+            value={ form && form.locality }
           />
           <FormTextInput 
-            name='address_administrative_area'
+            name='administrativeArea'
             title='Estado'
             placeholder='Seu estado'
-            value={ address && address.administrativeArea }
+            value={ form && form.administrativeArea }
           />
           <FormSubmit
             ref="submit"
-            title="Confirmar endereço e continuar"
+            title={this.submitText()}
             onSubmit={this.handleSubmit.bind(this)}
           />
         </Form>
@@ -230,40 +204,3 @@ class SetLocation extends Component {
 export default connect(state => ({
   location: state.location,
 }))(SetLocation)
-
-        // <View style={{
-        //   alignSelf: 'stretch',
-        //   backgroundColor: Colors.white,
-        //   borderColor: Colors.lightGray, 
-        //   borderTopWidth: 1,
-        //   borderBottomWidth: 1,
-        //   flexDirection: 'row',
-        // }}>
-        //   <TextInput
-        //     keyboardType={'default'}
-        //     autoCapitalize={'none'}
-        //     placeholder={'Procure seu endereço completo'}
-        //     value={search}
-        //     onChangeText={this.handleSearchChange.bind(this)}
-        //     style={{
-        //       fontSize: 16,
-        //       height: 40,
-        //       padding: 10,
-        //       flex: 1,
-        //     }}
-        //   />
-        //   { searching ? this.renderSearchLoading() : this.renderSearchButton() }
-        // </View>
-        // <Tip>
-        //   <Text style={{fontWeight: 'bold'}}>É este seu endereço?</Text> Caso não seja, é só digitar o endereço correto na busca acima e clicar na lupinha ;)
-        // </Tip>
-        // { address && this.renderAddress() }
-        // { gettingAddress && this.renderAddressLoading() }
-        // <View style={{
-        //   flex: 1,
-        //   alignSelf: 'stretch',
-        //   padding: 10,
-        //   backgroundColor: Colors.ice,
-        // }}>
-        //   <Button isDisabled={!(latitude && longitude && address) || settingLocation} isLoading={settingLocation} style={{ alignSelf: 'stretch' }} onPress={this.handleSetLocation.bind(this)}>Confirmar endereço e continuar</Button>
-        // </View>

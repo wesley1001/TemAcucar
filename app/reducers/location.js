@@ -4,9 +4,11 @@ const initialState = {
   latitude: null,
   longitude: null,
   address: null,
-  searchSet: false,
+  startingUp: true,
   search: null,
+  searchChanged: false,
   searching: false,
+  justSearched: false,
   searchError: null,
   gettingCoordinates: false,
   getCoordinatesError: null,
@@ -14,6 +16,13 @@ const initialState = {
   getAddressError: null,
   settingLocation: false,
   setLocationError: null,
+  form: {
+    thoroughfare: '',
+    subThoroughfare: '',
+    subLocality: '',
+    locality: '',
+    administrativeArea: '',
+  },
 }
 
 export default function location(state = initialState, action) {
@@ -54,6 +63,7 @@ export default function location(state = initialState, action) {
       return {
         ...state, 
         address: action.address,
+        form: action.address,
         gettingAddress: false,
         getAddressError: null,
       }
@@ -67,7 +77,8 @@ export default function location(state = initialState, action) {
       return {
         ...state, 
         search: action.search,
-        searchSet: true,
+        startingUp: false,
+        searchChanged: !state.startingUp,
       }
     case 'LOCATION_SEARCH_REQUEST':
       return {
@@ -78,9 +89,12 @@ export default function location(state = initialState, action) {
       return {
         ...state, 
         address: action.address,
+        form: action.address,
         latitude: action.latitude,
         longitude: action.longitude,
+        justSearched: true,
         searching: false,
+        searchChanged: false,
         searchError: null,
       }
     case 'LOCATION_SEARCH_FAILURE':
@@ -88,6 +102,16 @@ export default function location(state = initialState, action) {
         ...state, 
         searching: false,
         searchError: action.error,
+      }
+    case 'LOCATION_RESET_JUST_SEARCHED':
+      return {
+        ...state, 
+        justSearched: false,
+      }
+    case 'LOCATION_SET_FORM':
+      return {
+        ...state, 
+        form: action.form,
       }
     case 'LOCATION_SET_LOCATION_REQUEST':
       return {

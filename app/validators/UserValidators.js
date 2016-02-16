@@ -48,15 +48,21 @@ export default UserValidators = {
   },
   address_sub_thoroughfare: {
     title: 'Número',
-    validate: []
+    validate: [{
+      validator: () => true,
+    }]
   },
   address_complement: {
     title: 'Complemento',
-    validate: []
+    validate: [{
+      validator: () => true,
+    }]
   },
   address_sub_locality: {
     title: 'Complemento',
-    validate: []
+    validate: [{
+      validator: () => true,
+    }]
   },
   address_locality: {
     title: 'Cidade',

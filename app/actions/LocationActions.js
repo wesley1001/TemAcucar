@@ -71,6 +71,15 @@ export function locationGetAddress(latitude, longitude) {
   }  
 }
 
+export function locationSetForm(form) {
+  return dispatch => {
+    dispatch({
+      type: 'LOCATION_SET_FORM',
+      form,
+    })
+  }
+}
+
 export function locationSetSearch(search) {
   return dispatch => {
     dispatch({
@@ -84,7 +93,10 @@ export function locationSearch(search) {
   return dispatch => {
     if (!(search && search.length > 0))
       return
-    dispatch({ type: 'LOCATION_SEARCH_REQUEST' })
+    dispatch({
+      type: 'LOCATION_SEARCH_REQUEST',
+      search,
+    })
     RNGeocoder.geocodeAddress(search, (error, data) => {
       const address = data && data[0]
       if(!error && address) { 
@@ -102,6 +114,12 @@ export function locationSearch(search) {
       }
     })        
   }  
+}
+
+export function locationResetJustSearched() {
+  return dispatch => {
+    dispatch({ type: 'LOCATION_RESET_JUST_SEARCHED' })
+  }
 }
 
 export function locationSetLocation(location, credentials) {

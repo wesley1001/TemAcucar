@@ -27,8 +27,10 @@ export default class Form extends Component {
   }
 
   handleValidation(validation) {
-    if (this.state.isValid !== validation.isValid)
+    if (this.state.isValid !== validation.isValid) {
       this.setState({ isValid: validation.isValid })
+    }
+    this.props.onValidation && this.props.onValidation(validation)
   }
 
   render() {
