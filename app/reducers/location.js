@@ -16,13 +16,7 @@ const initialState = {
   getAddressError: null,
   settingLocation: false,
   setLocationError: null,
-  form: {
-    thoroughfare: '',
-    subThoroughfare: '',
-    subLocality: '',
-    locality: '',
-    administrativeArea: '',
-  },
+  form: null,
 }
 
 export default function location(state = initialState, action) {

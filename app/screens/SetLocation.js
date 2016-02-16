@@ -32,6 +32,7 @@ const validators = {
   subLocality: UserValidators.address_sub_locality,
   locality: UserValidators.address_locality,
   administrativeArea: UserValidators.address_administrative_area,
+  country: UserValidators.address_country,
 }
 
 class SetLocation extends Component {
@@ -159,13 +160,13 @@ class SetLocation extends Component {
             name='thoroughfare'
             title='Logradouro'
             placeholder='Sua rua, avenida, etc'
-            value={ form && form.thoroughfare }
+            value={ (form && form.thoroughfare) || '' }
           />
           <FormTextInput 
             name='subThoroughfare'
             title='Número'
             placeholder='Número de sua casa ou edifício'
-            value={ form && form.subThoroughfare }
+            value={ (form && form.subThoroughfare) || '' }
           />
           <FormTextInput 
             name='complement'
@@ -176,25 +177,26 @@ class SetLocation extends Component {
             name='subLocality'
             title='Bairro'
             placeholder='Seu bairro'
-            value={ form && form.subLocality }
+            value={ (form && form.subLocality) || '' }
           />
           <FormTextInput 
             name='locality'
             title='Cidade'
             placeholder='Sua cidade'
-            value={ form && form.locality }
+            value={ (form && form.locality) || '' }
           />
           <FormTextInput 
             name='administrativeArea'
             title='Estado'
             placeholder='Seu estado'
-            value={ form && form.administrativeArea }
+            value={ (form && form.administrativeArea) || '' }
           />
           <FormSubmit
             ref="submit"
             title={this.submitText()}
             onSubmit={this.handleSubmit.bind(this)}
           />
+          <GiftedForm.HiddenWidget name='country' value={ (form && form.country) || '' } />
         </Form>
       </View>
     )

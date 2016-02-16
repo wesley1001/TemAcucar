@@ -67,7 +67,7 @@ export function locationGetAddress(latitude, longitude) {
           error: {id: 'location_get_address_failure', message: error},
         })
       }
-    })        
+    }) 
   }  
 }
 

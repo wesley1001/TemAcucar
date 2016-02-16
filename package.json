@@ -9,6 +9,7 @@
     "step2": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm"
   },
   "dependencies": {
+    "@exponent/react-native-navigator": "^0.4.1",
     "apsl-react-native-button": "danielweinmann/react-native-button",
     "fbjs": "^0.6.0",
     "moment": "2.11.1",

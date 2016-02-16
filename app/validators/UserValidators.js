@@ -78,6 +78,13 @@ export default UserValidators = {
       arguments: [1, 255],
     }]
   },
+  address_country: {
+    title: 'País',
+    validate: [{
+      validator: 'isLength',
+      arguments: [1, 255],
+    }]
+  },
   errorMessage: (error) => {
     switch (error.id) {
       case 'not_found':
