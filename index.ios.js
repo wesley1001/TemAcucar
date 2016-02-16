@@ -7,91 +7,31 @@ import { GiftedForm, GiftedFormManager } from 'react-native-gifted-form'
 import ExNavigator from '@exponent/react-native-navigator'
 import moment from 'moment'
 
-const validators = {
-  fullName: {
-    title: 'Full name',
-    validate: [{
-      validator: 'isLength',
-      arguments: [1, 23],
-      message: '{TITLE} must be between {ARGS[0]} and {ARGS[1]} characters'
-    }]
-  },
-  gender: {
-    title: 'Gender',
-    validate: [{
-      validator: (...args) => {
-        if (args[0] === undefined) {
-          return false;
-        }
-        return true;
-      },
-      message: '{TITLE} is required',
-    }]
-  },
-  birthday: {
-    title: 'Birthday',
-    validate: [{
-      validator: 'isBefore',
-      arguments: [moment().utc().subtract(18, 'years').format('YYYY-MM-DD')],
-      message: 'You must be at least 18 years old'
-    }, {
-      validator: 'isAfter',
-      arguments: [moment().utc().subtract(100, 'years').format('YYYY-MM-DD')],
-      message: '{TITLE} is not valid'
-    }]
-  },
-  country: {
-    title: 'Country',
-    validate: [{
-      validator: 'isLength',
-      arguments: [2],
-      message: '{TITLE} is required'
-    }]
-  },
-  bio: {
-    title: 'Biography',
-    validate: [{
-      validator: 'isLength',
-      arguments: [0, 512],
-      message: '{TITLE} must be between {ARGS[0]} and {ARGS[1]} characters'
-    }]
-  },
-  tos: {
-    title: 'Terms of service',
-    validate: [{
-      validator: 'isBoolean',
-      message: '{TITLE} must be true or false'
-    }]
-  },
-}
-
 class Form extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
       form: {
         fullName: 'Marco Polo',
+        gender: ['F'],
         tos: false,
       }
     }
   }
 
-  handleValidation() {
-    const values = GiftedFormManager.getValues('signupForm')
+  handleValueChange(values) {
     this.setState({ form: values })
   }
 
   render() {
-    const { fullName, tos } = this.state.form
+    const { fullName, tos, gender } = this.state.form
     console.log('render', this.state.form)
     return (
       <GiftedForm
         formName='signupForm'
         openModal={(route) => { this.props.navigator.push(route) }}
-        validators={validators}
-        onValidation={this.handleValidation.bind(this)}
+        onValueChange={this.handleValueChange.bind(this)}
       >
-        <GiftedForm.SeparatorWidget />
         <GiftedForm.TextInputWidget
           name='fullName'
           title='Full name'
@@ -99,12 +39,13 @@ class Form extends Component {
           clearButtonMode='while-editing'
           value={fullName}
         />
-        <GiftedForm.ModalWidget
-          title='Gender'
-          displayValue='gender'
-        >
-          <GiftedForm.SeparatorWidget />
-          <GiftedForm.SelectWidget name='gender' title='Gender' multiple={false}>
+        <GiftedForm.ModalWidget title='Gender'>
+          <GiftedForm.SelectWidget
+            name='gender'
+            title='Gender'
+            multiple={false}
+            value={gender}
+          >
             <GiftedForm.OptionWidget title='Female' value='F'/>
             <GiftedForm.OptionWidget title='Male' value='M'/>
           </GiftedForm.SelectWidget>
