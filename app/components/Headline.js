@@ -7,7 +7,7 @@ export default Headline = (props) => (
     fontWeight: 'bold',
     fontSize: 24,
     textAlign: 'center',
-    paddingHorizontal: 40,
+    marginHorizontal: 20,
     marginBottom: 36,
   }, props.style]}>
     {props.children}

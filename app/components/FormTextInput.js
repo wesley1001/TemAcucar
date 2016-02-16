@@ -7,12 +7,20 @@ import Colors from "../Colors"
 export default FormTextInput = (props) => (
   <GiftedForm.TextInputWidget
     clearButtonMode='while-editing'
-    image={ <Icon name={props.icon || "pencil"} size={15} color={Colors.darkGray} style={{width: 30, height: 30, paddingHorizontal: 12, paddingVertical: 8}} /> }
+    returnKeyType='next'
+    image={ <Icon name={props.icon || "pencil"} size={15} color={Colors.darkGray} style={{
+      width: 15,
+      marginLeft: 13,
+      marginRight: 2,
+    }} /> }
     widgetStyles={{
       rowContainer: {
         borderColor: Colors.gray,
         borderBottomWidth: 0.5,
       },
+      textInputInline: {
+        backgroundColor: Colors.white
+      }
     }}
     {...props}
   />
