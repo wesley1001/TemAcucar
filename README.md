@@ -14,4 +14,7 @@ This repo demonstrates the usage of latest React-Native with Redux.
 npm run setup_project
 ```
 
-Cheers,
+### Android Setup
+
+- Follow this guide: https://facebook.github.io/react-native/docs/android-setup.html
+- Instal Google Play Services SDK package: https://developers.google.com/android/guides/setup and https://developer.android.com/intl/pt-br/sdk/installing/adding-packages.html (Step 3)

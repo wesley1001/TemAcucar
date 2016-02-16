@@ -2,6 +2,7 @@ package com.temacucar;
 
 import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.facebook.react.ReactActivity;
+import com.AirMaps.AirPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.magus.fblogin.FacebookLoginPackage;
@@ -38,6 +39,7 @@ public class MainActivity extends ReactActivity {
       return Arrays.<ReactPackage>asList(
         new RNGeocoderPackage(),
         new FacebookLoginPackage(),
-        new MainReactPackage());
+        new MainReactPackage(),
+        new AirPackage());
     }
 }

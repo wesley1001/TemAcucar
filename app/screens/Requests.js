@@ -2,8 +2,8 @@ import React, {
   Component,
   Text,
   View,
-  MapView,
 } from 'react-native'
+import MapView from 'react-native-maps'
 import Slider from 'react-native-slider'
 
 import Colors from "../Colors"
@@ -39,21 +39,21 @@ export default class Requests extends Component {
           latitudeDelta: parseFloat(delta),
           longitudeDelta: parseFloat(delta),
         }}
-        annotations={[{
-          latitude: latitude,
-          longitude: longitude,
-          image: require('../img/icon.png'),
-        }]}
-      />
+      >
+        <MapView.Marker 
+          coordinate={{latitude, longitude}}
+          image={require('../img/icon.png')}
+        />
+      </MapView>
     )
   }
 
-  //      { latitude && longitude && this.renderMap() }
   render() {
     const { latitude, longitude } = this.props.currentUser
     const delta = this.state.delta * 1000
     return (
       <View>
+        { latitude && longitude && this.renderMap() }
         <Slider
           disabled={false}
           minimumValue={-50}

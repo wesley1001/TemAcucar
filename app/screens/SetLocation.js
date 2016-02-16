@@ -3,10 +3,10 @@ import React, {
   Text,
   View,
   Image,
-  MapView,
   TextInput,
   TouchableOpacity,
 } from 'react-native'
+import MapView from 'react-native-maps'
 import GiftedSpinner from 'react-native-gifted-spinner'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -73,14 +73,14 @@ class SetLocation extends Component {
           latitudeDelta: parseFloat(0.005),
           longitudeDelta: parseFloat(0.005),
         }}
-        annotations={[{
-          latitude: latitude,
-          longitude: longitude,
-          title: 'É aqui que você mora?',
-          subtitle: 'Edite seu endereço para alterar sua localização',
-          image: require('../img/icon.png'),
-        }]}
-      />
+      >
+        <MapView.Marker 
+          coordinate={{latitude, longitude}}
+          title="É aqui que você mora?"
+          description="Edite seu endereço para alterar sua localização"
+          image={require('../img/icon.png')}
+        />
+      </MapView>
     )
   }
 
@@ -165,7 +165,7 @@ class SetLocation extends Component {
           />
           { searching ? this.renderSearchLoading() : this.renderSearchButton() }
         </View>
-        { /* this.renderMap() */ }
+        { this.renderMap() }
         <Tip>
           <Text style={{fontWeight: 'bold'}}>É este seu endereço?</Text> Caso não seja, é só digitar o endereço correto na busca acima e clicar na lupinha ;)
         </Tip>

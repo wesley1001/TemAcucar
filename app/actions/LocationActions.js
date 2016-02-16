@@ -88,12 +88,11 @@ export function locationSearch(search) {
     RNGeocoder.geocodeAddress(search, (error, data) => {
       const address = data && data[0]
       if(!error && address) { 
-        const location = (Platform.OS === 'ios' ? address.location : address.position)
         dispatch({
           type: 'LOCATION_SEARCH_SUCCESS',
           address: processAddress(address),
-          latitude: location.lat,
-          longitude: location.lng,
+          latitude: address.position.lat,
+          longitude: address.position.lng,
         })
       } else {
         dispatch({
