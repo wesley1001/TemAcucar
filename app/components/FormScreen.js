@@ -3,8 +3,9 @@ import { GiftedForm, GiftedFormManager } from 'react-native-gifted-form'
 
 import Colors from "../Colors"
 import SimpleScreen from "./SimpleScreen"
+import Form from "./Form"
 
-export default class Form extends Component {
+export default class FormScreen extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -32,28 +33,17 @@ export default class Form extends Component {
   }
 
   render() {
-    const { name, validators } = this.props
     return (
-      <View style={{
+      <SimpleScreen viewStyle={{
+        alignItems: 'stretch',
         flex: 1,
-        alignSelf: 'stretch',
-        borderColor: '#999',
-        borderTopWidth: 0.5,
+        paddingTop: 120,
+        backgroundColor: Colors.white,
       }}>
-        <GiftedForm
-          scrollEnabled={false}
-          formStyles={{
-            containerView: {
-              backgroundColor: Colors.beige,
-            }
-          }}
-          formName={name}
-          validators={validators}
-          onValidation={this.handleValidation.bind(this)}
-        >
-          {this.childrenWithProps()}
-        </GiftedForm>
-      </View>
+        <Form {...this.props}>
+          { this.props.children }
+        </Form>
+      </SimpleScreen>
     )
   }  
 }

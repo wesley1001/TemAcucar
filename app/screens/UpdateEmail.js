@@ -1,7 +1,7 @@
 import React, { Component } from 'react-native'
 
 import UserValidators from '../validators/UserValidators'
-import Form from "../components/Form"
+import FormScreen from "../components/FormScreen"
 import EmailInput from "../components/EmailInput"
 import FormSubmit from "../components/FormSubmit"
 
@@ -21,14 +21,14 @@ export default class UpdateEmail extends Component {
   render() {
     const { onUpdate } = this.props
     return (
-      <Form name="updateEmail" validators={validators}>
+      <FormScreen name="updateEmail" validators={validators}>
         <EmailInput />
         <FormSubmit
           ref="submit"
           title="Atualizar meu email"
           onSubmit={onUpdate}
         />
-      </Form>
+      </FormScreen>
     )
   }
 }

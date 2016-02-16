@@ -2,7 +2,7 @@ import React, { Component } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 import UserValidators from '../validators/UserValidators'
-import Form from "../components/Form"
+import FormScreen from "../components/FormScreen"
 import FormTextInput from "../components/FormTextInput"
 import EmailInput from "../components/EmailInput"
 import PasswordInput from "../components/PasswordInput"
@@ -29,7 +29,7 @@ export default class SignUpForm extends Component {
   render() {
     const { onSignUp } = this.props
     return (
-      <Form name="signUpForm" validators={validators}>
+      <FormScreen name="signUpForm" validators={validators}>
         <FormTextInput 
           name='first_name'
           title='Nome'
@@ -52,7 +52,7 @@ export default class SignUpForm extends Component {
         <FormFooter>
           <SignInLink />
         </FormFooter>
-      </Form>
+      </FormScreen>
     )
   }
 }

@@ -8,7 +8,7 @@ export default FormTextInput = (props) => (
   <GiftedForm.TextInputWidget
     clearButtonMode='while-editing'
     returnKeyType='next'
-    image={ <Icon name={props.icon || "pencil"} size={15} color={Colors.darkGray} style={{
+    image={ props.icon && <Icon name={props.icon || "pencil"} size={15} color={Colors.darkGray} style={{
       width: 15,
       marginLeft: 13,
       marginRight: 2,

@@ -2,7 +2,7 @@ import React, { Component } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 import UserValidators from '../validators/UserValidators'
-import Form from "../components/Form"
+import FormScreen from "../components/FormScreen"
 import EmailInput from "../components/EmailInput"
 import PasswordInput from "../components/PasswordInput"
 import FormSubmit from "../components/FormSubmit"
@@ -16,7 +16,7 @@ const validators = {
 }
 
 export default SignInForm = ({ onSignIn }) => (
-  <Form name="signInForm" validators={validators}>
+  <FormScreen name="signInForm" validators={validators}>
     <EmailInput />
     <PasswordInput />
     <FormSubmit
@@ -29,5 +29,5 @@ export default SignInForm = ({ onSignIn }) => (
       </Link>
       <SignUpLink />
     </FormFooter>
-  </Form>
+  </FormScreen>
 )

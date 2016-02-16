@@ -1,7 +1,7 @@
 import React, { Component } from 'react-native'
 
 import UserValidators from '../validators/UserValidators'
-import Form from "../components/Form"
+import FormScreen from "../components/FormScreen"
 import FormTextInput from "../components/FormTextInput"
 import PasswordInput from "../components/PasswordInput"
 import FormSubmit from "../components/FormSubmit"
@@ -23,11 +23,11 @@ export default class ResetPassword extends Component {
   render() {
     const { onResetPassword } = this.props
     return (
-      <Form name="resetPassword" validators={validators}>
+      <FormScreen name="resetPassword" validators={validators}>
         <FormTextInput 
           name='reset_password_token'
           title='Código'
-          placeholder='Digite o código recebido por email'
+          placeholder='Digite o código recebido'
           icon='unlock'
         />
         <PasswordInput
@@ -39,7 +39,7 @@ export default class ResetPassword extends Component {
           title="Criar nova senha"
           onSubmit={onResetPassword}
         />
-      </Form>
+      </FormScreen>
     )
   }
 }

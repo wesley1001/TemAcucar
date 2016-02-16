@@ -1,4 +1,5 @@
 import React, {
+  Platform,
   Component,
   Text,
   View,
@@ -17,7 +18,10 @@ import Colors from "../Colors"
 import Loading from "./Loading"
 import TextBox from "../components/TextBox"
 import Button from "../components/Button"
-import Tip from "../components/Tip"
+import Headline from "../components/Headline"
+import Form from "../components/Form"
+import FormTextInput from "../components/FormTextInput"
+import FormSubmit from "../components/FormSubmit"
 
 class SetLocation extends Component {
   componentWillMount() {
@@ -64,7 +68,7 @@ class SetLocation extends Component {
     return (
       <MapView
         style={{
-          height: 200,
+          height: 170,
           alignSelf: 'stretch',
         }}
         region={{
@@ -87,9 +91,16 @@ class SetLocation extends Component {
   renderAddress() {
     const { address } = this.props.location
     return (
-      <TextBox style={{alignSelf: 'center', height: 60}}>
-        {this.fullAddress(address)}
-      </TextBox>
+      <View style={{
+        backgroundColor: Colors.white,
+      }}>
+        <TextBox style={{
+          alignSelf: 'center',
+          height: 60,
+        }}>
+          {this.fullAddress(address)}
+        </TextBox>
+      </View>
     )
   }
 
@@ -132,6 +143,10 @@ class SetLocation extends Component {
     )    
   }
 
+  handleSubmit() {
+    console.log('aki')
+  }
+
   render() {
     const { latitude, longitude, address, search, searching, gettingAddress, settingLocation } = this.props.location
     if (!(latitude && longitude))
@@ -140,45 +155,33 @@ class SetLocation extends Component {
       <View style={{
         flex: 1,
         alignItems: 'center',
-        marginTop: 20,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.beige,
       }}>
-        <View style={{
+        <View elevation={3} style={{
+          backgroundColor: Colors.beige,
+          paddingTop: (Platform.OS === 'ios' ? 20 : 0),
           alignSelf: 'stretch',
-          borderColor: Colors.lightGray, 
-          borderTopWidth: 1,
-          borderBottomWidth: 1,
-          flexDirection: 'row',
+          shadowColor: 'black',
+          shadowOpacity: 0.8,
+          shadowRadius: 4,
+          overflow: 'visible',
+          transform: [{'translate': [0,0,1]}] 
         }}>
-          <TextInput
-            keyboardType={'default'}
-            autoCapitalize={'none'}
-            placeholder={'Procure seu endereço completo'}
-            value={search}
-            onChangeText={this.handleSearchChange.bind(this)}
-            style={{
-              fontSize: 16,
-              height: 40,
-              padding: 10,
-              flex: 1,
-            }}
-          />
-          { searching ? this.renderSearchLoading() : this.renderSearchButton() }
+          <Headline style={{marginTop: 15, marginBottom: 15}}>Onde você mora?</Headline>
         </View>
         { this.renderMap() }
-        <Tip>
-          <Text style={{fontWeight: 'bold'}}>É este seu endereço?</Text> Caso não seja, é só digitar o endereço correto na busca acima e clicar na lupinha ;)
-        </Tip>
-        { address && this.renderAddress() }
-        { gettingAddress && this.renderAddressLoading() }
-        <View style={{
-          flex: 1,
-          alignSelf: 'stretch',
-          padding: 10,
-          backgroundColor: Colors.ice,
-        }}>
-          <Button isDisabled={!(latitude && longitude && address) || settingLocation} isLoading={settingLocation} style={{ alignSelf: 'stretch' }} onPress={this.handleSetLocation.bind(this)}>Confirmar endereço e continuar</Button>
-        </View>
+        <Form name="setLocation">
+          <FormTextInput 
+            name='reset_password_token'
+            title='Código'
+            placeholder='Digite o código recebido'
+          />
+          <FormSubmit
+            ref="submit"
+            title="Confirmar endereço e continuar"
+            onSubmit={this.handleSubmit.bind(this)}
+          />
+        </Form>
       </View>
     )
   }
@@ -187,3 +190,40 @@ class SetLocation extends Component {
 export default connect(state => ({
   location: state.location,
 }))(SetLocation)
+
+        // <View style={{
+        //   alignSelf: 'stretch',
+        //   backgroundColor: Colors.white,
+        //   borderColor: Colors.lightGray, 
+        //   borderTopWidth: 1,
+        //   borderBottomWidth: 1,
+        //   flexDirection: 'row',
+        // }}>
+        //   <TextInput
+        //     keyboardType={'default'}
+        //     autoCapitalize={'none'}
+        //     placeholder={'Procure seu endereço completo'}
+        //     value={search}
+        //     onChangeText={this.handleSearchChange.bind(this)}
+        //     style={{
+        //       fontSize: 16,
+        //       height: 40,
+        //       padding: 10,
+        //       flex: 1,
+        //     }}
+        //   />
+        //   { searching ? this.renderSearchLoading() : this.renderSearchButton() }
+        // </View>
+        // <Tip>
+        //   <Text style={{fontWeight: 'bold'}}>É este seu endereço?</Text> Caso não seja, é só digitar o endereço correto na busca acima e clicar na lupinha ;)
+        // </Tip>
+        // { address && this.renderAddress() }
+        // { gettingAddress && this.renderAddressLoading() }
+        // <View style={{
+        //   flex: 1,
+        //   alignSelf: 'stretch',
+        //   padding: 10,
+        //   backgroundColor: Colors.ice,
+        // }}>
+        //   <Button isDisabled={!(latitude && longitude && address) || settingLocation} isLoading={settingLocation} style={{ alignSelf: 'stretch' }} onPress={this.handleSetLocation.bind(this)}>Confirmar endereço e continuar</Button>
+        // </View>

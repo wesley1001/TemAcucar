@@ -30,7 +30,7 @@ export default class Requests extends Component {
         scrollEnabled={false}
         zoomEnabled={false}
         style={{
-          height: 200,
+          height: 170,
           alignSelf: 'stretch',
         }}
         region={{

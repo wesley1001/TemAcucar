@@ -7,7 +7,7 @@ import React, {
 import { Actions } from 'react-native-router-flux'
 
 import UserValidators from '../validators/UserValidators'
-import Form from "../components/Form"
+import FormScreen from "../components/FormScreen"
 import EmailInput from "../components/EmailInput"
 import FormSubmit from "../components/FormSubmit"
 
@@ -30,14 +30,14 @@ export default class RequestPassword extends Component {
   render() {
     const { onRequestPassword } = this.props
     return (
-      <Form name="requestPassword" validators={validators}>
+      <FormScreen name="requestPassword" validators={validators}>
         <EmailInput />
         <FormSubmit
           ref="submit"
           title="Enviar instruções para nova senha"
           onSubmit={onRequestPassword}
         />
-      </Form>
+      </FormScreen>
     )
   }
 }
