@@ -32,12 +32,11 @@ export default class Form extends Component {
   }
 
   render() {
-    const { name, validators } = this.props
     return (
       <View style={{
         flex: 1,
         alignSelf: 'stretch',
-        borderColor: '#999',
+        borderColor: Colors.lightGray,
         borderTopWidth: 0.5,
       }}>
         <GiftedForm
@@ -47,8 +46,8 @@ export default class Form extends Component {
               backgroundColor: Colors.beige,
             }
           }}
-          formName={name}
-          validators={validators}
+          formName={this.props.name}
+          { ...this.props }
           onValidation={this.handleValidation.bind(this)}
         >
           {this.childrenWithProps()}

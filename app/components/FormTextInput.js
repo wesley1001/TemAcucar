@@ -15,12 +15,19 @@ export default FormTextInput = (props) => (
     }} /> }
     widgetStyles={{
       rowContainer: {
-        borderColor: Colors.gray,
+        borderColor: Colors.lightGray,
         borderBottomWidth: 0.5,
+        height: 46,
       },
       textInputInline: {
-        backgroundColor: Colors.white
-      }
+        backgroundColor: Colors.white,
+        color: Colors.pink,
+      },
+      textInputTitleInline: {
+        color: Colors.brown,
+        fontWeight: 'bold',
+        width: 128,
+      },
     }}
     {...props}
   />

@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 import { locationGetCoordinates, locationSetCoordinates, locationGetAddress, locationSetSearch, locationSearch, locationSetLocation } from '../actions/LocationActions'
 
+import UserValidators from '../validators/UserValidators'
 import Colors from "../Colors"
 import Loading from "./Loading"
 import TextBox from "../components/TextBox"
@@ -22,6 +23,15 @@ import Headline from "../components/Headline"
 import Form from "../components/Form"
 import FormTextInput from "../components/FormTextInput"
 import FormSubmit from "../components/FormSubmit"
+
+const validators = {
+  address_thoroughfare: UserValidators.address_thoroughfare,
+  address_sub_thoroughfare: UserValidators.address_sub_thoroughfare,
+  address_complement: UserValidators.address_complement,
+  address_sub_locality: UserValidators.address_sub_locality,
+  address_locality: UserValidators.address_locality,
+  address_administrative_area: UserValidators.address_administrative_area,
+}
 
 class SetLocation extends Component {
   componentWillMount() {
@@ -170,11 +180,41 @@ class SetLocation extends Component {
           <Headline style={{marginTop: 15, marginBottom: 15}}>Onde você mora?</Headline>
         </View>
         { this.renderMap() }
-        <Form name="setLocation">
+        <Form name="setLocation" validators={validators}>
           <FormTextInput 
-            name='reset_password_token'
-            title='Código'
-            placeholder='Digite o código recebido'
+            name='address_thoroughfare'
+            title='Logradouro'
+            placeholder='Sua rua, avenida, etc'
+            value={ address && address.thoroughfare }
+          />
+          <FormTextInput 
+            name='address_sub_thoroughfare'
+            title='Número'
+            placeholder='Número de sua casa ou edifício'
+            value={ address && address.subThoroughfare }
+          />
+          <FormTextInput 
+            name='address_complement'
+            title='Complemento'
+            placeholder='Número de seu apto, bloco, etc'
+          />
+          <FormTextInput 
+            name='address_sub_locality'
+            title='Bairro'
+            placeholder='Seu bairro'
+            value={ address && address.subLocality }
+          />
+          <FormTextInput 
+            name='address_locality'
+            title='Cidade'
+            placeholder='Sua cidade'
+            value={ address && address.locality }
+          />
+          <FormTextInput 
+            name='address_administrative_area'
+            title='Estado'
+            placeholder='Seu estado'
+            value={ address && address.administrativeArea }
           />
           <FormSubmit
             ref="submit"

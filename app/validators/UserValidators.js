@@ -39,6 +39,39 @@ export default UserValidators = {
       arguments: [1, 255],
     }]
   },
+  address_thoroughfare: {
+    title: 'Logradouro',
+    validate: [{
+      validator: 'isLength',
+      arguments: [1, 255],
+    }]
+  },
+  address_sub_thoroughfare: {
+    title: 'Número',
+    validate: []
+  },
+  address_complement: {
+    title: 'Complemento',
+    validate: []
+  },
+  address_sub_locality: {
+    title: 'Complemento',
+    validate: []
+  },
+  address_locality: {
+    title: 'Cidade',
+    validate: [{
+      validator: 'isLength',
+      arguments: [1, 255],
+    }]
+  },
+  address_administrative_area: {
+    title: 'Estado',
+    validate: [{
+      validator: 'isLength',
+      arguments: [1, 255],
+    }]
+  },
   errorMessage: (error) => {
     switch (error.id) {
       case 'not_found':
