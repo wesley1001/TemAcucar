@@ -152,7 +152,13 @@ class SetLocation extends Component {
           overflow: 'visible',
           transform: [{'translate': [0,0,1]}] 
         }}>
-          <Headline style={{marginTop: 15, marginBottom: 15}}>Onde você mora?</Headline>
+          <Headline style={{
+            fontSize: 20,
+            marginTop: 10,
+            marginBottom: 10
+          }}>
+            Onde você mora?
+          </Headline>
         </View>
         { this.renderMap() }
         <Form name="setLocation" validators={validators} onValidation={this.handleValidation.bind(this)}>

@@ -17,13 +17,14 @@ export default FormTextInput = (props) => (
       rowContainer: {
         borderColor: Colors.lightGray,
         borderBottomWidth: 0.5,
-        height: 46,
       },
       textInputInline: {
+        fontFamily: 'OpenSans',
         backgroundColor: Colors.white,
         color: Colors.pink,
       },
       textInputTitleInline: {
+        fontFamily: 'OpenSans',
         color: Colors.brown,
         fontWeight: 'bold',
         width: 128,

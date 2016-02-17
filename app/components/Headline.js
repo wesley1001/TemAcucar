@@ -6,6 +6,7 @@ export default Headline = (props) => (
     color: Colors.brown,
     fontWeight: 'bold',
     fontSize: 28,
+    lineHeight: 28,
     textAlign: 'center',
     marginHorizontal: 20,
     marginBottom: 36,

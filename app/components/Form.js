@@ -46,7 +46,7 @@ export default class Form extends Component {
           formStyles={{
             containerView: {
               backgroundColor: Colors.beige,
-            }
+            },
           }}
           formName={this.props.name}
           { ...this.props }

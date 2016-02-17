@@ -19,8 +19,8 @@ export default Button = (props) => (
       alignSelf: 'center',
       borderWidth: 0,
       borderRadius: 0,
-      paddingHorizontal: 20,
-      paddingVertical: 12,
+      paddingHorizontal: 40,
+      paddingVertical: 28,
       backgroundColor: Colors.pink,
       marginBottom: 0,
     }, props.style]}

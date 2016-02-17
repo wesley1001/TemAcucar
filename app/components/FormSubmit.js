@@ -21,6 +21,7 @@ export default class FormSubmit extends Component {
         widgetStyles={{
           submitButton: {
             backgroundColor: Colors.pink,
+            height: 60,
           },
           textSubmitButton: {
             fontSize: 16,
