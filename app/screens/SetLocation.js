@@ -10,7 +10,6 @@ import React, {
 import MapView from 'react-native-maps'
 import GiftedSpinner from 'react-native-gifted-spinner'
 import { GiftedForm, GiftedFormManager } from 'react-native-gifted-form'
-import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { connect } from 'react-redux'
 import { locationGetCoordinates, locationSetCoordinates, locationGetAddress, locationSetSearch, locationSearch, locationSetLocation, locationResetJustSearched, locationSetForm } from '../actions/LocationActions'

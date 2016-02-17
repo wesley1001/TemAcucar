@@ -4,7 +4,7 @@ import React, {
   TouchableOpacity,
   Animated,
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import Colors from "../Colors"
 

@@ -68,16 +68,16 @@ export default class Neighborhood extends Component {
               locked={true}
               renderTabBar={() => <TabBar />}
             >
-              <Tab tabLabel="paper-plane">
+              <Tab tabLabel="home">
                 <Requests {...this.props} />
               </Tab>
-              <Tab tabLabel="fort-awesome">
+              <Tab tabLabel="group">
                 <Text>Vizinhos</Text>
               </Tab>
-              <Tab tabLabel="comments">
+              <Tab tabLabel="chat">
                 <Text>Chats</Text>
               </Tab>
-              <Tab tabLabel="bell">
+              <Tab tabLabel="notifications">
                 <Text>Notificações</Text>
               </Tab>
             </ScrollableTabView>

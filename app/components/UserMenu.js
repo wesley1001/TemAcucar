@@ -4,7 +4,7 @@ import React, {
   Text,
   TouchableOpacity,
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import Colors from "../Colors"
 
@@ -19,11 +19,11 @@ export default UserMenu = ({ onSignOut }) => (
     <TouchableOpacity style={{ alignSelf: 'stretch' }} onPress={onSignOut}>
       <Text style={{
         alignSelf: 'stretch',
-        textAlign: 'right',
+        textAlign: 'left',
         color: Colors.lightGray,
         margin: 10,
       }}>
-        <Icon name="sign-out" />
+        <Icon name="power-settings-new" />
         { ' Sair' }
       </Text>
     </TouchableOpacity>

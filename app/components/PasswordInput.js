@@ -6,7 +6,7 @@ export default PasswordInput = (props) => (
     name='password'
     title='Senha'
     placeholder='Digite sua senha'
-    icon='key'
+    icon='vpn-key'
     autoCapitalize='none'
     secureTextEntry={true}
     { ...props }

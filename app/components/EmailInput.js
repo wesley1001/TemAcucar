@@ -6,7 +6,7 @@ export default EmailInput = (props) => (
     name='email'
     title='Email'
     placeholder='digite@seu.email'
-    icon='at'
+    icon='mail-outline'
     autoCapitalize='none'
     keyboardType='email-address'
     { ...props }

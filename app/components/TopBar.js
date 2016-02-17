@@ -5,7 +5,7 @@ import React, {
   Image,
   TouchableOpacity,
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import Colors from "../Colors"
 import Sentence from "./Sentence"
 
@@ -25,9 +25,9 @@ export default TopBar = ({ onMenuOpen }) => (
       flex: 0.05,
       padding: 10,
     }}>
-      <Icon name="bars" style={{
+      <Icon name="menu" style={{
         color: Colors.pink,
-        fontSize: 20,
+        fontSize: 28,
       }} />
     </TouchableOpacity>
     <View style={{

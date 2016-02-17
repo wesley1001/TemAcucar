@@ -34,13 +34,13 @@ export default class SignUpForm extends Component {
           name='first_name'
           title='Nome'
           placeholder='Digite seu primeiro nome'
-          icon='user'
+          icon='account-circle'
         />
         <FormTextInput 
           name='last_name'
           title='Sobrenome'
           placeholder='Digite seu sobrenome'
-          icon='pagelines'
+          icon='account-circle'
         />
         <EmailInput />
         <PasswordInput />

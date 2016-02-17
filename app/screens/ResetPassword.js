@@ -28,7 +28,7 @@ export default class ResetPassword extends Component {
           name='reset_password_token'
           title='Código'
           placeholder='Digite o código recebido'
-          icon='unlock'
+          icon='keyboard'
         />
         <PasswordInput
           title='Nova senha'
