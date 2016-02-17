@@ -22,6 +22,7 @@ export default class FormSubmit extends Component {
           submitButton: {
             backgroundColor: Colors.pink,
             height: 60,
+            margin: 24,
           },
           textSubmitButton: {
             fontSize: 16,
