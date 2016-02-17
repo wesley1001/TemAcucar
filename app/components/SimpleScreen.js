@@ -20,7 +20,7 @@ export default SimpleScreen = ({ children, headline, viewStyle }) => (
       alignSelf: 'stretch',
       alignItems: 'center',
     }}>
-      <Image source={require('../img/logo.png')} style={{marginBottom: (headline ? 12 : 48)}}/>
+      <Image source={require('../img/logo.png')} style={{marginBottom: (headline ? 20 : 50)}}/>
     </View>
     { headline && <Headline>{headline}</Headline> }
     {children}
