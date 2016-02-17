@@ -3,7 +3,7 @@ import Sentence from "./Sentence"
 
 export default TextBox = (props) => (
   <Sentence style={[{
-    marginHorizontal: 20,
+    marginHorizontal: 30,
   }, props.style]}>
     {props.children}
   </Sentence>

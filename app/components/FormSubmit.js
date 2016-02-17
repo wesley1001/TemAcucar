@@ -22,6 +22,11 @@ export default class FormSubmit extends Component {
           submitButton: {
             backgroundColor: Colors.pink,
           },
+          textSubmitButton: {
+            fontSize: 16,
+            fontFamily: 'BoosterNextFY-Bold',
+            lineHeight: 22,
+          },
           disabledSubmitButton: {
             opacity: 1,
             backgroundColor: Colors.gray,

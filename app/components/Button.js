@@ -9,6 +9,8 @@ export default Button = (props) => (
       textAlign: 'center',
       color: Colors.white,
       fontSize: 16,
+      fontFamily: 'BoosterNextFY-Bold',
+      lineHeight: 22,
     }, props.textStyle]}
     disabledStyle={[{
       backgroundColor: Colors.gray,

@@ -73,6 +73,22 @@
       <string>MaterialIcons.ttf</string>
       <string>Octicons.ttf</string>
       <string>Zocial.ttf</string>
+      <string>BoosterNextFY-Black.otf</string>
+      <string>BoosterNextFY-Bold.otf</string>
+      <string>BoosterNextFY-Light.otf</string>
+      <string>BoosterNextFY-Medium.otf</string>
+      <string>BoosterNextFY-Regular.otf</string>
+      <string>BoosterNextFY-Thin.otf</string>
+      <string>OpenSans-Bold.ttf</string>
+      <string>OpenSans-BoldItalic.ttf</string>
+      <string>OpenSans-ExtraBold.ttf</string>
+      <string>OpenSans-ExtraBoldItalic.ttf</string>
+      <string>OpenSans-Italic.ttf</string>
+      <string>OpenSans-Light.ttf</string>
+      <string>OpenSans-Semibold.ttf</string>
+      <string>OpenSans-SemiboldItalic.ttf</string>
+      <string>OpenSans.ttf</string>
+      <string>OpenSansLight-Italic.ttf</string>
     </array>
   </dict>
 </plist>
