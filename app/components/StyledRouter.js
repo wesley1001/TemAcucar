@@ -4,7 +4,7 @@ import Colors from "../Colors"
 
 export default StyledRouter = (props) => (
   <Router 
-    navigationBarStyle={{ backgroundColor: Colors.beige }}
+    navigationBarStyle={{ backgroundColor: Colors.white }}
     titleStyle={{ color: Colors.brown }}
     barButtonIconStyle={{ 
       tintColor: Colors.brown,

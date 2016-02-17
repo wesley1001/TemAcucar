@@ -57,7 +57,6 @@ export default class Neighborhood extends Component {
         drawerWidth={180}
         ref={(drawer) => { return this.drawer = drawer  }}
         keyboardDismissMode="on-drag"
-        drawerPosition={(Platform.OS == 'ios' ? 'right' : 8388613)}
         renderNavigationView={() => userMenu}
         onDrawerOpen={this.handleDrawerOpen.bind(this)}
         onDrawerClose={this.handleDrawerClose.bind(this)}

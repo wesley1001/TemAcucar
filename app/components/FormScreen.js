@@ -38,7 +38,7 @@ export default class FormScreen extends Component {
         alignItems: 'stretch',
         flex: 1,
         paddingTop: 120,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.beige,
       }}>
         <Form {...this.props}>
           { this.props.children }

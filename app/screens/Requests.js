@@ -42,7 +42,7 @@ export default class Requests extends Component {
       >
         <MapView.Marker 
           coordinate={{latitude, longitude}}
-          image={require('../img/icon.png')}
+          image={require('../img/marker.png')}
         />
       </MapView>
     )
