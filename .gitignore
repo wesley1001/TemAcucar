@@ -38,3 +38,4 @@ npm-debug.log
 *.sublime-workspace
 
 .env
+Config.js
