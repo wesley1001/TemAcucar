@@ -40,3 +40,5 @@ npm-debug.log
 .env
 Config.js
 Info.plist
+android/release/
+ios/release/
