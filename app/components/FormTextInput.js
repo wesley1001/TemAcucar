@@ -18,6 +18,9 @@ export default FormTextInput = (props) => (
         borderColor: Colors.lightGray,
         borderBottomWidth: 0.5,
       },
+      row: {
+        marginLeft: (props.icon ? 0 : 10),
+      },
       textInputInline: {
         fontFamily: 'OpenSans',
         backgroundColor: Colors.white,
@@ -27,7 +30,7 @@ export default FormTextInput = (props) => (
         fontFamily: 'OpenSans',
         color: Colors.brown,
         fontWeight: 'bold',
-        width: 128,
+        width: 98,
       },
     }}
     {...props}

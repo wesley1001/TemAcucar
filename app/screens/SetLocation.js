@@ -1,5 +1,6 @@
 import React, {
   Platform,
+  Dimensions,
   Component,
   Text,
   View,
@@ -79,7 +80,7 @@ class SetLocation extends Component {
     return (
       <MapView
         style={{
-          height: 170,
+          flex: (0.25+(Dimensions.get('window').height - 533.33333333)*0.0015),
           alignSelf: 'stretch',
         }}
         region={{

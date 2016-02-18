@@ -42,7 +42,7 @@ export default class Form extends Component {
         borderTopWidth: 0.5,
       }}>
         <GiftedForm
-          scrollEnabled={false}
+          scrollEnabled={true}
           formStyles={{
             containerView: {
               backgroundColor: Colors.beige,
