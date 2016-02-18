@@ -32,13 +32,16 @@ export default class TabBar extends Component {
   render() {
     return (
       <View>
-        <View style={{
+        <View elevation={3} style={{
           backgroundColor: Colors.beige,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          borderBottomWidth: 1,
-          borderBottomColor: 'rgba(0,0,0,0.05)',
+          shadowColor: 'black',
+          shadowOpacity: 0.8,
+          shadowRadius: 4,
+          overflow: 'visible',
+          transform: [{'translate': [0,0,1]}],
         }}>
           {this.props.tabs.map((tab, i) => this.renderTabOption(tab, i))}
         </View>
