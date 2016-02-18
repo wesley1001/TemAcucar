@@ -18,3 +18,18 @@ npm run setup_project
 
 - Follow this guide: https://facebook.github.io/react-native/docs/android-setup.html
 - Instal Google Play Services SDK package: https://developers.google.com/android/guides/setup and https://developer.android.com/intl/pt-br/sdk/installing/adding-packages.html (Step 3)
+
+### Release iOS to CodePush
+
+
+```
+rm -rf ./ios/release/
+mkdir ./ios/release
+react-native bundle \
+--platform ios \
+--entry-file index.ios.js \
+--bundle-output ./ios/release/main.jsbundle \
+--assets-dest ./ios/release \
+--dev false
+code-push release TemAcucar-iOS ./ios/release 0.0.1 --description "Release Changelog" --mandatory
+```
