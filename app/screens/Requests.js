@@ -18,7 +18,7 @@ export default class Requests extends Component {
   }
 
   handleSlide(value) {
-    this.setState({delta: -(value / 1000)})
+    this.setState({delta: (value / 1000)})
   }
 
   renderMap() {
@@ -54,30 +54,53 @@ export default class Requests extends Component {
     return (
       <View>
         { latitude && longitude && this.renderMap() }
-        <Slider
-          disabled={false}
-          minimumValue={-50}
-          maximumValue={-1}
-          step={1}
-          value={-delta}
-          onValueChange={this.handleSlide.bind(this)}
-          style={{marginHorizontal: 40}}
-          minimumTrackTintColor={Colors.pink}
-          trackStyle={{
-            height: 2,
-            backgroundColor: Colors.gray,
-          }}
-          thumbStyle={{
-            width: 10,
-            height: 10,
-            backgroundColor: Colors.pink,
-            borderRadius: 10 / 2,
-            shadowColor: Colors.pink,
-            shadowOffset: {width: 0, height: 0},
-            shadowRadius: 2,
-            shadowOpacity: 1,
-          }}
-        />
+        <View elevation={2} style={{
+          backgroundColor: Colors.white,
+          paddingVertical: 10,
+          paddingHorizontal: 20,
+          flexDirection: 'row',
+          alignItems: 'center',
+          shadowColor: 'black',
+          shadowOpacity: 0.8,
+          shadowRadius: 4,
+          overflow: 'visible',
+          transform: [{'translate': [0,0,1]}],
+        }}>
+          <Sentence>1 km</Sentence>
+          <Slider
+            disabled={false}
+            minimumValue={1}
+            maximumValue={50}
+            step={1}
+            value={delta}
+            onValueChange={this.handleSlide.bind(this)}
+            minimumTrackTintColor={Colors.pink}
+            style={{ flex: 1, marginHorizontal: 20 }}
+            trackStyle={{
+              height: 2,
+              backgroundColor: Colors.lightGray,
+            }}
+            thumbStyle={{
+              width: 24,
+              height: 24,
+              backgroundColor: Colors.pink,
+              borderRadius: 12,
+              shadowColor: Colors.black,
+              shadowOffset: {width: 0, height: 0},
+              shadowRadius: 2,
+              shadowOpacity: 1,
+            }}
+          />
+          <Sentence>10 km</Sentence>
+        </View>
+        <View style={{
+          backgroundColor: Colors.beige,
+          flex: 1,
+          alignSelf: 'stretch',
+          padding: 20,
+        }}>
+          <Sentence style={{ flex: 1, alignSelf: 'stretch' }}>Pedidos</Sentence>
+        </View>
       </View>
     )
   }

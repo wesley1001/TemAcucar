@@ -150,7 +150,7 @@ class SetLocation extends Component {
           shadowOpacity: 0.8,
           shadowRadius: 4,
           overflow: 'visible',
-          transform: [{'translate': [0,0,1]}] 
+          transform: [{'translate': [0,0,1]}],
         }}>
           <Headline style={{
             fontSize: 20,
