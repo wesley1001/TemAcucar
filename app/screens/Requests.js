@@ -5,6 +5,7 @@ import React, {
 } from 'react-native'
 import MapView from 'react-native-maps'
 import Slider from 'react-native-slider'
+import haversine from 'haversine'
 
 import Colors from "../Colors"
 import Button from "../components/Button"
@@ -24,6 +25,17 @@ export default class Requests extends Component {
   renderMap() {
     const { latitude, longitude } = this.props.currentUser
     const { delta } = this.state
+    // TODO remove this commented lines once we settle for a kilometer range
+    // const kilometers = haversine({
+    //   latitude,
+    //   longitude,
+    // }, {
+    //   latitude: latitude + delta,
+    //   longitude: longitude + delta,
+    // }, {
+    //   unit: 'km'
+    // })
+    // console.log(kilometers)
 
     return (
       <MapView
@@ -66,11 +78,11 @@ export default class Requests extends Component {
           overflow: 'visible',
           transform: [{'translate': [0,0,1]}],
         }}>
-          <Sentence>1 km</Sentence>
+          <Sentence>500 m</Sentence>
           <Slider
             disabled={false}
-            minimumValue={1}
-            maximumValue={50}
+            minimumValue={3.5}
+            maximumValue={70}
             step={1}
             value={delta}
             onValueChange={this.handleSlide.bind(this)}
