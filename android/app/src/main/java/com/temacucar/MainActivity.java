@@ -1,5 +1,6 @@
 package com.temacucar;
 
+import com.lugg.ReactConfig.ReactConfigPackage;
 import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.facebook.react.ReactActivity;
 import com.AirMaps.AirPackage;
@@ -37,6 +38,7 @@ public class MainActivity extends ReactActivity {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
+        new ReactConfigPackage(),
         new RNGeocoderPackage(),
         new FacebookLoginPackage(),
         new MainReactPackage(),

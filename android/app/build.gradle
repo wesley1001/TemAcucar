@@ -54,6 +54,8 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
+        resValue "string", "GOOGLE_MAPS_API_KEY", "\"$System.env.GOOGLE_MAPS_API_KEY\""
+
         applicationId "com.temacucar"
         minSdkVersion 16
         targetSdkVersion 22
@@ -72,6 +74,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-android-config')
     compile project(':react-native-maps')
     compile project(':react-native-facebook-login')
     compile project(':RNGeocoder')
