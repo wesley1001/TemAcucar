@@ -2,7 +2,6 @@ import React, {
   Component,
   View,
   TouchableOpacity,
-  Animated,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
@@ -20,42 +19,29 @@ export default class TabBar extends Component {
     return (
       <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} style={{
         flex: 1,
+        justifyContent: 'center',
         alignItems: 'center',
+        height: 60,
+        backgroundColor: (isActive ? Colors.pink : Colors.beige),
       }}>
-        <Icon name={name} size={24} color={isActive ? Colors.pink : Colors.lightGray} />
+        <Icon name={name} size={36} color={isActive ? Colors.beige : Colors.ice} />
       </TouchableOpacity>
     );
   }
 
   render() {
-    var containerWidth = this.props.containerWidth
-    var numberOfTabs = this.props.tabs.length
-    var tabUnderlineStyle = {
-      position: 'absolute',
-      width: containerWidth / numberOfTabs,
-      height: 2,
-      backgroundColor: Colors.pink,
-      bottom: 0,
-    }
-
-    var left = this.props.scrollValue.interpolate({
-      inputRange: [0, 1], outputRange: [0, containerWidth / numberOfTabs]
-    })
-
     return (
       <View>
         <View style={{
           backgroundColor: Colors.beige,
-          height: 45,
           flexDirection: 'row',
           justifyContent: 'center',
-          paddingTop: 10,
+          alignItems: 'center',
           borderBottomWidth: 1,
           borderBottomColor: 'rgba(0,0,0,0.05)',
         }}>
           {this.props.tabs.map((tab, i) => this.renderTabOption(tab, i))}
         </View>
-        <Animated.View style={[tabUnderlineStyle, {left}]} />
       </View>
     )
   }
