@@ -73,8 +73,12 @@ export default class Requests extends Component {
           flexDirection: 'row',
           alignItems: 'center',
           shadowColor: 'black',
-          shadowOpacity: 0.8,
-          shadowRadius: 4,
+          shadowOpacity: 0.2,
+          shadowRadius: 3,
+          shadowOffset: {
+            height: 2,
+            width: 0,
+          },
           overflow: 'visible',
           transform: [{'translate': [0,0,1]}],
         }}>
@@ -97,10 +101,6 @@ export default class Requests extends Component {
               height: 24,
               backgroundColor: Colors.pink,
               borderRadius: 12,
-              shadowColor: Colors.black,
-              shadowOffset: {width: 0, height: 0},
-              shadowRadius: 2,
-              shadowOpacity: 1,
             }}
           />
           <Sentence>10 km</Sentence>
