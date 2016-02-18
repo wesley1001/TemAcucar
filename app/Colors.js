@@ -1,5 +1,7 @@
 const Colors = {
   brown: '#523b3f',
+  lightBrown: '#664d50',
+  mediumBrown: '#573f43',
   pink: '#ff7f85',
   white: '#fff',
   beige: '#f4f0e7',
@@ -7,7 +9,7 @@ const Colors = {
   darkGray: '#333',
   gray: '#999',
   lightGray: '#ccc',
-  ice: '#eee',
+  ice: '#d1ccc3',
   facebook: '#516dac',
 }
 

@@ -1,6 +1,7 @@
 import React, {
   Component,
   Platform,
+  Dimensions,
   Text,
   View,
   PanResponder,
@@ -54,7 +55,7 @@ export default class Neighborhood extends Component {
     const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
     return (
       <DrawerLayout
-        drawerWidth={180}
+        drawerWidth={Dimensions.get('window').width * 0.8}
         ref={(drawer) => { return this.drawer = drawer  }}
         keyboardDismissMode="on-drag"
         renderNavigationView={() => userMenu}

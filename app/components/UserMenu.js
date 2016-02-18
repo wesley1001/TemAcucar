@@ -7,25 +7,40 @@ import React, {
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import Colors from "../Colors"
+import Sentence from "./Sentence"
 
-export default UserMenu = ({ onSignOut }) => (
+export default UserMenu = ({ auth, onSignOut }) => (
   <View style={{
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
-    backgroundColor: Colors.darkGray,
+    backgroundColor: Colors.lightBrown,
     paddingTop: (Platform.OS == 'ios' ? 20 : 0),
   }}>
-    <TouchableOpacity style={{ alignSelf: 'stretch' }} onPress={onSignOut}>
-      <Text style={{
-        alignSelf: 'stretch',
-        textAlign: 'left',
-        color: Colors.lightGray,
-        margin: 10,
+    <View style={{
+      backgroundColor: Colors.mediumBrown,
+      alignSelf: 'stretch',
+      padding: 20,
+    }}>
+      <Sentence style={{ 
+        fontFamily: 'BoosterNextFY-Bold', 
+        color: Colors.pink
       }}>
-        <Icon name="power-settings-new" />
-        { ' Sair' }
-      </Text>
+        { auth.currentUser.first_name } { auth.currentUser.last_name }
+      </Sentence>
+    </View>
+    <TouchableOpacity style={{ alignSelf: 'stretch', padding: 20, flexDirection: 'row', alignItems: 'center' }} onPress={onSignOut}>
+      <Icon name="power-settings-new" style={{ 
+        fontSize: 32,
+        color: Colors.ice,
+        marginRight: 10,
+      }} />
+      <Sentence style={{
+        fontSize: 24,
+        color: Colors.ice,
+      }}>
+        Sair
+      </Sentence>
     </TouchableOpacity>
   </View>
 )
