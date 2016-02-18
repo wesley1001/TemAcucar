@@ -2,6 +2,7 @@ import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import Communications from 'react-native-communications'
 import Package from '../../package.json'
+import codePush from "react-native-code-push"
 
 import Config from "../Config"
 import { versionsList, versionsIgnoreUpdate } from '../actions/VersionsActions'
@@ -19,6 +20,7 @@ class VersionChecker extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
+    codePush.sync()
     dispatch(versionsList())
   }
 

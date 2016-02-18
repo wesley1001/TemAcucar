@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
+    <key>CodePushDeploymentKey</key>
+    <string>YOUR_CODEPUSH_DEPLOYMENT_KEY</string>
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleExecutable</key>
@@ -15,7 +17,7 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0</string>
+    <string>0.0.1</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleVersion</key>
@@ -53,7 +55,7 @@
       </dict>
     </array>
     <key>FacebookAppID</key>
-    <string>590253407789297</string>
+    <string>YOUR_FACEBOOK_APP_ID</string>
     <key>FacebookDisplayName</key>
     <string>Tem Açúcar</string>
     <key>LSApplicationQueriesSchemes</key>

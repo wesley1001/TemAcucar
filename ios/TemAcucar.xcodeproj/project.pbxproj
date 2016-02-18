@@ -41,12 +41,16 @@
 		932FD61D1C7417E800086061 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 932FD60D1C7417E800086061 /* OpenSans-SemiboldItalic.ttf */; };
 		932FD61E1C7417E800086061 /* OpenSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 932FD60E1C7417E800086061 /* OpenSans.ttf */; };
 		932FD61F1C7417E800086061 /* OpenSansLight-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 932FD60F1C7417E800086061 /* OpenSansLight-Italic.ttf */; };
+		935C78BE1C76265E0016F456 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 935C78BC1C76265E0016F456 /* assets */; };
+		935C78BF1C76265E0016F456 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 935C78BD1C76265E0016F456 /* main.jsbundle */; };
 		937F65C61C4FD77D002D091D /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 937F65C51C4FD755002D091D /* libRNKeychain.a */; };
 		937F65D91C513C39002D091D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 937F65D61C513C39002D091D /* FBSDKCoreKit.framework */; };
 		937F65DA1C513C39002D091D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 937F65D71C513C39002D091D /* FBSDKLoginKit.framework */; };
 		937F65DB1C513C39002D091D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 937F65D81C513C39002D091D /* FBSDKShareKit.framework */; };
 		937F65E21C514450002D091D /* libRCTFBLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 937F65E11C514416002D091D /* libRCTFBLogin.a */; };
 		938260DD1C4AC4FA005AB6AD /* libRNGeocoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F0A8A01C4AB88000557F7C /* libRNGeocoder.a */; };
+		93D336981C76106F004E5E89 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D336871C76104A004E5E89 /* libCodePush.a */; };
+		93D3369A1C7610AD004E5E89 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D336991C7610AD004E5E89 /* libz.tbd */; };
 		9B91A56EDEDF423F9A13F662 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F784372B4854BE788A20AF1 /* Zocial.ttf */; };
 		AB3CBF41C7CB4CD38A129534 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64BDC79B307246C68F142991 /* Entypo.ttf */; };
 		AEBB9919A2E444FDBEA9B7C5 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD9EA3A48D19451BAA8A79D8 /* EvilIcons.ttf */; };
@@ -156,6 +160,13 @@
 			remoteGlobalIDString = 4F3A6B5B1ACFBCC500CA65F7;
 			remoteInfo = RCTFBLogin;
 		};
+		93D336861C76104A004E5E89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93D336811C76104A004E5E89 /* CodePush.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = CodePush;
+		};
 		93DC46A31C616BD800C44C7B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DFE5DF0C0FDA44D7B40D4421 /* GeocodingAppSample.xcodeproj */;
@@ -231,11 +242,15 @@
 		932FD60D1C7417E800086061 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiboldItalic.ttf"; path = "../android/app/src/main/assets/fonts/OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		932FD60E1C7417E800086061 /* OpenSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OpenSans.ttf; path = ../android/app/src/main/assets/fonts/OpenSans.ttf; sourceTree = "<group>"; };
 		932FD60F1C7417E800086061 /* OpenSansLight-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSansLight-Italic.ttf"; path = "../android/app/src/main/assets/fonts/OpenSansLight-Italic.ttf"; sourceTree = "<group>"; };
+		935C78BC1C76265E0016F456 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = release/assets; sourceTree = "<group>"; };
+		935C78BD1C76265E0016F456 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = release/main.jsbundle; sourceTree = "<group>"; };
 		937F65B51C4FD755002D091D /* RNKeychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKeychain.xcodeproj; path = "../node_modules/react-native-keychain/RNKeychain.xcodeproj"; sourceTree = "<group>"; };
 		937F65D61C513C39002D091D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		937F65D71C513C39002D091D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		937F65D81C513C39002D091D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		937F65DC1C514416002D091D /* RCTFBLogin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBLogin.xcodeproj; path = "../node_modules/react-native-facebook-login/RCTFBLogin.xcodeproj"; sourceTree = "<group>"; };
+		93D336811C76104A004E5E89 /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/CodePush.xcodeproj"; sourceTree = "<group>"; };
+		93D336991C7610AD004E5E89 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		93F0A8911C4AB87F00557F7C /* RNGeocoder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGeocoder.xcodeproj; path = "../node_modules/react-native-geocoder/RNGeocoder.xcodeproj"; sourceTree = "<group>"; };
 		BE64CB10AE714704B05D23E2 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		DD9EA3A48D19451BAA8A79D8 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -258,6 +273,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93D3369A1C7610AD004E5E89 /* libz.tbd in Frameworks */,
+				93D336981C76106F004E5E89 /* libCodePush.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				937F65DB1C513C39002D091D /* FBSDKShareKit.framework in Frameworks */,
@@ -420,6 +437,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				93D336811C76104A004E5E89 /* CodePush.xcodeproj */,
 				937F65DC1C514416002D091D /* RCTFBLogin.xcodeproj */,
 				937F65B51C4FD755002D091D /* RNKeychain.xcodeproj */,
 				93F0A8911C4AB87F00557F7C /* RNGeocoder.xcodeproj */,
@@ -451,6 +469,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				93C6A14D1C76239D00358AE8 /* Release */,
 				13B07FAE1A68108700A75B9A /* TemAcucar */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* TemAcucarTests */,
@@ -490,6 +509,7 @@
 		937F65CF1C513B4B002D091D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93D336991C7610AD004E5E89 /* libz.tbd */,
 				937F65D61C513C39002D091D /* FBSDKCoreKit.framework */,
 				937F65D71C513C39002D091D /* FBSDKLoginKit.framework */,
 				937F65D81C513C39002D091D /* FBSDKShareKit.framework */,
@@ -501,6 +521,23 @@
 			isa = PBXGroup;
 			children = (
 				937F65E11C514416002D091D /* libRCTFBLogin.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		93C6A14D1C76239D00358AE8 /* Release */ = {
+			isa = PBXGroup;
+			children = (
+				935C78BC1C76265E0016F456 /* assets */,
+				935C78BD1C76265E0016F456 /* main.jsbundle */,
+			);
+			name = Release;
+			sourceTree = "<group>";
+		};
+		93D336821C76104A004E5E89 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				93D336871C76104A004E5E89 /* libCodePush.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -599,6 +636,10 @@
 				{
 					ProductGroup = 932FD5EB1C7417CC00086061 /* Products */;
 					ProjectRef = BE64CB10AE714704B05D23E2 /* AirMaps.xcodeproj */;
+				},
+				{
+					ProductGroup = 93D336821C76104A004E5E89 /* Products */;
+					ProjectRef = 93D336811C76104A004E5E89 /* CodePush.xcodeproj */;
 				},
 				{
 					ProductGroup = 93DC469D1C616BD700C44C7B /* Products */;
@@ -761,6 +802,13 @@
 			remoteRef = 937F65E01C514416002D091D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		93D336871C76104A004E5E89 /* libCodePush.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCodePush.a;
+			remoteRef = 93D336861C76104A004E5E89 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		93DC46A41C616BD800C44C7B /* GeocodingAppSample.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
@@ -815,12 +863,14 @@
 				932FD6191C7417E800086061 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				AB3CBF41C7CB4CD38A129534 /* Entypo.ttf in Resources */,
 				AEBB9919A2E444FDBEA9B7C5 /* EvilIcons.ttf in Resources */,
+				935C78BE1C76265E0016F456 /* assets in Resources */,
 				E7518CB212B14F72883FEEFA /* FontAwesome.ttf in Resources */,
 				932FD6181C7417E800086061 /* OpenSans-ExtraBold.ttf in Resources */,
 				00D82E5A730B4112B6CBB04F /* Foundation.ttf in Resources */,
 				932FD6151C7417E800086061 /* BoosterNextFY-Thin.otf in Resources */,
 				10B61D09F1CC494B832E64C1 /* Ionicons.ttf in Resources */,
 				932FD61D1C7417E800086061 /* OpenSans-SemiboldItalic.ttf in Resources */,
+				935C78BF1C76265E0016F456 /* main.jsbundle in Resources */,
 				D9B13D95F1644B0B99E72E50 /* MaterialIcons.ttf in Resources */,
 				932FD61E1C7417E800086061 /* OpenSans.ttf in Resources */,
 				932FD61C1C7417E800086061 /* OpenSans-Semibold.ttf in Resources */,
@@ -957,6 +1007,7 @@
 					"$(SRCROOT)/../node_modules/react-native-geocoder/RNGeocoder/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-maps/ios/AirMaps/**",
+					"$(SRCROOT)/../node_modules/react-native-code-push/**",
 				);
 				INFOPLIST_FILE = TemAcucar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -980,6 +1031,7 @@
 					"$(SRCROOT)/../node_modules/react-native-geocoder/RNGeocoder/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-maps/ios/AirMaps/**",
+					"$(SRCROOT)/../node_modules/react-native-code-push/**",
 				);
 				INFOPLIST_FILE = TemAcucar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
