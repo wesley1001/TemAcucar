@@ -16,15 +16,15 @@ export default Terms = ({ onAcceptTerms, onRejectTerms, onScroll, scrolledToBott
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.beige,
     padding: 20,
-    marginTop: 20,
+    paddingTop: 40,
   }}>
     <Headline style={{marginBottom: 20}}>Termos de uso</Headline>
     <ScrollView
       style={{
         alignSelf: 'stretch',
-        backgroundColor: Colors.beige,
+        backgroundColor: Colors.white,
         padding: 10,
         marginBottom: 20,
       }}
@@ -302,23 +302,20 @@ export default Terms = ({ onAcceptTerms, onRejectTerms, onScroll, scrolledToBott
         Todos os itens destes Termos e Condições Gerais estão regidos pelas leis vigentes na República Federativa do Brasil. Para todos os assuntos referentes à interpretação e ao cumprimento deste Contrato, as partes se submetem ao Foro Central da Comarca do Rio de Janeiro, estado do Rio de Janeiro.
       </Paragraph>
     </ScrollView>
-    <TextBox style={{height: 60}}>
+    <TextBox style={{height: 60, textAlign: 'center', fontFamily: 'BoosterNextFY-Bold'}}>
       { (scrolledToBottom ? 'Para poder continuar, você deve aceitar os termos de uso.' : 'Para poder continuar, você deve ler os termos de uso até o final.') }
     </TextBox>
     <View style={{
       alignSelf: 'stretch',
       flexDirection: 'row',
     }}>
-      <Button isDisabled={!scrolledToBottom} style={{flex: 1, marginRight: 4}} onPress={onAcceptTerms}>
+      <Button isDisabled={!scrolledToBottom} style={{flex: 1, marginRight: 10}} onPress={onAcceptTerms}>
         Eu aceito
       </Button>
       <Button
         style={{
           flex: 1,
-          backgroundColor: Colors.beige,
-        }}
-        textStyle={{
-          color: Colors.brown,
+          backgroundColor: Colors.ice,
         }}
         onPress={onRejectTerms}
       >
