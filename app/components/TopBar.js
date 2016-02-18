@@ -36,7 +36,7 @@ export default TopBar = ({ onMenuOpen }) => (
       alignItems: 'center',
       justifyContent: 'center',
     }}>
-      <Image source={require('../img/icon.png')} style={{marginRight: 48}} />
+      <Image source={require('../img/icon.png')} style={{marginRight: 42}} />
     </View>
   </View>
 )
