@@ -25,8 +25,8 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		4E57226979BB422D95757FED /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56FE654350534B57B8516EC0 /* libAirMaps.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		930086331C764E140035C7E6 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 930086311C764E140035C7E6 /* assets */; };
-		930086341C764E140035C7E6 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 930086321C764E140035C7E6 /* main.jsbundle */; };
+		932BE0D71C765C61000FDC32 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 932BE0D51C765C61000FDC32 /* assets */; };
+		932BE0D81C765C61000FDC32 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 932BE0D61C765C61000FDC32 /* main.jsbundle */; };
 		932FD6101C7417E800086061 /* BoosterNextFY-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 932FD6001C7417E800086061 /* BoosterNextFY-Black.otf */; };
 		932FD6111C7417E800086061 /* BoosterNextFY-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 932FD6011C7417E800086061 /* BoosterNextFY-Bold.otf */; };
 		932FD6121C7417E800086061 /* BoosterNextFY-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 932FD6021C7417E800086061 /* BoosterNextFY-Light.otf */; };
@@ -226,8 +226,8 @@
 		7F784372B4854BE788A20AF1 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8FF7F91E50ED42179CDA22A5 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		930086311C764E140035C7E6 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = release/assets; sourceTree = "<group>"; };
-		930086321C764E140035C7E6 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = release/main.jsbundle; sourceTree = "<group>"; };
+		932BE0D51C765C61000FDC32 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = release/assets; sourceTree = "<group>"; };
+		932BE0D61C765C61000FDC32 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = release/main.jsbundle; sourceTree = "<group>"; };
 		932FD6001C7417E800086061 /* BoosterNextFY-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BoosterNextFY-Black.otf"; path = "../android/app/src/main/assets/fonts/BoosterNextFY-Black.otf"; sourceTree = "<group>"; };
 		932FD6011C7417E800086061 /* BoosterNextFY-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BoosterNextFY-Bold.otf"; path = "../android/app/src/main/assets/fonts/BoosterNextFY-Bold.otf"; sourceTree = "<group>"; };
 		932FD6021C7417E800086061 /* BoosterNextFY-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BoosterNextFY-Light.otf"; path = "../android/app/src/main/assets/fonts/BoosterNextFY-Light.otf"; sourceTree = "<group>"; };
@@ -528,8 +528,8 @@
 		93C6A14D1C76239D00358AE8 /* Release */ = {
 			isa = PBXGroup;
 			children = (
-				930086311C764E140035C7E6 /* assets */,
-				930086321C764E140035C7E6 /* main.jsbundle */,
+				932BE0D51C765C61000FDC32 /* assets */,
+				932BE0D61C765C61000FDC32 /* main.jsbundle */,
 			);
 			name = Release;
 			sourceTree = "<group>";
@@ -863,14 +863,14 @@
 				932FD6191C7417E800086061 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				AB3CBF41C7CB4CD38A129534 /* Entypo.ttf in Resources */,
 				AEBB9919A2E444FDBEA9B7C5 /* EvilIcons.ttf in Resources */,
-				930086331C764E140035C7E6 /* assets in Resources */,
+				932BE0D71C765C61000FDC32 /* assets in Resources */,
 				E7518CB212B14F72883FEEFA /* FontAwesome.ttf in Resources */,
 				932FD6181C7417E800086061 /* OpenSans-ExtraBold.ttf in Resources */,
 				00D82E5A730B4112B6CBB04F /* Foundation.ttf in Resources */,
 				932FD6151C7417E800086061 /* BoosterNextFY-Thin.otf in Resources */,
 				10B61D09F1CC494B832E64C1 /* Ionicons.ttf in Resources */,
 				932FD61D1C7417E800086061 /* OpenSans-SemiboldItalic.ttf in Resources */,
-				930086341C764E140035C7E6 /* main.jsbundle in Resources */,
+				932BE0D81C765C61000FDC32 /* main.jsbundle in Resources */,
 				D9B13D95F1644B0B99E72E50 /* MaterialIcons.ttf in Resources */,
 				932FD61E1C7417E800086061 /* OpenSans.ttf in Resources */,
 				932FD61C1C7417E800086061 /* OpenSans-Semibold.ttf in Resources */,
