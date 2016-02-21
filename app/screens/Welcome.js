@@ -6,7 +6,7 @@ import OrSeparator from "../components/OrSeparator"
 import Button from "../components/Button"
 
 export default Welcome = () => (
-  <SimpleScreen headline="Compartilhe suas coisas com seus vizinhos">
+  <SimpleScreen headline="Compartilhe coisas com seus vizinhos">
     <Button onPress={Actions.signIn}>
       Já possuo cadastro
     </Button>
