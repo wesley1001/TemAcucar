@@ -1,14 +1,24 @@
-import React from 'react-native'
+import React, { Component } from 'react-native'
 import FormTextInput from "./FormTextInput"
 
-export default EmailInput = (props) => (
-  <FormTextInput 
-    name='email'
-    title='Email'
-    placeholder='digite@seu.email'
-    icon='mail-outline'
-    autoCapitalize='none'
-    keyboardType='email-address'
-    { ...props }
-  />
-)
+export default class EmailInput extends Component {
+  focus() {
+    this.refs.input.focus()
+  }
+
+  render() {
+    return (
+      <FormTextInput 
+        ref='input'
+        name='email'
+        title='Email'
+        placeholder='digite@seu.email'
+        icon='mail-outline'
+        autoCorrect={false}
+        autoCapitalize='none'
+        keyboardType='email-address'
+        { ...this.props }
+      />
+    )
+  }
+}

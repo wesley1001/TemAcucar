@@ -34,7 +34,8 @@ export default class FormSubmit extends Component {
             backgroundColor: Colors.gray,
           },
           errorContainer: {
-            marginTop: 10,
+            marginTop: 16,
+            paddingBottom: 0,
           },
           errorText: {
             color: Colors.pink,

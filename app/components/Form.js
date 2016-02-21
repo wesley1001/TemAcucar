@@ -18,12 +18,34 @@ export default class Form extends Component {
   }
 
   childrenWithProps() {
-    return React.Children.map(this.props.children, (child) => {
-      if (!child.props.onSubmit) return child
-      return React.cloneElement(child, {
-        isDisabled: !this.state.isValid,
-      })
-    })
+    const inputTypes = ['EmailInput', 'PasswordInput', 'FormTextInput']
+    let nextInput = null
+    let inputCount = 0
+    return React.Children.map(this.props.children, (child) => child).reverse().map((child) => {
+      if (child.type.name == 'FormSubmit') {
+        return React.cloneElement(child, {
+          isDisabled: !this.state.isValid,
+        })
+      } else if (inputTypes.indexOf(child.type.name) > -1) {
+        inputCount++
+        const input = React.cloneElement(child, {
+          ref: `input${inputCount}`,
+          nextInput: nextInput,
+          onNextInputFocus: this.handleNextInputFocus.bind(this),
+        })
+        nextInput = input
+        return input
+      } else {
+        return child
+      }
+    }).reverse()
+  }
+
+  handleNextInputFocus(nextInput) {
+    if (nextInput) {
+      const input = this.refs[nextInput.ref]
+      input.focus()
+    }
   }
 
   handleValidation(validation) {
