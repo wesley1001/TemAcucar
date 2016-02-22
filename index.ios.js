@@ -5,8 +5,65 @@
 import React, { Component } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { StatelessForm, InlineTextInput } from 'react-native-stateless-form'
+import { validate } from 'validate-model'
 
-export default class Form extends Component {
+const UserValidators = {
+  name: {
+    title: 'Name',
+    validate: [{
+      validator: 'isLength',
+      arguments: [1, 255],
+    }]
+  },
+  email: {
+    title: 'Email',
+    validate: [{
+      validator: 'isLength',
+      arguments: [1, 255],
+    },
+    {
+      validator: 'isEmail',
+      message: '{TITLE} must be valid',
+    }]
+  },
+  password: {
+    title: 'Password',
+    validate: [{
+      validator: 'isLength',
+      arguments: [8, 255],
+      message: '{TITLE} is too short',
+    }]
+  },
+}
+
+class FormInput extends Component {
+  focus() {
+    this.refs.input.focus()
+  }
+
+  render() {
+    const { iconName, name, value } = this.props
+    const { valid, messages } = validate(UserValidators[name], value)
+    const message = (messages && messages.length > 0 ? messages[0] : null)
+    return (
+      <InlineTextInput
+        ref='input'
+        style={{ borderColor: 'gray' }}
+        titleStyle={{ color: 'dimgray' }}
+        inputStyle={{ color: 'slategray' }}
+        messageStyle={{ color: 'red' }}
+        icon={ <Icon name={iconName} size={18} color={'steelblue'} /> }
+        validIcon={ <Icon name='check' size={18} color='green' /> }
+        invalidIcon={ <Icon name='clear' size={18} color='red' /> }
+        valid={valid}
+        message={message}
+        { ...this.props }
+      />
+    )
+  }
+}
+
+class Form extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -18,64 +75,39 @@ export default class Form extends Component {
 
   render() {
     const { name, email, password } = this.state
-    const nameValid = (name && name.length > 0 ? true : false)
-    const emailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
-    const passwordValid = (password && password.length >= 8 ? true : false)
     return (
-      <StatelessForm style={{
-        flex: 1,
-        marginTop: 20,
-        backgroundColor: 'lightgray',
-      }}>
-        <InlineTextInput
+      <StatelessForm
+        focusableTypes={['InlineTextInput', 'FormInput']}
+        style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}
+      >
+        <FormInput
+          name='name'
           title='Name'
           placeholder='Tell us your name'
-          style={{ borderColor: 'gray' }}
-          titleStyle={{ color: 'dimgray' }}
-          inputStyle={{ color: 'slategray' }}
-          messageStyle={{ color: 'red' }}
-          icon={ <Icon name={'account-circle'} size={18} color={'steelblue'} /> }
-          validIcon={ <Icon name='check' size={18} color='green' /> }
-          invalidIcon={ <Icon name='clear' size={18} color='red' /> }
+          iconName='account-circle'
           value={name}
-          valid={nameValid}
-          message={name && !nameValid ? 'Please fill your name' : null}
           onChangeText={(text) => { this.setState({name: text}) }}
         />
-        <InlineTextInput
+        <FormInput
+          name='email'
           title='Email'
           placeholder='type@your.email'
           autoCorrect={false}
           autoCapitalize='none'
           keyboardType='email-address'
-          style={{ borderColor: 'gray' }}
-          titleStyle={{ color: 'dimgray' }}
-          inputStyle={{ color: 'slategray' }}
-          messageStyle={{ color: 'red' }}
-          icon={ <Icon name={'mail-outline'} size={18} color={'steelblue'} /> }
-          validIcon={ <Icon name='check' size={18} color='green' /> }
-          invalidIcon={ <Icon name='clear' size={18} color='red' /> }
+          iconName='mail-outline'
           value={email}
-          valid={emailValid}
-          message={email && !emailValid ? 'Please enter a valid email address' : null}
           onChangeText={(text) => { this.setState({email: text}) }}
         />
-        <InlineTextInput
+        <FormInput
+          name='password'
           title='Password'
           placeholder='Create a password'
           autoCorrect={false}
           autoCapitalize='none'
           secureTextEntry={true}
-          style={{ borderColor: 'gray' }}
-          titleStyle={{ color: 'dimgray' }}
-          inputStyle={{ color: 'slategray' }}
-          messageStyle={{ color: 'red' }}
-          icon={ <Icon name={'vpn-key'} size={18} color={'steelblue'} /> }
-          validIcon={ <Icon name='check' size={18} color='green' /> }
-          invalidIcon={ <Icon name='clear' size={18} color='red' /> }
+          iconName='vpn-key'
           value={password}
-          valid={passwordValid}
-          message={password && !passwordValid ? 'Password too short' : null}
           onChangeText={(text) => { this.setState({password: text}) }}
         />
       </StatelessForm>
