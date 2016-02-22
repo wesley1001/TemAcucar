@@ -41,7 +41,8 @@ public class MainActivity extends ReactActivity {
         new ReactConfigPackage(),
         new RNGeocoderPackage(),
         new FacebookLoginPackage(),
-        new MainReactPackage(),
-        new AirPackage());
+        new AirPackage(),
+        new MainReactPackage()
+      );
     }
 }
