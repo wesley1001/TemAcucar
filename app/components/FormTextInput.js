@@ -1,53 +1,33 @@
 import React, { Component } from 'react-native'
-import { GiftedForm } from 'react-native-gifted-form'
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import { InlineTextInput } from 'react-native-stateless-form'
 
 import Colors from "../Colors"
+import Icon from "./Icon"
 
 export default class FormTextInput extends Component {
   focus() {
     this.refs.input.focus()
   }
 
-  handleSubmitEditing() {
-    const { nextInput } = this.props
-    this.props.onNextInputFocus && this.props.onNextInputFocus(nextInput)
-  }
-
   render() {
-    const { icon, nextInput } = this.props
+    const { icon } = this.props
     return (
-      <GiftedForm.TextInputWidget
+      <InlineTextInput
         ref='input'
-        onSubmitEditing={this.handleSubmitEditing.bind(this)}
-        returnKeyType={ nextInput ? 'next' : 'done' }
-        clearButtonMode='while-editing'
-        image={ icon && <Icon name={icon} size={15} color={Colors.darkGray} style={{
-          width: 15,
-          marginLeft: 13,
-          marginRight: 2,
-        }} /> }
-        widgetStyles={{
-          rowContainer: {
-            borderColor: Colors.lightGray,
-            borderBottomWidth: 0.5,
-          },
-          row: {
-            marginLeft: (icon ? 0 : 10),
-          },
-          textInputInline: {
-            fontFamily: 'OpenSans',
-            backgroundColor: Colors.white,
-            color: Colors.pink,
-          },
-          textInputTitleInline: {
-            fontFamily: 'OpenSans',
-            color: Colors.brown,
-            fontWeight: 'bold',
-            width: 98,
-          },
+        style={{
+          borderColor: Colors.ice,
         }}
-        {...this.props}
+        titleStyle={{
+          fontFamily: 'OpenSans',
+          color: Colors.brown,
+        }}
+        inputStyle={{
+          color: Colors.pink,
+        }}
+        { ...this.props }
+        icon={ <Icon name={icon} color={Colors.brown} /> }
+        validIcon={ <Icon name='check' color='green' /> }
+        invalidIcon={ <Icon name='clear' color='red' /> }
       />
     )
   }

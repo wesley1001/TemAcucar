@@ -35,15 +35,29 @@ export default class SignUpForm extends Component {
           title='Nome'
           placeholder='Digite seu primeiro nome'
           icon='account-circle'
+          value='Valor'
+          valid={true}
+          message='Hey! Preenche aí!'
         />
         <FormTextInput 
           name='last_name'
           title='Sobrenome'
           placeholder='Digite seu sobrenome'
           icon='account-circle'
+          value='Valor'
+          valid={true}
+          message='Hey! Preenche aí!'
         />
-        <EmailInput />
-        <PasswordInput />
+        <EmailInput
+          value='Valor'
+          valid={false}
+          message='Hey! Preenche aí!'
+        />
+        <PasswordInput
+          value='Valor'
+          valid={false}
+          message='Hey! Preenche aí!'
+        />
         <FormSubmit
           ref="submit"
           title="Fazer cadastro"
