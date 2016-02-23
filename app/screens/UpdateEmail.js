@@ -1,4 +1,6 @@
 import React, { Component } from 'react-native'
+import { validateFunction } from 'validate-model'
+import { reduxForm } from 'redux-form'
 
 import UserValidators from '../validators/UserValidators'
 import FormScreen from "../components/FormScreen"
@@ -10,25 +12,28 @@ const validators = {
 }
 
 export default class UpdateEmail extends Component {
-  componentWillReceiveProps(nextProps) {
-    const { updateEmailError } = nextProps.config
-    const { submit } = this.refs
-    if (updateEmailError) {
-      submit.postSubmit(UserValidators.errorMessage(updateEmailError))
-    }
-  }
-
   render() {
-    const { onUpdate } = this.props
+    const { onUpdate, fields: { email }, config: { updateEmailError, updatingEmail } } = this.props
     return (
       <FormScreen name="updateEmail" validators={validators}>
-        <EmailInput />
+        <EmailInput {...email} />
+        { updateEmailError && <FormError message={UserValidators.errorMessage(updateEmailError)} /> }
         <FormSubmit
-          ref="submit"
-          title="Atualizar meu email"
+          {...this.props}
+          isLoading={updatingEmail}
           onSubmit={onUpdate}
-        />
+        >
+          Atualizar meu email
+        </FormSubmit>
       </FormScreen>
     )
   }
 }
+
+UpdateEmail = reduxForm({
+  form: 'updateEmail',
+  fields: ['email'],
+  validate: validateFunction(validators),
+})(UpdateEmail)
+
+export default UpdateEmail

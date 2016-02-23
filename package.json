@@ -28,13 +28,13 @@
     "react-native-scrollable-tab-view": "0.3.5",
     "react-native-simple-store": "0.1.0",
     "react-native-slider": "jeanregisser/react-native-slider",
-    "react-native-stateless-form": "0.0.4",
+    "react-native-stateless-form": "0.0.5",
     "react-native-vector-icons": "1.1.1",
     "react-redux": "4.3.0",
     "redux": "3.2.1",
     "redux-form": "4.2.0",
     "redux-logger": "2.5.0",
     "redux-thunk": "1.0.3",
-    "validate-model": "0.0.1"
+    "validate-model": "0.0.2"
   }
 }

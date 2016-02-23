@@ -1,51 +1,17 @@
-import React, { Component } from 'react-native'
-import { GiftedForm } from 'react-native-gifted-form'
-import Colors from "../Colors"
+import React from 'react-native'
+import Button from "./Button"
 
-export default class FormSubmit extends Component {
-  handleSubmit(isValid, values) {
-    if (isValid === true) {
-      this.props.onSubmit(values)
-    }
-  }
-
-  postSubmit(error) {
-    this.refs.submit._postSubmit([error])
-  }
-
-  render() {
-    return (
-      <GiftedForm.SubmitWidget
-        ref="submit"
-        activityIndicatorColor={ Colors.white }
-        widgetStyles={{
-          submitButton: {
-            backgroundColor: Colors.pink,
-            height: 60,
-            margin: 24,
-          },
-          textSubmitButton: {
-            fontSize: 16,
-            fontFamily: 'BoosterNextFY-Bold',
-            lineHeight: 22,
-          },
-          disabledSubmitButton: {
-            opacity: 1,
-            backgroundColor: Colors.gray,
-          },
-          errorContainer: {
-            marginTop: 16,
-            paddingBottom: 0,
-          },
-          errorText: {
-            color: Colors.pink,
-            textAlign: 'center',
-            fontSize: 16,
-          },
-        }}
-        {...this.props}
-        onSubmit={this.handleSubmit.bind(this)}
-      />
-    )
-  }
-}
+export default FormSubmit = (props) => (
+  <Button
+    style={{
+      alignSelf: 'stretch',
+      margin: 24,
+      marginBottom: 24,
+    }}
+    isDisabled={!props.dirty || !props.valid || props.submitting}
+    onPress={props.handleSubmit(props.onSubmit)}
+    {...props}
+  >
+    {props.children}
+  </Button>
+)

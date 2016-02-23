@@ -1,4 +1,6 @@
 import React, { Component } from 'react-native'
+import { validateFunction } from 'validate-model'
+import { reduxForm } from 'redux-form'
 import { Actions } from 'react-native-router-flux'
 
 import UserValidators from '../validators/UserValidators'
@@ -15,19 +17,31 @@ const validators = {
   password: UserValidators.password,
 }
 
-export default SignInForm = ({ onSignIn }) => (
-  <FormScreen name="signInForm" validators={validators}>
-    <EmailInput />
-    <PasswordInput />
-    <FormSubmit
-      title="Fazer login"
-      onSubmit={onSignIn}
-    />
-    <FormFooter>
-      <Link onPress={Actions.requestPassword} style={{marginBottom: 10}}>
-        Esqueceu sua senha?
-      </Link>
-      <SignUpLink />
-    </FormFooter>
-  </FormScreen>
-)
+class SignInForm extends Component {
+  render() {
+    const { onSignIn, fields: { email, password }, dirty, valid, submitting, handleSubmit } = this.props
+    return (
+      <FormScreen>
+        <EmailInput {...email} />
+        <PasswordInput {...password} />
+        <FormSubmit {...this.props} onSubmit={onSignIn}>
+          Fazer login
+        </FormSubmit>
+        <FormFooter>
+          <Link onPress={Actions.requestPassword} style={{marginBottom: 10}}>
+            Esqueceu sua senha?
+          </Link>
+          <SignUpLink />
+        </FormFooter>
+      </FormScreen>
+    )
+  }
+}
+
+SignInForm = reduxForm({
+  form: 'signIn',
+  fields: ['email', 'password'],
+  validate: validateFunction(validators),
+})(SignInForm)
+
+export default SignInForm

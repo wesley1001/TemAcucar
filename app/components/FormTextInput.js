@@ -10,7 +10,8 @@ export default class FormTextInput extends Component {
   }
 
   render() {
-    const { icon } = this.props
+    const { icon, error } = this.props
+    const message = ( error && error.length > 0 ? error[0] : null)
     return (
       <InlineTextInput
         ref='input'
@@ -28,6 +29,7 @@ export default class FormTextInput extends Component {
         icon={ <Icon name={icon} color={Colors.brown} /> }
         validIcon={ <Icon name='check' color='green' /> }
         invalidIcon={ <Icon name='clear' color='red' /> }
+        message={message}
       />
     )
   }

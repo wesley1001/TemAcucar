@@ -1,4 +1,6 @@
 import React, { Component } from 'react-native'
+import { validateFunction } from 'validate-model'
+import { reduxForm } from 'redux-form'
 import { Actions } from 'react-native-router-flux'
 
 import UserValidators from '../validators/UserValidators'
@@ -7,6 +9,7 @@ import FormTextInput from "../components/FormTextInput"
 import EmailInput from "../components/EmailInput"
 import PasswordInput from "../components/PasswordInput"
 import FormSubmit from "../components/FormSubmit"
+import FormError from "../components/FormError"
 import FormFooter from "../components/FormFooter"
 import SignInLink from "../components/SignInLink"
 
@@ -18,51 +21,37 @@ const validators = {
 }
 
 export default class SignUpForm extends Component {
-  componentWillReceiveProps(nextProps) {
-    const { signUpError } = nextProps.auth
-    const { submit } = this.refs
-    if(signUpError) {
-      submit.postSubmit(UserValidators.errorMessage(signUpError))
-    }
-  }
-
   render() {
-    const { onSignUp } = this.props
+    const { onSignUp, fields, auth: { signingUp, signUpError } } = this.props
+    const { first_name, last_name, email, password } = fields
     return (
-      <FormScreen name="signUpForm" validators={validators}>
+      <FormScreen>
         <FormTextInput 
           name='first_name'
           title='Nome'
           placeholder='Digite seu primeiro nome'
           icon='account-circle'
-          value='Valor'
-          valid={true}
-          message='Hey! Preenche aí!'
+          autoCapitalize='words'
+          {...first_name}
         />
         <FormTextInput 
           name='last_name'
           title='Sobrenome'
           placeholder='Digite seu sobrenome'
           icon='account-circle'
-          value='Valor'
-          valid={true}
-          message='Hey! Preenche aí!'
+          autoCapitalize='words'
+          {...last_name}
         />
-        <EmailInput
-          value='Valor'
-          valid={false}
-          message='Hey! Preenche aí!'
-        />
-        <PasswordInput
-          value='Valor'
-          valid={false}
-          message='Hey! Preenche aí!'
-        />
+        <EmailInput {...email} />
+        <PasswordInput {...password} />
+        { signUpError && <FormError message={UserValidators.errorMessage(signUpError)} /> }
         <FormSubmit
-          ref="submit"
-          title="Fazer cadastro"
+          {...this.props}
+          isLoading={signingUp}
           onSubmit={onSignUp}
-        />
+        >
+          Fazer cadastro
+        </FormSubmit>
         <FormFooter>
           <SignInLink />
         </FormFooter>
@@ -70,3 +59,11 @@ export default class SignUpForm extends Component {
     )
   }
 }
+
+SignUpForm = reduxForm({
+  form: 'signUp',
+  fields: ['first_name', 'last_name', 'email', 'password'],
+  validate: validateFunction(validators),
+})(SignUpForm)
+
+export default SignUpForm
