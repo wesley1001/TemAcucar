@@ -42,7 +42,7 @@ export function locationGetCoordinates() {
           error: {id: error.code, message: error.message},
         })
       },
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      {enableHighAccuracy: false, timeout: 5000, maximumAge: 20000}
     )
   }  
 }
