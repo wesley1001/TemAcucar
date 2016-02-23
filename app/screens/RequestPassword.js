@@ -13,7 +13,7 @@ const validators = {
   email: UserValidators.email,
 }
 
-export default class RequestPassword extends Component {
+class RequestPassword extends Component {
   componentWillReceiveProps(nextProps) {
     const { resetPassword } = nextProps.auth
     if (resetPassword && (resetPassword != this.props.auth.resetPassword)) {

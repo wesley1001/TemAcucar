@@ -20,7 +20,7 @@ const validators = {
   password: UserValidators.password,
 }
 
-export default class SignUpForm extends Component {
+class SignUpForm extends Component {
   render() {
     const { onSignUp, fields, auth: { signingUp, signUpError } } = this.props
     const { first_name, last_name, email, password } = fields

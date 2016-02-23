@@ -14,7 +14,7 @@ const validators = {
   password: UserValidators.password,
 }
 
-export default class ResetPassword extends Component {
+class ResetPassword extends Component {
   render() {
     const { onResetPassword, fields, auth: { resetPasswordError, resetingPassword } } = this.props
     const { reset_password_token, password } = fields
