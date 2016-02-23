@@ -10,6 +10,7 @@ function processAddress(address) {
     name: `${address.thoroughfare}, ${address.subThoroughfare}`,
     thoroughfare: address.thoroughfare,
     subThoroughfare: address.subThoroughfare,
+    complement: address.complement,
     subLocality: address.subLocality,
     locality: address.locality,
     subAdministrativeArea: address.subAdminArea,
@@ -56,7 +57,7 @@ export function locationSetCoordinates(latitude, longitude) {
   }
 }
 
-export function locationGetAddress(latitude, longitude) {
+export function locationGetAddress(latitude, longitude, complement) {
   return dispatch => {
     if (!(latitude && longitude)) {
       return dispatch({
@@ -66,10 +67,14 @@ export function locationGetAddress(latitude, longitude) {
     }
     dispatch({ type: 'LOCATION_GET_ADDRESS_REQUEST' })
     RNGeocoder.reverseGeocodeLocation({latitude, longitude}, (error, data) => {
-      if(!error && data && data[0]) { 
+      const address = data && data[0]
+      if(!error && address) { 
         dispatch({
           type: 'LOCATION_GET_ADDRESS_SUCCESS',
-          address: processAddress(data[0]),
+          address: processAddress({
+            complement,
+            ...address,
+          }),
         })
       } else {
         dispatch({
@@ -81,7 +86,7 @@ export function locationGetAddress(latitude, longitude) {
   }  
 }
 
-export function locationSearch(searchAddress) {
+export function locationSearch(searchAddress, initializeForm) {
   return dispatch => {
     const search = addressSearch(searchAddress)
     dispatch({
@@ -91,9 +96,14 @@ export function locationSearch(searchAddress) {
     RNGeocoder.geocodeAddress(search, (error, data) => {
       const address = data && data[0]
       if(!error && address) { 
+        const processedAddress = processAddress({
+          complement: searchAddress.complement,
+          ...address,
+        })
+        initializeForm(processedAddress)
         dispatch({
           type: 'LOCATION_SEARCH_SUCCESS',
-          address: processAddress(address),
+          address: processedAddress,
           latitude: address.position.lat,
           longitude: address.position.lng,
         })
@@ -116,6 +126,7 @@ export function locationSetLocation(location, credentials) {
     address_name: address.name,
     address_thoroughfare: address.thoroughfare,
     address_sub_thoroughfare: address.subThoroughfare,
+    address_complement: address.complement,
     address_sub_locality: address.subLocality,
     address_locality: address.locality,
     address_sub_administrative_area: address.subAdministrativeArea,

@@ -21,10 +21,15 @@ const validators = {
 }
 
 class SetLocation extends Component {
+  componentDidMount() {
+    const { initializeForm, location: { address } } = this.props
+    initializeForm(address)
+  }
+
   handleSubmit() {
-    const { dirty, values, onSearch, onSetLocation } = this.props
+    const { dirty, values, initializeForm, onSearch, onSetLocation } = this.props
     if (dirty) {
-      return onSearch(values)
+      return onSearch(values, initializeForm)
     }
     onSetLocation()
   }
@@ -116,6 +121,7 @@ class SetLocation extends Component {
           />
           <FormSubmit
             {...this.props}
+            isDisabled={ !valid }
             isLoading={searching || settingLocation}
             onSubmit={this.handleSubmit.bind(this)}
           >

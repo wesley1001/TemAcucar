@@ -17,16 +17,16 @@ class LocationSetter extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, location } = nextProps
+    const { dispatch, location, auth: { currentUser } } = nextProps
     const { latitude, longitude, gettingCoordinates, gettingAddress, startingUp } = location
     if (startingUp && !gettingCoordinates && !gettingAddress) {
-      dispatch(locationGetAddress(latitude, longitude))
+      dispatch(locationGetAddress(latitude, longitude, currentUser.address_complement))
     }
   }
 
-  handleSearch(search) {
+  handleSearch(search, initializeForm) {
     const { dispatch } = this.props
-    dispatch(locationSearch(search))
+    dispatch(locationSearch(search, initializeForm))
   }
 
   handleSetLocation() {
