@@ -23,20 +23,8 @@ export default class Requests extends Component {
   }
 
   renderMap() {
-    const { latitude, longitude } = this.props.currentUser
+    const { latitude, longitude } = this.props.auth.currentUser
     const { delta } = this.state
-    // TODO remove this commented lines once we settle for a kilometer range
-    // const kilometers = haversine({
-    //   latitude,
-    //   longitude,
-    // }, {
-    //   latitude: latitude + delta,
-    //   longitude: longitude + delta,
-    // }, {
-    //   unit: 'km'
-    // })
-    // console.log(kilometers)
-
     return (
       <MapView
         scrollEnabled={false}
@@ -61,7 +49,7 @@ export default class Requests extends Component {
   }
 
   render() {
-    const { latitude, longitude } = this.props.currentUser
+    const { latitude, longitude } = this.props.auth.currentUser
     const delta = this.state.delta * 1000
     return (
       <View>

@@ -13,7 +13,7 @@ const validators = {
 
 class UpdateEmail extends Component {
   render() {
-    const { onUpdate, fields: { email }, config: { updateEmailError, updatingEmail } } = this.props
+    const { onUpdateEmail, fields: { email }, config: { updateEmailError, updatingEmail } } = this.props
     return (
       <FormScreen name="updateEmail" validators={validators}>
         <EmailInput {...email} />
@@ -21,7 +21,7 @@ class UpdateEmail extends Component {
         <FormSubmit
           {...this.props}
           isLoading={updatingEmail}
-          onSubmit={onUpdate}
+          onSubmit={onUpdateEmail}
         >
           Atualizar meu email
         </FormSubmit>

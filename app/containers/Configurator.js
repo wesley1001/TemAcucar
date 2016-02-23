@@ -5,10 +5,10 @@ import Communications from 'react-native-communications'
 import { termsAccept, termsReject, termsCancelReject, termsScrollToBottom } from '../actions/TermsActions'
 import { configConfirmEmail, configUpdateEmail } from '../actions/ConfigActions'
 
+import LocationSetter from "./LocationSetter"
 import Loading from "../screens/Loading"
 import RejectedTerms from "../screens/RejectedTerms"
 import Terms from "../screens/Terms"
-import SetLocation from "../screens/SetLocation"
 import UnreviewedEmail from "../routers/UnreviewedEmail"
 import Neighborhood from "./Neighborhood"
 
@@ -67,10 +67,10 @@ class Configurator extends Component {
     if (!currentUser.accepted_terms)
       return (<Terms onAcceptTerms={this.handleAcceptTerms.bind(this)} onRejectTerms={this.handleRejectTerms.bind(this)} onScroll={this.handleScrollTerms.bind(this)} scrolledToBottom={scrolledToBottom} />)
     if (!currentUser.reviewed_email)
-      return (<UnreviewedEmail {...this.props} currentUser={currentUser} onConfirm={this.handleConfirmEmail.bind(this)} onUpdate={this.handleUpdateEmail.bind(this)} />)
+      return (<UnreviewedEmail {...this.props} onConfirm={this.handleConfirmEmail.bind(this)} onUpdateEmail={this.handleUpdateEmail.bind(this)} />)
     if (!currentUser.latitude || !currentUser.longitude || !currentUser.reviewed_location)
-      return (<SetLocation auth={auth} currentUser={currentUser} />)
-    return (<Neighborhood {...this.props} currentUser={currentUser} />)
+      return (<LocationSetter {...this.props} />)
+    return (<Neighborhood {...this.props} />)
   }
 }
 

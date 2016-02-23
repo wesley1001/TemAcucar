@@ -26,7 +26,7 @@ export default class FormTextInput extends Component {
           color: Colors.pink,
         }}
         { ...this.props }
-        icon={ <Icon name={icon} color={Colors.brown} /> }
+        icon={ icon && <Icon name={icon} color={Colors.brown} /> }
         validIcon={ <Icon name='check' color='green' /> }
         invalidIcon={ <Icon name='clear' color='red' /> }
         message={message}

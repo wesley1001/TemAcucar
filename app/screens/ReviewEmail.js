@@ -7,7 +7,7 @@ import TextBox from "../components/TextBox"
 import OrSeparator from "../components/OrSeparator"
 import Button from "../components/Button"
 
-export default ReviewEmail = ({ currentUser: { email }, onConfirm, onUpdate }) => (
+export default ReviewEmail = ({ auth: { currentUser: { email } }, onConfirm }) => (
   <SimpleScreen>
     <Headline style={{fontSize: 18, marginBottom: 10}}>{email}</Headline>
     <TextBox style={{marginBottom: 36, textAlign: 'center'}}>

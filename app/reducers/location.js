@@ -5,10 +5,7 @@ const initialState = {
   longitude: null,
   address: null,
   startingUp: true,
-  search: null,
-  searchChanged: false,
   searching: false,
-  justSearched: false,
   searchError: null,
   gettingCoordinates: false,
   getCoordinatesError: null,
@@ -16,7 +13,6 @@ const initialState = {
   getAddressError: null,
   settingLocation: false,
   setLocationError: null,
-  form: null,
 }
 
 export default function location(state = initialState, action) {
@@ -45,7 +41,6 @@ export default function location(state = initialState, action) {
         ...state, 
         latitude: action.latitude,
         longitude: action.longitude,
-        gettingCoordinates: false,
         getCoordinatesError: null,
       }
     case 'LOCATION_GET_ADDRESS_REQUEST':
@@ -57,22 +52,16 @@ export default function location(state = initialState, action) {
       return {
         ...state, 
         address: action.address,
-        form: action.address,
+        startingUp: false,
         gettingAddress: false,
         getAddressError: null,
       }
     case 'LOCATION_GET_ADDRESS_FAILURE':
       return {
         ...state, 
+        startingUp: false,
         gettingAddress: false,
         getAddressError: action.error,
-      }
-    case 'LOCATION_SET_SEARCH':
-      return {
-        ...state, 
-        search: action.search,
-        startingUp: false,
-        searchChanged: !state.startingUp,
       }
     case 'LOCATION_SEARCH_REQUEST':
       return {
@@ -83,12 +72,9 @@ export default function location(state = initialState, action) {
       return {
         ...state, 
         address: action.address,
-        form: action.address,
         latitude: action.latitude,
         longitude: action.longitude,
-        justSearched: true,
         searching: false,
-        searchChanged: false,
         searchError: null,
       }
     case 'LOCATION_SEARCH_FAILURE':
@@ -96,16 +82,6 @@ export default function location(state = initialState, action) {
         ...state, 
         searching: false,
         searchError: action.error,
-      }
-    case 'LOCATION_RESET_JUST_SEARCHED':
-      return {
-        ...state, 
-        justSearched: false,
-      }
-    case 'LOCATION_SET_FORM':
-      return {
-        ...state, 
-        form: action.form,
       }
     case 'LOCATION_SET_LOCATION_REQUEST':
       return {

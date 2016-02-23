@@ -50,7 +50,7 @@ class VersionChecker extends Component {
     Communications.web(Config.appStoreUrl)
   }
 
-  handleIgnoreUpdate() {
+  handleIgnore() {
     const { dispatch } = this.props
     dispatch(versionsIgnoreUpdate())
   }
@@ -72,7 +72,7 @@ class VersionChecker extends Component {
     if (this.isExpired())
       return (<ExpiredVersion onUpdate={this.handleUpdate.bind(this)} />)
     if (!this.isCurrent() && !ignoreUpdate)
-      return (<UpdateVersion version={version} onIgnore={this.handleIgnoreUpdate.bind(this)} onUpdate={this.handleUpdate.bind(this)} daysRemaining={this.daysRemaining(version)} />)
+      return (<UpdateVersion version={version} onIgnore={this.handleIgnore.bind(this)} onUpdate={this.handleUpdate.bind(this)} daysRemaining={this.daysRemaining(version)} />)
     return (<Authorizer />)
   }
 }

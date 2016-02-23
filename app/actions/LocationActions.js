@@ -19,6 +19,10 @@ function processAddress(address) {
   }
 }
 
+function addressSearch(address) {
+  return `${ address.thoroughfare }${ (address.subThoroughfare ? `, ${ address.subThoroughfare }` : '') }${ (address.subLocality ? ` - ${ address.subLocality }` : '') }${ (address.locality ? ` - ${ address.locality }` : '') }${ (address.administrativeArea ? ` - ${ address.administrativeArea }` : '') }${ address.country ? `, ${address.country}` : '' }`
+}
+
 export function locationGetCoordinates() {
   return dispatch => {
     dispatch({ type: 'LOCATION_GET_COORDINATES_REQUEST' })
@@ -54,6 +58,12 @@ export function locationSetCoordinates(latitude, longitude) {
 
 export function locationGetAddress(latitude, longitude) {
   return dispatch => {
+    if (!(latitude && longitude)) {
+      return dispatch({
+        type: 'LOCATION_GET_ADDRESS_FAILURE',
+        error: {id: 'no_coordinates', message: 'Tried to get address without coordinates'},
+      })
+    }
     dispatch({ type: 'LOCATION_GET_ADDRESS_REQUEST' })
     RNGeocoder.reverseGeocodeLocation({latitude, longitude}, (error, data) => {
       if(!error && data && data[0]) { 
@@ -71,28 +81,9 @@ export function locationGetAddress(latitude, longitude) {
   }  
 }
 
-export function locationSetForm(form) {
+export function locationSearch(searchAddress) {
   return dispatch => {
-    dispatch({
-      type: 'LOCATION_SET_FORM',
-      form,
-    })
-  }
-}
-
-export function locationSetSearch(search) {
-  return dispatch => {
-    dispatch({
-      type: 'LOCATION_SET_SEARCH',
-      search,
-    })
-  }
-}
-
-export function locationSearch(search) {
-  return dispatch => {
-    if (!(search && search.length > 0))
-      return
+    const search = addressSearch(searchAddress)
     dispatch({
       type: 'LOCATION_SEARCH_REQUEST',
       search,
@@ -114,12 +105,6 @@ export function locationSearch(search) {
       }
     })        
   }  
-}
-
-export function locationResetJustSearched() {
-  return dispatch => {
-    dispatch({ type: 'LOCATION_RESET_JUST_SEARCHED' })
-  }
 }
 
 export function locationSetLocation(location, credentials) {
