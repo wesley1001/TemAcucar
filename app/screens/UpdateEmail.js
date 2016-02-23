@@ -11,7 +11,7 @@ const validators = {
   email: UserValidators.email,
 }
 
-export default class UpdateEmail extends Component {
+class UpdateEmail extends Component {
   render() {
     const { onUpdate, fields: { email }, config: { updateEmailError, updatingEmail } } = this.props
     return (
