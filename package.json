@@ -28,7 +28,7 @@
     "react-native-scrollable-tab-view": "0.3.5",
     "react-native-simple-store": "0.1.0",
     "react-native-slider": "jeanregisser/react-native-slider",
-    "react-native-stateless-form": "0.0.5",
+    "react-native-stateless-form": "0.0.6",
     "react-native-vector-icons": "1.1.1",
     "react-redux": "4.3.0",
     "redux": "3.2.1",

@@ -39,7 +39,7 @@ class SetLocation extends Component {
     return (
       <MapView
         style={{
-          flex: (0.25 + (Dimensions.get('window').height - 533.33333333) * 0.0005),
+          flex: (0.16 + (Dimensions.get('window').height - 533.33333333) * 0.0025),
           alignSelf: 'stretch',
         }}
         region={{
