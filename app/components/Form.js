@@ -1,16 +1,11 @@
-import React, { Component } from 'react-native'
+import React from 'react-native'
 import { StatelessForm } from 'react-native-stateless-form'
 
-import Colors from "../Colors"
-
-export default class Form extends Component {
-  render() {
-    return (
-      <StatelessForm
-        focusableTypes={['EmailInput', 'PasswordInput', 'FormTextInput']}
-      >
-        {this.props.children}
-      </StatelessForm>
-    )
-  }  
-}
+export default Form = ({style, children}) => (
+  <StatelessForm
+    focusableTypes={['EmailInput', 'PasswordInput', 'FormTextInput']}
+    style={style}
+  >
+    {children}
+  </StatelessForm>
+)

@@ -36,17 +36,19 @@ class SetLocation extends Component {
 
   renderMap() {
     const { location: { latitude, longitude } } = this.props
+    const height = Dimensions.get('window').height
+    const delta = (height < 570 ? 0.0025 : 0.005)
     return (
       <MapView
         style={{
-          flex: (0.16 + (Dimensions.get('window').height - 533.33333333) * 0.0025),
+          height: height * (height < 570 ? 0.12 : 0.25),
           alignSelf: 'stretch',
         }}
         region={{
           latitude: parseFloat(latitude || -13.5412631), 
           longitude: parseFloat(longitude || -71.5518237),
-          latitudeDelta: parseFloat(latitude ? 0.005 : 50),
-          longitudeDelta: parseFloat(longitude ? 0.005 : 50),
+          latitudeDelta: parseFloat(latitude ? delta : 50),
+          longitudeDelta: parseFloat(longitude ? delta : 50),
         }}
       >
         { latitude && longitude && <MapView.Marker coordinate={{latitude, longitude}} image={require('../img/icon.png')} /> }
@@ -58,9 +60,7 @@ class SetLocation extends Component {
     const { valid, dirty, fields, location: { searching, settingLocation } } = this.props
     const { thoroughfare, subThoroughfare, complement, subLocality, locality, administrativeArea } = fields
     return (
-      <View style={{
-        flex: 1,
-        alignItems: 'center',
+      <Form style={{
         backgroundColor: Colors.beige,
       }}>
         <View elevation={3} style={{
@@ -82,7 +82,10 @@ class SetLocation extends Component {
           </Headline>
         </View>
         { this.renderMap() }
-        <Form>
+        <View style={{
+          flex: 1,
+          alignSelf: 'stretch',
+        }}>
           <FormTextInput 
             name='thoroughfare'
             title='Logradouro'
@@ -127,8 +130,8 @@ class SetLocation extends Component {
           >
             {dirty || !valid ? 'Buscar endereço e confirmar' : 'Confirmar endereço e continuar'}
           </FormSubmit>
-        </Form>
-      </View>
+        </View>
+      </Form>
     )
   }
 }
