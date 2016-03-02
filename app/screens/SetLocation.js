@@ -60,32 +60,30 @@ class SetLocation extends Component {
     const { valid, dirty, fields, location: { searching, settingLocation } } = this.props
     const { thoroughfare, subThoroughfare, complement, subLocality, locality, administrativeArea } = fields
     return (
-      <Form style={{
+      <View style={{
+        flex: 1,
+        paddingTop: (Platform.OS === 'ios' ? 20 : 0),
         backgroundColor: Colors.beige,
       }}>
-        <View elevation={3} style={{
-          backgroundColor: Colors.beige,
-          paddingTop: (Platform.OS === 'ios' ? 20 : 0),
-          alignSelf: 'stretch',
-          shadowColor: 'black',
-          shadowOpacity: 0.8,
-          shadowRadius: 4,
-          overflow: 'visible',
-          transform: [{'translate': [0,0,1]}],
-        }}>
-          <Headline style={{
-            fontSize: 20,
-            marginTop: 10,
-            marginBottom: 10
+        <Form>
+          <View elevation={3} style={{
+            backgroundColor: Colors.beige,
+            alignSelf: 'stretch',
+            shadowColor: 'black',
+            shadowOpacity: 0.8,
+            shadowRadius: 4,
+            overflow: 'visible',
+            transform: [{'translate': [0,0,1]}],
           }}>
-            Onde você mora?
-          </Headline>
-        </View>
-        { this.renderMap() }
-        <View style={{
-          flex: 1,
-          alignSelf: 'stretch',
-        }}>
+            <Headline style={{
+              fontSize: 20,
+              marginTop: 10,
+              marginBottom: 10
+            }}>
+              Onde você mora?
+            </Headline>
+          </View>
+          { this.renderMap() }
           <FormTextInput 
             name='thoroughfare'
             title='Logradouro'
@@ -130,8 +128,8 @@ class SetLocation extends Component {
           >
             {dirty || !valid ? 'Buscar endereço e confirmar' : 'Confirmar endereço e continuar'}
           </FormSubmit>
-        </View>
-      </Form>
+        </Form>
+      </View>
     )
   }
 }
