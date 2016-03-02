@@ -22,7 +22,7 @@ export default TopBar = ({ onMenuOpen }) => (
     borderColor: 'rgba(0,0,0,0.1)',
   }}>
     <TouchableOpacity onPress={onMenuOpen} style={{
-      flex: 0.05,
+      flex: 0.10,
       padding: 10,
     }}>
       <Icon name="menu" style={{
@@ -31,12 +31,12 @@ export default TopBar = ({ onMenuOpen }) => (
       }} />
     </TouchableOpacity>
     <View style={{
-      flex: 0.95, 
+      flex: 0.90, 
       flexDirection: 'row', 
       alignItems: 'center',
       justifyContent: 'center',
     }}>
-      <Image source={require('../img/icon.png')} style={{marginRight: 42}} />
+      <Image source={require('../img/icon.png')} style={{marginRight: 60}} />
     </View>
   </View>
 )
