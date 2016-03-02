@@ -1,14 +1,11 @@
 ## TemAcucar
 
-#### React-Native 0.18.0-rc & Redux 3.0.5 & React-Redux 4.0.6
-
-This repo demonstrates the usage of latest React-Native with Redux.
-
 ### Usage
 
 - clone the project
 - run `npm install`
 - if you are using npm version 2 then you need to run the following command, npm@3 won't need this command. to follow up why you need to run this command you can look at this [issue](https://github.com/rackt/react-redux/issues/236)
+- Actually, you probably wont need to run the following command at all. I just left it here because I'm not sure yet. So I recommend not running it unless you run into trouble without it.
 
 ```js
 npm run setup_project
@@ -32,11 +29,22 @@ react-native bundle \
 --dev false
 ```
 
-### Release compiled iOS app to Appetize.io
+### Generate new Android bundle with main.jsbundle and assets
 
-Use this if you had to recompile, add new native libraries, etc.
+```
+rm -rf ./android/release/
+mkdir ./android/release
+react-native bundle \
+--platform android \
+--entry-file index.android.js \
+--bundle-output ./android/release/main.jsbundle \
+--assets-dest ./android/release \
+--dev false
+```
 
-1. Generate new iOS bunde
+### Compile iOS app
+
+1. Generate new iOS bundle
 
 2. Open `TemAcucar.xcodeproj`
 
@@ -53,15 +61,19 @@ Use this if you had to recompile, add new native libraries, etc.
 
 6. Navigate to `Product > Build` and make sure the build succeeds.
 
-7. In your shell, go to `cd ~/Library/Developer/Xcode/DerivedData`, search form a folder starting with `TemAcucar` and `cd` it. Then `open Build/Products/Release-iphonesimulator/`.
+7. Navigate to `Product > Scheme > Edit Scheme...` and change `Build Configuration` to `Debug`, so we don't need to check this change in for other developers.
 
-8. Find `TemAcucar.app`, zip it, and upload the zip to Appetize.io.
+### Release compiled iOS app to Appetize.io
 
-9. Navigate to `Product > Scheme > Edit Scheme...` and change `Build Configuration` to `Debug`, so we don't need to check this change in for other developers.
+1. Compile iOS app
+
+2. In your shell, go to `cd ~/Library/Developer/Xcode/DerivedData`, search form a folder starting with `TemAcucar` and `cd` it. Then `open Build/Products/Release-iphonesimulator/`.
+
+3. Find `TemAcucar.app`, zip it, and upload the zip to Appetize.io.
 
 ### Release iOS to CodePush
 
-Use this if you didn't need to recompile and just want to publish new JS + assets.
+Use this if you didn't need to recompile and just want to publish new JS + assets (works only on device, wont work on Appetize.io).
 
 First generate new iOS bundle, then:
 
