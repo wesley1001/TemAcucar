@@ -1,5 +1,5 @@
 import keyFilter from 'object-key-filter'
-import Config from "../Config"
+import Config from 'react-native-config'
 import { storedAuthSet } from './StoredAuthActions'
 
 function requestHeaders(credentials) {
@@ -81,7 +81,7 @@ export function apiDispatchAction(dispatch, options) {
   if (params) {
     fetchOptions.body = JSON.stringify(params)
   }
-  fetch(`${Config.apiUrl}${path}`, fetchOptions)
+  fetch(`${Config.API_URL}${path}`, fetchOptions)
   .then(response => {
     if(response.ok) {
       const newCredentials = responseCredentials(response)

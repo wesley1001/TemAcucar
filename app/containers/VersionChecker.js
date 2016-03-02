@@ -1,10 +1,10 @@
-import React, { Component } from 'react-native'
+import React, { Platform, Component } from 'react-native'
 import { connect } from 'react-redux'
 import Communications from 'react-native-communications'
 import Package from '../../package.json'
 import codePush from "react-native-code-push"
+import Config from 'react-native-config'
 
-import Config from "../Config"
 import { versionsList, versionsIgnoreUpdate } from '../actions/VersionsActions'
 
 import Loading from "../screens/Loading"
@@ -47,7 +47,8 @@ class VersionChecker extends Component {
   }
 
   handleUpdate() {
-    Communications.web(Config.appStoreUrl)
+    const url = (Platform.OS === 'ios' ? Config.APP_STORE_URL : Config.PLAY_STORE_URL)
+    Communications.web(url)
   }
 
   handleIgnore() {

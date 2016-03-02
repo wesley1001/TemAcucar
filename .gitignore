@@ -38,7 +38,8 @@ npm-debug.log
 *.sublime-workspace
 
 .env
-Config.js
+.env.staging
+.env.production
 Info.plist
 android/release/
 ios/release/
