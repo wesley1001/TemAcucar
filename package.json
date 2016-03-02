@@ -25,7 +25,7 @@
     "react-native-gifted-spinner": "0.0.3",
     "react-native-maps": "0.3.0",
     "react-native-router-flux": "danielweinmann/react-native-router-flux#route_props",
-    "react-native-scrollable-tab-view": "0.3.5",
+    "react-native-scrollable-tab-view": "0.4.0",
     "react-native-simple-store": "0.1.0",
     "react-native-slider": "jeanregisser/react-native-slider",
     "react-native-stateless-form": "0.0.6",
