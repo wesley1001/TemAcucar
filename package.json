@@ -9,7 +9,7 @@
     "step2": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm"
   },
   "dependencies": {
-    "apsl-react-native-button": "APSL/react-native-button#3abb74394e165254595836fa287f30d2f096cd26",
+    "apsl-react-native-button": "2.4.2",
     "fbjs": "^0.6.0",
     "haversine": "1.0.0",
     "moment": "2.11.1",
