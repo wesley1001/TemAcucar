@@ -1,6 +1,6 @@
 ## TemAcucar
 
-### Usage
+### Installation
 
 - clone the project
 - run `npm install`
@@ -10,6 +10,18 @@
 ```js
 npm run setup_project
 ```
+
+### Configuration
+
+1. Copy `.env.sample` to `.env` to create default environment for development and set the config vars.
+
+2. Copy `.env.sample` to `.env.staging` to create staging environment and set the config vars.
+
+3. Copy `.env.sample` to `.env.production` to create production environment and set the config vars.
+
+4. on `./ios/TemAcucar/`, copy `Info.sample.plist` to `Info.plist` and configure the variables there (as of now, `react-native-config` package does not make config variables to `plist` files, so we need this duplication of configurations).
+
+IMPORTANT: for now, changes to `Info.plist` must be done for every build on iOS, if you want to change the enviroment config vars.
 
 ### Android Setup
 
