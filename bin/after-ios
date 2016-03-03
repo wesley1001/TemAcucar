@@ -1,2 +1,2 @@
-rm ./.env
+./bin/after
 rm ./ios/TemAcucar/Info.plist

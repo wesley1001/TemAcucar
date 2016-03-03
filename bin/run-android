@@ -1,0 +1,6 @@
+if [[ "$ENV" = "" ]]; then
+  ENV="debug"
+fi
+ENV=$ENV ./bin/before
+react-native run-android
+ENV=$ENV ./bin/after

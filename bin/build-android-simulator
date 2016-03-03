@@ -1,0 +1,11 @@
+if [[ "$ENV" = "" ]]; then
+  ENV="staging"
+fi
+ENV=$ENV ./bin/before
+cd android
+./gradlew assembleRelease
+mkdir -p ../release
+cp -rp ./app/build/outputs/apk/app-release-unsigned.apk ../release/
+cd ..
+open ./release/
+ENV=$ENV ./bin/after

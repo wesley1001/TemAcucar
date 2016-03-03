@@ -32,11 +32,21 @@ Xcode 7.0 or higher is required. It can be installed from the App Store.
 
 `bin/run-ios`
 
+### Running on Android
+
+`bin/run-android`
+
 ### Building release for iOS simulator
 
 - For staging environment release, run `bin/build-ios-simulator`
 
 - For production environment release, run `ENV=production bin/build-ios-simulator`
+
+### Building release for Android simulator
+
+- For staging environment release, run `bin/build-android-simulator`
+
+- For production environment release, run `ENV=production bin/build-android-simulator`
 
 ### Releasing iOS bundle to CodePush
 

@@ -1,3 +1,2 @@
-echo "Setting up $ENV environment..."
-cp "./.env.$ENV" "./.env"
+ENV=$ENV ./bin/before
 ruby ./bin/plist.rb

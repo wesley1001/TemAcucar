@@ -2,5 +2,5 @@ if [[ "$ENV" = "" ]]; then
   ENV="debug"
 fi
 ENV=$ENV ./bin/before-ios
-react-native run-ios
+react-native run-ios --simulator "iPhone 5s"
 ENV=$ENV ./bin/after-ios

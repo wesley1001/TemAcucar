@@ -1,0 +1,2 @@
+echo "Setting up $ENV environment..."
+cp "./.env.$ENV" "./.env"
