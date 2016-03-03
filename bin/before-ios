@@ -1,0 +1,3 @@
+echo "Setting up $ENV environment..."
+cp "./.env.$ENV" "./.env"
+ruby ./bin/plist.rb

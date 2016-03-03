@@ -1,0 +1,2 @@
+rm ./.env
+rm ./ios/TemAcucar/Info.plist

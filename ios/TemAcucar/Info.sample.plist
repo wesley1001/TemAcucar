@@ -3,7 +3,7 @@
 <plist version="1.0">
   <dict>
     <key>CodePushDeploymentKey</key>
-    <string>YOUR_CODEPUSH_DEPLOYMENT_KEY</string>
+    <string>`${CODEPUSH_DEPLOYMENT_KEY}`</string>
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleExecutable</key>
@@ -50,12 +50,12 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>fb590253407789297</string>
+          <string>fb`${FACEBOOK_APP_ID}`</string>
         </array>
       </dict>
     </array>
     <key>FacebookAppID</key>
-    <string>YOUR_FACEBOOK_APP_ID</string>
+    <string>`${FACEBOOK_APP_ID}`</string>
     <key>FacebookDisplayName</key>
     <string>Tem Açúcar</string>
     <key>LSApplicationQueriesSchemes</key>

@@ -38,8 +38,10 @@ npm-debug.log
 *.sublime-workspace
 
 .env
+.env.debug
 .env.staging
 .env.production
-Info.plist
+Info.sample.plist
 android/release/
 ios/release/
+release/
