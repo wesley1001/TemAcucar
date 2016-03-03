@@ -34,7 +34,9 @@ Xcode 7.0 or higher is required. It can be installed from the App Store.
 
 ### Building release for iOS simulator
 
-`bin/build-ios-simulator`
+- For staging environment release, run `bin/build-ios-simulator`
+
+- For production environment release, run `ENV=production bin/build-ios-simulator`
 
 ### Releasing iOS bundle to CodePush
 
