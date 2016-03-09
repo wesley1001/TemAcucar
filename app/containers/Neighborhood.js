@@ -1,13 +1,9 @@
-import React, {
-  Component,
-  Platform,
-  Dimensions,
-  Text,
-  View,
-  PanResponder,
-} from 'react-native'
+import React, { Component, Dimensions, Text, View, PanResponder } from 'react-native'
+import { connect } from 'react-redux'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
+
+import { openDrawer, closeDrawer } from '../actions/NeighborhoodActions'
 
 import TopBar from "../components/TopBar"
 import UserMenu from "../components/UserMenu"
@@ -15,18 +11,11 @@ import TabBar from "../components/TabBar"
 import Tab from "../components/Tab"
 import Requests from "../screens/Requests"
 
-export default class Neighborhood extends Component {
-  constructor(props, context) {
-    super(props, context)
-    this.state = {
-      drawerOpen: false,
-    }
-  }
-
+class Neighborhood extends Component {
   componentWillMount() {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponderCapture: () => {
-        return this.state.drawerOpen
+        return this.props.neighborhood.drawerOpen
       },
       onPanResponderRelease: () => {
         this.drawer.closeDrawer()
@@ -35,11 +24,13 @@ export default class Neighborhood extends Component {
   }
 
   handleDrawerOpen() {
-    this.setState({drawerOpen: true})
+    const { dispatch } = this.props
+    dispatch(openDrawer())
   }
 
   handleDrawerClose() {
-    this.setState({drawerOpen: false})
+    const { dispatch } = this.props
+    dispatch(closeDrawer())
   }
 
   handleMenuOpen() {
@@ -51,11 +42,11 @@ export default class Neighborhood extends Component {
   }
 
   render() {
-    const { drawerOpen } = this.state
+    const { drawerOpen } = this.props.neighborhood
     const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
     return (
       <DrawerLayout
-        drawerWidth={Dimensions.get('window').width * 0.8}
+        drawerWidth={Dimensions.get('window').width * 0.9}
         ref={(drawer) => { return this.drawer = drawer  }}
         keyboardDismissMode="on-drag"
         renderNavigationView={() => userMenu}
@@ -65,10 +56,7 @@ export default class Neighborhood extends Component {
         <View {...this.panResponder.panHandlers} style={{flex: 1, alignSelf: 'stretch'}} >
           <TopBar onMenuOpen={this.handleMenuOpen.bind(this)} />
           <View style={{ flex: 1 }}>
-            <ScrollableTabView
-              locked={true}
-              renderTabBar={() => <TabBar />}
-            >
+            <ScrollableTabView renderTabBar={() => <TabBar />}>
               <Tab tabLabel="home">
                 <Requests {...this.props} />
               </Tab>
@@ -88,3 +76,7 @@ export default class Neighborhood extends Component {
     )
   }
 }
+
+export default connect(state => ({
+  neighborhood: state.neighborhood,
+}))(Neighborhood)
