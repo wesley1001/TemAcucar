@@ -5,6 +5,7 @@ import Colors from "../Colors"
 export default Button = (props) => (
   <ReactNativeButton 
     {...props}
+    activityIndicatorColor={Colors.white}
     textStyle={[{
       textAlign: 'center',
       color: Colors.white,
