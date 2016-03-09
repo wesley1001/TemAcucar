@@ -19,7 +19,7 @@ const validators = {
 
 class SignInForm extends Component {
   render() {
-    const { onSignIn, fields: { email, password }, dirty, valid, submitting, handleSubmit } = this.props
+    const { onSignIn, fields: { email, password } } = this.props
     return (
       <FormScreen>
         <EmailInput {...email} />
