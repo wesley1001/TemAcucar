@@ -20,7 +20,8 @@ class VersionChecker extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    codePush.sync()
+    if (!__DEV__)
+      codePush.sync()
     dispatch(versionsList())
   }
 
