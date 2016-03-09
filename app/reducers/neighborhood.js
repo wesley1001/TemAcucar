@@ -1,5 +1,6 @@
 const initialState = {
   drawerOpen: false,
+  delta: 0.02,
 }
 
 export default function terms(state = initialState, action) {
@@ -13,6 +14,11 @@ export default function terms(state = initialState, action) {
       return {
         ...state, 
         drawerOpen: false,
+      }
+    case 'NEIGHBORHOOD_SET_DELTA':
+      return {
+        ...state, 
+        delta: action.delta,
       }
     default:
       return state
