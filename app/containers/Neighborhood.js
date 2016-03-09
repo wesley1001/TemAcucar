@@ -56,7 +56,10 @@ class Neighborhood extends Component {
         <View {...this.panResponder.panHandlers} style={{flex: 1, alignSelf: 'stretch'}} >
           <TopBar onMenuOpen={this.handleMenuOpen.bind(this)} />
           <View style={{ flex: 1 }}>
-            <ScrollableTabView renderTabBar={() => <TabBar />}>
+            <ScrollableTabView
+              locked={true}
+              renderTabBar={() => <TabBar />}
+            >
               <Tab tabLabel="home">
                 <Requests {...this.props} />
               </Tab>
