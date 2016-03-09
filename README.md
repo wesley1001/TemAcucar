@@ -42,11 +42,17 @@ Xcode 7.0 or higher is required. It can be installed from the App Store.
 
 - For production environment release, run `ENV=production bin/build-ios-simulator`
 
-### Building release for Android simulator
+### Building release for Android
 
-- For staging environment release, run `bin/build-android-simulator`
+1. Request the appropriate `keystore` file and passwords to your team's manager and save the `keystore` file to `android/app`
 
-- For production environment release, run `ENV=production bin/build-android-simulator`
+2. Configure the passwords on the appropriate `.env.*` files
+
+3. Then:
+
+  - For staging environment release, run `bin/build-android`
+
+  - For production environment release, run `ENV=production bin/build-android`
 
 ### Releasing iOS bundle to CodePush
 

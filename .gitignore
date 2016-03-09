@@ -45,3 +45,4 @@ Info.sample.plist
 android/release/
 ios/release/
 release/
+*.keystore
