@@ -6,6 +6,10 @@ export default class EmailInput extends Component {
     this.refs.input.focus()
   }
 
+  blur() {
+    this.refs.input.blur()
+  }
+
   render() {
     return (
       <FormTextInput 

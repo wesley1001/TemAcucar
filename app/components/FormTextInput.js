@@ -9,6 +9,10 @@ export default class FormTextInput extends Component {
     this.refs.input.focus()
   }
 
+  blur() {
+    this.refs.input.blur()
+  }
+
   render() {
     const { icon, error } = this.props
     const message = ( error && error.length > 0 ? error[0] : null)
