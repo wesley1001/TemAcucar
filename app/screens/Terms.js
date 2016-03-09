@@ -303,7 +303,7 @@ export default Terms = ({ onAcceptTerms, onRejectTerms, onScroll, scrolledToBott
       </Paragraph>
     </ScrollView>
     <TextBox style={{height: 60, textAlign: 'center', fontFamily: 'BoosterNextFY-Bold'}}>
-      { (scrolledToBottom ? 'Para poder continuar, você deve aceitar os termos de uso.' : 'Para poder continuar, você deve ler os termos de uso até o final.') }
+      { (scrolledToBottom ? 'Para continuar, aceite os termos de uso.' : 'Para continuar, leia os termos de uso até o final.') }
     </TextBox>
     <View style={{
       alignSelf: 'stretch',
