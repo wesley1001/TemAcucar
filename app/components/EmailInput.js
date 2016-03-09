@@ -1,7 +1,7 @@
-import React, { Component } from 'react-native'
+import React, { Component, PropTypes } from 'react-native'
 import FormTextInput from "./FormTextInput"
 
-export default class EmailInput extends Component {
+class EmailInput extends Component {
   focus() {
     this.refs.input.focus()
   }
@@ -25,3 +25,10 @@ export default class EmailInput extends Component {
     )
   }
 }
+
+EmailInput.propTypes = {
+  value: PropTypes.string,
+  valid: PropTypes.bool,
+}
+
+export default EmailInput

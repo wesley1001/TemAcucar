@@ -1,10 +1,10 @@
-import React, { Component } from 'react-native'
+import React, { Component, PropTypes } from 'react-native'
 import { InlineTextInput } from 'react-native-stateless-form'
 
 import Colors from "../Colors"
 import Icon from "./Icon"
 
-export default class FormTextInput extends Component {
+class FormTextInput extends Component {
   focus() {
     this.refs.input.focus()
   }
@@ -38,3 +38,10 @@ export default class FormTextInput extends Component {
     )
   }
 }
+
+FormTextInput.propTypes = {
+  value: PropTypes.string,
+  valid: PropTypes.bool,
+}
+
+export default FormTextInput

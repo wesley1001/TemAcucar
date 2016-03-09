@@ -1,7 +1,7 @@
-import React, { Component } from 'react-native'
+import React, { Component, PropTypes } from 'react-native'
 import FormTextInput from "./FormTextInput"
 
-export default class PasswordInput extends Component {
+class PasswordInput extends Component {
   focus() {
     this.refs.input.focus()
   }
@@ -26,3 +26,10 @@ export default class PasswordInput extends Component {
     )
   }
 }
+
+PasswordInput.propTypes = {
+  value: PropTypes.string,
+  valid: PropTypes.bool,
+}
+
+export default PasswordInput
