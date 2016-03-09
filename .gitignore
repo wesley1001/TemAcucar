@@ -41,7 +41,7 @@ npm-debug.log
 .env.debug
 .env.staging
 .env.production
-Info.sample.plist
+Info.plist
 android/release/
 ios/release/
 release/
