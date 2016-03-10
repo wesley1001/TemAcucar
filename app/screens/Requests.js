@@ -32,27 +32,30 @@ export default class Requests extends Component {
     const { latitude, longitude } = this.props.auth.currentUser
     const { delta } = this.props.neighborhood
     return (
-      <MapView
-        scrollEnabled={false}
-        zoomEnabled={false}
-        style={{
-          height: 170,
-          alignSelf: 'stretch',
-          borderBottomWidth: 10,
-          borderColor: Colors.ice,
-        }}
-        region={{
-          latitude: parseFloat(latitude), 
-          longitude: parseFloat(longitude),
-          latitudeDelta: parseFloat(delta),
-          longitudeDelta: parseFloat(delta),
-        }}
-      >
-        <MapView.Marker 
-          coordinate={{latitude, longitude}}
-          image={require('../img/marker.png')}
-        />
-      </MapView>
+      <View style={{
+        borderBottomWidth: 1,
+        borderColor: Colors.ice,
+      }}>
+        <MapView
+          scrollEnabled={false}
+          zoomEnabled={false}
+          style={{
+            height: 170,
+            alignSelf: 'stretch',
+          }}
+          region={{
+            latitude: parseFloat(latitude), 
+            longitude: parseFloat(longitude),
+            latitudeDelta: parseFloat(delta),
+            longitudeDelta: parseFloat(delta),
+          }}
+        >
+          <MapView.Marker 
+            coordinate={{latitude, longitude}}
+            image={require('../img/marker.png')}
+          />
+        </MapView>
+      </View>
     )
   }
 
