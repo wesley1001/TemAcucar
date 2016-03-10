@@ -9,6 +9,7 @@ import haversine from 'haversine'
 
 import Colors from "../Colors"
 import Button from "../components/Button"
+import Sentence from "../components/Sentence"
 
 export default class Requests extends Component {
   handleSlide(value) {
@@ -37,6 +38,8 @@ export default class Requests extends Component {
         style={{
           height: 170,
           alignSelf: 'stretch',
+          borderBottomWidth: 10,
+          borderColor: Colors.ice,
         }}
         region={{
           latitude: parseFloat(latitude), 
@@ -57,54 +60,45 @@ export default class Requests extends Component {
     const { latitude, longitude } = this.props.auth.currentUser
     const { delta } = this.props.neighborhood
     return (
-      <View>
+      <View style={{
+        paddingBottom: 20,
+      }}>
         { latitude && longitude && this.renderMap() }
-        <View elevation={2} style={{
-          backgroundColor: Colors.white,
-          paddingVertical: 10,
-          paddingHorizontal: 20,
-          flexDirection: 'row',
-          alignItems: 'center',
-          shadowColor: 'black',
-          shadowOpacity: 0.2,
-          shadowRadius: 3,
-          shadowOffset: {
-            height: 2,
-            width: 0,
-          },
-          overflow: 'visible',
-          transform: [{'translate': [0,0,1]}],
-        }}>
-          <Sentence>500 m</Sentence>
-          <Slider
-            disabled={false}
-            minimumValue={3.5}
-            maximumValue={70}
-            step={1}
-            value={delta * 1000}
-            onValueChange={this.handleSlide.bind(this)}
-            onSlidingComplete={this.handleSlidingComplete.bind(this)}
-            minimumTrackTintColor={Colors.pink}
-            style={{ flex: 1, marginHorizontal: 20 }}
-            trackStyle={{
-              height: 2,
-              backgroundColor: Colors.ice,
-            }}
-            thumbStyle={{
-              width: 24,
-              height: 24,
-              backgroundColor: Colors.pink,
-              borderRadius: 12,
-            }}
-          />
-          <Sentence>10 km</Sentence>
-        </View>
         <View style={{
-          backgroundColor: Colors.white,
-          flex: 1,
-          alignSelf: 'stretch',
-          padding: 20,
+          flexDirection: 'row',
+          position: 'absolute',
+          left: 10,
+          right: 10,
+          bottom: 0,
         }}>
+          <View style={{
+            flex: 3,
+            backgroundColor: Colors.beige,
+            paddingVertical: 10,
+            borderWidth: 1,
+            borderRightWidth: 0,
+            borderColor: Colors.ice,
+          }}>
+            <Sentence style={{color: Colors.brown, fontFamily: 'OpenSans-Bold', textAlign: 'center'}}>7 vizinhos em um raio de</Sentence>
+          </View>
+          <View style={{
+            flex: 1,
+            backgroundColor: Colors.pink,
+            borderWidth: 1,
+            borderLeftWidth: 0,
+            borderColor: Colors.pink,
+            paddingVertical: 10,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <Sentence style={{color: Colors.white, fontFamily: 'OpenSans-Bold', textAlign: 'center'}}>5km</Sentence>
+            <Icon name="keyboard-arrow-down" style={{ 
+              color: Colors.white,
+              marginLeft: 4,
+              marginTop: 4,
+            }} />
+          </View>
         </View>
       </View>
     )

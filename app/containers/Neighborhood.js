@@ -69,7 +69,11 @@ class Neighborhood extends Component {
         onDrawerOpen={this.handleDrawerOpen.bind(this)}
         onDrawerClose={this.handleDrawerClose.bind(this)}
       >
-        <View {...this.panResponder.panHandlers} style={{flex: 1, alignSelf: 'stretch'}} >
+        <View {...this.panResponder.panHandlers} style={{
+          flex: 1, 
+          alignSelf: 'stretch',
+          backgroundColor: Colors.white,
+        }} >
           <TopBar onMenuOpen={this.handleMenuOpen.bind(this)} />
           <View style={{ flex: 1 }}>
             <ScrollableTabView
