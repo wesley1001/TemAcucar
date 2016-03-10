@@ -2,6 +2,7 @@ import React, { Component, Dimensions, Text, View, PanResponder } from 'react-na
 import { connect } from 'react-redux'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
+import LinearGradient from 'react-native-linear-gradient'
 
 import { openDrawer, closeDrawer, setDelta, storeDelta } from '../actions/NeighborhoodActions'
 
@@ -94,16 +95,23 @@ class Neighborhood extends Component {
             </ScrollableTabView>
           </View>
           <View style={{
-            backgroundColor: 'rgba(0,0,0,0.7)',
-            padding: 10,
             position: 'absolute',
             bottom: 0,
             left: 0,
             right: 0,
           }}>
-            <Button style={{alignSelf: 'stretch'}}>
-              Pedir
-            </Button>
+            <LinearGradient
+              colors={['rgba(255,255,255,0)', Colors.white]}
+              locations={[0,0.3]}
+              style={{
+                flex: 1,
+                padding: 10,
+                paddingTop: 30,
+              }}>
+              <Button onPress={() => {console.log('click!')}} style={{alignSelf: 'stretch'}}>
+                Pedir
+              </Button>
+            </LinearGradient>
           </View>
         </View>
       </DrawerLayout>

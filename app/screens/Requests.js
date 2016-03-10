@@ -100,7 +100,7 @@ export default class Requests extends Component {
           <Sentence>10 km</Sentence>
         </View>
         <View style={{
-          backgroundColor: Colors.beige,
+          backgroundColor: Colors.white,
           flex: 1,
           alignSelf: 'stretch',
           padding: 20,
