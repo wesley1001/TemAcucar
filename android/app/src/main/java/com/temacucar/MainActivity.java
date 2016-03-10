@@ -7,6 +7,7 @@ import com.AirMaps.AirPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.magus.fblogin.FacebookLoginPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 // 1. Import the plugin class
 import com.microsoft.codepush.react.CodePush;
 
@@ -60,6 +61,7 @@ public class MainActivity extends ReactActivity {
         new RNGeocoderPackage(),
         new FacebookLoginPackage(),
         new AirPackage(),
+        new LinearGradientPackage(),
         new MainReactPackage(),
         this._codePush.getReactPackage()
       );

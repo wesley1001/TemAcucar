@@ -7,7 +7,7 @@ const Colors = {
   white: '#fff',
   beige: '#f4f0e7',
   blue: '#00a6b3',
-  darkGray: '#666',
+  darkGray: '#777',
   gray: '#999',
   lightGray: '#ccc',
   ice: '#d1ccc3',
