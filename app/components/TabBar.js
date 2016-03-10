@@ -62,9 +62,9 @@ export default class TabBar extends Component {
         alignItems: 'center',
         shadowColor: 'black',
         shadowOpacity: 0.3,
-        shadowRadius: 3,
+        shadowRadius: 2,
         shadowOffset: {
-          height: 2,
+          height: 1,
           width: 0,
         },
         overflow: 'visible',

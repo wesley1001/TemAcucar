@@ -33,7 +33,7 @@ export default class Requests extends Component {
     const { delta } = this.props.neighborhood
     return (
       <View style={{
-        borderBottomWidth: 1,
+        borderBottomWidth: 0.5,
         borderColor: Colors.ice,
       }}>
         <MapView
@@ -78,7 +78,7 @@ export default class Requests extends Component {
             flex: 3,
             backgroundColor: Colors.beige,
             paddingVertical: 10,
-            borderWidth: 1,
+            borderWidth: 0.5,
             borderRightWidth: 0,
             borderColor: Colors.ice,
           }}>
@@ -87,7 +87,7 @@ export default class Requests extends Component {
           <View style={{
             flex: 1,
             backgroundColor: Colors.darkIce,
-            borderWidth: 1,
+            borderWidth: 0.5,
             borderLeftWidth: 0,
             borderColor: Colors.darkIce,
             paddingVertical: 10,
