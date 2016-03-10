@@ -83,16 +83,16 @@ export default class Requests extends Component {
           </View>
           <View style={{
             flex: 1,
-            backgroundColor: Colors.pink,
+            backgroundColor: Colors.darkIce,
             borderWidth: 1,
             borderLeftWidth: 0,
-            borderColor: Colors.pink,
+            borderColor: Colors.darkIce,
             paddingVertical: 10,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-            <Sentence style={{color: Colors.white, fontFamily: 'OpenSans-Bold', textAlign: 'center'}}>5km</Sentence>
+            <Sentence style={{color: Colors.white, fontFamily: 'OpenSans-Bold', textAlign: 'center'}}>5 km</Sentence>
             <Icon name="keyboard-arrow-down" style={{ 
               color: Colors.white,
               marginLeft: 4,
