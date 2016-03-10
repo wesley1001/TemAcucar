@@ -13,7 +13,7 @@ export default SimpleScreen = ({ children, headline, viewStyle }) => (
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: Colors.beige,
+      backgroundColor: Colors.white,
     }, viewStyle]
   }>
     <View style={{

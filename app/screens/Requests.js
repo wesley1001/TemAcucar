@@ -88,7 +88,7 @@ export default class Requests extends Component {
             style={{ flex: 1, marginHorizontal: 20 }}
             trackStyle={{
               height: 2,
-              backgroundColor: Colors.lightGray,
+              backgroundColor: Colors.ice,
             }}
             thumbStyle={{
               width: 24,
@@ -105,21 +105,6 @@ export default class Requests extends Component {
           alignSelf: 'stretch',
           padding: 20,
         }}>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
-          <Sentence>Pedidos</Sentence>
         </View>
       </View>
     )

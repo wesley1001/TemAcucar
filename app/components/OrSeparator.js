@@ -4,8 +4,7 @@ import TextBox from "./TextBox"
 export default OrSeparator = () => (
   <TextBox style={{
     margin: 10,
-    fontFamily: 'BoosterNextFY-Bold',
-    lineHeight: 22,
+    fontFamily: 'Montserrat-Bold',
   }}>
     ou
   </TextBox>

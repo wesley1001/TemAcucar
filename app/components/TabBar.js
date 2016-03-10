@@ -1,6 +1,7 @@
 import React, {
   Component,
   View,
+  Text,
   TouchableOpacity,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -22,9 +23,32 @@ export default class TabBar extends Component {
         justifyContent: 'center',
         alignItems: 'center',
         height: 60,
-        backgroundColor: (isActive ? Colors.pink : Colors.beige),
+        backgroundColor: (isActive ? Colors.darkBlue : Colors.blue),
       }}>
-        <Icon name={name} size={36} color={isActive ? Colors.beige : Colors.ice} />
+        <Icon name={name} size={36} color={isActive ? Colors.white : Colors.white} />
+        { page === 3 && 
+          <View style={{
+            position: 'absolute',
+            right: 26,
+            top: 8,
+            height: 18,
+            width: 18,
+            backgroundColor: Colors.red,
+            borderWidth: 1,
+            borderColor: Colors.red,
+            borderRadius: 9,
+          }}>
+            <Text style={{
+              backgroundColor: 'transparent',
+              color: Colors.white,
+              fontFamily: 'Montserrat-Bold',
+              textAlign: 'center',
+              fontSize: 12,
+            }}>
+              3
+            </Text>
+          </View>
+        }
       </TouchableOpacity>
     );
   }
@@ -32,7 +56,7 @@ export default class TabBar extends Component {
   render() {
     return (
       <View elevation={3} style={{
-        backgroundColor: Colors.beige,
+        backgroundColor: Colors.white,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

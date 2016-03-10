@@ -302,7 +302,7 @@ export default Terms = ({ onAcceptTerms, onRejectTerms, onScroll, scrolledToBott
         Todos os itens destes Termos e Condições Gerais estão regidos pelas leis vigentes na República Federativa do Brasil. Para todos os assuntos referentes à interpretação e ao cumprimento deste Contrato, as partes se submetem ao Foro Central da Comarca do Rio de Janeiro, estado do Rio de Janeiro.
       </Paragraph>
     </ScrollView>
-    <TextBox style={{height: 60, textAlign: 'center', fontFamily: 'BoosterNextFY-Bold'}}>
+    <TextBox style={{height: 60, textAlign: 'center', fontFamily: 'Montserrat-Bold'}}>
       { (scrolledToBottom ? 'Para continuar, aceite os termos de uso.' : 'Para continuar, leia os termos de uso até o final.') }
     </TextBox>
     <View style={{
@@ -316,6 +316,7 @@ export default Terms = ({ onAcceptTerms, onRejectTerms, onScroll, scrolledToBott
         style={{
           flex: 1,
           backgroundColor: Colors.ice,
+          borderColor: Colors.darkIce,
         }}
         onPress={onRejectTerms}
       >

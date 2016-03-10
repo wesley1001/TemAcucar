@@ -14,16 +14,16 @@ export default UserMenu = ({ auth, onSignOut }) => (
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
-    backgroundColor: Colors.lightBrown,
+    backgroundColor: Colors.yellow,
     paddingTop: (Platform.OS == 'ios' ? 20 : 0),
   }}>
     <View style={{
-      backgroundColor: Colors.mediumBrown,
+      backgroundColor: Colors.beige,
       alignSelf: 'stretch',
       padding: 20,
     }}>
       <Sentence style={{ 
-        fontFamily: 'BoosterNextFY-Bold', 
+        fontFamily: 'Montserrat-Bold', 
         color: Colors.pink
       }}>
         { auth.currentUser.first_name } { auth.currentUser.last_name }

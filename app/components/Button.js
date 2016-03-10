@@ -8,10 +8,9 @@ export default Button = (props) => (
     activityIndicatorColor={Colors.white}
     textStyle={[{
       textAlign: 'center',
-      color: Colors.white,
-      fontSize: 16,
-      fontFamily: 'BoosterNextFY-Bold',
-      lineHeight: 22,
+      color: (props.isDisabled ? Colors.white : Colors.yellow),
+      fontSize: 14,
+      fontFamily: 'Montserrat-Bold',
     }, props.textStyle]}
     disabledStyle={[{
       backgroundColor: Colors.gray,
@@ -22,13 +21,13 @@ export default Button = (props) => (
       borderWidth: 0,
       borderRadius: 0,
       paddingHorizontal: 40,
-      paddingVertical: 28,
+      paddingVertical: 24,
       backgroundColor: Colors.pink,
-      borderBottomWidth: 5,
+      borderBottomWidth: 4,
       borderColor: Colors.darkPink,
       marginBottom: 0,
     }, props.style]}
   >
-    {props.children}
+    {props.children.toUpperCase()}
   </ReactNativeButton>
 )

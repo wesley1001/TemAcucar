@@ -7,7 +7,7 @@ import Form from "./Form"
 export default FormScreen = (props) => (
   <View style={{
     flex: 1,
-    backgroundColor: Colors.beige,
+    backgroundColor: Colors.white,
     paddingTop: 40 + (Platform.OS === 'ios' ? 24 : 16),
   }}>
     <Form {...props}>
