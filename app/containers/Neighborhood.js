@@ -5,6 +5,8 @@ import DrawerLayout from 'react-native-drawer-layout'
 
 import { openDrawer, closeDrawer, setDelta, storeDelta } from '../actions/NeighborhoodActions'
 
+import Colors from "../Colors"
+import Button from "../components/Button"
 import TopBar from "../components/TopBar"
 import UserMenu from "../components/UserMenu"
 import TabBar from "../components/TabBar"
@@ -90,6 +92,18 @@ class Neighborhood extends Component {
                 <Text>Notificações</Text>
               </Tab>
             </ScrollableTabView>
+          </View>
+          <View style={{
+            backgroundColor: 'rgba(0,0,0,0.7)',
+            padding: 10,
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+          }}>
+            <Button style={{alignSelf: 'stretch'}}>
+              Pedir
+            </Button>
           </View>
         </View>
       </DrawerLayout>

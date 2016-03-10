@@ -15,6 +15,7 @@ export default Button = (props) => (
     }, props.textStyle]}
     disabledStyle={[{
       backgroundColor: Colors.gray,
+      borderColor: Colors.darkGray,
     }, props.disabledStyle]}
     style={[{
       alignSelf: 'center',
@@ -23,6 +24,8 @@ export default Button = (props) => (
       paddingHorizontal: 40,
       paddingVertical: 28,
       backgroundColor: Colors.pink,
+      borderBottomWidth: 5,
+      borderColor: Colors.darkPink,
       marginBottom: 0,
     }, props.style]}
   >

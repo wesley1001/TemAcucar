@@ -9,7 +9,7 @@ import SignUpLink from "../components/SignUpLink"
 
 export default SignIn = ({ onFacebook }) => (
   <SimpleScreen>
-    <Button onPress={onFacebook} style={{ backgroundColor: Colors.facebook }}>
+    <Button onPress={onFacebook} style={{ backgroundColor: Colors.facebook, borderColor: Colors.darkFacebook }}>
       Faça login com seu Facebook
     </Button>
     <OrSeparator />

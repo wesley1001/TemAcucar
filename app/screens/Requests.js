@@ -105,7 +105,21 @@ export default class Requests extends Component {
           alignSelf: 'stretch',
           padding: 20,
         }}>
-          <Sentence style={{ flex: 1, alignSelf: 'stretch' }}>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
+          <Sentence>Pedidos</Sentence>
         </View>
       </View>
     )
