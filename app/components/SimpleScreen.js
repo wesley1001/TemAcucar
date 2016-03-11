@@ -13,14 +13,18 @@ export default SimpleScreen = ({ children, headline, viewStyle }) => (
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.beige,
     }, viewStyle]
   }>
     <View style={{
       alignSelf: 'stretch',
       alignItems: 'center',
     }}>
-      <Image source={require('../img/logo.png')} style={{marginBottom: (headline ? 36 : 40)}}/>
+      <Image source={require('../img/logo.png')} style={{
+        marginBottom: (headline ? 36 : 40),
+        width: 134,
+        height: 86,
+      }}/>
     </View>
     { headline && <Headline>{headline}</Headline> }
     {children}

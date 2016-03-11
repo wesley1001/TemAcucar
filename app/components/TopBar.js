@@ -12,21 +12,17 @@ import Sentence from "./Sentence"
 export default TopBar = ({ onMenuOpen }) => (
   <View style={{
     marginTop: (Platform.OS == 'ios' ? 20 : 0),
-    height: 34,
-    backgroundColor: Colors.brown,
+    height: 36,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: 'rgba(0,0,0,0.1)',
   }}>
     <TouchableOpacity onPress={onMenuOpen} style={{
       flex: 0.10,
       padding: 10,
     }}>
       <Icon name="menu" style={{
-        color: Colors.white,
+        color: Colors.pink,
         fontSize: 28,
       }} />
     </TouchableOpacity>
@@ -36,7 +32,12 @@ export default TopBar = ({ onMenuOpen }) => (
       alignItems: 'center',
       justifyContent: 'center',
     }}>
-      {true == false && <Image source={require('../img/icon.png')} style={{marginRight: 60}} />}
+      {true == true && <Image source={require('../img/icon.png')} style={{
+        marginTop: -4,
+        marginRight: 60,
+        width: 25,
+        height: 25,
+      }} />}
     </View>
   </View>
 )

@@ -8,7 +8,7 @@ export default Button = (props) => (
     activityIndicatorColor={Colors.white}
     textStyle={[{
       textAlign: 'center',
-      color: (props.isDisabled ? Colors.white : Colors.yellow),
+      color: Colors.white,
       fontSize: 14,
       fontFamily: 'Montserrat-Bold',
     }, props.textStyle]}
@@ -23,7 +23,7 @@ export default Button = (props) => (
       paddingHorizontal: 40,
       paddingVertical: 24,
       backgroundColor: Colors.pink,
-      borderBottomWidth: 4,
+      borderBottomWidth: 3,
       borderColor: Colors.darkPink,
       marginBottom: 0,
     }, props.style]}

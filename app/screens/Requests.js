@@ -10,6 +10,7 @@ import haversine from 'haversine'
 import Colors from "../Colors"
 import Button from "../components/Button"
 import Sentence from "../components/Sentence"
+import Request from "../components/Request"
 
 export default class Requests extends Component {
   handleSlide(value) {
@@ -64,44 +65,66 @@ export default class Requests extends Component {
     const { delta } = this.props.neighborhood
     return (
       <View style={{
-        paddingBottom: 20,
+        paddingBottom: 100,
       }}>
-        { latitude && longitude && this.renderMap() }
         <View style={{
-          flexDirection: 'row',
-          position: 'absolute',
-          left: 10,
-          right: 10,
-          bottom: 0,
+          paddingBottom: 12,
         }}>
-          <View style={{
-            flex: 3,
-            backgroundColor: Colors.beige,
-            paddingVertical: 10,
-            borderWidth: 0.5,
-            borderRightWidth: 0,
-            borderColor: Colors.ice,
-          }}>
-            <Sentence style={{color: Colors.brown, fontFamily: 'OpenSans-Bold', textAlign: 'center'}}>7 vizinhos em um raio de</Sentence>
-          </View>
+          { latitude && longitude && this.renderMap() }
           <View style={{
             flex: 1,
-            backgroundColor: Colors.darkIce,
-            borderWidth: 0.5,
-            borderLeftWidth: 0,
-            borderColor: Colors.darkIce,
-            paddingVertical: 10,
             flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
+            position: 'absolute',
+            left: 10,
+            right: 10,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.1)',
+            paddingBottom: 1.5,
           }}>
-            <Sentence style={{color: Colors.white, fontFamily: 'OpenSans-Bold', textAlign: 'center'}}>5 km</Sentence>
-            <Icon name="keyboard-arrow-down" style={{ 
-              color: Colors.white,
-              marginLeft: 4,
-              marginTop: 4,
-            }} />
+            <View style={{
+              flex: 3,
+              backgroundColor: Colors.white,
+              paddingVertical: 4,
+            }}>
+              <Sentence style={{
+                color: Colors.brown, 
+                fontFamily: 'OpenSans-Bold', 
+                textAlign: 'center',
+                fontSize: 12,
+              }}>
+                7 vizinhos em um raio de
+              </Sentence>
+            </View>
+            <View style={{
+              flex: 1,
+              backgroundColor: Colors.pink,
+              paddingVertical: 4,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <Sentence style={{
+                color: Colors.white, 
+                fontFamily: 'OpenSans-Bold', 
+                textAlign: 'center',
+                fontSize: 12,
+              }}>
+                5km
+              </Sentence>
+              <Icon name="keyboard-arrow-down" style={{ 
+                color: Colors.white,
+                marginLeft: 4,
+                marginTop: 2,
+                fontSize: 12,
+              }} />
+            </View>
           </View>
+        </View>
+        <View>
+          <Request />
+          <Request />
+          <Request />
+          <Request />
         </View>
       </View>
     )

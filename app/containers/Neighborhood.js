@@ -72,7 +72,7 @@ class Neighborhood extends Component {
         <View {...this.panResponder.panHandlers} style={{
           flex: 1, 
           alignSelf: 'stretch',
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.brown,
         }} >
           <TopBar onMenuOpen={this.handleMenuOpen.bind(this)} />
           <View style={{ flex: 1 }}>
@@ -105,12 +105,12 @@ class Neighborhood extends Component {
             right: 0,
           }}>
             <LinearGradient
-              colors={['rgba(255,255,255,0)', Colors.white]}
-              locations={[0,0.3]}
+              colors={['rgba(230,226,212,0)', Colors.beige]}
+              locations={[0,0.5]}
               style={{
                 flex: 1,
                 padding: 10,
-                paddingTop: 30,
+                paddingTop: 50,
               }}>
               <Button onPress={() => {console.log('click!')}} style={{alignSelf: 'stretch'}}>
                 Pedir

@@ -7,7 +7,7 @@ import Form from "./Form"
 export default FormScreen = (props) => (
   <View style={{
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.beige,
     paddingTop: 40 + (Platform.OS === 'ios' ? 24 : 16),
   }}>
     <Form {...props}>
@@ -16,7 +16,11 @@ export default FormScreen = (props) => (
         alignItems: 'center',
         paddingTop: 40,
       }}>
-        <Image source={require('../img/logo.png')} style={{marginBottom: 30}}/>
+        <Image source={require('../img/logo.png')} style={{
+          marginBottom: 30,
+          width: 134,
+          height: 86,
+        }}/>
       </View>
       { props.children }
     </Form>

@@ -25,7 +25,7 @@ export default class TabBar extends Component {
         height: 60,
         backgroundColor: (isActive ? Colors.darkBlue : Colors.blue),
       }}>
-        <Icon name={name} size={36} color={isActive ? Colors.white : Colors.white} />
+        <Icon name={name} size={36} color={isActive ? Colors.white : Colors.darkBlue} />
         { page === 3 && 
           <View style={{
             position: 'absolute',
@@ -33,9 +33,9 @@ export default class TabBar extends Component {
             top: 8,
             height: 18,
             width: 18,
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.pink,
             borderWidth: 1,
-            borderColor: Colors.red,
+            borderColor: Colors.pink,
             borderRadius: 9,
           }}>
             <Text style={{
