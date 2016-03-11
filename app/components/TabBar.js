@@ -56,7 +56,7 @@ export default class TabBar extends Component {
   render() {
     return (
       <View elevation={3} style={{
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
