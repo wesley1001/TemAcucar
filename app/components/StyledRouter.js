@@ -4,14 +4,14 @@ import Colors from "../Colors"
 
 export default StyledRouter = (props) => (
   <Router 
-    navigationBarStyle={{ backgroundColor: Colors.blue }}
-    titleStyle={{ color: Colors.white }}
+    navigationBarStyle={{ backgroundColor: Colors.brown }}
+    titleStyle={{ color: Colors.pink }}
     barButtonIconStyle={{ 
-      tintColor: Colors.white,
+      tintColor: Colors.pink,
       marginTop: (Platform.OS === 'ios' ? 12 : 18),
       marginLeft: 12,
     }}
-    barButtonTextStyle={{ color: Colors.brown }}
+    barButtonTextStyle={{ color: Colors.pink }}
     { ...props }
   >
     { props.children }
