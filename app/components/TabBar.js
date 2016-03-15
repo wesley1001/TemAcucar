@@ -26,10 +26,10 @@ export default class TabBar extends Component {
         backgroundColor: (isActive ? Colors.darkBlue : Colors.blue),
       }}>
         <Icon name={name} size={36} color={isActive ? Colors.white : Colors.darkBlue} />
-        { page === 3 && 
+        { page === 2 && 
           <View style={{
             position: 'absolute',
-            right: 26,
+            right: 42,
             top: 8,
             height: 18,
             width: 18,

@@ -87,9 +87,6 @@ class Neighborhood extends Component {
                   onStoreDelta={this.handleStoreDelta.bind(this)} 
                 />
               </Tab>
-              <Tab tabLabel="group">
-                <Text>Vizinhos</Text>
-              </Tab>
               <Tab tabLabel="chat">
                 <Text>Chats</Text>
               </Tab>

@@ -75,8 +75,8 @@ export default class Requests extends Component {
             flex: 1,
             flexDirection: 'row',
             position: 'absolute',
-            left: 10,
-            right: 10,
+            left: 40,
+            right: 40,
             bottom: 0,
             backgroundColor: 'rgba(0,0,0,0.1)',
             paddingBottom: 1.5,
@@ -92,31 +92,8 @@ export default class Requests extends Component {
                 textAlign: 'center',
                 fontSize: 12,
               }}>
-                7 vizinhos em um raio de
+                132 pessoas em sua vizinhança
               </Sentence>
-            </View>
-            <View style={{
-              flex: 1,
-              backgroundColor: Colors.pink,
-              paddingVertical: 4,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-              <Sentence style={{
-                color: Colors.white, 
-                fontFamily: 'OpenSans-Bold', 
-                textAlign: 'center',
-                fontSize: 12,
-              }}>
-                5km
-              </Sentence>
-              <Icon name="keyboard-arrow-down" style={{ 
-                color: Colors.white,
-                marginLeft: 4,
-                marginTop: 2,
-                fontSize: 12,
-              }} />
             </View>
           </View>
         </View>

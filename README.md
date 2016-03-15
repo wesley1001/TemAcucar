@@ -1,5 +1,7 @@
 ## TemAcucar
 
+[Tem Açúcar](http://temacucar.com) Android and iOS apps, built with React Native + Redux.
+
 ### Installation
 
 - clone the project

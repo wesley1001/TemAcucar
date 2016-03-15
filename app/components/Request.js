@@ -12,6 +12,9 @@ export default Request = ({ children }) => (
       paddingBottom: 10,
       marginTop: 16,
       marginHorizontal: 10,
+      borderColor: Colors.white,
+      borderTopLeftRadius: 12,
+      borderTopRightRadius: 12,
     }}>
       <Text style={{
         textAlign: 'center',
