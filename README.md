@@ -1,6 +1,6 @@
 ## TemAcucar
 
-[Tem Açúcar](http://temacucar.com) Android and iOS apps, built with React Native + Redux.
+[Tem Açúcar](http://temacucar.com) Android and iOS apps, built with [React Native](https://facebook.github.io/react-native/) + [Redux](http://redux.js.org/).
 
 ### Installation
 
