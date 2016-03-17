@@ -14,17 +14,17 @@ export default UserMenu = ({ auth, onSignOut }) => (
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
-    backgroundColor: Colors.yellow,
-    paddingTop: (Platform.OS == 'ios' ? 20 : 0),
+    backgroundColor: Colors.lightPink,
   }}>
     <View style={{
-      backgroundColor: Colors.beige,
+      backgroundColor: Colors.pink,
       alignSelf: 'stretch',
       padding: 20,
+      paddingTop: (Platform.OS == 'ios' ? 40 : 20),
     }}>
       <Sentence style={{ 
         fontFamily: 'Montserrat-Bold', 
-        color: Colors.pink
+        color: Colors.white
       }}>
         { auth.currentUser.first_name } { auth.currentUser.last_name }
       </Sentence>
@@ -32,12 +32,12 @@ export default UserMenu = ({ auth, onSignOut }) => (
     <TouchableOpacity style={{ alignSelf: 'stretch', padding: 20, flexDirection: 'row', alignItems: 'center' }} onPress={onSignOut}>
       <Icon name="power-settings-new" style={{ 
         fontSize: 32,
-        color: Colors.ice,
+        color: Colors.white,
         marginRight: 10,
       }} />
       <Sentence style={{
         fontSize: 24,
-        color: Colors.ice,
+        color: Colors.white,
       }}>
         Sair
       </Sentence>

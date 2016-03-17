@@ -1,5 +1,6 @@
 const initialState = {
   drawerOpen: false,
+  users: [],
 }
 
 export default function terms(state = initialState, action) {
@@ -13,6 +14,11 @@ export default function terms(state = initialState, action) {
       return {
         ...state, 
         drawerOpen: false,
+      }
+    case 'NEIGHBORHOOD_USERS_LIST_SUCCESS':
+      return {
+        ...state, 
+        users: action.users,
       }
     default:
       return state

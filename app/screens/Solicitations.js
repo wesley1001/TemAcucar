@@ -15,10 +15,9 @@ import Solicitation from "../components/Solicitation"
 export default class Solicitations extends Component {
   renderMap() {
     const { latitude, longitude } = this.props.auth.currentUser
+    const { users } = this.props.neighborhood
     return (
       <MapView
-        scrollEnabled={false}
-        zoomEnabled={false}
         style={{
           height: 150,
           alignSelf: 'stretch',
@@ -26,20 +25,27 @@ export default class Solicitations extends Component {
         region={{
           latitude: parseFloat(latitude), 
           longitude: parseFloat(longitude),
-          latitudeDelta: 0.02,
-          longitudeDelta: 0.02,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
         }}
       >
-        <MapView.Marker 
-          coordinate={{latitude, longitude}}
-          image={require('../img/marker.png')}
-        />
+        { users.map(user => (
+          <MapView.Marker 
+            key={user.id}
+            coordinate={{
+              latitude: user.latitude,
+              longitude: user.longitude
+            }}
+            image={require('../img/marker.png')}
+          />
+        )) }
       </MapView>
     )
   }
 
   render() {
     const { latitude, longitude } = this.props.auth.currentUser
+    const { users } = this.props.neighborhood
     return (
       <View style={{
         paddingBottom: 100,
@@ -55,7 +61,7 @@ export default class Solicitations extends Component {
             textAlign: 'center',
             fontSize: 12,
           }}>
-            132 pessoas em sua vizinhança
+            { users.length === 0 ? "Carregando vizinhança..." : `${users.length} pessoas em sua vizinhança` }
           </Sentence>
         </View>
         <Solicitation />
