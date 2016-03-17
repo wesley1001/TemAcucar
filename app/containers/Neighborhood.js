@@ -85,7 +85,7 @@ class Neighborhood extends Component {
             right: 0,
           }}>
             <LinearGradient
-              colors={['rgba(230,226,212,0)', Colors.beige]}
+              colors={['rgba(255,255,255,0)', Colors.white]}
               locations={[0,0.5]}
               style={{
                 flex: 1,

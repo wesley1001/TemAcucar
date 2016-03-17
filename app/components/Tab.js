@@ -5,7 +5,7 @@ export default Tab = ({ children }) => (
   <ScrollView style={{
     flex: 1, 
     alignSelf: 'stretch', 
-    backgroundColor: Colors.beige,
+    backgroundColor: Colors.white,
   }}>
     {children}
   </ScrollView>
