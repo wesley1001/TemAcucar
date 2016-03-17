@@ -13,25 +13,8 @@ import Sentence from "../components/Sentence"
 import Request from "../components/Request"
 
 export default class Requests extends Component {
-  handleSlide(value) {
-    const { onSetDelta } = this.props
-    const { delta } = this.props.neighborhood
-    const newDelta = value / 1000
-    if (newDelta !== delta)
-      onSetDelta && onSetDelta(newDelta)
-  }
-
-  handleSlidingComplete() {
-    const { onStoreDelta } = this.props
-    const delta = this.props.auth.currentUser.delta
-    const newDelta = this.props.neighborhood.delta
-    if (newDelta !== delta)
-      onStoreDelta && onStoreDelta(newDelta)
-  }
-
   renderMap() {
     const { latitude, longitude } = this.props.auth.currentUser
-    const { delta } = this.props.neighborhood
     return (
       <View style={{
         borderBottomWidth: 0.5,
@@ -47,8 +30,8 @@ export default class Requests extends Component {
           region={{
             latitude: parseFloat(latitude), 
             longitude: parseFloat(longitude),
-            latitudeDelta: parseFloat(delta),
-            longitudeDelta: parseFloat(delta),
+            latitudeDelta: 0.02,
+            longitudeDelta: 0.02,
           }}
         >
           <MapView.Marker 
@@ -62,7 +45,6 @@ export default class Requests extends Component {
 
   render() {
     const { latitude, longitude } = this.props.auth.currentUser
-    const { delta } = this.props.neighborhood
     return (
       <View style={{
         paddingBottom: 100,

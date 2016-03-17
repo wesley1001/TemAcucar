@@ -4,7 +4,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
 import LinearGradient from 'react-native-linear-gradient'
 
-import { openDrawer, closeDrawer, setDelta, storeDelta } from '../actions/NeighborhoodActions'
+import { openDrawer, closeDrawer } from '../actions/NeighborhoodActions'
 
 import Colors from "../Colors"
 import Button from "../components/Button"
@@ -24,9 +24,6 @@ class Neighborhood extends Component {
         this.drawer.closeDrawer()
       },
     })
-    const { dispatch } = this.props
-    const { delta } = this.props.auth.currentUser
-    dispatch(setDelta(delta))
   }
 
   handleDrawerOpen() {
@@ -45,16 +42,6 @@ class Neighborhood extends Component {
 
   handleMenuClose() {
     this.drawer.closeDrawer()
-  }
-
-  handleSetDelta(delta) {
-    const { dispatch } = this.props
-    dispatch(setDelta(delta))
-  }
-
-  handleStoreDelta(delta) {
-    const { dispatch, auth: { credentials } } = this.props
-    dispatch(storeDelta(delta, credentials))
   }
 
   render() {
@@ -81,11 +68,7 @@ class Neighborhood extends Component {
               renderTabBar={() => <TabBar />}
             >
               <Tab tabLabel="home">
-                <Requests
-                  {...this.props}
-                  onSetDelta={this.handleSetDelta.bind(this)} 
-                  onStoreDelta={this.handleStoreDelta.bind(this)} 
-                />
+                <Requests {...this.props} />
               </Tab>
               <Tab tabLabel="chat">
                 <Text>Chats</Text>

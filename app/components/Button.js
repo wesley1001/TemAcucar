@@ -9,7 +9,7 @@ export default Button = (props) => (
     textStyle={[{
       textAlign: 'center',
       color: Colors.white,
-      fontSize: 14,
+      fontSize: 12,
       fontFamily: 'Montserrat-Bold',
     }, props.textStyle]}
     disabledStyle={[{
