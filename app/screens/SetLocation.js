@@ -51,7 +51,7 @@ class SetLocation extends Component {
           longitudeDelta: parseFloat(longitude ? delta : 50),
         }}
       >
-        { latitude && longitude && <MapView.Marker coordinate={{latitude, longitude}} image={require('../img/icon.png')} /> }
+        { latitude && longitude && <MapView.Marker coordinate={{latitude, longitude}} image={require('../img/marker.png')} /> }
       </MapView>
     )
   }
