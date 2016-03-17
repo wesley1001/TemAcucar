@@ -12,7 +12,7 @@ import TopBar from "../components/TopBar"
 import UserMenu from "../components/UserMenu"
 import TabBar from "../components/TabBar"
 import Tab from "../components/Tab"
-import Requests from "../screens/Requests"
+import Solicitations from "../screens/Solicitations"
 
 class Neighborhood extends Component {
   componentWillMount() {
@@ -68,7 +68,7 @@ class Neighborhood extends Component {
               renderTabBar={() => <TabBar />}
             >
               <Tab tabLabel="home">
-                <Requests {...this.props} />
+                <Solicitations {...this.props} />
               </Tab>
               <Tab tabLabel="chat">
                 <Text>Chats</Text>
