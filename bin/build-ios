@@ -1,0 +1,11 @@
+if [[ "$ENV" = "" ]]; then
+  ENV="staging"
+fi
+ENV=$ENV ./bin/before-ios
+cd ios
+xcodebuild -project TemAcucar.xcodeproj -scheme TemAcucarRelease -destination "generic/platform=iOS" -derivedDataPath build
+mkdir -p ../release
+cp -rp ./build/Build/Products/Release-iphoneos/TemAcucar.app ../release/
+cd ..
+open ./release/
+ENV=$ENV ./bin/after-ios
