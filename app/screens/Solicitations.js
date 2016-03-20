@@ -17,29 +17,34 @@ export default class Solicitations extends Component {
     const { latitude, longitude } = this.props.auth.currentUser
     const { users } = this.props.neighborhood
     return (
-      <MapView
-        style={{
-          height: 150,
-          alignSelf: 'stretch',
-        }}
-        region={{
-          latitude: parseFloat(latitude), 
-          longitude: parseFloat(longitude),
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        }}
-      >
-        { users.map(user => (
-          <MapView.Marker 
-            key={user.id}
-            coordinate={{
-              latitude: user.latitude,
-              longitude: user.longitude
-            }}
-            image={require('../img/marker.png')}
-          />
-        )) }
-      </MapView>
+      <View style={{
+        backgroundColor: Colors.beige,
+        height: 150,
+      }}>
+        <MapView
+          style={{
+            height: 150,
+            alignSelf: 'stretch',
+          }}
+          region={{
+            latitude: parseFloat(latitude), 
+            longitude: parseFloat(longitude),
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          }}
+        >
+          { users.map(user => (
+            <MapView.Marker 
+              key={user.id}
+              coordinate={{
+                latitude: user.latitude,
+                longitude: user.longitude
+              }}
+              image={require('../img/marker.png')}
+            />
+          )) }
+        </MapView>
+      </View>
     )
   }
 

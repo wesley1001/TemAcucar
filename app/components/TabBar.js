@@ -29,7 +29,7 @@ export default class TabBar extends Component {
         { page === 2 && 
           <View style={{
             position: 'absolute',
-            right: 42,
+            right: 36,
             top: 8,
             height: 18,
             width: 18,
