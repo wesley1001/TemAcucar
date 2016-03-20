@@ -1,9 +1,12 @@
 if [[ "$ENV" = "" ]]; then
   ENV="staging"
 fi
+if [[ "$NAME" = "" ]]; then
+  NAME="iPhone 5s"
+fi
 ENV=$ENV ./bin/before-ios
 cd ios
-xcodebuild -project TemAcucar.xcodeproj -scheme TemAcucarRelease -destination id=EFBD64D9-E9F7-4B5D-803A-E247979DD1D3 -derivedDataPath build
+xcodebuild -project TemAcucar.xcodeproj -scheme TemAcucarRelease -destination "platform=iOS Simulator,name=$NAME" -derivedDataPath build
 mkdir -p ../release
 cp -rp ./build/Build/Products/Release-iphonesimulator/TemAcucar.app ../release/
 cd ..

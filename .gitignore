@@ -42,6 +42,7 @@ npm-debug.log
 .env.staging
 .env.production
 Info.plist
+AppDelegate.m
 android/release/
 ios/release/
 release/

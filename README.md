@@ -32,6 +32,14 @@ Xcode 7.0 or higher is required. It can be installed from the App Store.
 
 `bin/run-android`
 
+### Building release for iPhone
+
+- For staging environment release, run `bin/build-ios`
+
+- For debug environment release, run `ENV=debug bin/build-ios`
+
+- For production environment release, run `ENV=production bin/build-ios`
+
 ### Building release for iOS simulator
 
 - For staging environment release, run `bin/build-ios-simulator`

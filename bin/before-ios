@@ -1,2 +1,5 @@
+if [[ "$ENV" = "" ]]; then
+  ENV="debug"
+fi
 ENV=$ENV ./bin/before
-ruby ./bin/plist.rb
+ruby ./bin/ios.rb
