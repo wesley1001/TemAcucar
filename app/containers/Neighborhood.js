@@ -4,7 +4,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
 import LinearGradient from 'react-native-linear-gradient'
 
-import { openDrawer, closeDrawer, usersList, demandsList, demandsRefuse, demandsFlag } from '../actions/NeighborhoodActions'
+import * as NeighborhoodActions from '../actions/NeighborhoodActions'
 
 import Colors from "../Colors"
 import Button from "../components/Button"
@@ -25,37 +25,37 @@ class Neighborhood extends Component {
       },
     })
     const { dispatch, auth: { credentials, currentUser } } = this.props
-    dispatch(usersList(credentials, currentUser))
-    this.handleDemandsList()
+    dispatch(NeighborhoodActions.listUsers(credentials, currentUser))
+    this.handleListDemands()
   }
 
   handleDrawerOpen() {
     const { dispatch } = this.props
-    dispatch(openDrawer())
+    dispatch(NeighborhoodActions.openDrawer())
   }
 
   handleDrawerClose() {
     const { dispatch } = this.props
-    dispatch(closeDrawer())
+    dispatch(NeighborhoodActions.closeDrawer())
   }
 
-  handleDemandsList() {
+  handleListDemands() {
     const { dispatch, auth, neighborhood } = this.props
     const { credentials, currentUser } = auth
     const { demandsOffset } = neighborhood
-    dispatch(demandsList(credentials, currentUser, demandsOffset))
+    dispatch(NeighborhoodActions.listDemands(credentials, currentUser, demandsOffset))
   }
 
-  handleDemandsRefuse(demand) {
+  handleRefuseDemand(demand) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
-    dispatch(demandsRefuse(credentials, currentUser, demand))
+    dispatch(NeighborhoodActions.refuseDemand(credentials, currentUser, demand))
   }
 
-  handleDemandsFlag(demand) {
+  handleFlagDemand(demand) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
-    dispatch(demandsFlag(credentials, currentUser, demand))
+    dispatch(NeighborhoodActions.flagDemand(credentials, currentUser, demand))
   }
 
   handleMenuOpen() {
@@ -90,7 +90,7 @@ class Neighborhood extends Component {
               renderTabBar={() => <TabBar />}
             >
               <Tab tabLabel="home">
-                <Demands {...this.props} onRefuse={this.handleDemandsRefuse.bind(this)} onFlag={this.handleDemandsFlag.bind(this)} onLoadMoreDemands={this.handleDemandsList.bind(this)} />
+                <Demands {...this.props} onRefuse={this.handleRefuseDemand.bind(this)} onFlag={this.handleFlagDemand.bind(this)} onLoadMoreDemands={this.handleListDemands.bind(this)} />
               </Tab>
               <Tab tabLabel="chat">
                 <Text>Transações</Text>

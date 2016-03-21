@@ -20,18 +20,33 @@ export default function terms(state = initialState, action) {
         ...state, 
         drawerOpen: false,
       }
-    case 'NEIGHBORHOOD_USERS_LIST_SUCCESS':
+    case 'NEIGHBORHOOD_LIST_DEMANDS_REQUEST':
+      return {
+        ...state, 
+        loadingDemands: true,
+      }
+    case 'NEIGHBORHOOD_LIST_USERS_REQUEST':
+      return {
+        ...state, 
+        loadingUsers: true,
+      }
+    case 'NEIGHBORHOOD_LIST_USERS_SUCCESS':
       return {
         ...state, 
         users: action.users,
         loadingUsers: false,
       }
-    case 'NEIGHBORHOOD_DEMANDS_LIST_REQUEST':
+    case 'NEIGHBORHOOD_LIST_USERS_FAILURE':
+      return {
+        ...state, 
+        loadingUsers: false,
+      }
+    case 'NEIGHBORHOOD_LIST_DEMANDS_REQUEST':
       return {
         ...state, 
         loadingDemands: true,
       }
-    case 'NEIGHBORHOOD_DEMANDS_LIST_SUCCESS':
+    case 'NEIGHBORHOOD_LIST_DEMANDS_SUCCESS':
       return {
         ...state, 
         demands: state.demands.concat(action.demands),
@@ -39,18 +54,18 @@ export default function terms(state = initialState, action) {
         demandsOffset: state.demandsOffset + action.demands.length,
         canLoadMoreDemands: (action.demands.length >= 10 ? true : false),
       }
-    case 'NEIGHBORHOOD_DEMANDS_LIST_FAILURE':
+    case 'NEIGHBORHOOD_LIST_DEMANDS_FAILURE':
       return {
         ...state, 
         loadingDemands: false,
       }
-    case 'NEIGHBORHOOD_DEMANDS_REFUSE_REQUEST':
+    case 'NEIGHBORHOOD_REFUSE_DEMAND_REQUEST':
       return {
         ...state, 
         demands: state.demands.filter(demand => action.demand.id !== demand.id),
         demandsOffset: state.demandsOffset - 1,
       }
-    case 'NEIGHBORHOOD_DEMANDS_FLAG_REQUEST':
+    case 'NEIGHBORHOOD_FLAG_DEMAND_REQUEST':
       return {
         ...state, 
         demands: state.demands.filter(demand => action.demand.id !== demand.id),

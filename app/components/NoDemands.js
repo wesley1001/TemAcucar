@@ -9,6 +9,6 @@ export default NoDemands = () => (
     padding: 10,
     textAlign: 'center',
   }}>
-    Nenhum pedido na sua vizinhança. Que tal começar agora mesmo fazendo um pedido?
+    Nenhum pedido ativo na sua vizinhança. Que tal começar agora mesmo fazendo um pedido?
   </Sentence>
 )

@@ -2,8 +2,8 @@ import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import Communications from 'react-native-communications'
 
-import { termsAccept, termsReject, termsCancelReject, termsScrollToBottom } from '../actions/TermsActions'
-import { configConfirmEmail, configUpdateEmail } from '../actions/ConfigActions'
+import * as TermsActions from '../actions/TermsActions'
+import * as ConfigActions from '../actions/ConfigActions'
 
 import LocationSetter from "./LocationSetter"
 import Loading from "../screens/Loading"
@@ -15,17 +15,17 @@ import Neighborhood from "./Neighborhood"
 class Configurator extends Component {
   handleAcceptTerms() {
     const { dispatch, auth: { credentials } } = this.props
-    dispatch(termsAccept(credentials))
+    dispatch(TermsActions.accept(credentials))
   }
 
   handleRejectTerms() {
     const { dispatch } = this.props
-    dispatch(termsReject())
+    dispatch(TermsActions.reject())
   }
 
   handleCancelRejectTerms() {
     const { dispatch } = this.props
-    dispatch(termsCancelReject())
+    dispatch(TermsActions.cancelReject())
   }
 
   handleContact() {
@@ -39,20 +39,20 @@ class Configurator extends Component {
       return
     const { nativeEvent } = event
     if(nativeEvent.contentOffset.y >= (nativeEvent.contentSize.height - nativeEvent.layoutMeasurement.height - 1)) {
-      dispatch(termsScrollToBottom())
+      dispatch(TermsActions.scrollToBottom())
     }
   }
 
   handleConfirmEmail() {
     const { dispatch, auth } = this.props
     const { credentials } = auth
-    dispatch(configConfirmEmail(credentials))
+    dispatch(ConfigActions.confirmEmail(credentials))
   }
 
   handleUpdateEmail(data) {
     const { dispatch, auth } = this.props
     const { currentUser, credentials } = auth
-    dispatch(configUpdateEmail(data.email, currentUser.email, credentials))
+    dispatch(ConfigActions.updateEmail(data.email, currentUser.email, credentials))
   }
 
   render() {

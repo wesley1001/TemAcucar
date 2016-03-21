@@ -1,8 +1,8 @@
 import { apiAction } from './BasicActions'
 
-export function usersList(credentials, currentUser) {
+export function listUsers(credentials, currentUser) {
   return apiAction({
-    prefix: 'NEIGHBORHOOD_USERS_LIST',
+    prefix: 'NEIGHBORHOOD_LIST_USERS',
     path: '/users',
     credentials,
     currentUser: () => currentUser,
@@ -12,9 +12,9 @@ export function usersList(credentials, currentUser) {
   })
 }
 
-export function demandsList(credentials, currentUser, offset = 0) {
+export function listDemands(credentials, currentUser, offset = 0) {
   return apiAction({
-    prefix: 'NEIGHBORHOOD_DEMANDS_LIST',
+    prefix: 'NEIGHBORHOOD_LIST_DEMANDS',
     path: '/demands?offset=' + offset,
     credentials,
     currentUser: () => currentUser,
@@ -24,9 +24,9 @@ export function demandsList(credentials, currentUser, offset = 0) {
   })
 }
 
-export function demandsRefuse(credentials, currentUser, demand) {
+export function refuseDemand(credentials, currentUser, demand) {
   return apiAction({
-    prefix: 'NEIGHBORHOOD_DEMANDS_REFUSE',
+    prefix: 'NEIGHBORHOOD_REFUSE_DEMAND',
     path: '/refusals',
     method: 'post',
     params: {
@@ -38,9 +38,9 @@ export function demandsRefuse(credentials, currentUser, demand) {
   })
 }
 
-export function demandsFlag(credentials, currentUser, demand) {
+export function flagDemand(credentials, currentUser, demand) {
   return apiAction({
-    prefix: 'NEIGHBORHOOD_DEMANDS_FLAG',
+    prefix: 'NEIGHBORHOOD_FLAG_DEMAND',
     path: '/flags',
     method: 'post',
     params: {
