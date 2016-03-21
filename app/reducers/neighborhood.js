@@ -50,6 +50,12 @@ export default function terms(state = initialState, action) {
         demands: state.demands.filter(demand => action.demand.id !== demand.id),
         demandsOffset: state.demandsOffset - 1,
       }
+    case 'NEIGHBORHOOD_DEMANDS_FLAG_REQUEST':
+      return {
+        ...state, 
+        demands: state.demands.filter(demand => action.demand.id !== demand.id),
+        demandsOffset: state.demandsOffset - 1,
+      }
     default:
       return state
   }

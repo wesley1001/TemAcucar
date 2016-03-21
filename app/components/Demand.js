@@ -1,4 +1,4 @@
-import React, { Component, View, Text, Image } from 'react-native'
+import React, { Component, Alert, View, Text, Image } from 'react-native'
 import moment from 'moment'
 import Colors from "../Colors"
 import Button from "./Button"
@@ -25,6 +25,17 @@ export default class Demand extends Component {
   handleRefuse() {
     const { demand, onRefuse } = this.props
     onRefuse(demand)
+  }
+
+  handleFlag() {
+    Alert.alert(
+      'Pedido impróprio?',
+      'Você tem certeza que quer denunciar este pedido como impróprio?',
+      [{ text: 'Cancelar', style: 'cancel' }, { text: 'OK', onPress: () => {
+        const { demand, onFlag } = this.props
+        onFlag(demand)
+      }}]
+    )
   }
 
   render() {
@@ -127,6 +138,7 @@ export default class Demand extends Component {
             Não tenho
           </Button>
           <Button
+            onPress={this.handleFlag.bind(this)}
             style={{
               flex: 1.01,
               backgroundColor: Colors.ice,
