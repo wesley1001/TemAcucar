@@ -4,6 +4,8 @@ const initialState = {
   demands: [],
   loadingUsers: true,
   loadingDemands: true,
+  demandsOffset: 0,
+  canLoadMoreDemands: false,
 }
 
 export default function terms(state = initialState, action) {
@@ -24,10 +26,22 @@ export default function terms(state = initialState, action) {
         users: action.users,
         loadingUsers: false,
       }
+    case 'NEIGHBORHOOD_DEMANDS_LIST_REQUEST':
+      return {
+        ...state, 
+        loadingDemands: true,
+      }
     case 'NEIGHBORHOOD_DEMANDS_LIST_SUCCESS':
       return {
         ...state, 
-        demands: action.demands,
+        demands: state.demands.concat(action.demands),
+        loadingDemands: false,
+        demandsOffset: state.demandsOffset + action.demands.length,
+        canLoadMoreDemands: (action.demands.length > 0 ? true : false),
+      }
+    case 'NEIGHBORHOOD_DEMANDS_LIST_FAILURE':
+      return {
+        ...state, 
         loadingDemands: false,
       }
     default:

@@ -12,10 +12,10 @@ export function usersList(credentials, currentUser) {
   })
 }
 
-export function demandsList(credentials, currentUser) {
+export function demandsList(credentials, currentUser, offset = 0) {
   return apiAction({
     prefix: 'NEIGHBORHOOD_DEMANDS_LIST',
-    path: '/demands',
+    path: '/demands?offset=' + offset,
     credentials,
     currentUser: () => currentUser,
     processResponse: (response) => {

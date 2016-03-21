@@ -26,7 +26,7 @@ class Neighborhood extends Component {
     })
     const { dispatch, auth: { credentials, currentUser } } = this.props
     dispatch(usersList(credentials, currentUser))
-    dispatch(demandsList(credentials, currentUser))
+    this.handleDemandsList()
   }
 
   handleDrawerOpen() {
@@ -37,6 +37,13 @@ class Neighborhood extends Component {
   handleDrawerClose() {
     const { dispatch } = this.props
     dispatch(closeDrawer())
+  }
+
+  handleDemandsList() {
+    const { dispatch, auth, neighborhood } = this.props
+    const { credentials, currentUser } = auth
+    const { demandsOffset } = neighborhood
+    dispatch(demandsList(credentials, currentUser, demandsOffset))
   }
 
   handleMenuOpen() {
@@ -71,7 +78,7 @@ class Neighborhood extends Component {
               renderTabBar={() => <TabBar />}
             >
               <Tab tabLabel="home">
-                <Demands {...this.props} />
+                <Demands {...this.props} onLoadMoreDemands={this.handleDemandsList.bind(this)} />
               </Tab>
               <Tab tabLabel="chat">
                 <Text>Transações</Text>
