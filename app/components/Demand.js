@@ -1,4 +1,4 @@
-import React, { View, Text, Image } from 'react-native'
+import React, { Component, View, Text, Image } from 'react-native'
 import moment from 'moment'
 import Colors from "../Colors"
 import Button from "./Button"
@@ -21,115 +21,126 @@ moment.locale('pt-br', {
   }
 })
 
-export default Demand = ({ demand: { user, state, name, distance, created_at }}) => (
-  <View style={{
-  }}>
-    <View style={{
-      backgroundColor: Colors.white,
-      borderTopWidth: 4,
-      borderColor: Colors.beige,
-      paddingVertical: 10,
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}>
-      <Image source={{uri: user.image_url}} style={{
-        width: 36,
-        height: 36,
-        borderRadius: 18,
-        marginBottom: 6,
-      }} />
-      <Text style={{
-        textAlign: 'center',
-        color: Colors.brown,
-        fontSize: 10,
-        fontFamily: 'OpenSans-Bold',
-      }}>
-        {user.first_name} {state == 'active' ? 'precisa' : 'precisou'} de um(a)
-      </Text>
-      <Text style={{
-        textAlign: 'center',
-        color: Colors.pink,
-        fontSize: 12,
-        fontFamily: 'OpenSans-Bold',
-      }}>
-        { name.toUpperCase() }
-      </Text>
+export default class Demand extends Component {
+  handleRefuse() {
+    const { demand, onRefuse } = this.props
+    onRefuse(demand)
+  }
+
+  render() {
+    const { user, state, name, distance, created_at } = this.props.demand
+    return (
       <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 5,
       }}>
-        <Icon name="access-time" style={{ 
-          color: Colors.ice,
-          marginRight: 4,
-          marginTop: 2,
-          fontSize: 14,
-        }} />
-        <Text style={{
-          color: Colors.brown,
-          fontSize: 10,
-          fontFamily: 'OpenSans',
+        <View style={{
+          backgroundColor: Colors.white,
+          borderTopWidth: 4,
+          borderColor: Colors.beige,
+          paddingVertical: 10,
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
         }}>
-          { moment(created_at).fromNow() }
-        </Text>
-        <Icon name="place" style={{ 
-          color: Colors.ice,
-          marginLeft: 10,
-          marginRight: 2,
-          marginTop: 2,
-          fontSize: 14,
-        }} />
-        <Text style={{
-          color: Colors.brown,
-          fontSize: 10,
-          fontFamily: 'OpenSans',
+          <Image source={{uri: user.image_url}} style={{
+            width: 36,
+            height: 36,
+            borderRadius: 18,
+            marginBottom: 6,
+          }} />
+          <Text style={{
+            textAlign: 'center',
+            color: Colors.brown,
+            fontSize: 10,
+            fontFamily: 'OpenSans-Bold',
+          }}>
+            {user.first_name} {state == 'active' ? 'precisa' : 'precisou'} de um(a)
+          </Text>
+          <Text style={{
+            textAlign: 'center',
+            color: Colors.pink,
+            fontSize: 12,
+            fontFamily: 'OpenSans-Bold',
+          }}>
+            { name.toUpperCase() }
+          </Text>
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: 5,
+          }}>
+            <Icon name="access-time" style={{ 
+              color: Colors.ice,
+              marginRight: 4,
+              marginTop: 2,
+              fontSize: 14,
+            }} />
+            <Text style={{
+              color: Colors.brown,
+              fontSize: 10,
+              fontFamily: 'OpenSans',
+            }}>
+              { moment(created_at).fromNow() }
+            </Text>
+            <Icon name="place" style={{ 
+              color: Colors.ice,
+              marginLeft: 10,
+              marginRight: 2,
+              marginTop: 2,
+              fontSize: 14,
+            }} />
+            <Text style={{
+              color: Colors.brown,
+              fontSize: 10,
+              fontFamily: 'OpenSans',
+            }}>
+              A { distance > 1 ? `${Math.round(distance)}km` : `${Math.round(distance * 1000)}m` }
+            </Text>
+          </View>
+        </View>
+        <View style={{
+          flexDirection: 'row',
         }}>
-          A { distance > 1 ? `${Math.round(distance)}km` : `${Math.round(distance * 1000)}m` }
-        </Text>
+          <Button
+            style={{
+              flex: 1,
+              paddingVertical: 18,
+            }}
+            textStyle={{
+              fontSize: 12,
+            }}
+          >
+            Emprestar
+          </Button>
+          <Button
+            onPress={this.handleRefuse.bind(this)}
+            style={{
+              flex: 1,
+              backgroundColor: Colors.blue,
+              borderColor: Colors.darkBlue,
+              paddingVertical: 18,
+            }}
+            textStyle={{
+              fontSize: 12,
+            }}
+          >
+            Não tenho
+          </Button>
+          <Button
+            style={{
+              flex: 1.01,
+              backgroundColor: Colors.ice,
+              borderColor: Colors.darkIce,
+              paddingVertical: 18,
+            }}
+            textStyle={{
+              fontSize: 12,
+            }}
+          >
+            Denunciar
+          </Button>
+        </View>
       </View>
-    </View>
-    <View style={{
-      flexDirection: 'row',
-    }}>
-      <Button
-        style={{
-          flex: 1,
-          paddingVertical: 18,
-        }}
-        textStyle={{
-          fontSize: 12,
-        }}
-      >
-        Emprestar
-      </Button>
-      <Button
-        style={{
-          flex: 1,
-          backgroundColor: Colors.blue,
-          borderColor: Colors.darkBlue,
-          paddingVertical: 18,
-        }}
-        textStyle={{
-          fontSize: 12,
-        }}
-      >
-        Não tenho
-      </Button>
-      <Button
-        style={{
-          flex: 1.01,
-          backgroundColor: Colors.ice,
-          borderColor: Colors.darkIce,
-          paddingVertical: 18,
-        }}
-        textStyle={{
-          fontSize: 12,
-        }}
-      >
-        Denunciar
-      </Button>
-    </View>
-  </View>
-)
+    )
+  }
+}

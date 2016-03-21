@@ -44,6 +44,12 @@ export default function terms(state = initialState, action) {
         ...state, 
         loadingDemands: false,
       }
+    case 'NEIGHBORHOOD_DEMANDS_REFUSE_REQUEST':
+      return {
+        ...state, 
+        demands: state.demands.filter(demand => action.demand.id !== demand.id),
+        demandsOffset: state.demandsOffset - 1,
+      }
     default:
       return state
   }

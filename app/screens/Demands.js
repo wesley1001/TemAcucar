@@ -50,7 +50,7 @@ export default class Demands extends Component {
   }
 
   render() {
-    const { onLoadMoreDemands } = this.props
+    const { onRefuse, onLoadMoreDemands } = this.props
     const { latitude, longitude } = this.props.auth.currentUser
     const { users, loadingUsers, demands, loadingDemands, canLoadMoreDemands } = this.props.neighborhood
     return (
@@ -72,7 +72,7 @@ export default class Demands extends Component {
           </Sentence>
         </View>
         { demands.map(demand => (
-          <Demand key={demand.id} demand={demand} />
+          <Demand key={demand.id} demand={demand} onRefuse={onRefuse} />
         )) }
         { loadingDemands && <GiftedSpinner style={{ marginTop: 20 }} /> }
         { demands.length === 0 && !loadingDemands && <NoDemands /> }

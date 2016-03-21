@@ -24,6 +24,20 @@ export function demandsList(credentials, currentUser, offset = 0) {
   })
 }
 
+export function demandsRefuse(credentials, currentUser, demand) {
+  return apiAction({
+    prefix: 'NEIGHBORHOOD_DEMANDS_REFUSE',
+    path: '/refusals',
+    method: 'post',
+    params: {
+      demand_id: demand.id,
+    },
+    requestAttributes: { demand },
+    credentials,
+    currentUser: () => currentUser,
+  })
+}
+
 export function openDrawer() {
   return dispatch => {
     dispatch({ type: 'NEIGHBORHOOD_OPEN_DRAWER' })
