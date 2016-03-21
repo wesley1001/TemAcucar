@@ -4,7 +4,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
 import LinearGradient from 'react-native-linear-gradient'
 
-import { openDrawer, closeDrawer, usersList } from '../actions/NeighborhoodActions'
+import { openDrawer, closeDrawer, usersList, demandsList } from '../actions/NeighborhoodActions'
 
 import Colors from "../Colors"
 import Button from "../components/Button"
@@ -12,7 +12,7 @@ import TopBar from "../components/TopBar"
 import UserMenu from "../components/UserMenu"
 import TabBar from "../components/TabBar"
 import Tab from "../components/Tab"
-import Solicitations from "../screens/Solicitations"
+import Demands from "../screens/Demands"
 
 class Neighborhood extends Component {
   componentWillMount() {
@@ -26,6 +26,7 @@ class Neighborhood extends Component {
     })
     const { dispatch, auth: { credentials, currentUser } } = this.props
     dispatch(usersList(credentials, currentUser))
+    dispatch(demandsList(credentials, currentUser))
   }
 
   handleDrawerOpen() {
@@ -70,7 +71,7 @@ class Neighborhood extends Component {
               renderTabBar={() => <TabBar />}
             >
               <Tab tabLabel="home">
-                <Solicitations {...this.props} />
+                <Demands {...this.props} />
               </Tab>
               <Tab tabLabel="chat">
                 <Text>Transações</Text>

@@ -12,6 +12,18 @@ export function usersList(credentials, currentUser) {
   })
 }
 
+export function demandsList(credentials, currentUser) {
+  return apiAction({
+    prefix: 'NEIGHBORHOOD_DEMANDS_LIST',
+    path: '/demands',
+    credentials,
+    currentUser: () => currentUser,
+    processResponse: (response) => {
+      return { demands: JSON.parse(response._bodyText) }
+    },
+  })
+}
+
 export function openDrawer() {
   return dispatch => {
     dispatch({ type: 'NEIGHBORHOOD_OPEN_DRAWER' })
