@@ -1,8 +1,27 @@
 import React, { View, Text, Image } from 'react-native'
+import moment from 'moment'
 import Colors from "../Colors"
 import Button from "./Button"
 
-export default Demand = ({ demand: { name, user }}) => (
+moment.locale('pt-br', {
+  relativeTime : {
+    future: "Em %s",
+    past:   "Há %s",
+    s:  "segunds",
+    m:  "um minuto",
+    mm: "%d minutos",
+    h:  "an hora",
+    hh: "%d horas",
+    d:  "um dia",
+    dd: "%d dias",
+    M:  "um mês",
+    MM: "%d meses",
+    y:  "um ano",
+    yy: "%d anos",
+  }
+})
+
+export default Demand = ({ demand: { user, state, name, distance, created_at }}) => (
   <View style={{
   }}>
     <View style={{
@@ -26,7 +45,7 @@ export default Demand = ({ demand: { name, user }}) => (
         fontSize: 10,
         fontFamily: 'OpenSans-Bold',
       }}>
-        {user.first_name} precisa de um(a)
+        {user.first_name} {state == 'active' ? 'precisa' : 'precisou'} de um(a)
       </Text>
       <Text style={{
         textAlign: 'center',
@@ -53,7 +72,7 @@ export default Demand = ({ demand: { name, user }}) => (
           fontSize: 10,
           fontFamily: 'OpenSans',
         }}>
-          Hoje
+          { moment(created_at).fromNow() }
         </Text>
         <Icon name="place" style={{ 
           color: Colors.ice,
@@ -67,7 +86,7 @@ export default Demand = ({ demand: { name, user }}) => (
           fontSize: 10,
           fontFamily: 'OpenSans',
         }}>
-          A 3km
+          A { distance > 1 ? `${Math.round(distance)}km` : `${Math.round(distance * 1000)}m` }
         </Text>
       </View>
     </View>

@@ -37,7 +37,7 @@ export default function terms(state = initialState, action) {
         demands: state.demands.concat(action.demands),
         loadingDemands: false,
         demandsOffset: state.demandsOffset + action.demands.length,
-        canLoadMoreDemands: (action.demands.length > 0 ? true : false),
+        canLoadMoreDemands: (action.demands.length >= 10 ? true : false),
       }
     case 'NEIGHBORHOOD_DEMANDS_LIST_FAILURE':
       return {

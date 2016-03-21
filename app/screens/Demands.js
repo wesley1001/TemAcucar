@@ -30,8 +30,8 @@ export default class Demands extends Component {
           region={{
             latitude: parseFloat(latitude), 
             longitude: parseFloat(longitude),
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
+            latitudeDelta: 0.02,
+            longitudeDelta: 0.02,
           }}
         >
           { users.map(user => (
