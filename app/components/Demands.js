@@ -10,7 +10,7 @@ import Colors from "../Colors"
 import Button from "../components/Button"
 import Link from "../components/Link"
 import Sentence from "../components/Sentence"
-import Demand from "../components/Demand"
+import DemandMiniature from "../components/DemandMiniature"
 import NoDemands from "../components/NoDemands"
 
 export default class Demands extends Component {
@@ -72,7 +72,7 @@ export default class Demands extends Component {
           </Sentence>
         </View>
         { demands.map(demand => (
-          <Demand key={demand.id} demand={demand} onRefuse={onRefuse} onFlag={onFlag} />
+          <DemandMiniature key={demand.id} demand={demand} onRefuse={onRefuse} onFlag={onFlag} />
         )) }
         { loadingDemands && <GiftedSpinner style={{ marginTop: 20 }} /> }
         { demands.length === 0 && !loadingDemands && <NoDemands /> }

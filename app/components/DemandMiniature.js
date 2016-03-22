@@ -21,7 +21,7 @@ moment.locale('pt-br', {
   }
 })
 
-export default class Demand extends Component {
+export default class DemandMiniature extends Component {
   handleRefuse() {
     const { demand, onRefuse } = this.props
     onRefuse(demand)
