@@ -4,7 +4,7 @@ import * as AuthActions from '../actions/AuthActions'
 import * as StoredAuthActions from '../actions/StoredAuthActions'
 
 import Loading from "../screens/Loading"
-import SignedOut from "../routers/SignedOut"
+import AuthRouter from "../routers/AuthRouter"
 import Configurator from "./Configurator"
 
 class Authorizer extends Component {
@@ -40,7 +40,7 @@ class Authorizer extends Component {
       !facebookSigningIn && !signingIn && !signingUp && !signingOut && 
       // We're not in the middle of reset password flow
       !requestingPassword && !resetingPassword && !resetPassword &&
-      // We don't have any error of the kinds that SignedOut router will render SignInFailed
+      // We don't have any error of the kinds that AuthRouter router will render SignInFailed
       !facebookError && !signInError && 
       // We don't have a sign up error, so SignUpForm can manage errors by itself
       !signUpError && 
@@ -109,7 +109,7 @@ class Authorizer extends Component {
     if (this.isLoading())
       return (<Loading />)
     if (this.isSignedOut())
-      return (<SignedOut auth={auth} {...authEvents} />)
+      return (<AuthRouter auth={auth} {...authEvents} />)
     return (<Configurator auth={auth} {...authEvents} />)
   }
 }
