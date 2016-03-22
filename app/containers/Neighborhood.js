@@ -52,6 +52,7 @@ class Neighborhood extends Component {
   handleViewDemand(demand) {
     Actions.demand({
       demand,
+      onDashboard: this.handleDashboard.bind(this),
       onRefuse: this.handleRefuseDemand.bind(this),
       onFlag: this.handleFlagDemand.bind(this),
     })

@@ -1,4 +1,4 @@
-import React, { Component, View } from 'react-native'
+import React, { Component, Alert, View } from 'react-native'
 import Colors from "../Colors"
 import Button from "./Button"
 

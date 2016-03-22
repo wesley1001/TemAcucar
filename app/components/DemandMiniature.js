@@ -1,4 +1,4 @@
-import React, { Component, Alert, View, Text, Image, TouchableOpacity } from 'react-native'
+import React, { Component, View, TouchableOpacity } from 'react-native'
 import Colors from "../Colors"
 import DemandHeader from "./DemandHeader"
 import DemandButtons from "./DemandButtons"
