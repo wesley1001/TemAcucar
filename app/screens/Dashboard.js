@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { onDrawerOpen, onDrawerClose, onRefuseDemand, onFlagDemand, onLoadMoreDemands, onNewDemand } = this.props
+    const { onDrawerOpen, onDrawerClose, onRefuseDemand, onFlagDemand, onLoadMoreDemands, onNewDemand, onViewDemand } = this.props
     const { drawerOpen } = this.props.neighborhood
     const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
     return (
@@ -56,7 +56,7 @@ export default class Dashboard extends Component {
               renderTabBar={() => <TabBar />}
             >
               <Tab tabLabel="home">
-                <Demands {...this.props} onRefuse={onRefuseDemand} onFlag={onFlagDemand} onLoadMore={onLoadMoreDemands} />
+                <Demands {...this.props} onView={onViewDemand} onRefuse={onRefuseDemand} onFlag={onFlagDemand} onLoadMore={onLoadMoreDemands} />
               </Tab>
               <Tab tabLabel="chat">
                 <Text>Transações</Text>

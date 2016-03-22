@@ -1,4 +1,4 @@
-import React, { Text } from 'react-native'
+import React from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 import SimpleScreen from "../components/SimpleScreen"

@@ -1,4 +1,4 @@
-import React, { Text, TouchableOpacity } from 'react-native'
+import React, { Text } from 'react-native'
 import Colors from "../Colors"
 
 export default Link = ({ style, onPress, children }) => (

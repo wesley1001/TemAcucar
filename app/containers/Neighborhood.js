@@ -49,6 +49,14 @@ class Neighborhood extends Component {
     Actions.dashboard()
   }
 
+  handleViewDemand(demand) {
+    Actions.demand({
+      demand,
+      onRefuse: this.handleRefuseDemand.bind(this),
+      onFlag: this.handleFlagDemand.bind(this),
+    })
+  }
+
   handleCreateDemand(demand) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
@@ -62,6 +70,7 @@ class Neighborhood extends Component {
         onDashboard={this.handleDashboard.bind(this)}
         onDrawerOpen={this.handleDrawerOpen.bind(this)}
         onDrawerClose={this.handleDrawerClose.bind(this)}
+        onViewDemand={this.handleViewDemand.bind(this)}
         onRefuseDemand={this.handleRefuseDemand.bind(this)}
         onFlagDemand={this.handleFlagDemand.bind(this)}
         onLoadMoreDemands={this.handleListDemands.bind(this)}
