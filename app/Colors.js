@@ -7,8 +7,10 @@ const Colors = {
   beige: '#F4F0E7',
   // beige: '#E6E2D4',
   yellow: '#FFFAD6',
+  darkYellow: '#F0AD4E',
   blue: '#4AA2B0',
   darkBlue: '#2A8290',
+  lightBlue: '#6AC2D0',
   gray: '#999',
   darkGray: '#888',
   ice: '#C5BEB5',
@@ -16,6 +18,7 @@ const Colors = {
   facebook: '#516dac',
   darkFacebook: '#314d8c',
   red: '#E9122B',
+  green: '#5CB85C',
 }
 
 export default Colors

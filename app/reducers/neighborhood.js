@@ -82,6 +82,7 @@ export default function terms(state = initialState, action) {
       return {
         ...state, 
         demands: [action.demand].concat(state.demands),
+        demandsOffset: state.demandsOffset + 1,
         creatingDemand: false,
       }
     case 'NEIGHBORHOOD_CREATE_DEMAND_FAILURE':
