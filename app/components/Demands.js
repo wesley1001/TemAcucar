@@ -50,7 +50,7 @@ export default class Demands extends Component {
   }
 
   render() {
-    const { onView, onRefuse, onFlag, onLoadMore } = this.props
+    const { onLoadMoreDemands } = this.props
     const { latitude, longitude } = this.props.auth.currentUser
     const { users, loadingUsers, demands, loadingDemands, canLoadMoreDemands } = this.props.neighborhood
     return (
@@ -72,12 +72,12 @@ export default class Demands extends Component {
           </Sentence>
         </View>
         { demands.map(demand => (
-          <DemandMiniature key={demand.id} demand={demand} onView={onView} onRefuse={onRefuse} onFlag={onFlag} />
+          <DemandMiniature {...this.props} key={demand.id} demand={demand} />
         )) }
         { loadingDemands && <GiftedSpinner style={{ marginTop: 20 }} /> }
         { demands.length === 0 && !loadingDemands && <NoDemands /> }
         { canLoadMoreDemands && !loadingDemands &&
-          <Link onPress={onLoadMore} style={{
+          <Link onPress={onLoadMoreDemands} style={{
             marginTop: 10,
             marginBottom: 20,
             textAlign: 'center',
