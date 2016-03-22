@@ -1,6 +1,7 @@
 import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import * as NeighborhoodActions from '../actions/NeighborhoodActions'
+import { Actions } from 'react-native-router-flux'
 
 import NeighborhoodRouter from "../routers/NeighborhoodRouter"
 
@@ -40,15 +41,32 @@ class Neighborhood extends Component {
     dispatch(NeighborhoodActions.flagDemand(credentials, currentUser, demand))
   }
 
+  handleNewDemand() {
+    Actions.newDemand()
+  }
+
+  handleDashboard() {
+    Actions.dashboard()
+  }
+
+  handleCreateDemand(demand) {
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(NeighborhoodActions.createDemand(credentials, currentUser, demand))
+  }
+
   render() {
     return (
       <NeighborhoodRouter
         {...this.props}
+        onDashboard={this.handleDashboard.bind(this)}
         onDrawerOpen={this.handleDrawerOpen.bind(this)}
         onDrawerClose={this.handleDrawerClose.bind(this)}
         onRefuseDemand={this.handleRefuseDemand.bind(this)}
         onFlagDemand={this.handleFlagDemand.bind(this)}
         onLoadMoreDemands={this.handleListDemands.bind(this)}
+        onNewDemand={this.handleNewDemand.bind(this)}
+        onCreateDemand={this.handleCreateDemand.bind(this)}
       />
     )
   }

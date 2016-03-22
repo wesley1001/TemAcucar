@@ -6,6 +6,8 @@ const initialState = {
   loadingDemands: true,
   demandsOffset: 0,
   canLoadMoreDemands: false,
+  creatingDemand: false,
+  createDemandError: null,
 }
 
 export default function terms(state = initialState, action) {
@@ -70,6 +72,23 @@ export default function terms(state = initialState, action) {
         ...state, 
         demands: state.demands.filter(demand => action.demand.id !== demand.id),
         demandsOffset: state.demandsOffset - 1,
+      }
+    case 'NEIGHBORHOOD_CREATE_DEMAND_REQUEST':
+      return {
+        ...state, 
+        creatingDemand: true,
+      }
+    case 'NEIGHBORHOOD_CREATE_DEMAND_SUCCESS':
+      return {
+        ...state, 
+        demands: [action.demand].concat(state.demands),
+        creatingDemand: false,
+      }
+    case 'NEIGHBORHOOD_CREATE_DEMAND_FAILURE':
+      return {
+        ...state, 
+        creatingDemand: false,
+        createDemandError: action.error,
       }
     default:
       return state

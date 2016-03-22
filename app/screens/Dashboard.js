@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { onDrawerOpen, onDrawerClose, onRefuseDemand, onFlagDemand, onLoadMoreDemands } = this.props
+    const { onDrawerOpen, onDrawerClose, onRefuseDemand, onFlagDemand, onLoadMoreDemands, onNewDemand } = this.props
     const { drawerOpen } = this.props.neighborhood
     const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
     return (
@@ -80,7 +80,7 @@ export default class Dashboard extends Component {
                 padding: 10,
                 paddingTop: 50,
               }}>
-              <Button style={{alignSelf: 'stretch'}}>
+              <Button onPress={onNewDemand} style={{alignSelf: 'stretch'}}>
                 Pedir
               </Button>
             </LinearGradient>

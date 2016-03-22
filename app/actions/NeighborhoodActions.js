@@ -52,6 +52,24 @@ export function flagDemand(credentials, currentUser, demand) {
   })
 }
 
+export function createDemand(credentials, currentUser, demand) {
+  return apiAction({
+    prefix: 'NEIGHBORHOOD_CREATE_DEMAND',
+    path: '/demands',
+    method: 'post',
+    params: {
+      name: demand.name,
+      description: demand.description,
+    },
+    requestAttributes: { demand },
+    credentials,
+    currentUser: () => currentUser,
+    processResponse: (response) => {
+      return { demand: JSON.parse(response._bodyText) }
+    },
+  })
+}
+
 export function openDrawer() {
   return dispatch => {
     dispatch({ type: 'NEIGHBORHOOD_OPEN_DRAWER' })

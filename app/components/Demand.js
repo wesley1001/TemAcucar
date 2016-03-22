@@ -7,7 +7,7 @@ moment.locale('pt-br', {
   relativeTime : {
     future: "Em %s",
     past:   "Há %s",
-    s:  "segunds",
+    s:  "segundos",
     m:  "um minuto",
     mm: "%d minutos",
     h:  "an hora",
@@ -64,7 +64,7 @@ export default class Demand extends Component {
             fontSize: 10,
             fontFamily: 'OpenSans-Bold',
           }}>
-            {user.first_name} {state == 'active' ? 'precisa' : 'precisou'} de um(a)
+            {user.first_name} precisa de um(a)
           </Text>
           <Text style={{
             textAlign: 'center',

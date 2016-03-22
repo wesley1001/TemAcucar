@@ -55,7 +55,7 @@ export default class Demands extends Component {
     const { users, loadingUsers, demands, loadingDemands, canLoadMoreDemands } = this.props.neighborhood
     return (
       <View style={{
-        paddingBottom: 120,
+        paddingBottom: 100,
       }}>
         { latitude && longitude && this.renderMap() }
         <View style={{
@@ -79,6 +79,7 @@ export default class Demands extends Component {
         { canLoadMoreDemands && !loadingDemands &&
           <Link onPress={onLoadMore} style={{
             marginTop: 10,
+            marginBottom: 20,
             textAlign: 'center',
           }}>
             Carregar mais
