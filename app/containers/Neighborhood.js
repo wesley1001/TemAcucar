@@ -2,7 +2,7 @@ import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import * as NeighborhoodActions from '../actions/NeighborhoodActions'
 
-import Dashboard from "../screens/Dashboard"
+import NeighborhoodRouter from "../routers/NeighborhoodRouter"
 
 class Neighborhood extends Component {
   componentWillMount() {
@@ -42,7 +42,7 @@ class Neighborhood extends Component {
 
   render() {
     return (
-      <Dashboard
+      <NeighborhoodRouter
         {...this.props}
         onDrawerOpen={this.handleDrawerOpen.bind(this)}
         onDrawerClose={this.handleDrawerClose.bind(this)}
