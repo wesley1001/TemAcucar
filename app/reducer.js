@@ -7,7 +7,7 @@ import config from './reducers/config'
 import location from './reducers/location'
 import dashboard from './reducers/dashboard'
 import neighbors from './reducers/neighbors'
-import transactionDemands from './reducers/transactionDemands'
+import transactions from './reducers/transactions'
 
 const reducer = combineReducers({
   form: formReducer,
@@ -18,7 +18,7 @@ const reducer = combineReducers({
   location,
   dashboard,
   neighbors,
-  transactionDemands,
+  transactions,
 })
 
 export default reducer

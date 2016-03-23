@@ -12,7 +12,7 @@ import Tab from "../components/Tab"
 import NeighborsMap from "../components/NeighborsMap"
 import Demands from "../components/Demands"
 
-import TransactionDemandsContainer from "../containers/TransactionDemandsContainer"
+import TransactionsContainer from "../containers/TransactionsContainer"
 
 export default class Dashboard extends Component {
   componentWillMount() {
@@ -60,7 +60,7 @@ export default class Dashboard extends Component {
               renderTabBar={() => <TabBar />}
             >
               <Tab tabLabel="chat">
-                <TransactionDemandsContainer {...this.props} />
+                <TransactionsContainer {...this.props} />
               </Tab>
               <Tab tabLabel="home">
                 { latitude && longitude && <NeighborsMap {...this.props} /> }
