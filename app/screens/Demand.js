@@ -8,7 +8,7 @@ export default class Demand extends Component {
   componentWillReceiveProps(nextProps) {
     const { onDashboard, dashboard: { demands } } = nextProps
     const oldDemands = this.props.dashboard.demands
-    if (demands.length !== oldDemands.length) {
+    if (demands.length !== oldDemands.length && oldDemands.length > 0) {
       onDashboard()
     }
   }
