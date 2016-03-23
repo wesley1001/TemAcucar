@@ -10,9 +10,9 @@ export default TransactionDemandTimeAgo = ({ index, demand: { created_at }}) => 
     alignItems: (index % 2 == 0 ? 'flex-end' : 'flex-start'),
   }}>
     <Icon name="schedule" style={{ 
-      color: Colors.white,
+      color: (index % 2 == 0 ? Colors.lightPink : Colors.lightBlue),
       fontSize: 14,
     }} />
-    <TimeAgo time={created_at} style={{fontSize: 9, color: Colors.white}} />
+    <TimeAgo time={created_at} style={{color: (index % 2 == 0 ? Colors.lightPink : Colors.lightBlue)}} />
   </View>
 )

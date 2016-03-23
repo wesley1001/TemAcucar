@@ -5,7 +5,7 @@ import TransactionDemandTimeAgo from "./TransactionDemandTimeAgo"
 
 export default TransactionDemandHeader = (props) => (
   <View style={{
-    backgroundColor: (props.index % 2 == 0 ? Colors.blue : Colors.pink),
+    backgroundColor: (props.index % 2 == 0 ? Colors.pink : Colors.blue),
     padding: 10,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
