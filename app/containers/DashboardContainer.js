@@ -51,7 +51,12 @@ class DashboardContainer extends Component {
   }
 
   handleViewDemand(demand) {
-    Actions.demand({ demand })
+    Actions.viewDemand({ demand })
+  }
+
+  handleViewCreatedDemand() {
+    const { createdDemand } = this.props.dashboard
+    Actions.viewCreatedDemand({ demand: createdDemand })
   }
 
   handleCreateDemand(demand) {
@@ -73,6 +78,7 @@ class DashboardContainer extends Component {
         onLoadMoreDemands={this.handleListDemands.bind(this)}
         onNewDemand={this.handleNewDemand.bind(this)}
         onCreateDemand={this.handleCreateDemand.bind(this)}
+        onViewCreatedDemand={this.handleViewCreatedDemand.bind(this)}
       />
     )
   }

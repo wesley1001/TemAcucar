@@ -6,6 +6,7 @@ const initialState = {
   canLoadMoreDemands: false,
   creatingDemand: false,
   createDemandError: null,
+  createdDemand: null,
 }
 
 export default function dashboard(state = initialState, action) {
@@ -53,13 +54,13 @@ export default function dashboard(state = initialState, action) {
     case 'DASHBOARD_CREATE_DEMAND_REQUEST':
       return {
         ...state, 
+        createdDemand: null,
         creatingDemand: true,
       }
     case 'DASHBOARD_CREATE_DEMAND_SUCCESS':
       return {
         ...state, 
-        demands: [action.demand].concat(state.demands),
-        demandsOffset: state.demandsOffset + 1,
+        createdDemand: action.demand,
         creatingDemand: false,
       }
     case 'DASHBOARD_CREATE_DEMAND_FAILURE':
@@ -67,6 +68,11 @@ export default function dashboard(state = initialState, action) {
         ...state, 
         creatingDemand: false,
         createDemandError: action.error,
+      }
+    case 'AFTER_ROUTER_ROUTE':
+      return {
+        ...state, 
+        createdDemand: null,
       }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState

@@ -18,11 +18,11 @@ const validators = {
 
 class NewDemand extends Component {
   componentWillReceiveProps(nextProps) {
-    const { onDashboard, dashboard } = nextProps
+    const { onViewCreatedDemand, dashboard } = nextProps
     const { creatingDemand, createDemandError } = dashboard
     const oldCreatingDemand = this.props.dashboard.creatingDemand
     if (oldCreatingDemand && !creatingDemand && !createDemandError) {
-      onDashboard()
+      onViewCreatedDemand()
     }
   }
 
