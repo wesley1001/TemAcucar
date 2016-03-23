@@ -1,36 +1,14 @@
-import React, { View, Text, Image } from 'react-native'
-import moment from 'moment'
+import React, { View, Text } from 'react-native'
 import Colors from "../Colors"
-
-moment.locale('pt-br', {
-  relativeTime : {
-    future: "Em %s",
-    past:   "Há %s",
-    s:  "segundos",
-    m:  "um minuto",
-    mm: "%d minutos",
-    h:  "an hora",
-    hh: "%d horas",
-    d:  "um dia",
-    dd: "%d dias",
-    M:  "um mês",
-    MM: "%d meses",
-    y:  "um ano",
-    yy: "%d anos",
-  }
-})
+import UserImage from "./UserImage"
+import TimeAgo from "./TimeAgo"
 
 export default DemandHeader = ({ demand: { user, name, distance, created_at }}) => (
   <View style={{
     alignItems: 'center',
     justifyContent: 'center',
   }}>
-    <Image source={{uri: user.image_url}} style={{
-      width: 36,
-      height: 36,
-      borderRadius: 18,
-      marginBottom: 6,
-    }} />
+    <UserImage source={{uri: user.image_url}} style={{marginBottom: 6}} />
     <Text style={{
       textAlign: 'center',
       color: Colors.brown,
@@ -59,13 +37,7 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
         marginTop: 2,
         fontSize: 14,
       }} />
-      <Text style={{
-        color: Colors.brown,
-        fontSize: 10,
-        fontFamily: 'OpenSans',
-      }}>
-        { moment(created_at).fromNow() }
-      </Text>
+      <TimeAgo time={created_at} />
       <Icon name="place" style={{ 
         color: Colors.ice,
         marginLeft: 10,
