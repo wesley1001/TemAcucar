@@ -18,16 +18,16 @@ const validators = {
 
 class NewDemand extends Component {
   componentWillReceiveProps(nextProps) {
-    const { onDashboard, neighborhood } = nextProps
-    const { creatingDemand, createDemandError } = neighborhood
-    const oldCreatingDemand = this.props.neighborhood.creatingDemand
+    const { onDashboard, dashboard } = nextProps
+    const { creatingDemand, createDemandError } = dashboard
+    const oldCreatingDemand = this.props.dashboard.creatingDemand
     if (oldCreatingDemand && !creatingDemand && !createDemandError) {
       onDashboard()
     }
   }
 
   render() {
-    const { onCreateDemand, fields: { name, description }, neighborhood: { createDemandError, creatingDemand } } = this.props
+    const { onCreateDemand, fields: { name, description }, dashboard: { createDemandError, creatingDemand } } = this.props
     const length = (description && description.value ? description.value.length : 0)
     const proportion = Math.round((length / 80) * 100)
     const progress = (proportion > 92 ? 100 : (proportion > 0 ? proportion + 8 : proportion))

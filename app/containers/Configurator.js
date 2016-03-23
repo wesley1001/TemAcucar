@@ -10,7 +10,7 @@ import Loading from "../screens/Loading"
 import RejectedTerms from "../screens/RejectedTerms"
 import Terms from "../screens/Terms"
 import ReviewEmailRouter from "../routers/ReviewEmailRouter"
-import Neighborhood from "./Neighborhood"
+import DashboardContainer from "./DashboardContainer"
 
 class Configurator extends Component {
   handleAcceptTerms() {
@@ -70,7 +70,7 @@ class Configurator extends Component {
       return (<ReviewEmailRouter {...this.props} onConfirm={this.handleConfirmEmail.bind(this)} onUpdateEmail={this.handleUpdateEmail.bind(this)} />)
     if (!currentUser.latitude || !currentUser.longitude || !currentUser.reviewed_location)
       return (<LocationSetter {...this.props} />)
-    return (<Neighborhood {...this.props} />)
+    return (<DashboardContainer {...this.props} />)
   }
 }
 

@@ -9,13 +9,16 @@ import TopBar from "../components/TopBar"
 import UserMenu from "../components/UserMenu"
 import TabBar from "../components/TabBar"
 import Tab from "../components/Tab"
+import NeighborsMap from "../components/NeighborsMap"
 import Demands from "../components/Demands"
+
+import TransactionDemandsContainer from "../containers/TransactionDemandsContainer"
 
 export default class Dashboard extends Component {
   componentWillMount() {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponderCapture: () => {
-        return this.props.neighborhood.drawerOpen
+        return this.props.dashboard.drawerOpen
       },
       onPanResponderRelease: () => {
         this.drawer.closeDrawer()
@@ -33,7 +36,8 @@ export default class Dashboard extends Component {
 
   render() {
     const { onDrawerOpen, onDrawerClose, onNewDemand } = this.props
-    const { drawerOpen } = this.props.neighborhood
+    const { drawerOpen } = this.props.dashboard
+    const { latitude, longitude } = this.props.auth.currentUser
     const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
     return (
       <DrawerLayout
@@ -56,10 +60,11 @@ export default class Dashboard extends Component {
               renderTabBar={() => <TabBar />}
             >
               <Tab tabLabel="home">
+                { latitude && longitude && <NeighborsMap {...this.props} /> }
                 <Demands {...this.props} />
               </Tab>
               <Tab tabLabel="chat">
-                <Text>Transações</Text>
+                <TransactionDemandsContainer {...this.props} />
               </Tab>
               <Tab tabLabel="notifications">
                 <Text>Notificações</Text>

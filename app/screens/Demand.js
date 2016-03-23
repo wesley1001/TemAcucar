@@ -6,8 +6,8 @@ import DemandButtons from "../components/DemandButtons"
 
 export default class Demand extends Component {
   componentWillReceiveProps(nextProps) {
-    const { onDashboard, neighborhood: { demands } } = nextProps
-    const oldDemands = this.props.neighborhood.demands
+    const { onDashboard, dashboard: { demands } } = nextProps
+    const oldDemands = this.props.dashboard.demands
     if (demands.length !== oldDemands.length) {
       onDashboard()
     }

@@ -11,7 +11,7 @@ import Loading from "../screens/Loading"
 import NetworkError from "../screens/NetworkError"
 import ExpiredVersion from "../screens/ExpiredVersion"
 import UpdateVersion from "../screens/UpdateVersion"
-import Authorizer from './Authorizer'
+import Authenticator from './Authenticator'
 
 class VersionChecker extends Component {
   daysRemaining(version) {
@@ -75,7 +75,7 @@ class VersionChecker extends Component {
       return (<ExpiredVersion onUpdate={this.handleUpdate.bind(this)} />)
     if (!this.isCurrent() && !ignoreUpdate)
       return (<UpdateVersion version={version} onIgnore={this.handleIgnore.bind(this)} onUpdate={this.handleUpdate.bind(this)} daysRemaining={this.daysRemaining(version)} />)
-    return (<Authorizer />)
+    return (<Authenticator />)
   }
 }
 

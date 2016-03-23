@@ -1,21 +1,9 @@
 import { apiAction } from './BasicActions'
 
-export function listUsers(credentials, currentUser) {
-  return apiAction({
-    prefix: 'NEIGHBORHOOD_LIST_USERS',
-    path: '/users',
-    credentials,
-    currentUser: () => currentUser,
-    processResponse: (response) => {
-      return { users: JSON.parse(response._bodyText) }
-    },
-  })
-}
-
 export function listDemands(credentials, currentUser, offset = 0) {
   return apiAction({
-    prefix: 'NEIGHBORHOOD_LIST_DEMANDS',
-    path: '/demands?offset=' + offset,
+    prefix: 'DASHBOARD_LIST_DEMANDS',
+    path: '/demands?filter=neighborhood&offset=' + offset,
     credentials,
     currentUser: () => currentUser,
     processResponse: (response) => {
@@ -26,7 +14,7 @@ export function listDemands(credentials, currentUser, offset = 0) {
 
 export function refuseDemand(credentials, currentUser, demand) {
   return apiAction({
-    prefix: 'NEIGHBORHOOD_REFUSE_DEMAND',
+    prefix: 'DASHBOARD_REFUSE_DEMAND',
     path: '/refusals',
     method: 'post',
     params: {
@@ -40,7 +28,7 @@ export function refuseDemand(credentials, currentUser, demand) {
 
 export function flagDemand(credentials, currentUser, demand) {
   return apiAction({
-    prefix: 'NEIGHBORHOOD_FLAG_DEMAND',
+    prefix: 'DASHBOARD_FLAG_DEMAND',
     path: '/flags',
     method: 'post',
     params: {
@@ -54,7 +42,7 @@ export function flagDemand(credentials, currentUser, demand) {
 
 export function createDemand(credentials, currentUser, demand) {
   return apiAction({
-    prefix: 'NEIGHBORHOOD_CREATE_DEMAND',
+    prefix: 'DASHBOARD_CREATE_DEMAND',
     path: '/demands',
     method: 'post',
     params: {
@@ -72,12 +60,12 @@ export function createDemand(credentials, currentUser, demand) {
 
 export function openDrawer() {
   return dispatch => {
-    dispatch({ type: 'NEIGHBORHOOD_OPEN_DRAWER' })
+    dispatch({ type: 'DASHBOARD_OPEN_DRAWER' })
   }
 }
 
 export function closeDrawer() {
   return dispatch => {
-    dispatch({ type: 'NEIGHBORHOOD_CLOSE_DRAWER' })
+    dispatch({ type: 'DASHBOARD_CLOSE_DRAWER' })
   }
 }

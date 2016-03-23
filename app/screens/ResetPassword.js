@@ -25,6 +25,8 @@ class ResetPassword extends Component {
           title='Código'
           placeholder='Digite o código recebido'
           icon='keyboard'
+          autoCorrect={false}
+          autoCapitalize='none'
           {...reset_password_token}
         />
         <PasswordInput

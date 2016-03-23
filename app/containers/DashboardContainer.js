@@ -1,44 +1,45 @@
 import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
-import * as NeighborhoodActions from '../actions/NeighborhoodActions'
+import * as DashboardActions from '../actions/DashboardActions'
+import * as NeighborsActions from '../actions/NeighborsActions'
 import { Actions } from 'react-native-router-flux'
 
-import NeighborhoodRouter from "../routers/NeighborhoodRouter"
+import DashboardRouter from "../routers/DashboardRouter"
 
-class Neighborhood extends Component {
+class DashboardContainer extends Component {
   componentWillMount() {
     const { dispatch, auth: { credentials, currentUser } } = this.props
-    dispatch(NeighborhoodActions.listUsers(credentials, currentUser))
+    dispatch(NeighborsActions.list(credentials, currentUser))
     this.handleListDemands()
   }
 
   handleDrawerOpen() {
     const { dispatch } = this.props
-    dispatch(NeighborhoodActions.openDrawer())
+    dispatch(DashboardActions.openDrawer())
   }
 
   handleDrawerClose() {
     const { dispatch } = this.props
-    dispatch(NeighborhoodActions.closeDrawer())
+    dispatch(DashboardActions.closeDrawer())
   }
 
   handleListDemands() {
-    const { dispatch, auth, neighborhood } = this.props
+    const { dispatch, auth, dashboard } = this.props
     const { credentials, currentUser } = auth
-    const { demandsOffset } = neighborhood
-    dispatch(NeighborhoodActions.listDemands(credentials, currentUser, demandsOffset))
+    const { demandsOffset } = dashboard
+    dispatch(DashboardActions.listDemands(credentials, currentUser, demandsOffset))
   }
 
   handleRefuseDemand(demand) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
-    dispatch(NeighborhoodActions.refuseDemand(credentials, currentUser, demand))
+    dispatch(DashboardActions.refuseDemand(credentials, currentUser, demand))
   }
 
   handleFlagDemand(demand) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
-    dispatch(NeighborhoodActions.flagDemand(credentials, currentUser, demand))
+    dispatch(DashboardActions.flagDemand(credentials, currentUser, demand))
   }
 
   handleNewDemand() {
@@ -56,12 +57,12 @@ class Neighborhood extends Component {
   handleCreateDemand(demand) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
-    dispatch(NeighborhoodActions.createDemand(credentials, currentUser, demand))
+    dispatch(DashboardActions.createDemand(credentials, currentUser, demand))
   }
 
   render() {
     return (
-      <NeighborhoodRouter
+      <DashboardRouter
         {...this.props}
         onDashboard={this.handleDashboard.bind(this)}
         onDrawerOpen={this.handleDrawerOpen.bind(this)}
@@ -78,5 +79,6 @@ class Neighborhood extends Component {
 }
 
 export default connect(state => ({
-  neighborhood: state.neighborhood,
-}))(Neighborhood)
+  dashboard: state.dashboard,
+  neighbors: state.neighbors,
+}))(DashboardContainer)

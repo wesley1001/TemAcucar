@@ -5,7 +5,9 @@ import auth from './reducers/auth'
 import terms from './reducers/terms'
 import config from './reducers/config'
 import location from './reducers/location'
-import neighborhood from './reducers/neighborhood'
+import dashboard from './reducers/dashboard'
+import neighbors from './reducers/neighbors'
+import transactionDemands from './reducers/transactionDemands'
 
 const reducer = combineReducers({
   form: formReducer,
@@ -14,7 +16,9 @@ const reducer = combineReducers({
   terms,
   config,
   location,
-  neighborhood,
+  dashboard,
+  neighbors,
+  transactionDemands,
 })
 
 export default reducer

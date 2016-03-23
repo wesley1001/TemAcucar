@@ -7,7 +7,7 @@ import Loading from "../screens/Loading"
 import AuthRouter from "../routers/AuthRouter"
 import Configurator from "./Configurator"
 
-class Authorizer extends Component {
+class Authenticator extends Component {
   componentDidMount() {
     const { dispatch, auth: { currentUser } } = this.props
     dispatch(StoredAuthActions.get(currentUser))
@@ -116,4 +116,4 @@ class Authorizer extends Component {
 
 export default connect(state => ({
   auth: state.auth,
-}))(Authorizer)
+}))(Authenticator)

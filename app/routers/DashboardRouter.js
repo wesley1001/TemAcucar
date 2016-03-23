@@ -6,7 +6,7 @@ import Dashboard from "../screens/Dashboard"
 import NewDemand from "../screens/NewDemand"
 import Demand from "../screens/Demand"
 
-export default NeighborhoodRouter = (props) => (
+export default DashboardRouter = (props) => (
   <StyledRouter {...props}>
     <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
     <Route name="dashboard" component={Dashboard} initial={true} hideNavBar={true} type="reset" />
