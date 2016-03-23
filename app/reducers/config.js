@@ -47,6 +47,8 @@ export default function config(state = initialState, action) {
         updatingEmail: false,
         updateEmailError: action.error,
       }
+    case 'STORED_AUTH_RESET_SUCCESS':
+      return initialState
     default:
       return state
   }

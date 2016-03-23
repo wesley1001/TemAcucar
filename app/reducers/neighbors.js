@@ -21,6 +21,8 @@ export default function neighbors(state = initialState, action) {
         ...state, 
         loading: false,
       }
+    case 'STORED_AUTH_RESET_SUCCESS':
+      return initialState
     default:
       return state
   }

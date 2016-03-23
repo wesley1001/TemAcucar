@@ -50,6 +50,8 @@ export default function transactions(state = initialState, action) {
           }
         }),
       }
+    case 'STORED_AUTH_RESET_SUCCESS':
+      return initialState
     default:
       return state
   }

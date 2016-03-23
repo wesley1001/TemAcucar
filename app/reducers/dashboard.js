@@ -68,6 +68,8 @@ export default function dashboard(state = initialState, action) {
         creatingDemand: false,
         createDemandError: action.error,
       }
+    case 'STORED_AUTH_RESET_SUCCESS':
+      return initialState
     default:
       return state
   }
