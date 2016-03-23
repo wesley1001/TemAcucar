@@ -12,7 +12,6 @@ export default TransactionDemandTimeAgo = ({ index, demand: { created_at }}) => 
     <Icon name="schedule" style={{ 
       color: Colors.white,
       fontSize: 14,
-      marginBottom: 4,
     }} />
     <TimeAgo time={created_at} style={{fontSize: 9, color: Colors.white}} />
   </View>
