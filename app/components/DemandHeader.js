@@ -31,7 +31,7 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
       justifyContent: 'center',
       marginTop: 5,
     }}>
-      <Icon name="access-time" style={{ 
+      <Icon name="schedule" style={{ 
         color: Colors.ice,
         marginRight: 4,
         marginTop: 2,

@@ -10,8 +10,8 @@ export default class TransactionDemands extends Component {
     const { demands, loading, canLoadMore } = transactionDemands
     return (
       <View >
-        { demands.map(demand => (
-          <TransactionDemand {...this.props} key={demand.id} demand={demand} />
+        { demands.map((demand, index) => (
+          <TransactionDemand {...this.props} key={demand.id} demand={demand} index={index} />
         )) }
         { loading && <GiftedSpinner style={{ marginTop: 20 }} /> }
         { demands.length === 0 && !loading && <NoTransactionDemands /> }

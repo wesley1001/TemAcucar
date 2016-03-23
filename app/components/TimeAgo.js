@@ -10,7 +10,7 @@ moment.locale('pt-br', {
     s:  "segundos",
     m:  "um minuto",
     mm: "%d minutos",
-    h:  "an hora",
+    h:  "uma hora",
     hh: "%d horas",
     d:  "um dia",
     dd: "%d dias",
