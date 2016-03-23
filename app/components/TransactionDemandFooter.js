@@ -25,7 +25,7 @@ export default TransactionDemandFooter = ({ demand: { state }}) => (
       }} />
       <Sentence style={{
         fontFamily: 'Montserrat-Bold',
-        fontSize: 10,
+        fontSize: 8,
         lineHeight: 10,
         color: Colors.white,
       }}>
