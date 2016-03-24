@@ -54,6 +54,14 @@ class DashboardContainer extends Component {
     Actions.viewDemand({ demand })
   }
 
+  handleChat(transaction) {
+    Actions.chat({ transaction })
+  }
+
+  handleBack() {
+    Actions.pop()
+  }
+
   handleViewCreatedDemand() {
     const { createdDemand } = this.props.dashboard
     Actions.viewCreatedDemand({ demand: createdDemand })
@@ -69,6 +77,7 @@ class DashboardContainer extends Component {
     return (
       <DashboardRouter
         {...this.props}
+        onBack={this.handleBack.bind(this)}
         onDashboard={this.handleDashboard.bind(this)}
         onDrawerOpen={this.handleDrawerOpen.bind(this)}
         onDrawerClose={this.handleDrawerClose.bind(this)}
@@ -79,6 +88,7 @@ class DashboardContainer extends Component {
         onNewDemand={this.handleNewDemand.bind(this)}
         onCreateDemand={this.handleCreateDemand.bind(this)}
         onViewCreatedDemand={this.handleViewCreatedDemand.bind(this)}
+        onChat={this.handleChat.bind(this)}
       />
     )
   }

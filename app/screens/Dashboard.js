@@ -59,12 +59,12 @@ export default class Dashboard extends Component {
               locked={true}
               renderTabBar={() => <TabBar />}
             >
+              <Tab tabLabel="chat">
+                <TransactionsContainer {...this.props} />
+              </Tab>
               <Tab tabLabel="home">
                 { latitude && longitude && <NeighborsMap {...this.props} /> }
                 <Demands {...this.props} />
-              </Tab>
-              <Tab tabLabel="chat">
-                <TransactionsContainer {...this.props} />
               </Tab>
               <Tab tabLabel="notifications">
                 <Text>Notificações</Text>

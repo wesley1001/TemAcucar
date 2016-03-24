@@ -4,7 +4,7 @@ import Sentence from "../components/Sentence"
 import DemandHeader from "../components/DemandHeader"
 import DemandButtons from "../components/DemandButtons"
 
-export default class Demand extends Component {
+export default class ViewDemand extends Component {
   componentWillReceiveProps(nextProps) {
     const { onDashboard, dashboard: { demands } } = nextProps
     const oldDemands = this.props.dashboard.demands

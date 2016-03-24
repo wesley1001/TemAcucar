@@ -1,7 +1,6 @@
 import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import * as TransactionsActions from '../actions/TransactionsActions'
-import { Actions } from 'react-native-router-flux'
 
 import TransactionDemands from "../components/TransactionDemands"
 

@@ -8,6 +8,7 @@ import location from './reducers/location'
 import dashboard from './reducers/dashboard'
 import neighbors from './reducers/neighbors'
 import transactions from './reducers/transactions'
+import messages from './reducers/messages'
 
 const reducer = combineReducers({
   form: formReducer,
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   dashboard,
   neighbors,
   transactions,
+  messages,
 })
 
 export default reducer

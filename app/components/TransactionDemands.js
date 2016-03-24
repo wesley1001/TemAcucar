@@ -6,7 +6,7 @@ import NoTransactionDemands from "../components/NoTransactionDemands"
 
 export default class TransactionDemands extends Component {
   render() {
-    const { onLoadMore, demand, transactions } = this.props
+    const { onLoadMore, transactions } = this.props
     const { demands, loading, canLoadMore } = transactions
     return (
       <View >
