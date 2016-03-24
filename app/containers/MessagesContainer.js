@@ -6,7 +6,9 @@ import Messages from "../components/Messages"
 
 class MessagesContainer extends Component {
   componentWillMount() {
-    this.handleList()
+    const { dispatch, auth, transaction } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(MessagesActions.list(credentials, currentUser, transaction))
   }
 
   handleList() {

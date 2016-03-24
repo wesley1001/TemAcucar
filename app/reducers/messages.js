@@ -10,6 +10,7 @@ export default function messages(state = initialState, action) {
     case 'MESSAGES_LIST_REQUEST':
       return {
         ...state, 
+        messages: (action.offset === 0 ? [] : state.messages),
         loading: true,
       }
     case 'MESSAGES_LIST_SUCCESS':
