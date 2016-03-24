@@ -5,6 +5,7 @@ const RCTUIManager = NativeModules.UIManager
 import Colors from "../Colors"
 import Icon from "../components/Icon"
 import Sentence from "../components/Sentence"
+import UserImage from "../components/UserImage"
 import MessagesContainer from "../containers/MessagesContainer"
 
 export default class Chat extends Component {
@@ -61,6 +62,12 @@ export default class Chat extends Component {
                 {truncate(demand.name, 40)}
               </Sentence>
             </View>
+            <UserImage size={24} source={{uri: user.image_url}} style={{
+              position: 'absolute',
+              top: 2,
+              right: 12,
+              justifyContent: 'center',
+            }} />
             <TouchableOpacity onPress={onBack} style={{
               position: 'absolute',
               top: 0,
