@@ -23,7 +23,7 @@ export default TransactionDemandDescription = ({ index, demand: { user, name }, 
       </Sentence>
       <Sentence style={{
         fontFamily: 'BoosterNextFY-Black',
-        fontSize: 10,
+        fontSize: 12,
         color: Colors.white,
       }}>
         {truncate(name, 30)}
