@@ -11,7 +11,7 @@ export default Button = (props) => (
       color: Colors.white,
       fontSize: 14,
       fontFamily: 'BoosterNextFY-Black',
-      lineHeight: 18,
+      lineHeight: 20,
     }, props.textStyle]}
     disabledStyle={[{
       backgroundColor: Colors.gray,

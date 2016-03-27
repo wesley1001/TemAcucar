@@ -33,7 +33,7 @@ export default class Messages extends Component {
           }
           return (<Message {...this.props} key={message.id} message={message} fromCurrentUser={currentUser.id === message.user.id} date={date} />)
         }) }
-        { creating && <GiftedSpinner style={{ marginBottom: 10 }} /> }
+        { creating && <GiftedSpinner style={{ marginTop: 0, marginBottom: 10 }} /> }
       </View>
     )
   }
