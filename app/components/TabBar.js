@@ -41,9 +41,10 @@ export default class TabBar extends Component {
             <Text style={{
               backgroundColor: 'transparent',
               color: Colors.white,
-              fontFamily: 'Montserrat-Bold',
+              fontFamily: 'BoosterNextFY-Black',
               textAlign: 'center',
-              fontSize: 12,
+              fontSize: 11,
+              lineHeight: 14,
             }}>
               3
             </Text>

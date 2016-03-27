@@ -33,17 +33,27 @@ export default NeighborsMap = ({ neighbors: { loading, users }, auth: { currentU
       </MapView>
     </View>
     <View style={{
-      backgroundColor: Colors.lightPink,
-      paddingVertical: 8,
+      position: 'absolute',
+      bottom: 10,
+      left: 0,
+      right: 0,
+      alignItems: 'center',
     }}>
-      <Sentence style={{
-        color: Colors.white, 
-        fontFamily: 'OpenSans-Bold', 
-        textAlign: 'center',
-        fontSize: 12,
+      <View style={{
+        backgroundColor: Colors.lightPink,
+        paddingVertical: 4,
+        paddingHorizontal: 30,
+        borderRadius: 12,
       }}>
-        { loading ? "Carregando vizinhança..." : `${users.length} pessoas em sua vizinhança` }
-      </Sentence>
+        <Sentence style={{
+          color: Colors.white, 
+          fontFamily: 'OpenSans-Bold', 
+          textAlign: 'center',
+          fontSize: 12,
+        }}>
+          { loading ? "Carregando..." : `${users.length} vizinhos` }
+        </Sentence>
+      </View>
     </View>
   </View>
 )

@@ -59,12 +59,12 @@ export default class Dashboard extends Component {
               locked={true}
               renderTabBar={() => <TabBar />}
             >
-              <Tab tabLabel="chat">
-                <TransactionsContainer {...this.props} />
-              </Tab>
               <Tab tabLabel="home">
                 { latitude && longitude && <NeighborsMap {...this.props} /> }
                 <Demands {...this.props} />
+              </Tab>
+              <Tab tabLabel="chat">
+                <TransactionsContainer {...this.props} />
               </Tab>
               <Tab tabLabel="notifications">
                 <Text>Notificações</Text>
@@ -85,7 +85,16 @@ export default class Dashboard extends Component {
                 padding: 10,
                 paddingTop: 50,
               }}>
-              <Button onPress={onNewDemand} style={{alignSelf: 'stretch'}}>
+              <Button
+                onPress={onNewDemand}
+                style={{
+                  alignSelf: 'stretch',
+                }}
+                textStyle={{
+                  fontSize: 16,
+                  lineHeight: 20,
+                }}
+              >
                 Pedir
               </Button>
             </LinearGradient>

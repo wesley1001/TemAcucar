@@ -22,7 +22,7 @@ export default TransactionDemandDescription = ({ index, demand: { user, name }, 
         {currentUser.id === user.id ? 'Você' : user.first_name} pediu um(a)
       </Sentence>
       <Sentence style={{
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'BoosterNextFY-Black',
         fontSize: 10,
         color: Colors.white,
       }}>

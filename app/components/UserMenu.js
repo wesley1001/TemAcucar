@@ -9,34 +9,49 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import Colors from "../Colors"
 import Sentence from "./Sentence"
 
-export default UserMenu = ({ auth, onSignOut }) => (
+export default UserMenu = ({ auth: { currentUser }, onSignOut }) => (
   <View style={{
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
-    backgroundColor: Colors.lightPink,
+    backgroundColor: Colors.darkPink,
   }}>
     <View style={{
       backgroundColor: Colors.pink,
       alignSelf: 'stretch',
-      padding: 20,
-      paddingTop: (Platform.OS == 'ios' ? 40 : 20),
+      padding: 10,
+      paddingTop: (Platform.OS == 'ios' ? 30 : 10),
+      flexDirection: 'row',
+      alignItems: 'center',
     }}>
-      <Sentence style={{ 
-        fontFamily: 'Montserrat-Bold', 
-        color: Colors.white
+      <UserImage source={{uri: currentUser.image_url}} style={{marginRight: 10}} />
+      <View style={{
+        flexDirection: 'column',
+        flex: 1,
       }}>
-        { auth.currentUser.first_name } { auth.currentUser.last_name }
-      </Sentence>
+        <Sentence style={{ 
+          fontFamily: 'BoosterNextFY-Black', 
+          color: Colors.yellow,
+          fontSize: 20,
+          lineHeight: 28,
+        }}>
+          { currentUser.first_name } { currentUser.last_name }
+        </Sentence>
+      </View>
     </View>
-    <TouchableOpacity style={{ alignSelf: 'stretch', padding: 20, flexDirection: 'row', alignItems: 'center' }} onPress={onSignOut}>
+    <TouchableOpacity onPress={onSignOut} style={{
+      alignSelf: 'stretch',
+      padding: 10,
+      flexDirection: 'row',
+      alignItems: 'center'
+    }}>
       <Icon name="power-settings-new" style={{ 
-        fontSize: 32,
+        fontSize: 24,
         color: Colors.white,
         marginRight: 10,
       }} />
       <Sentence style={{
-        fontSize: 24,
+        fontSize: 16,
         color: Colors.white,
       }}>
         Sair

@@ -13,15 +13,17 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
       textAlign: 'center',
       color: Colors.brown,
       fontSize: 10,
-      fontFamily: 'OpenSans-Bold',
+      fontFamily: 'BoosterNextFY-Regular',
     }}>
       {user.first_name} precisa de um(a)
     </Text>
     <Text style={{
+      marginTop: 4,
       textAlign: 'center',
       color: Colors.pink,
       fontSize: 12,
-      fontFamily: 'OpenSans-Bold',
+      lineHeight: 12,
+      fontFamily: 'BoosterNextFY-Black',
     }}>
       { name.toUpperCase() }
     </Text>
@@ -29,7 +31,6 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: 5,
     }}>
       <Icon name="schedule" style={{ 
         color: Colors.ice,

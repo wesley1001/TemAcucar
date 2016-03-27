@@ -24,17 +24,21 @@ export default class DemandButtons extends Component {
       <View style={{
         alignSelf: 'stretch',
         flexDirection: 'row',
+        padding: 10,
+        paddingTop: 0,
       }}>
         <Button
           style={{
             flex: 1,
-            paddingVertical: 18,
+            paddingVertical: 0,
+            height: 30,
           }}
           textStyle={{
             fontSize: 12,
+            lineHeight: 16,
           }}
         >
-          Emprestar
+          Ajudar
         </Button>
         <Button
           onPress={this.handleRefuse.bind(this)}
@@ -42,24 +46,29 @@ export default class DemandButtons extends Component {
             flex: 1,
             backgroundColor: Colors.blue,
             borderColor: Colors.darkBlue,
-            paddingVertical: 18,
+            paddingVertical: 0,
+            height: 30,
+            marginHorizontal: 4,
           }}
           textStyle={{
             fontSize: 12,
+            lineHeight: 16,
           }}
         >
-          Não tenho
+          Não posso
         </Button>
         <Button
           onPress={this.handleFlag.bind(this)}
           style={{
-            flex: 1.01,
+            flex: 1,
             backgroundColor: Colors.ice,
             borderColor: Colors.darkIce,
-            paddingVertical: 18,
+            paddingVertical: 0,
+            height: 30,
           }}
           textStyle={{
             fontSize: 12,
+            lineHeight: 16,
           }}
         >
           Denunciar

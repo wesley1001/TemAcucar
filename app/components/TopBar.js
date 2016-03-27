@@ -17,27 +17,30 @@ export default TopBar = ({ onMenuOpen }) => (
     justifyContent: 'center',
     flexDirection: 'row',
   }}>
-    <TouchableOpacity onPress={onMenuOpen} style={{
-      flex: 0.10,
-      padding: 10,
-    }}>
-      <Icon name="menu" style={{
-        color: Colors.pink,
-        fontSize: 28,
-      }} />
-    </TouchableOpacity>
     <View style={{
-      flex: 0.90, 
+      flex: 1, 
       flexDirection: 'row', 
       alignItems: 'center',
       justifyContent: 'center',
     }}>
       {true == true && <Image source={require('../img/icon.png')} style={{
         marginTop: -2,
-        marginRight: 52,
         width: 25,
         height: 25,
       }} />}
     </View>
+    <TouchableOpacity onPress={onMenuOpen} style={{
+      paddingHorizontal: 10,
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      justifyContent: 'center',
+    }}>
+      <Icon name="menu" style={{
+        color: Colors.pink,
+        fontSize: 28,
+      }} />
+    </TouchableOpacity>
   </View>
 )

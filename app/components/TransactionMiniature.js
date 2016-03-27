@@ -29,7 +29,7 @@ export default class TransacionMiniature extends Component {
           flex: 1,
         }}>
           <Sentence style={{
-            fontFamily: 'Montserrat-Bold',
+            fontFamily: 'BoosterNextFY-Black',
             fontSize: 10,
             color: Colors.pink,
           }}>

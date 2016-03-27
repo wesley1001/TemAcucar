@@ -94,14 +94,16 @@ class ViewTransaction extends Component {
               justifyContent: 'center',
             }}>
               <Sentence style={{
-                fontFamily: 'Montserrat-Bold',
-                fontSize: 10,
+                fontFamily: 'BoosterNextFY-Black',
+                fontSize: 12,
+                lineHeight: 12,
                 color: Colors.white,
               }}>
                 {user.first_name} {user.last_name}
               </Sentence>
               <Sentence style={{
                 fontSize: 10,
+                lineHeight: 10,
                 color: Colors.white,
               }}>
                 {truncate(demand.name, 40)}
