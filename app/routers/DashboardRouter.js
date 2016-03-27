@@ -6,7 +6,7 @@ import Dashboard from "../screens/Dashboard"
 import NewDemand from "../screens/NewDemand"
 import ViewDemand from "../screens/ViewDemand"
 import ViewCreatedDemand from "../screens/ViewCreatedDemand"
-import Chat from "../screens/Chat"
+import ViewTransaction from "../screens/ViewTransaction"
 
 export default DashboardRouter = (props) => (
   <StyledRouter {...props}>
@@ -15,6 +15,6 @@ export default DashboardRouter = (props) => (
     <Route name="newDemand" component={NewDemand} schema="default" />
     <Route name="viewDemand" component={ViewDemand} schema="default" />
     <Route name="viewCreatedDemand" component={ViewCreatedDemand} schema="default" type="replace" />
-    <Route name="chat" component={Chat} schema="default" hideNavBar={true} />
+    <Route name="viewTransaction" component={ViewTransaction} schema="default" hideNavBar={true} />
   </StyledRouter>
 )

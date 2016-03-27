@@ -3,6 +3,7 @@ const initialState = {
   loading: true,
   offset: 0,
   canLoadMore: false,
+  creating: false,
 }
 
 export default function messages(state = initialState, action) {
@@ -20,6 +21,23 @@ export default function messages(state = initialState, action) {
         loading: false,
         offset: state.offset + action.messages.length,
         canLoadMore: (action.messages.length >= 10 ? true : false),
+      }
+    case 'MESSAGES_CREATE_REQUEST':
+      return {
+        ...state,
+        creating: true,
+      }
+    case 'MESSAGES_CREATE_SUCCESS':
+      return {
+        ...state, 
+        messages: state.messages.concat(action.message),
+        offset: state.offset + 1,
+        creating: false,
+      }
+    case 'MESSAGES_CREATE_FAILURE':
+      return {
+        ...state,
+        creating: false,
       }
     case 'MESSAGES_LIST_FAILURE':
       return {

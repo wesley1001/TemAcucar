@@ -6,7 +6,7 @@ import Message from "../components/Message"
 
 export default class Messages extends Component {
   render() {
-    const { onLoadMore, auth, messages: { messages, loading, canLoadMore } } = this.props
+    const { onLoadMore, auth, messages: { messages, loading, creating, canLoadMore } } = this.props
     const { currentUser } = auth
     let lastDate = null
     let date = null
@@ -33,6 +33,7 @@ export default class Messages extends Component {
           }
           return (<Message {...this.props} key={message.id} message={message} fromCurrentUser={currentUser.id === message.user.id} date={date} />)
         }) }
+        { creating && <GiftedSpinner style={{ marginBottom: 10 }} /> }
       </View>
     )
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import * as DashboardActions from '../actions/DashboardActions'
 import * as NeighborsActions from '../actions/NeighborsActions'
+import * as MessagesActions from '../actions/MessagesActions'
 import { Actions } from 'react-native-router-flux'
 
 import DashboardRouter from "../routers/DashboardRouter"
@@ -54,8 +55,8 @@ class DashboardContainer extends Component {
     Actions.viewDemand({ demand })
   }
 
-  handleChat(transaction) {
-    Actions.chat({ transaction })
+  handleViewTransaction(transaction) {
+    Actions.viewTransaction({ transaction })
   }
 
   handleBack() {
@@ -73,6 +74,12 @@ class DashboardContainer extends Component {
     dispatch(DashboardActions.createDemand(credentials, currentUser, demand))
   }
 
+  handleCreateMessage(message) {
+    const { dispatch, auth, transaction } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(MessagesActions.create(credentials, currentUser, message))
+  }
+
   render() {
     return (
       <DashboardRouter
@@ -88,7 +95,8 @@ class DashboardContainer extends Component {
         onNewDemand={this.handleNewDemand.bind(this)}
         onCreateDemand={this.handleCreateDemand.bind(this)}
         onViewCreatedDemand={this.handleViewCreatedDemand.bind(this)}
-        onChat={this.handleChat.bind(this)}
+        onViewTransaction={this.handleViewTransaction.bind(this)}
+        onCreateMessage={this.handleCreateMessage.bind(this)}
       />
     )
   }

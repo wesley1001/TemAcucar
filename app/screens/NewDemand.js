@@ -1,7 +1,6 @@
 import React, { Component, View, Platform } from 'react-native'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
-import { Actions } from 'react-native-router-flux'
 
 import Colors from "../Colors"
 import DemandValidators from '../validators/DemandValidators'

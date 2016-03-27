@@ -6,9 +6,9 @@ import Sentence from "./Sentence"
 import UserImage from "./UserImage"
 
 export default class TransacionMiniature extends Component {
-  handleChat() {
-    const { onChat, transaction } = this.props
-    onChat(transaction)
+  handleViewTransaction() {
+    const { onViewTransaction, transaction } = this.props
+    onViewTransaction(transaction)
   }
 
   render() {
@@ -16,7 +16,7 @@ export default class TransacionMiniature extends Component {
     const { user, last_message_text } = transaction
     const { currentUser } = auth
     return (
-      <TouchableOpacity onPress={this.handleChat.bind(this)} style={{
+      <TouchableOpacity onPress={this.handleViewTransaction.bind(this)} style={{
         borderColor: Colors.ice,
         borderBottomWidth: 0.5,
         padding: 10,

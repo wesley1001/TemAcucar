@@ -1,17 +1,61 @@
-import React, { Component, View, ScrollView, Platform, NativeModules, TouchableOpacity } from 'react-native'
+import React, { Component, View, ScrollView, Platform, NativeModules, TouchableOpacity, TextInput } from 'react-native'
+import { validateFunction } from 'validate-model'
+import { reduxForm } from 'redux-form'
 import truncate from 'truncate'
 const RCTUIManager = NativeModules.UIManager
 
 import Colors from "../Colors"
+import MessageValidators from '../validators/MessageValidators'
 import Icon from "../components/Icon"
 import Sentence from "../components/Sentence"
 import UserImage from "../components/UserImage"
 import MessagesContainer from "../containers/MessagesContainer"
 
-export default class Chat extends Component {
+const validators = {
+  text: MessageValidators.text,
+}
+
+class ViewTransaction extends Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = { inputFocused: false }
+    this.shouldSubmit = false
+  }
+
+  componentDidMount() {
+    const { initializeForm, transaction } = this.props
+    initializeForm({transaction_id: transaction.id})
+  }
+
+  componentDidUpdate() {
+    if (this.shouldSubmit) {
+      // This is a hack to only submit after blur, so we can scroll to bottom correctly
+      this.shouldSubmit = false
+      const { handleSubmit, onCreateMessage, resetForm } = this.props
+      handleSubmit(onCreateMessage)()
+      resetForm()
+    }
+  }
+
+  handleFocus() {
+    this.setState({ inputFocused: true })
+  }
+
+  handleBlur() {
+    this.setState({ inputFocused: false })
+  }
+
   handleSize() {
-    if (this.scrollInnerHeight)
-      return
+    if (!this.state.inputFocused)
+    this.scrollToBottom()
+  }
+
+  handleCreate() {
+    this.refs.input.blur()
+    this.shouldSubmit = true
+  }
+
+  scrollToBottom() {
     RCTUIManager.measure(React.findNodeHandle(this.refs.scrollView), (left, top, width, height) => {
       this.scrollHeight = height
       RCTUIManager.measure(this.refs.scrollView.getInnerViewNode(), (left, top, width, height) => {
@@ -25,14 +69,15 @@ export default class Chat extends Component {
   }
 
   render() {
-    const { onBack, transaction, auth } = this.props
+    const { onBack, transaction, auth, fields: { text } } = this.props
     const { currentUser } = auth
     const { demand } = transaction
     const user = (transaction.user.id === currentUser.id ? transaction.demand.user : transaction.user)
+    const { inputFocused } = this.state
     return (
       <View style={{
         flex: 1,
-        paddingBottom: 40,
+        paddingBottom: (inputFocused ? 320 : 32),
       }}>
         <View style={{
           backgroundColor: Colors.blue,
@@ -95,11 +140,44 @@ export default class Chat extends Component {
           left: 0,
           right: 0,
           backgroundColor: Colors.beige,
-          height: 35,
+          height: (inputFocused ? 320 : 32),
+          flexDirection: 'row',
         }}>
-
+          <TextInput
+            ref='input'
+            multiline={true}
+            placeholder="Escreva sua mensagem"
+            style={{
+              flex: 10,
+              fontSize: 10, 
+              height: (inputFocused ? 64 : 32),
+              paddingVertical: 4,
+              paddingHorizontal: 10,
+              color: Colors.brown,
+            }}
+            {...text}
+            onFocus={this.handleFocus.bind(this)}
+            onBlur={this.handleBlur.bind(this)}
+          />
+          <TouchableOpacity onPress={this.handleCreate.bind(this)} style={{
+            flex: 1,
+            paddingVertical: 4,
+            paddingHorizontal: 10,
+          }}>
+            <Icon name="send" style={{
+              fontSize: 24,
+            }} />
+          </TouchableOpacity>
         </View>
       </View>
     )
   }
 }
+
+ViewTransaction = reduxForm({
+  form: 'newMessage',
+  fields: ['transaction_id','text'],
+  validate: validateFunction(validators),
+})(ViewTransaction)
+
+export default ViewTransaction
