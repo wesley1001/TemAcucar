@@ -5,6 +5,7 @@ export default OrSeparator = () => (
   <TextBox style={{
     margin: 10,
     fontFamily: 'BoosterNextFY-Bold',
+    lineHeight: 20,
   }}>
     ou
   </TextBox>
