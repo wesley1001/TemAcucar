@@ -1,6 +1,8 @@
 import React, { Component, View } from 'react-native'
 import moment from 'moment'
 import GiftedSpinner from 'react-native-gifted-spinner'
+import Colors from "../Colors"
+import Sentence from "../components/Sentence"
 import LoadMore from "../components/LoadMore"
 import Message from "../components/Message"
 
@@ -12,6 +14,20 @@ export default class Messages extends Component {
     let date = null
     return (
       <View>
+        { !loading && messages.length === 0 &&
+          <View style={{
+            backgroundColor: Colors.beige,
+            borderRadius: 4,
+            padding: 10,
+          }}>
+            <Sentence style={{
+              color: Colors.brown,
+              fontSize: 10,
+            }}>
+              Apresente-se, diga os cuidados e informações sobre seu objeto, combine data de entrega, devolução e local de encontro. Um número de telefone para imprevistos vai bem :)
+            </Sentence>
+          </View>
+        }
         { canLoadMore && !loading &&
           <LoadMore onPress={onLoadMore} />
         }

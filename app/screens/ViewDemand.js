@@ -6,6 +6,13 @@ import DemandButtons from "../components/DemandButtons"
 
 export default class ViewDemand extends Component {
   componentWillReceiveProps(nextProps) {
+    const { onViewCreatedTransaction, dashboard } = nextProps
+    const { creatingTransaction, createTransactionError } = dashboard
+    const oldCreatingTransaction = this.props.dashboard.creatingTransaction
+    if (oldCreatingTransaction && !creatingTransaction && !createTransactionError) {
+      onViewCreatedTransaction()
+      return
+    }
     const { onDashboard, dashboard: { demands } } = nextProps
     const oldDemands = this.props.dashboard.demands
     if (demands.length !== oldDemands.length && oldDemands.length > 0) {
@@ -14,6 +21,7 @@ export default class ViewDemand extends Component {
   }
 
   render() {
+    console.log('render', this.props)
     const { description } = this.props.demand
     return (
       <View style={{

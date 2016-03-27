@@ -97,6 +97,7 @@ export function apiDispatchAction(dispatch, options) {
     } else {
       dispatch({
         type: `${prefix}_FAILURE`,
+        ...requestAttributes,
         error: parseError(response),
       })
     }

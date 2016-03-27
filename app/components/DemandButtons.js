@@ -3,6 +3,11 @@ import Colors from "../Colors"
 import Button from "./Button"
 
 export default class DemandButtons extends Component {
+  handleCreateTransaction() {
+    const { demand, onCreateTransaction } = this.props
+    onCreateTransaction(demand)
+  }
+
   handleRefuse() {
     const { demand, onRefuseDemand } = this.props
     onRefuseDemand(demand)
@@ -20,6 +25,10 @@ export default class DemandButtons extends Component {
   }
 
   render() {
+    const { demands } = this.props.dashboard
+    const viewDemand = this.props.demand
+    const demand = demands.filter(demand => demand.id === viewDemand.id)[0] || viewDemand
+    const { creatingTransaction } = demand
     return (
       <View style={{
         alignSelf: 'stretch',
@@ -28,6 +37,8 @@ export default class DemandButtons extends Component {
         paddingTop: 0,
       }}>
         <Button
+          onPress={this.handleCreateTransaction.bind(this)}
+          isLoading={creatingTransaction}
           style={{
             flex: 1,
             paddingVertical: 0,

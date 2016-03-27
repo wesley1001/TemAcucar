@@ -39,7 +39,7 @@ export default class TransacionMiniature extends Component {
             fontSize: 9,
             color: Colors.ice,
           }}>
-            { truncate(last_message_text, 50) }
+            { truncate((last_message_text ? last_message_text : 'Escreva uma mensagem para ' + transaction.demand.user.first_name), 50) }
           </Sentence>
         </View>
         <Icon name="keyboard-arrow-right" />

@@ -50,6 +50,17 @@ export default function transactions(state = initialState, action) {
           }
         }),
       }
+    case 'TRANSACTIONS_CREATE_SUCCESS':
+      const { transaction } = action
+      return {
+        ...state, 
+        demands: [{
+          ...transaction.demand,
+          transactions: [transaction],
+        }].concat(state.demands),
+        offset: state.offset + 1,
+        creating: false,
+      }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState
     default:

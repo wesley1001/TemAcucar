@@ -26,6 +26,15 @@ export default class Dashboard extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { onViewTransaction, dashboard } = nextProps
+    const { creatingTransaction, createTransactionError, createdTransaction } = dashboard
+    const oldCreatingTransaction = this.props.dashboard.creatingTransaction
+    if (oldCreatingTransaction && !creatingTransaction && !createTransactionError) {
+      onViewTransaction(createdTransaction)
+    }
+  }
+
   handleMenuOpen() {
     this.drawer.openDrawer()
   }

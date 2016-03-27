@@ -26,7 +26,7 @@ export default TransactionDemandDescription = ({ index, demand: { user, name }, 
         fontSize: 12,
         color: Colors.white,
       }}>
-        {truncate(name, 30)}
+        {truncate(name, 25)}
       </Sentence>
     </View>
     { index % 2 != 0 && <UserImage source={{uri: user.image_url}} style={{marginLeft: 6}} /> }

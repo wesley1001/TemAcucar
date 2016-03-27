@@ -1,5 +1,22 @@
 import { apiAction } from './BasicActions'
 
+export function create(credentials, currentUser, demand) {
+  return apiAction({
+    prefix: 'TRANSACTIONS_CREATE',
+    path: '/transactions',
+    method: 'post',
+    params: {
+      demand_id: demand.id,
+    },
+    requestAttributes: { demand },
+    credentials,
+    currentUser: () => currentUser,
+    processResponse: (response) => {
+      return { transaction: JSON.parse(response._bodyText) }
+    },
+  })
+}
+
 export function listDemands(credentials, currentUser, offset = 0) {
   return apiAction({
     prefix: 'TRANSACTIONS_LIST_DEMANDS',
