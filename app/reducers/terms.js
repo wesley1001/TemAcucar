@@ -38,6 +38,8 @@ export default function terms(state = initialState, action) {
         ...state, 
         scrolledToBottom: true,
       }
+    case 'STORED_AUTH_RESET_SUCCESS':
+      return initialState
     default:
       return state
   }

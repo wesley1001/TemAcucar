@@ -5,7 +5,7 @@ const initialState = {
   updateEmailError: null,
 }
 
-export default function terms(state = initialState, action) {
+export default function config(state = initialState, action) {
   switch (action.type) {
     case 'CONFIG_CONFIRM_EMAIL_REQUEST':
       return {
@@ -47,6 +47,8 @@ export default function terms(state = initialState, action) {
         updatingEmail: false,
         updateEmailError: action.error,
       }
+    case 'STORED_AUTH_RESET_SUCCESS':
+      return initialState
     default:
       return state
   }

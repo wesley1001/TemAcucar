@@ -1,6 +1,6 @@
 import keyFilter from 'object-key-filter'
 import Config from 'react-native-config'
-import { storedAuthSet } from './StoredAuthActions'
+import * as StoredAuthActions from './StoredAuthActions'
 
 function requestHeaders(credentials) {
   return {
@@ -91,7 +91,7 @@ export function apiDispatchAction(dispatch, options) {
       }
       if (newCredentials.accessToken) {
         successAction.credentials = newCredentials
-        storedAuthSet(dispatch, newCredentials, keyFilter(currentUser(response), ['password', 'facebook']))
+        StoredAuthActions.set(dispatch, newCredentials, keyFilter(currentUser(response), ['password', 'facebook']))
       }
       dispatch(successAction)
     } else {

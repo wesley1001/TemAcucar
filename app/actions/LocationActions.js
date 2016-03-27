@@ -24,7 +24,7 @@ function addressSearch(address) {
   return `${ address.thoroughfare }${ (address.subThoroughfare ? `, ${ address.subThoroughfare }` : '') }${ (address.subLocality ? ` - ${ address.subLocality }` : '') }${ (address.locality ? ` - ${ address.locality }` : '') }${ (address.administrativeArea ? ` - ${ address.administrativeArea }` : '') }${ address.country ? `, ${address.country}` : '' }`
 }
 
-export function locationGetCoordinates() {
+export function getCoordinates() {
   return dispatch => {
     dispatch({ type: 'LOCATION_GET_COORDINATES_REQUEST' })
     navigator.geolocation.getCurrentPosition(
@@ -47,7 +47,7 @@ export function locationGetCoordinates() {
   }  
 }
 
-export function locationSetCoordinates(latitude, longitude) {
+export function setCoordinates(latitude, longitude) {
   return dispatch => {
     dispatch({
       type: 'LOCATION_SET_COORDINATES',
@@ -57,7 +57,7 @@ export function locationSetCoordinates(latitude, longitude) {
   }
 }
 
-export function locationGetAddress(latitude, longitude, complement) {
+export function getAddress(latitude, longitude, complement) {
   return dispatch => {
     if (!(latitude && longitude)) {
       return dispatch({
@@ -86,7 +86,7 @@ export function locationGetAddress(latitude, longitude, complement) {
   }  
 }
 
-export function locationSearch(searchAddress, initializeForm) {
+export function search(searchAddress, initializeForm) {
   return dispatch => {
     const search = addressSearch(searchAddress)
     dispatch({
@@ -117,7 +117,7 @@ export function locationSearch(searchAddress, initializeForm) {
   }  
 }
 
-export function locationSetLocation(location, credentials) {
+export function setLocation(location, credentials) {
   const { latitude, longitude, address } = location
   return updateCurrentUser('LOCATION_SET_LOCATION', credentials, {
     reviewed_location: true,

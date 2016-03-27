@@ -1,7 +1,4 @@
-import React, {
-  Component,
-  Navigator,
-} from 'react-native'
+import React, { Component, Navigator } from 'react-native'
 import { Route, Schema, Actions } from 'react-native-router-flux'
 
 import StyledRouter from "../components/StyledRouter"
@@ -14,7 +11,7 @@ import SignInFailed from "../screens/SignInFailed"
 import RequestPassword from "../screens/RequestPassword"
 import ResetPassword from "../screens/ResetPassword"
 
-export default class SignedOut extends Component {
+export default class AuthRouter extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.signInFailed(nextProps)) {
       Actions.signInFailed()

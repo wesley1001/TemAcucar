@@ -5,13 +5,13 @@ import Package from '../../package.json'
 import codePush from "react-native-code-push"
 import Config from 'react-native-config'
 
-import { versionsList, versionsIgnoreUpdate } from '../actions/VersionsActions'
+import * as VersionsActions from '../actions/VersionsActions'
 
 import Loading from "../screens/Loading"
 import NetworkError from "../screens/NetworkError"
 import ExpiredVersion from "../screens/ExpiredVersion"
 import UpdateVersion from "../screens/UpdateVersion"
-import Authorizer from './Authorizer'
+import Authenticator from './Authenticator'
 
 class VersionChecker extends Component {
   daysRemaining(version) {
@@ -22,7 +22,7 @@ class VersionChecker extends Component {
     const { dispatch } = this.props
     if (!__DEV__)
       codePush.sync()
-    dispatch(versionsList())
+    dispatch(VersionsActions.list())
   }
 
   version() {
@@ -54,12 +54,12 @@ class VersionChecker extends Component {
 
   handleIgnore() {
     const { dispatch } = this.props
-    dispatch(versionsIgnoreUpdate())
+    dispatch(VersionsActions.ignoreUpdate())
   }
 
   handleTryAgain() {
     const { dispatch } = this.props
-    dispatch(versionsList())
+    dispatch(VersionsActions.list())
   }
 
   render() {
@@ -75,7 +75,7 @@ class VersionChecker extends Component {
       return (<ExpiredVersion onUpdate={this.handleUpdate.bind(this)} />)
     if (!this.isCurrent() && !ignoreUpdate)
       return (<UpdateVersion version={version} onIgnore={this.handleIgnore.bind(this)} onUpdate={this.handleUpdate.bind(this)} daysRemaining={this.daysRemaining(version)} />)
-    return (<Authorizer />)
+    return (<Authenticator />)
   }
 }
 

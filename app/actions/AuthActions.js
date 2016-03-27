@@ -2,9 +2,9 @@ import React, { Platform, NativeModules } from 'react-native'
 const FBLoginManager = NativeModules.FBLoginManager
 
 import { apiAction, apiDispatchAction } from './BasicActions'
-import { storedAuthReset } from './StoredAuthActions'
+import * as StoredAuthActions from './StoredAuthActions'
 
-export function authRefreshUser(credentials) {
+export function refreshUser(credentials) {
   return apiAction({
     prefix: 'AUTH_REFRESH_USER',
     path: `/me`,
@@ -17,23 +17,23 @@ export function authRefreshUser(credentials) {
     },
     afterAction: (dispatch, response) => {
       if (response.status === 401) {
-        storedAuthReset(dispatch)
+        StoredAuthActions.reset(dispatch)
       }
     },
   })
 }
 
-export function authSignIn(currentUser) {
+export function signIn(currentUser) {
   return dispatch => {
     if (currentUser.email && currentUser.password) {
-      dispatch(authEmail(currentUser))
+      dispatch(email(currentUser))
     } else if (currentUser.facebook) {
-      dispatch(authFacebook())
+      dispatch(facebook())
     }
   }
 }
 
-export function authSignUp(currentUser) {
+export function signUp(currentUser) {
   return apiAction({
     prefix: 'AUTH_SIGN_UP',
     path: '/users',
@@ -54,7 +54,7 @@ export function authSignUp(currentUser) {
   })
 }
 
-function authFacebookLogin(callback) {
+function facebookLogin(callback) {
   FBLoginManager.loginWithPermissions(["public_profile", "email", "user_friends"], (facebookError, facebookData) => {
     if (Platform.OS == 'ios') {
       callback(facebookData, facebookError)
@@ -64,9 +64,9 @@ function authFacebookLogin(callback) {
   })
 }
 
-export function authFacebook() {
+export function facebook() {
   return dispatch => {
-    authFacebookLogin((data, facebookError) => {
+    facebookLogin((data, facebookError) => {
       if (!facebookError) {
         const facebook = data.credentials
         apiDispatchAction(dispatch, {
@@ -96,7 +96,7 @@ export function authFacebook() {
   }  
 }
 
-function authEmail(currentUser) {
+function email(currentUser) {
   return apiAction({
     prefix: 'AUTH_SIGN_IN',
     path: '/authentications',
@@ -115,7 +115,7 @@ function authEmail(currentUser) {
   })
 }
 
-export function authSignOut(credentials) {
+export function signOut(credentials) {
   return apiAction({
     prefix: 'AUTH_SIGN_OUT',
     path: '/authentications',
@@ -124,11 +124,11 @@ export function authSignOut(credentials) {
     currentUser: (response) => {
       return JSON.parse(response._bodyText)
     },
-    afterAction: (dispatch) => storedAuthReset(dispatch),
+    afterAction: (dispatch) => StoredAuthActions.reset(dispatch),
   })
 }
 
-export function authRequestPassword(currentUser) {
+export function requestPassword(currentUser) {
   return apiAction({
     prefix: 'AUTH_REQUEST_PASSWORD',
     path: '/password',
@@ -141,7 +141,7 @@ export function authRequestPassword(currentUser) {
   })
 }
 
-export function authResetPassword(currentUser) {
+export function resetPassword(currentUser) {
   return apiAction({
     prefix: 'AUTH_RESET_PASSWORD',
     path: '/password',

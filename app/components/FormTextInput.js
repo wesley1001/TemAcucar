@@ -14,22 +14,22 @@ class FormTextInput extends Component {
   }
 
   render() {
-    const { icon, error } = this.props
+    const { icon, error, style, titleStyle, inputStyle } = this.props
     const message = ( error && error.length > 0 ? error[0] : null)
     return (
       <InlineTextInput
         ref='input'
-        style={{
+        { ...this.props }
+        style={[{
           borderColor: Colors.ice,
-        }}
-        titleStyle={{
+        }, style]}
+        titleStyle={[{
           fontFamily: 'OpenSans',
           color: Colors.brown,
-        }}
-        inputStyle={{
+        }, titleStyle]}
+        inputStyle={[{
           color: Colors.pink,
-        }}
-        { ...this.props }
+        }, inputStyle]}
         icon={ icon && <Icon name={icon} color={Colors.brown} /> }
         validIcon={ <Icon name='check' color='green' /> }
         invalidIcon={ <Icon name='clear' color='red' /> }

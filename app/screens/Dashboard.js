@@ -1,10 +1,7 @@
 import React, { Component, Dimensions, Text, View, PanResponder } from 'react-native'
-import { connect } from 'react-redux'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
 import LinearGradient from 'react-native-linear-gradient'
-
-import { openDrawer, closeDrawer, usersList } from '../actions/NeighborhoodActions'
 
 import Colors from "../Colors"
 import Button from "../components/Button"
@@ -12,30 +9,21 @@ import TopBar from "../components/TopBar"
 import UserMenu from "../components/UserMenu"
 import TabBar from "../components/TabBar"
 import Tab from "../components/Tab"
-import Solicitations from "../screens/Solicitations"
+import NeighborsMap from "../components/NeighborsMap"
+import Demands from "../components/Demands"
 
-class Neighborhood extends Component {
+import TransactionsContainer from "../containers/TransactionsContainer"
+
+export default class Dashboard extends Component {
   componentWillMount() {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponderCapture: () => {
-        return this.props.neighborhood.drawerOpen
+        return this.props.dashboard.drawerOpen
       },
       onPanResponderRelease: () => {
         this.drawer.closeDrawer()
       },
     })
-    const { dispatch, auth: { credentials, currentUser } } = this.props
-    dispatch(usersList(credentials, currentUser))
-  }
-
-  handleDrawerOpen() {
-    const { dispatch } = this.props
-    dispatch(openDrawer())
-  }
-
-  handleDrawerClose() {
-    const { dispatch } = this.props
-    dispatch(closeDrawer())
   }
 
   handleMenuOpen() {
@@ -47,7 +35,9 @@ class Neighborhood extends Component {
   }
 
   render() {
-    const { drawerOpen } = this.props.neighborhood
+    const { onDrawerOpen, onDrawerClose, onNewDemand } = this.props
+    const { drawerOpen } = this.props.dashboard
+    const { latitude, longitude } = this.props.auth.currentUser
     const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
     return (
       <DrawerLayout
@@ -55,8 +45,8 @@ class Neighborhood extends Component {
         ref={(drawer) => { return this.drawer = drawer  }}
         keyboardDismissMode="on-drag"
         renderNavigationView={() => userMenu}
-        onDrawerOpen={this.handleDrawerOpen.bind(this)}
-        onDrawerClose={this.handleDrawerClose.bind(this)}
+        onDrawerOpen={onDrawerOpen}
+        onDrawerClose={onDrawerClose}
       >
         <View {...this.panResponder.panHandlers} style={{
           flex: 1, 
@@ -69,11 +59,12 @@ class Neighborhood extends Component {
               locked={true}
               renderTabBar={() => <TabBar />}
             >
-              <Tab tabLabel="home">
-                <Solicitations {...this.props} />
-              </Tab>
               <Tab tabLabel="chat">
-                <Text>Transações</Text>
+                <TransactionsContainer {...this.props} />
+              </Tab>
+              <Tab tabLabel="home">
+                { latitude && longitude && <NeighborsMap {...this.props} /> }
+                <Demands {...this.props} />
               </Tab>
               <Tab tabLabel="notifications">
                 <Text>Notificações</Text>
@@ -94,7 +85,7 @@ class Neighborhood extends Component {
                 padding: 10,
                 paddingTop: 50,
               }}>
-              <Button style={{alignSelf: 'stretch'}}>
+              <Button onPress={onNewDemand} style={{alignSelf: 'stretch'}}>
                 Pedir
               </Button>
             </LinearGradient>
@@ -104,7 +95,3 @@ class Neighborhood extends Component {
     )
   }
 }
-
-export default connect(state => ({
-  neighborhood: state.neighborhood,
-}))(Neighborhood)

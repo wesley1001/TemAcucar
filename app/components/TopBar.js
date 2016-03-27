@@ -34,7 +34,7 @@ export default TopBar = ({ onMenuOpen }) => (
     }}>
       {true == true && <Image source={require('../img/icon.png')} style={{
         marginTop: -2,
-        marginRight: 60,
+        marginRight: 52,
         width: 25,
         height: 25,
       }} />}

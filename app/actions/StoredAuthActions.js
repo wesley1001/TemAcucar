@@ -1,7 +1,7 @@
 import SimpleStore from 'react-native-simple-store'
 import { parseError } from './BasicActions'
 
-export function storedAuthGet(currentUser) {
+export function get(currentUser) {
   return dispatch => {
     if (currentUser) 
       return
@@ -33,7 +33,7 @@ export function storedAuthGet(currentUser) {
   }
 }
 
-export function storedAuthSet(dispatch, credentials, currentUser) {
+export function set(dispatch, credentials, currentUser) {
   if (credentials && currentUser) {
     dispatch({
       type: 'STORED_AUTH_SET_REQUEST',
@@ -57,7 +57,7 @@ export function storedAuthSet(dispatch, credentials, currentUser) {
   }
 }
 
-export function storedAuthReset(dispatch) {
+export function reset(dispatch) {
   dispatch({ type: 'STORED_AUTH_RESET_REQUEST'})
   SimpleStore.delete('storedAuth')
   .then(() => dispatch({ type: 'STORED_AUTH_RESET_SUCCESS' }))

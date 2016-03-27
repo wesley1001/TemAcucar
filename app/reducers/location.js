@@ -100,6 +100,8 @@ export default function location(state = initialState, action) {
         settingLocation: false,
         setLocationError: action.error,
       }
+    case 'STORED_AUTH_RESET_SUCCESS':
+      return initialState
     default:
       return state
   }

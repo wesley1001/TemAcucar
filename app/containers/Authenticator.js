@@ -1,22 +1,22 @@
 import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
-import { authRefreshUser, authSignIn, authSignUp, authSignOut, authFacebook, authRequestPassword, authResetPassword } from '../actions/AuthActions'
-import { storedAuthGet } from '../actions/StoredAuthActions'
+import * as AuthActions from '../actions/AuthActions'
+import * as StoredAuthActions from '../actions/StoredAuthActions'
 
 import Loading from "../screens/Loading"
-import SignedOut from "../routers/SignedOut"
+import AuthRouter from "../routers/AuthRouter"
 import Configurator from "./Configurator"
 
-class Authorizer extends Component {
+class Authenticator extends Component {
   componentDidMount() {
     const { dispatch, auth: { currentUser } } = this.props
-    dispatch(storedAuthGet(currentUser))
+    dispatch(StoredAuthActions.get(currentUser))
   }
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, auth: { credentials } } = nextProps
     if (this.shouldRefreshUser(nextProps)) {
-      dispatch(authRefreshUser(credentials))
+      dispatch(AuthActions.refreshUser(credentials))
     }
   }
 
@@ -40,7 +40,7 @@ class Authorizer extends Component {
       !facebookSigningIn && !signingIn && !signingUp && !signingOut && 
       // We're not in the middle of reset password flow
       !requestingPassword && !resetingPassword && !resetPassword &&
-      // We don't have any error of the kinds that SignedOut router will render SignInFailed
+      // We don't have any error of the kinds that AuthRouter router will render SignInFailed
       !facebookError && !signInError && 
       // We don't have a sign up error, so SignUpForm can manage errors by itself
       !signUpError && 
@@ -63,34 +63,34 @@ class Authorizer extends Component {
 
   handleFacebook() {
     const { dispatch } = this.props
-    dispatch(authFacebook())
+    dispatch(AuthActions.facebook())
   }
 
   handleSignIn(currentUser) {
     const { dispatch } = this.props
-    dispatch(authSignIn(currentUser))
+    dispatch(AuthActions.signIn(currentUser))
   }
 
   handleSignUp(currentUser) {
     const { dispatch } = this.props
-    dispatch(authSignUp(currentUser))
+    dispatch(AuthActions.signUp(currentUser))
   }
 
   handleSignOut() {
     const { dispatch, auth } = this.props
     const { credentials } = auth
-    dispatch(authSignOut(credentials))
+    dispatch(AuthActions.signOut(credentials))
   }
 
   handleRequestPassword(currentUser) {
     const { dispatch } = this.props
-    dispatch(authRequestPassword(currentUser))
+    dispatch(AuthActions.requestPassword(currentUser))
   }
 
   handleResetPassword(data) {
     const { dispatch, auth } = this.props
     const { currentUser } = auth
-    dispatch(authResetPassword({
+    dispatch(AuthActions.resetPassword({
       ...currentUser,
       ...data,
     }))
@@ -109,11 +109,11 @@ class Authorizer extends Component {
     if (this.isLoading())
       return (<Loading />)
     if (this.isSignedOut())
-      return (<SignedOut auth={auth} {...authEvents} />)
+      return (<AuthRouter auth={auth} {...authEvents} />)
     return (<Configurator auth={auth} {...authEvents} />)
   }
 }
 
 export default connect(state => ({
   auth: state.auth,
-}))(Authorizer)
+}))(Authenticator)

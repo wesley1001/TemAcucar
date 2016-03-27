@@ -1,4 +1,4 @@
-import React, { ScrollView } from 'react-native'
+import React, { ScrollView, View } from 'react-native'
 import Colors from '../Colors'
 
 export default Tab = ({ children }) => (
@@ -7,6 +7,8 @@ export default Tab = ({ children }) => (
     alignSelf: 'stretch', 
     backgroundColor: Colors.white,
   }}>
-    {children}
+    <View style={{ paddingBottom: 100 }}>
+      {children}
+    </View>
   </ScrollView>
 )
