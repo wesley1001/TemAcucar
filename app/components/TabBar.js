@@ -18,7 +18,7 @@ export default class TabBar extends Component {
 
   renderTabOption(name, page) {
     const isActive = (this.props.activeTab === page)
-    const IconComponent = (page == 0 ? FontAwesomeIcon : Icon)
+    const IconComponent = (page == 0 ? Icon : Icon)
     return (
       <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} style={{
         flex: 1,

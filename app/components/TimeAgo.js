@@ -23,7 +23,7 @@ moment.locale('pt-br', {
 
 export default TimeAgo = ({ time, style}) => (
   <Sentence style={[{
-    fontSize: 10,
+    fontSize: 9,
   }, style]}>
     { moment(time).fromNow() }
   </Sentence>
