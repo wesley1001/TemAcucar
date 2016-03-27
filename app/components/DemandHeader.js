@@ -8,6 +8,7 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 9,
+    alignSelf: 'stretch',
   }}>
     <View style={{
       flexDirection: 'row',
@@ -80,6 +81,7 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
       left: 0,
       right: 0,
       alignItems: 'center',
+      justifyContent: 'center',
     }}>
       <UserImage source={{uri: user.image_url}} style={{marginBottom: 6}} />
     </View>

@@ -5,10 +5,10 @@ export default Headline = (props) => (
   <Text style={[{
     fontFamily: 'BoosterNextFY-Black',
     color: Colors.brown,
-    fontSize: 28,
+    fontSize: 24,
     textAlign: 'center',
     marginHorizontal: 20,
-    marginBottom: 36,
+    marginBottom: 24,
   }, props.style]}>
     {props.children}
   </Text>

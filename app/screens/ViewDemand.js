@@ -21,7 +21,6 @@ export default class ViewDemand extends Component {
   }
 
   render() {
-    console.log('render', this.props)
     const { description } = this.props.demand
     return (
       <View style={{
@@ -29,7 +28,16 @@ export default class ViewDemand extends Component {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-        <DemandHeader {...this.props} />
+        <View style={{
+          alignSelf: 'stretch',
+        }}>
+          <View style={{
+            flex: 1,
+            alignSelf: 'stretch',
+          }}>
+            <DemandHeader {...this.props} />
+          </View>
+        </View>
         <Sentence style={{
           fontSize: 10,
           padding: 20,
