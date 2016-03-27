@@ -8,7 +8,6 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 9,
-    alignSelf: 'stretch',
   }}>
     <View style={{
       flexDirection: 'row',
