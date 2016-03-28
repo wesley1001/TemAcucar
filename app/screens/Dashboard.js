@@ -15,6 +15,11 @@ import Demands from "../components/Demands"
 import TransactionsContainer from "../containers/TransactionsContainer"
 
 export default class Dashboard extends Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = { loadTransactionDemands: false }
+  }
+
   componentWillMount() {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponderCapture: () => {
@@ -43,10 +48,18 @@ export default class Dashboard extends Component {
     this.drawer.closeDrawer()
   }
 
+  handleChangeTab(tab) {
+    const loadTransactionDemands = (tab.i === 1)
+    if (loadTransactionDemands !== this.state.loadTransactionDemands) {
+      this.setState({loadTransactionDemands})
+    }
+  }
+
   render() {
     const { onDrawerOpen, onDrawerClose, onNewDemand } = this.props
     const { drawerOpen } = this.props.dashboard
     const { latitude, longitude } = this.props.auth.currentUser
+    const { loadTransactionDemands } = this.state
     const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
     return (
       <DrawerLayout
@@ -67,13 +80,14 @@ export default class Dashboard extends Component {
             <ScrollableTabView
               locked={true}
               renderTabBar={() => <TabBar />}
+              onChangeTab={this.handleChangeTab.bind(this)}
             >
               <Tab tabLabel="home">
                 { latitude && longitude && <NeighborsMap {...this.props} /> }
                 <Demands {...this.props} />
               </Tab>
               <Tab tabLabel="chat">
-                <TransactionsContainer {...this.props} />
+                <TransactionsContainer {...this.props} loadTransactionDemands={loadTransactionDemands} />
               </Tab>
               <Tab tabLabel="notifications">
                 <Text>Notificações</Text>

@@ -12,7 +12,7 @@ export default Message = ({ message: { created_at, text }, fromCurrentUser, date
         alignItems: 'center',
       }}>
         <Sentence style={{
-          fontSize: 10,
+          fontSize: 12,
         }}>
           {date}
         </Sentence>
@@ -28,12 +28,12 @@ export default Message = ({ message: { created_at, text }, fromCurrentUser, date
     }}>
       <Sentence style={{
         color: Colors.white,
-        fontSize: 10,
+        fontSize: 12,
       }}>
         {text}
       </Sentence>
       <Sentence style={{
-        fontSize: 8,
+        fontSize: 10,
         color: (fromCurrentUser ? Colors.lightPink : Colors.lightBlue),
         alignSelf: 'flex-end',
       }}>

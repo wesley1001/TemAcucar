@@ -1,5 +1,6 @@
 import React, { Component, View } from 'react-native'
 
+import Colors from "../Colors"
 import Sentence from "../components/Sentence"
 import DemandHeader from "../components/DemandHeader"
 import DemandButtons from "../components/DemandButtons"
@@ -27,9 +28,11 @@ export default class ViewDemand extends Component {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: Colors.white,
       }}>
         <View style={{
           alignSelf: 'stretch',
+          paddingHorizontal: 10,
         }}>
           <View style={{
             flex: 1,
@@ -39,8 +42,8 @@ export default class ViewDemand extends Component {
           </View>
         </View>
         <Sentence style={{
-          fontSize: 10,
-          padding: 20,
+          fontSize: 12,
+          margin: 20,
         }}>
           {description}
         </Sentence>

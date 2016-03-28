@@ -1,9 +1,4 @@
-import React, {
-  Component,
-  Text,
-  View,
-  ScrollView,
-} from 'react-native'
+import React, { Component, View, ScrollView, Platform } from 'react-native'
 
 import Colors from "../Colors"
 import Button from "../components/Button"
@@ -18,7 +13,7 @@ export default Terms = ({ onAcceptTerms, onRejectTerms, onScroll, scrolledToBott
     alignItems: 'center',
     backgroundColor: Colors.beige,
     padding: 20,
-    paddingTop: 40,
+    paddingTop: (Platform.OS === 'ios' ? 40 : 20),
   }}>
     <Headline style={{marginBottom: 10}}>Termos de uso</Headline>
     <ScrollView

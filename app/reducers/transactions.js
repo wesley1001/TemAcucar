@@ -1,6 +1,6 @@
 const initialState = {
   demands: [],
-  loading: true,
+  loading: false,
   loadTransactions: false,
   offset: 0,
   canLoadMore: false,

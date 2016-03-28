@@ -1,4 +1,4 @@
-import React, { View, Text } from 'react-native'
+import React, { View, Text, Platform } from 'react-native'
 import Colors from "../Colors"
 import UserImage from "./UserImage"
 import TimeAgo from "./TimeAgo"
@@ -69,7 +69,7 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
       textAlign: 'center',
       color: Colors.pink,
       fontSize: 12,
-      lineHeight: 12,
+      lineHeight: (Platform.OS === 'ios' ? 12 : 16),
       fontFamily: 'BoosterNextFY-Black',
     }}>
       { name.toUpperCase() }

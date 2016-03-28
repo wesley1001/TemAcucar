@@ -6,6 +6,7 @@ import * as TransactionsActions from '../actions/TransactionsActions'
 import * as MessagesActions from '../actions/MessagesActions'
 import { Actions } from 'react-native-router-flux'
 
+import Loading from "../screens/Loading"
 import DashboardRouter from "../routers/DashboardRouter"
 
 class DashboardContainer extends Component {
@@ -93,6 +94,9 @@ class DashboardContainer extends Component {
   }
 
   render() {
+    const { neighbors, dashboard } = this.props
+    if (neighbors.loading || dashboard.loadingDemands)
+      return (<Loading />)
     return (
       <DashboardRouter
         {...this.props}

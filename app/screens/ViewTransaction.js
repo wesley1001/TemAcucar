@@ -74,10 +74,13 @@ class ViewTransaction extends Component {
     const { demand } = transaction
     const user = (transaction.user.id === currentUser.id ? transaction.demand.user : transaction.user)
     const { inputFocused } = this.state
+    const blurredHeight = 44
+    const focusedHeight = (Platform.OS === 'ios' ? 336 : 400)
+    const focusedInputHeight = 88
     return (
       <View style={{
         flex: 1,
-        paddingBottom: (inputFocused ? 320 : 32),
+        paddingBottom: (inputFocused ? focusedHeight : blurredHeight),
       }}>
         <View style={{
           backgroundColor: Colors.blue,
@@ -87,7 +90,7 @@ class ViewTransaction extends Component {
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'row',
-            paddingBottom: 6,
+            paddingVertical: 6,
           }}>
             <View style={{
               alignItems: 'center',
@@ -96,36 +99,34 @@ class ViewTransaction extends Component {
               <Sentence style={{
                 fontFamily: 'BoosterNextFY-Black',
                 fontSize: 12,
-                lineHeight: 12,
+                lineHeight: (Platform.OS === 'ios' ? 12 : 16),
                 color: Colors.white,
               }}>
                 {user.first_name} {user.last_name}
               </Sentence>
               <Sentence style={{
                 fontSize: 10,
-                lineHeight: 10,
+                lineHeight: (Platform.OS === 'ios' ? 10 : 14),
                 color: Colors.white,
               }}>
                 {truncate(demand.name, 40)}
               </Sentence>
             </View>
-            <UserImage size={24} source={{uri: user.image_url}} style={{
+            <UserImage size={28} source={{uri: user.image_url}} style={{
               position: 'absolute',
-              top: 2,
+              top: (Platform.OS === 'ios' ? 4 : 7),
               right: 12,
-              justifyContent: 'center',
             }} />
             <TouchableOpacity onPress={onBack} style={{
               position: 'absolute',
               top: 0,
               left: 0,
-              bottom: 0,
-              justifyContent: 'center',
-              paddingHorizontal: 10,
             }}>
               <Icon name="keyboard-arrow-left" style={{
                 color: Colors.white,
                 fontSize: 24,
+                marginVertical: (Platform.OS === 'ios' ? 6 : 9),
+                marginHorizontal: 12,
               }} />
             </TouchableOpacity>
           </View>
@@ -142,7 +143,7 @@ class ViewTransaction extends Component {
           left: 0,
           right: 0,
           backgroundColor: Colors.beige,
-          height: (inputFocused ? 320 : 32),
+          height: (inputFocused ? focusedHeight : blurredHeight),
           flexDirection: 'row',
         }}>
           <TextInput
@@ -151,11 +152,11 @@ class ViewTransaction extends Component {
             placeholder="Escreva sua mensagem"
             style={{
               flex: 10,
-              fontSize: 10, 
-              height: (inputFocused ? 64 : 32),
-              paddingVertical: 4,
-              paddingHorizontal: 10,
+              fontSize: 12, 
+              height: (inputFocused ? focusedInputHeight : blurredHeight),
+              padding: 10,
               color: Colors.brown,
+              backgroundColor: Colors.beige,
             }}
             {...text}
             onFocus={this.handleFocus.bind(this)}
@@ -163,8 +164,7 @@ class ViewTransaction extends Component {
           />
           <TouchableOpacity onPress={this.handleCreate.bind(this)} style={{
             flex: 1,
-            paddingVertical: 4,
-            paddingHorizontal: 10,
+            padding: 10,
           }}>
             <Icon name="send" style={{
               fontSize: 24,

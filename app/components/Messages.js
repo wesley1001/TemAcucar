@@ -22,7 +22,7 @@ export default class Messages extends Component {
           }}>
             <Sentence style={{
               color: Colors.brown,
-              fontSize: 10,
+              fontSize: 12,
             }}>
               Apresente-se, diga os cuidados e informações sobre seu objeto, combine data de entrega, devolução e local de encontro. Um número de telefone para imprevistos vai bem :)
             </Sentence>

@@ -9,6 +9,7 @@ export default NeighborsMap = ({ neighbors: { loading, users }, auth: { currentU
       height: 150,
     }}>
       <MapView
+        showsUserLocation={false}
         style={{
           height: 150,
           alignSelf: 'stretch',
