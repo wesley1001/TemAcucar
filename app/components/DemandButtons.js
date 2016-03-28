@@ -25,9 +25,15 @@ export default class DemandButtons extends Component {
   }
 
   render() {
-    const { demands } = this.props.dashboard
-    const viewDemand = this.props.demand
-    const demand = demands.filter(demand => demand.id === viewDemand.id)[0] || viewDemand
+    const { demands } = this.props
+    // This is a hack to update creatingTransaction of demand on ViewDemand
+    let demand
+    if (demands) {
+      const viewDemand = this.props.demand
+      demand = demands.filter(demand => demand.id === viewDemand.id)[0] || viewDemand
+    } else {
+      demand = this.props.demand
+    }
     const { creatingTransaction } = demand
     return (
       <View style={{

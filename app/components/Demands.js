@@ -15,12 +15,19 @@ import NoDemands from "../components/NoDemands"
 
 export default class Demands extends Component {
   render() {
-    const { onLoadMoreDemands } = this.props
+    const { onLoadMoreDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onViewDemand } = this.props
     const { demands, loadingDemands, canLoadMoreDemands } = this.props.dashboard
     return (
       <View>
         { demands.map(demand => (
-          <DemandMiniature {...this.props} key={demand.id} demand={demand} />
+          <DemandMiniature
+            key={demand.id}
+            demand={demand}
+            onFlagDemand={onFlagDemand}
+            onCreateTransaction={onCreateTransaction}
+            onRefuseDemand={onRefuseDemand}
+            onViewDemand={onViewDemand}
+          />
         )) }
         { loadingDemands && <GiftedSpinner style={{ marginTop: 20 }} /> }
         { demands.length === 0 && !loadingDemands && <NoDemands /> }

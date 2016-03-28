@@ -49,15 +49,15 @@ export default class Dashboard extends Component {
   }
 
   handleChangeTab(tab) {
-    const loadTransactionDemands = (tab.i === 1)
-    if (loadTransactionDemands !== this.state.loadTransactionDemands) {
-      this.setState({loadTransactionDemands})
+    if (!this.state.loadTransactionDemands && tab.i === 1) {
+      this.setState({loadTransactionDemands: true})
     }
   }
 
   render() {
     const { onDrawerOpen, onDrawerClose, onNewDemand } = this.props
     const { drawerOpen } = this.props.dashboard
+    const { users } = this.props.neighbors
     const { latitude, longitude } = this.props.auth.currentUser
     const { loadTransactionDemands } = this.state
     const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
@@ -83,7 +83,11 @@ export default class Dashboard extends Component {
               onChangeTab={this.handleChangeTab.bind(this)}
             >
               <Tab tabLabel="home">
-                { latitude && longitude && <NeighborsMap {...this.props} /> }
+                { latitude && longitude && <NeighborsMap 
+                  latitude={latitude}
+                  longitude={longitude}
+                  users={users}
+                /> }
                 <Demands {...this.props} />
               </Tab>
               <Tab tabLabel="chat">

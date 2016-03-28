@@ -2,7 +2,7 @@ import React, { View } from 'react-native'
 import MapView from 'react-native-maps'
 import Colors from "../Colors"
 
-export default NeighborsMap = ({ neighbors: { loading, users }, auth: { currentUser: { latitude, longitude } }}) => (
+export default NeighborsMap = ({ latitude, longitude, users }) => (
   <View>
     <View style={{
       backgroundColor: Colors.beige,
@@ -52,7 +52,7 @@ export default NeighborsMap = ({ neighbors: { loading, users }, auth: { currentU
           textAlign: 'center',
           fontSize: 12,
         }}>
-          { loading ? "Carregando..." : `${users.length} vizinhos` }
+          { `${users.length} vizinhos` }
         </Sentence>
       </View>
     </View>
