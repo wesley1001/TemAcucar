@@ -5,8 +5,6 @@ export default TransactionDemandFooter = ({ demand: { state }}) => (
   <View style={{
     backgroundColor: Colors.beige,
     padding: 10,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
     flexDirection: 'row',
     justifyContent: 'flex-end',
   }}>
