@@ -4,7 +4,7 @@ import Colors from "../Colors"
 import Sentence from "./Sentence"
 import UserImage from "./UserImage"
 
-export default TransactionDemandDescription = ({ index, demand: { user, name }, auth: { currentUser }}) => (
+export default TransactionDemandDescription = ({ index, demand: { user, name }, currentUser}) => (
   <View style={{
     flexDirection: 'row',
     alignItems: 'center',

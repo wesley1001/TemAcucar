@@ -1,65 +1,58 @@
 const initialState = {
-  demands: [],
-  loading: false,
-  loadTransactions: false,
+  list: [],
+  listing: false,
   offset: 0,
-  canLoadMore: false,
+  canList: false,
+  creating: false,
+  createError: null,
+  lastCreated: null,
 }
 
 export default function transactions(state = initialState, action) {
   switch (action.type) {
-    case 'TRANSACTIONS_LIST_DEMANDS_REQUEST':
+    case 'TRANSACTIONS_LIST_REQUEST':
       return {
         ...state, 
-        loading: true,
+        listing: true,
       }
-    case 'TRANSACTIONS_LIST_DEMANDS_SUCCESS':
+    case 'TRANSACTIONS_LIST_SUCCESS':
       return {
         ...state, 
-        demands: state.demands.concat(action.demands.map(demand => {
-          return { ...demand, transactions: [] }
-        })),
-        loading: false,
-        loadTransactions: true,
-        offset: state.offset + action.demands.length,
-        canLoadMore: (action.demands.length >= 10 ? true : false),
+        list: state.list.concat(action.list),
+        listing: false,
+        offset: state.offset + action.list.length,
+        canList: (action.list.length >= 10 ? true : false),
       }
-    case 'TRANSACTIONS_LIST_DEMANDS_FAILURE':
+    case 'TRANSACTIONS_LIST_FAILURE':
       return {
         ...state, 
-        loading: false,
+        listing: false,
       }
-    case 'TRANSACTIONS_LIST_TRANSACTIONS_REQUEST':
+    case 'TRANSACTIONS_CREATE_REQUEST':
       return {
         ...state, 
-        loadTransactions: false,
-      }
-    case 'TRANSACTIONS_LIST_TRANSACTIONS_SUCCESS':
-      return {
-        ...state, 
-        demands: state.demands.map(demand => {
-          const { transactions } = action
-          if (transactions.length > 0) {
-            if (transactions[0].demand.id === demand.id) {
-              return { ...demand, transactions: transactions }
-            } else {
-              return demand
-            }
-          } else {
-            return demand
-          }
-        }),
+        lastCreated: null,
+        creating: true,
+        createError: null,
       }
     case 'TRANSACTIONS_CREATE_SUCCESS':
       const { transaction } = action
       return {
         ...state, 
-        demands: [{
+        list: [{
           ...transaction.demand,
           transactions: [transaction],
-        }].concat(state.demands),
+        }].concat(state.list),
         offset: state.offset + 1,
+        lastCreated: transaction,
         creating: false,
+        createError: null,
+      }
+    case 'TRANSACTIONS_CREATE_FAILURE':
+      return {
+        ...state, 
+        creating: false,
+        createError: action.error,
       }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState

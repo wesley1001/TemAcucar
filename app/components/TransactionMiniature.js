@@ -6,17 +6,16 @@ import Sentence from "./Sentence"
 import UserImage from "./UserImage"
 
 export default class TransacionMiniature extends Component {
-  handleViewTransaction() {
-    const { onViewTransaction, transaction } = this.props
-    onViewTransaction(transaction)
+  handleView() {
+    const { onView, transaction } = this.props
+    onView(transaction)
   }
 
   render() {
-    const { transaction, auth } = this.props
+    const { transaction, currentUser } = this.props
     const { user, last_message_text } = transaction
-    const { currentUser } = auth
     return (
-      <TouchableOpacity onPress={this.handleViewTransaction.bind(this)} style={{
+      <TouchableOpacity onPress={this.handleView.bind(this)} style={{
         borderColor: Colors.ice,
         borderBottomWidth: 0.5,
         padding: 10,

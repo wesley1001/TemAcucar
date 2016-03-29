@@ -4,14 +4,15 @@ import DemandHeader from "./DemandHeader"
 import DemandButtons from "./DemandButtons"
 
 export default class DemandMiniature extends Component {
-  handleViewDemand() {
-    const { demand, onViewDemand } = this.props
-    onViewDemand(demand)
+  handleView() {
+    const { demand, onView } = this.props
+    onView(demand)
   }
 
   render() {
+    const { demand } = this.props
     return (
-      <TouchableOpacity onPress={this.handleViewDemand.bind(this)}>
+      <TouchableOpacity onPress={this.handleView.bind(this)}>
         <View style={{
           backgroundColor: Colors.white,
           borderTopWidth: 4,
@@ -19,7 +20,7 @@ export default class DemandMiniature extends Component {
           paddingVertical: 10,
           flex: 1,
         }}>
-          <DemandHeader {...this.props} />
+          <DemandHeader demand={demand} />
         </View>
         <DemandButtons {...this.props} />
       </TouchableOpacity>

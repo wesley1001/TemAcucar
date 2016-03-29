@@ -11,15 +11,9 @@ import TabBar from "../components/TabBar"
 import Tab from "../components/Tab"
 import NeighborsMap from "../components/NeighborsMap"
 import Demands from "../components/Demands"
-
-import TransactionsContainer from "../containers/TransactionsContainer"
+import TransactionDemands from "../components/TransactionDemands"
 
 export default class Dashboard extends Component {
-  constructor(props, context) {
-    super(props, context)
-    this.state = { loadTransactionDemands: false }
-  }
-
   componentWillMount() {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponderCapture: () => {
@@ -32,11 +26,11 @@ export default class Dashboard extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { onViewTransaction, dashboard } = nextProps
-    const { creatingTransaction, createTransactionError, createdTransaction } = dashboard
-    const oldCreatingTransaction = this.props.dashboard.creatingTransaction
-    if (oldCreatingTransaction && !creatingTransaction && !createTransactionError) {
-      onViewTransaction(createdTransaction)
+    const { onViewTransaction, transactions } = nextProps
+    const { creating, createError, lastCreated } = transactions
+    const oldCreating = this.props.transactions.creating
+    if (oldCreating && !creating && !createError) {
+      onViewTransaction(lastCreated)
     }
   }
 
@@ -48,18 +42,11 @@ export default class Dashboard extends Component {
     this.drawer.closeDrawer()
   }
 
-  handleChangeTab(tab) {
-    if (!this.state.loadTransactionDemands && tab.i === 1) {
-      this.setState({loadTransactionDemands: true})
-    }
-  }
-
   render() {
-    const { onDrawerOpen, onDrawerClose, onNewDemand } = this.props
+    const { users, demands, transactions, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onViewTransaction, onBack } = this.props
     const { drawerOpen } = this.props.dashboard
-    const { users } = this.props.neighbors
-    const { latitude, longitude } = this.props.auth.currentUser
-    const { loadTransactionDemands } = this.state
+    const { currentUser } = this.props.auth
+    const { latitude, longitude } = currentUser   
     const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
     return (
       <DrawerLayout
@@ -80,18 +67,37 @@ export default class Dashboard extends Component {
             <ScrollableTabView
               locked={true}
               renderTabBar={() => <TabBar />}
-              onChangeTab={this.handleChangeTab.bind(this)}
             >
               <Tab tabLabel="home">
-                { latitude && longitude && <NeighborsMap 
-                  latitude={latitude}
-                  longitude={longitude}
-                  users={users}
-                /> }
-                <Demands {...this.props} />
+                { latitude && longitude && 
+                  <NeighborsMap 
+                    latitude={latitude}
+                    longitude={longitude}
+                    users={users.list}
+                  /> 
+                }
+                <Demands
+                  {...this.props}
+                  demands={demands.list}
+                  listing={demands.listing}
+                  canList={demands.canList}
+                  onList={onListDemands}
+                  onAccept={onCreateTransaction}
+                  onRefuse={onRefuseDemand}
+                  onFlag={onFlagDemand}
+                  onView={onViewDemand}
+                />
               </Tab>
               <Tab tabLabel="chat">
-                <TransactionsContainer {...this.props} loadTransactionDemands={loadTransactionDemands} />
+                <TransactionDemands
+                  demands={transactions.list}
+                  listing={transactions.listing}
+                  canList={transactions.canList}
+                  onList={onListTransactions}
+                  onView={onViewTransaction}
+                  onBack={onBack}
+                  currentUser={currentUser}
+                />
               </Tab>
               <Tab tabLabel="notifications">
                 <Text>Notificações</Text>

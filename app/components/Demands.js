@@ -1,8 +1,4 @@
-import React, {
-  Component,
-  Text,
-  View,
-} from 'react-native'
+import React, { Component, View } from 'react-native'
 import GiftedSpinner from 'react-native-gifted-spinner'
 
 import Colors from "../Colors"
@@ -15,24 +11,23 @@ import NoDemands from "../components/NoDemands"
 
 export default class Demands extends Component {
   render() {
-    const { onLoadMoreDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onViewDemand } = this.props
-    const { demands, loadingDemands, canLoadMoreDemands } = this.props.dashboard
+    const { demands, listing, canList, onList, onAccept, onRefuse, onFlag, onView } = this.props
     return (
       <View>
         { demands.map(demand => (
           <DemandMiniature
             key={demand.id}
             demand={demand}
-            onFlagDemand={onFlagDemand}
-            onCreateTransaction={onCreateTransaction}
-            onRefuseDemand={onRefuseDemand}
-            onViewDemand={onViewDemand}
+            onAccept={onAccept}
+            onFlag={onFlag}
+            onRefuse={onRefuse}
+            onView={onView}
           />
         )) }
-        { loadingDemands && <GiftedSpinner style={{ marginTop: 20 }} /> }
-        { demands.length === 0 && !loadingDemands && <NoDemands /> }
-        { canLoadMoreDemands && !loadingDemands &&
-          <LoadMore onPress={onLoadMoreDemands} />
+        { listing && <GiftedSpinner style={{ marginTop: 20 }} /> }
+        { demands.length === 0 && !listing && <NoDemands /> }
+        { canList && !listing &&
+          <LoadMore onPress={onList} />
         }
       </View>
     )

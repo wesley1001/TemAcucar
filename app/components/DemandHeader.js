@@ -69,7 +69,7 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
       textAlign: 'center',
       color: Colors.pink,
       fontSize: 12,
-      lineHeight: (Platform.OS === 'ios' ? 12 : 16),
+      lineHeight: (Platform.OS === 'ios' ? 14 : 16),
       fontFamily: 'BoosterNextFY-Black',
     }}>
       { name.toUpperCase() }

@@ -2,12 +2,12 @@ import { apiAction } from './BasicActions'
 
 export function list(credentials, currentUser) {
   return apiAction({
-    prefix: 'NEIGHBORS_LIST',
+    prefix: 'USERS_LIST',
     path: '/users',
     credentials,
     currentUser: () => currentUser,
     processResponse: (response) => {
-      return { users: JSON.parse(response._bodyText) }
+      return { list: JSON.parse(response._bodyText) }
     },
   })
 }

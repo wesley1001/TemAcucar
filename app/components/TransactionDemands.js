@@ -6,17 +6,23 @@ import NoTransactionDemands from "../components/NoTransactionDemands"
 
 export default class TransactionDemands extends Component {
   render() {
-    const { onLoadMore, transactions } = this.props
-    const { demands, loading, canLoadMore } = transactions
+    const { onList, onView, onBack, demands, listing, canList, currentUser } = this.props
     return (
       <View >
         { demands.map((demand, index) => (
-          <TransactionDemand {...this.props} key={demand.id} demand={demand} index={index} />
+          <TransactionDemand
+            key={demand.id}
+            demand={demand}
+            index={index}
+            currentUser={currentUser}
+            onView={onView}
+            onBack={onBack}
+          />
         )) }
-        { loading && <GiftedSpinner style={{ marginTop: 20 }} /> }
-        { demands.length === 0 && !loading && <NoTransactionDemands /> }
-        { canLoadMore && !loading &&
-          <LoadMore onPress={onLoadMore} />
+        { listing && <GiftedSpinner style={{ marginTop: 20 }} /> }
+        { demands.length === 0 && !listing && <NoTransactionDemands /> }
+        { canList && !listing &&
+          <LoadMore onPress={onList} />
         }
       </View>
     )

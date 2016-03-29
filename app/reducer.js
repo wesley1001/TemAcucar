@@ -6,7 +6,8 @@ import terms from './reducers/terms'
 import config from './reducers/config'
 import location from './reducers/location'
 import dashboard from './reducers/dashboard'
-import neighbors from './reducers/neighbors'
+import users from './reducers/users'
+import demands from './reducers/demands'
 import transactions from './reducers/transactions'
 import messages from './reducers/messages'
 
@@ -18,7 +19,8 @@ const reducer = combineReducers({
   config,
   location,
   dashboard,
-  neighbors,
+  demands,
+  users,
   transactions,
   messages,
 })

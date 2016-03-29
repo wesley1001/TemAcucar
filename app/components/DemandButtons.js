@@ -3,14 +3,14 @@ import Colors from "../Colors"
 import Button from "./Button"
 
 export default class DemandButtons extends Component {
-  handleCreateTransaction() {
-    const { demand, onCreateTransaction } = this.props
-    onCreateTransaction(demand)
+  handleAccept() {
+    const { demand, onAccept } = this.props
+    onAccept(demand)
   }
 
   handleRefuse() {
-    const { demand, onRefuseDemand } = this.props
-    onRefuseDemand(demand)
+    const { demand, onRefuse } = this.props
+    onRefuse(demand)
   }
 
   handleFlag() {
@@ -18,8 +18,8 @@ export default class DemandButtons extends Component {
       'Pedido impróprio?',
       'Você tem certeza que quer denunciar este pedido como impróprio?',
       [{ text: 'Cancelar', style: 'cancel' }, { text: 'OK', onPress: () => {
-        const { demand, onFlagDemand } = this.props
-        onFlagDemand(demand)
+        const { demand, onFlag } = this.props
+        onFlag(demand)
       }}]
     )
   }
@@ -43,7 +43,7 @@ export default class DemandButtons extends Component {
         paddingTop: 0,
       }}>
         <Button
-          onPress={this.handleCreateTransaction.bind(this)}
+          onPress={this.handleAccept.bind(this)}
           isLoading={creatingTransaction}
           style={{
             flex: 1,
