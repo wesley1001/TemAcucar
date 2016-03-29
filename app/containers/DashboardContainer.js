@@ -104,7 +104,7 @@ class DashboardContainer extends Component {
 
   render() {
     const { users, demands, transactions } = this.props
-    if (users.listing || demands.listing || transactions.listing)
+    if (users.listing || (demands.listing && demands.list.length === 0) || (transactions.listing && transactions.list.length === 0))
       return (<Loading />)
     return (
       <DashboardRouter
