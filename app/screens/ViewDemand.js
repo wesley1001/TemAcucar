@@ -39,8 +39,9 @@ export default class ViewDemand extends Component {
           <View style={{
             flex: 1,
             alignSelf: 'stretch',
+            marginBottom: 20,
           }}>
-            <DemandHeader demand={demand} />
+            <DemandHeader demand={demand} fullDescription={true} />
           </View>
         </View>
         <DemandButtons

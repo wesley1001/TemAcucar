@@ -1,9 +1,12 @@
 import React, { View, Text, Platform } from 'react-native'
+import truncate from 'truncate'
+
 import Colors from "../Colors"
+import Sentence from "./Sentence"
 import UserImage from "./UserImage"
 import TimeAgo from "./TimeAgo"
 
-export default DemandHeader = ({ demand: { user, name, distance, created_at }}) => (
+export default DemandHeader = ({ fullDescription, demand: { user, name, description, distance, created_at }}) => (
   <View style={{
     alignItems: 'center',
     justifyContent: 'center',
@@ -16,7 +19,6 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
       borderWidth: 1,
       borderColor: Colors.beige,
       borderRadius: 12,
-      paddingVertical: 2,
     }}>
       <View style={{
         width: 90,
@@ -31,7 +33,9 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
           marginTop: 2,
           fontSize: 12,
         }} />
-        <TimeAgo time={created_at} />
+        <TimeAgo time={created_at} style={{
+          color: Colors.ice,
+        }} />
       </View>
       <View style={{
         width: 110,
@@ -47,7 +51,7 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
           fontSize: 12,
         }} />
         <Text style={{
-          color: Colors.brown,
+          color: Colors.ice,
           fontSize: 9,
           fontFamily: 'OpenSans',
         }}>
@@ -57,15 +61,16 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
     </View>
     <Text style={{
       textAlign: 'center',
-      color: Colors.brown,
+      color: Colors.ice,
       fontSize: 10,
-      fontFamily: 'BoosterNextFY-Regular',
+      lineHeight: (Platform.OS === 'ios' ? 12 : 14),
+      fontFamily: 'BoosterNextFY-Bold',
       marginTop: 14,
     }}>
       {user.first_name} precisa de um(a)
     </Text>
     <Text style={{
-      marginTop: 4,
+      marginHorizontal: 10,
       textAlign: 'center',
       color: Colors.pink,
       fontSize: 12,
@@ -74,6 +79,16 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
     }}>
       { name.toUpperCase() }
     </Text>
+    <Sentence style={{
+      fontSize: 10,
+      marginHorizontal: 10,
+      marginTop: 4,
+      lineHeight: (Platform.OS === 'ios' ? 10 : 12),
+      fontFamily: 'BoosterNextFY-Regular',
+      textAlign: 'center',
+    }}>
+      { fullDescription ? description : truncate(description, 120) }
+    </Sentence>
     <View style={{
       position: 'absolute',
       top: 0,
@@ -82,7 +97,7 @@ export default DemandHeader = ({ demand: { user, name, distance, created_at }}) 
       alignItems: 'center',
       justifyContent: 'center',
     }}>
-      <UserImage source={{uri: user.image_url}} style={{marginBottom: 6}} />
+      <UserImage source={{uri: user.image_url}} />
     </View>
   </View>
 )
