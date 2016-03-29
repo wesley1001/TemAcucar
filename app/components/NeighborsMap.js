@@ -2,13 +2,14 @@ import React, { View } from 'react-native'
 import MapView from 'react-native-maps'
 import Colors from "../Colors"
 
-export default NeighborsMap = ({ neighbors: { loading, users }, auth: { currentUser: { latitude, longitude } }}) => (
+export default NeighborsMap = ({ latitude, longitude, users }) => (
   <View>
     <View style={{
       backgroundColor: Colors.beige,
       height: 150,
     }}>
       <MapView
+        showsUserLocation={false}
         style={{
           height: 150,
           alignSelf: 'stretch',
@@ -33,17 +34,27 @@ export default NeighborsMap = ({ neighbors: { loading, users }, auth: { currentU
       </MapView>
     </View>
     <View style={{
-      backgroundColor: Colors.lightPink,
-      paddingVertical: 8,
+      position: 'absolute',
+      bottom: 10,
+      left: 0,
+      right: 0,
+      alignItems: 'center',
     }}>
-      <Sentence style={{
-        color: Colors.white, 
-        fontFamily: 'OpenSans-Bold', 
-        textAlign: 'center',
-        fontSize: 12,
+      <View style={{
+        backgroundColor: Colors.lightPink,
+        paddingVertical: 4,
+        paddingHorizontal: 30,
+        borderRadius: 12,
       }}>
-        { loading ? "Carregando vizinhança..." : `${users.length} pessoas em sua vizinhança` }
-      </Sentence>
+        <Sentence style={{
+          color: Colors.white, 
+          fontFamily: 'OpenSans-Bold', 
+          textAlign: 'center',
+          fontSize: 12,
+        }}>
+          { `${users.length} vizinhos` }
+        </Sentence>
+      </View>
     </View>
   </View>
 )

@@ -2,9 +2,11 @@ import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import * as DashboardActions from '../actions/DashboardActions'
 import * as NeighborsActions from '../actions/NeighborsActions'
+import * as TransactionsActions from '../actions/TransactionsActions'
 import * as MessagesActions from '../actions/MessagesActions'
 import { Actions } from 'react-native-router-flux'
 
+import Loading from "../screens/Loading"
 import DashboardRouter from "../routers/DashboardRouter"
 
 class DashboardContainer extends Component {
@@ -68,19 +70,33 @@ class DashboardContainer extends Component {
     Actions.viewCreatedDemand({ demand: createdDemand })
   }
 
+  handleViewCreatedTransaction() {
+    const { createdTransaction } = this.props.dashboard
+    Actions.viewCreatedTransaction({ transaction: createdTransaction })
+  }
+
   handleCreateDemand(demand) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
     dispatch(DashboardActions.createDemand(credentials, currentUser, demand))
   }
 
+  handleCreateTransaction(demand) {
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(TransactionsActions.create(credentials, currentUser, demand))
+  }
+
   handleCreateMessage(message) {
-    const { dispatch, auth, transaction } = this.props
+    const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
     dispatch(MessagesActions.create(credentials, currentUser, message))
   }
 
   render() {
+    const { neighbors, dashboard } = this.props
+    if (neighbors.loading || dashboard.loadingDemands)
+      return (<Loading />)
     return (
       <DashboardRouter
         {...this.props}
@@ -96,6 +112,8 @@ class DashboardContainer extends Component {
         onCreateDemand={this.handleCreateDemand.bind(this)}
         onViewCreatedDemand={this.handleViewCreatedDemand.bind(this)}
         onViewTransaction={this.handleViewTransaction.bind(this)}
+        onCreateTransaction={this.handleCreateTransaction.bind(this)}
+        onViewCreatedTransaction={this.handleViewCreatedTransaction.bind(this)}
         onCreateMessage={this.handleCreateMessage.bind(this)}
       />
     )

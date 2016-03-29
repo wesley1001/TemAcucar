@@ -53,7 +53,7 @@ class NewDemand extends Component {
         <Form>
           <Headline style={{
             fontSize: 20,
-            marginTop: 20,
+            marginTop: 30,
             marginBottom: 20,
           }}>
             O que você precisa?

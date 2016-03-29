@@ -15,6 +15,11 @@ import Demands from "../components/Demands"
 import TransactionsContainer from "../containers/TransactionsContainer"
 
 export default class Dashboard extends Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = { loadTransactionDemands: false }
+  }
+
   componentWillMount() {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponderCapture: () => {
@@ -26,6 +31,15 @@ export default class Dashboard extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { onViewTransaction, dashboard } = nextProps
+    const { creatingTransaction, createTransactionError, createdTransaction } = dashboard
+    const oldCreatingTransaction = this.props.dashboard.creatingTransaction
+    if (oldCreatingTransaction && !creatingTransaction && !createTransactionError) {
+      onViewTransaction(createdTransaction)
+    }
+  }
+
   handleMenuOpen() {
     this.drawer.openDrawer()
   }
@@ -34,10 +48,18 @@ export default class Dashboard extends Component {
     this.drawer.closeDrawer()
   }
 
+  handleChangeTab(tab) {
+    if (!this.state.loadTransactionDemands && tab.i === 1) {
+      this.setState({loadTransactionDemands: true})
+    }
+  }
+
   render() {
     const { onDrawerOpen, onDrawerClose, onNewDemand } = this.props
     const { drawerOpen } = this.props.dashboard
+    const { users } = this.props.neighbors
     const { latitude, longitude } = this.props.auth.currentUser
+    const { loadTransactionDemands } = this.state
     const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
     return (
       <DrawerLayout
@@ -58,13 +80,18 @@ export default class Dashboard extends Component {
             <ScrollableTabView
               locked={true}
               renderTabBar={() => <TabBar />}
+              onChangeTab={this.handleChangeTab.bind(this)}
             >
-              <Tab tabLabel="chat">
-                <TransactionsContainer {...this.props} />
-              </Tab>
               <Tab tabLabel="home">
-                { latitude && longitude && <NeighborsMap {...this.props} /> }
+                { latitude && longitude && <NeighborsMap 
+                  latitude={latitude}
+                  longitude={longitude}
+                  users={users}
+                /> }
                 <Demands {...this.props} />
+              </Tab>
+              <Tab tabLabel="chat">
+                <TransactionsContainer {...this.props} loadTransactionDemands={loadTransactionDemands} />
               </Tab>
               <Tab tabLabel="notifications">
                 <Text>Notificações</Text>
@@ -85,7 +112,16 @@ export default class Dashboard extends Component {
                 padding: 10,
                 paddingTop: 50,
               }}>
-              <Button onPress={onNewDemand} style={{alignSelf: 'stretch'}}>
+              <Button
+                onPress={onNewDemand}
+                style={{
+                  alignSelf: 'stretch',
+                }}
+                textStyle={{
+                  fontSize: 16,
+                  lineHeight: 20,
+                }}
+              >
                 Pedir
               </Button>
             </LinearGradient>

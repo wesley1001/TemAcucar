@@ -1,9 +1,4 @@
-import React, {
-  Component,
-  Text,
-  View,
-  ScrollView,
-} from 'react-native'
+import React, { Component, View, ScrollView, Platform } from 'react-native'
 
 import Colors from "../Colors"
 import Button from "../components/Button"
@@ -18,9 +13,9 @@ export default Terms = ({ onAcceptTerms, onRejectTerms, onScroll, scrolledToBott
     alignItems: 'center',
     backgroundColor: Colors.beige,
     padding: 20,
-    paddingTop: 40,
+    paddingTop: (Platform.OS === 'ios' ? 40 : 20),
   }}>
-    <Headline style={{marginBottom: 20}}>Termos de uso</Headline>
+    <Headline style={{marginBottom: 10}}>Termos de uso</Headline>
     <ScrollView
       style={{
         alignSelf: 'stretch',
@@ -302,7 +297,7 @@ export default Terms = ({ onAcceptTerms, onRejectTerms, onScroll, scrolledToBott
         Todos os itens destes Termos e Condições Gerais estão regidos pelas leis vigentes na República Federativa do Brasil. Para todos os assuntos referentes à interpretação e ao cumprimento deste Contrato, as partes se submetem ao Foro Central da Comarca do Rio de Janeiro, estado do Rio de Janeiro.
       </Paragraph>
     </ScrollView>
-    <TextBox style={{height: 60, textAlign: 'center', fontFamily: 'Montserrat-Bold'}}>
+    <TextBox style={{height: 60, fontFamily: 'BoosterNextFY-Bold'}}>
       { (scrolledToBottom ? 'Para continuar, aceite os termos de uso.' : 'Para continuar, leia os termos de uso até o final.') }
     </TextBox>
     <View style={{

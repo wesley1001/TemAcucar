@@ -5,17 +5,18 @@ import * as TransactionsActions from '../actions/TransactionsActions'
 import TransactionDemands from "../components/TransactionDemands"
 
 class TransactionsContainer extends Component {
-  componentWillMount() {
-    this.handleList()
-  }
-
   componentWillReceiveProps(nextProps) {
-    const { dispatch, auth, transactions } = nextProps
+    const { dispatch, auth, transactions, loadTransactionDemands } = nextProps
     const { credentials, currentUser } = auth
-    const { loadTransactions, demands } = transactions
+    const { loading, loadTransactions, demands } = transactions
+    if(loadTransactionDemands && demands.length === 0 && !loading) {
+      this.handleList()
+    }
     if(loadTransactions) {
       demands.map(demand => {
-        dispatch(TransactionsActions.listTransactions(credentials, currentUser, demand))
+        if (demand.transactions.length === 0) {
+          dispatch(TransactionsActions.listTransactions(credentials, currentUser, demand))
+        }
       })
     }
   }

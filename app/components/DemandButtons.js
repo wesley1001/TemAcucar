@@ -3,6 +3,11 @@ import Colors from "../Colors"
 import Button from "./Button"
 
 export default class DemandButtons extends Component {
+  handleCreateTransaction() {
+    const { demand, onCreateTransaction } = this.props
+    onCreateTransaction(demand)
+  }
+
   handleRefuse() {
     const { demand, onRefuseDemand } = this.props
     onRefuseDemand(demand)
@@ -20,21 +25,37 @@ export default class DemandButtons extends Component {
   }
 
   render() {
+    const { demands } = this.props
+    // This is a hack to update creatingTransaction of demand on ViewDemand
+    let demand
+    if (demands) {
+      const viewDemand = this.props.demand
+      demand = demands.filter(demand => demand.id === viewDemand.id)[0] || viewDemand
+    } else {
+      demand = this.props.demand
+    }
+    const { creatingTransaction } = demand
     return (
       <View style={{
         alignSelf: 'stretch',
         flexDirection: 'row',
+        padding: 10,
+        paddingTop: 0,
       }}>
         <Button
+          onPress={this.handleCreateTransaction.bind(this)}
+          isLoading={creatingTransaction}
           style={{
             flex: 1,
-            paddingVertical: 18,
+            paddingVertical: 0,
+            height: 30,
           }}
           textStyle={{
             fontSize: 12,
+            lineHeight: 16,
           }}
         >
-          Emprestar
+          Ajudar
         </Button>
         <Button
           onPress={this.handleRefuse.bind(this)}
@@ -42,24 +63,29 @@ export default class DemandButtons extends Component {
             flex: 1,
             backgroundColor: Colors.blue,
             borderColor: Colors.darkBlue,
-            paddingVertical: 18,
+            paddingVertical: 0,
+            height: 30,
+            marginHorizontal: 4,
           }}
           textStyle={{
             fontSize: 12,
+            lineHeight: 16,
           }}
         >
-          Não tenho
+          Não posso
         </Button>
         <Button
           onPress={this.handleFlag.bind(this)}
           style={{
-            flex: 1.01,
+            flex: 1,
             backgroundColor: Colors.ice,
             borderColor: Colors.darkIce,
-            paddingVertical: 18,
+            paddingVertical: 0,
+            height: 30,
           }}
           textStyle={{
             fontSize: 12,
+            lineHeight: 16,
           }}
         >
           Denunciar

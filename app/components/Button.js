@@ -9,8 +9,9 @@ export default Button = (props) => (
     textStyle={[{
       textAlign: 'center',
       color: Colors.white,
-      fontSize: 12,
-      fontFamily: 'Montserrat-Bold',
+      fontSize: 14,
+      fontFamily: 'BoosterNextFY-Black',
+      lineHeight: 20,
     }, props.textStyle]}
     disabledStyle={[{
       backgroundColor: Colors.gray,
@@ -19,15 +20,13 @@ export default Button = (props) => (
     style={[{
       alignSelf: 'center',
       borderWidth: 0,
-      borderRadius: 0,
+      borderRadius: 6,
       paddingHorizontal: 40,
-      paddingVertical: 24,
+      paddingVertical: 8,
       backgroundColor: Colors.pink,
-      borderBottomWidth: 3,
-      borderColor: Colors.darkPink,
       marginBottom: 0,
     }, props.style]}
   >
-    {props.children.toUpperCase()}
+    {props.children}
   </ReactNativeButton>
 )

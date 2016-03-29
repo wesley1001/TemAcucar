@@ -24,7 +24,7 @@ export default TransactionDemandFooter = ({ demand: { state }}) => (
         marginRight: 6,
       }} />
       <Sentence style={{
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'BoosterNextFY-Bold',
         fontSize: 8,
         lineHeight: 10,
         color: Colors.white,

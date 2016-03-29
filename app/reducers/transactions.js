@@ -1,6 +1,6 @@
 const initialState = {
   demands: [],
-  loading: true,
+  loading: false,
   loadTransactions: false,
   offset: 0,
   canLoadMore: false,
@@ -49,6 +49,17 @@ export default function transactions(state = initialState, action) {
             return demand
           }
         }),
+      }
+    case 'TRANSACTIONS_CREATE_SUCCESS':
+      const { transaction } = action
+      return {
+        ...state, 
+        demands: [{
+          ...transaction.demand,
+          transactions: [transaction],
+        }].concat(state.demands),
+        offset: state.offset + 1,
+        creating: false,
       }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState

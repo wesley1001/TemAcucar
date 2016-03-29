@@ -5,7 +5,7 @@ export default Sentence = (props) => (
   <Text style={[{
     color: Colors.brown,
     fontFamily: 'OpenSans',
-    fontSize: 16,
+    fontSize: 14,
   }, props.style]}>
     {props.children}
   </Text>

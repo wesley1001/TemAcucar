@@ -6,7 +6,9 @@ import createLogger from 'redux-logger'
 import reducer from '../reducer'
 import VersionChecker from './VersionChecker'
 
-const loggerMiddleware = createLogger()
+const loggerMiddleware = createLogger({
+  predicate: (getState, action) => __DEV__
+})
 
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware,

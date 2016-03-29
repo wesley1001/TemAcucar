@@ -22,6 +22,11 @@ export default function messages(state = initialState, action) {
         offset: state.offset + action.messages.length,
         canLoadMore: (action.messages.length >= 10 ? true : false),
       }
+    case 'MESSAGES_LIST_FAILURE':
+      return {
+        ...state, 
+        loading: false,
+      }
     case 'MESSAGES_CREATE_REQUEST':
       return {
         ...state,
@@ -38,11 +43,6 @@ export default function messages(state = initialState, action) {
       return {
         ...state,
         creating: false,
-      }
-    case 'MESSAGES_LIST_FAILURE':
-      return {
-        ...state, 
-        loading: false,
       }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState

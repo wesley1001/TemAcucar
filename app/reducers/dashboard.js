@@ -7,6 +7,9 @@ const initialState = {
   creatingDemand: false,
   createDemandError: null,
   createdDemand: null,
+  creatingTransaction: false,
+  createTransactionError: null,
+  createdTransaction: null,
 }
 
 export default function dashboard(state = initialState, action) {
@@ -69,10 +72,45 @@ export default function dashboard(state = initialState, action) {
         creatingDemand: false,
         createDemandError: action.error,
       }
+    case 'TRANSACTIONS_CREATE_REQUEST':
+      return {
+        ...state, 
+        demands: state.demands.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, creatingTransaction: true}
+          } else {
+            return demand
+          }
+        }),
+        creatingTransaction: true,
+      }
+    case 'TRANSACTIONS_CREATE_SUCCESS':
+      return {
+        ...state, 
+        demands: state.demands.filter(demand => action.transaction.demand.id !== demand.id),
+        demandsOffset: state.demandsOffset - 1,
+        createTransactionError: null,
+        creatingTransaction: false,
+        createdTransaction: action.transaction,
+      }
+    case 'TRANSACTIONS_CREATE_FAILURE':
+      return {
+        ...state, 
+        demands: state.demands.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, creatingTransaction: false}
+          } else {
+            return demand
+          }
+        }),
+        createTransactionError: action.error,
+        creatingTransaction: false,
+      }
     case 'AFTER_ROUTER_ROUTE':
       return {
         ...state, 
         createdDemand: null,
+        createdTransaction: null,
       }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState
