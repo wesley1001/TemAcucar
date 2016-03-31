@@ -24,7 +24,7 @@ export default class Demands extends Component {
             onView={onView}
           />
         )) }
-        { listing && <GiftedSpinner style={{ marginTop: 20 }} /> }
+        { listing && <GiftedSpinner style={{ marginTop: 10 }} /> }
         { demands.length === 0 && !listing && <NoDemands /> }
         { canList && !listing &&
           <LoadMore onPress={onList} />

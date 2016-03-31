@@ -19,7 +19,7 @@ export default class TransactionDemands extends Component {
             onBack={onBack}
           />
         )) }
-        { listing && <GiftedSpinner style={{ marginTop: 20 }} /> }
+        { listing && <GiftedSpinner style={{ marginTop: 10 }} /> }
         { demands.length === 0 && !listing && <NoTransactionDemands /> }
         { canList && !listing &&
           <LoadMore onPress={onList} />
