@@ -6,6 +6,6 @@ import TextBox from "../components/TextBox"
 export default Loading = ({ status }) => (
   <SimpleScreen>
     <TextBox style={{ height: 50, lineHeight: 20 }}>{status}</TextBox>
-    <GiftedSpinner style={{ marginBottom: 20 }} />
+    <GiftedSpinner style={{ marginVertical: 20 }} />
   </SimpleScreen>
 )
