@@ -104,8 +104,12 @@ class DashboardContainer extends Component {
 
   render() {
     const { users, demands, transactions } = this.props
-    if (users.listing || (demands.listing && demands.list.length === 0) || (transactions.listing && transactions.list.length === 0))
-      return (<Loading />)
+    if (demands.listing && demands.list.length === 0)
+      return (<Loading status="Carregando pedidos na sua vizinhança..." />)
+    if (transactions.listing && transactions.list.length === 0)
+      return (<Loading status="Carregando seu histórico de transações..." />)
+    if (users.listing)
+      return (<Loading status="Carregando mapa com seus vizinhos..." />)
     return (
       <DashboardRouter
         {...this.props}
