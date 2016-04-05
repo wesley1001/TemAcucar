@@ -57,3 +57,45 @@ export function create(credentials, currentUser, demand) {
     },
   })
 }
+
+export function complete(credentials, currentUser, demand) {
+  return apiAction({
+    prefix: 'DEMANDS_COMPLETE',
+    path: `/demands/${demand.id}/complete`,
+    method: 'put',
+    requestAttributes: { demand },
+    credentials,
+    currentUser: () => currentUser,
+    processResponse: (response) => {
+      return { demand: JSON.parse(response._bodyText) }
+    },
+  })
+}
+
+export function cancel(credentials, currentUser, demand) {
+  return apiAction({
+    prefix: 'DEMANDS_CANCEL',
+    path: `/demands/${demand.id}/cancel`,
+    method: 'put',
+    requestAttributes: { demand },
+    credentials,
+    currentUser: () => currentUser,
+    processResponse: (response) => {
+      return { demand: JSON.parse(response._bodyText) }
+    },
+  })
+}
+
+export function reactivate(credentials, currentUser, demand) {
+  return apiAction({
+    prefix: 'DEMANDS_REACTIVATE',
+    path: `/demands/${demand.id}/reactivate`,
+    method: 'put',
+    requestAttributes: { demand },
+    credentials,
+    currentUser: () => currentUser,
+    processResponse: (response) => {
+      return { demand: JSON.parse(response._bodyText) }
+    },
+  })
+}

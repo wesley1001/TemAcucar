@@ -3,7 +3,7 @@ import Colors from "../Colors"
 import Headline from "../components/Headline"
 import Demands from "../components/Demands"
 
-export default UserDemands = ({ auth: {currentUser}, userDemands, onListUserDemands, onViewDemand }) => (
+export default UserDemands = ({ auth: {currentUser}, userDemands, onListUserDemands, onCompleteDemand, onCancelDemand, onReactivateDemand, onViewDemand }) => (
   <ScrollView style={{
     flex: 1,
     backgroundColor: Colors.beige,
@@ -16,6 +16,9 @@ export default UserDemands = ({ auth: {currentUser}, userDemands, onListUserDema
       listing={userDemands.listing}
       canList={userDemands.canList}
       onList={onListUserDemands}
+      onComplete={onCompleteDemand}
+      onCancel={onCancelDemand}
+      onReactivate={onReactivateDemand}
       onView={onViewDemand}
     />
   </ScrollView>

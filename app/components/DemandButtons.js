@@ -1,6 +1,6 @@
 import React, { Component, Alert, View } from 'react-native'
 import Colors from "../Colors"
-import Button from "./Button"
+import DemandButton from "./DemandButton"
 
 export default class DemandButtons extends Component {
   handleAccept() {
@@ -43,54 +43,27 @@ export default class DemandButtons extends Component {
         padding: 10,
         paddingTop: 0,
       }}>
-        <Button
+        <DemandButton
           onPress={this.handleAccept.bind(this)}
           isLoading={creatingTransaction}
-          style={{
-            flex: 1,
-            paddingVertical: 0,
-            height: 30,
-          }}
-          textStyle={{
-            fontSize: 12,
-            lineHeight: 16,
-          }}
         >
           Ajudar
-        </Button>
-        <Button
+        </DemandButton>
+        <DemandButton
           onPress={this.handleRefuse.bind(this)}
           style={{
-            flex: 1,
             backgroundColor: Colors.blue,
-            borderColor: Colors.darkBlue,
-            paddingVertical: 0,
-            height: 30,
             marginHorizontal: 4,
-          }}
-          textStyle={{
-            fontSize: 12,
-            lineHeight: 16,
           }}
         >
           Não posso
-        </Button>
-        <Button
+        </DemandButton>
+        <DemandButton
           onPress={this.handleFlag.bind(this)}
-          style={{
-            flex: 1,
-            backgroundColor: Colors.ice,
-            borderColor: Colors.darkIce,
-            paddingVertical: 0,
-            height: 30,
-          }}
-          textStyle={{
-            fontSize: 12,
-            lineHeight: 16,
-          }}
+          style={{ backgroundColor: Colors.ice }}
         >
           Denunciar
-        </Button>
+        </DemandButton>
       </View>
     )
   }

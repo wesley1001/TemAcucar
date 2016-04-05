@@ -31,6 +31,39 @@ export default function userDemands(state = initialState, action) {
         list: [action.demand].concat(state.list),
         offset: state.offset + 1,
       }
+    case 'DEMANDS_COMPLETE_SUCCESS':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return action.demand
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_CANCEL_SUCCESS':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return action.demand
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_REACTIVATE_SUCCESS':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return action.demand
+          } else {
+            return demand
+          }
+        }),
+      }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState
     default:

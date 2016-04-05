@@ -4,6 +4,7 @@ import Colors from "../Colors"
 import Sentence from "../components/Sentence"
 import DemandHeader from "../components/DemandHeader"
 import DemandButtons from "../components/DemandButtons"
+import DemandUserButtons from "../components/DemandUserButtons"
 
 export default class ViewDemand extends Component {
   componentWillReceiveProps(nextProps) {
@@ -24,7 +25,7 @@ export default class ViewDemand extends Component {
   }
 
   render() {
-    const { auth: { currentUser }, demand, demands, onFlagDemand, onCreateTransaction, onRefuseDemand } = this.props
+    const { auth: { currentUser }, demand, demands, userDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onCompleteDemand, onCancelDemand, onReactivateDemand } = this.props
     return (
       <View style={{
         flex: 1,
@@ -43,18 +44,27 @@ export default class ViewDemand extends Component {
           }}>
             <DemandHeader
               demand={demand}
+              demands={currentUser.id === demand.user.id ? userDemands.list : demands.list}
               currentUser={currentUser}
-              fullDescription={true} />
+              fullHeader={true} />
           </View>
         </View>
-        <DemandButtons
+        { currentUser.id !== demand.user.id && <DemandButtons
           currentUser={currentUser}
           demand={demand}
           demands={demands.list}
           onAccept={onCreateTransaction}
           onRefuse={onRefuseDemand}
           onFlag={onFlagDemand}
-        />
+        /> }
+        { currentUser.id === demand.user.id && <DemandUserButtons
+          currentUser={currentUser}
+          demand={demand}
+          demands={userDemands.list}
+          onComplete={onCompleteDemand}
+          onCancel={onCancelDemand}
+          onReactivate={onReactivateDemand}
+        /> }
       </View>
     )
   }

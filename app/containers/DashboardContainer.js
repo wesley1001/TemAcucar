@@ -63,6 +63,24 @@ class DashboardContainer extends Component {
     dispatch(DemandsActions.flag(credentials, currentUser, demand))
   }
 
+  handleCompleteDemand(demand) {
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(DemandsActions.complete(credentials, currentUser, demand))
+  }
+
+  handleCancelDemand(demand) {
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(DemandsActions.cancel(credentials, currentUser, demand))
+  }
+
+  handleReactivateDemand(demand) {
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(DemandsActions.reactivate(credentials, currentUser, demand))
+  }
+
   handleNewDemand() {
     Actions.newDemand()
   }
@@ -135,6 +153,9 @@ class DashboardContainer extends Component {
         onViewDemand={this.handleViewDemand.bind(this)}
         onRefuseDemand={this.handleRefuseDemand.bind(this)}
         onFlagDemand={this.handleFlagDemand.bind(this)}
+        onCompleteDemand={this.handleCompleteDemand.bind(this)}
+        onCancelDemand={this.handleCancelDemand.bind(this)}
+        onReactivateDemand={this.handleReactivateDemand.bind(this)}
         onListDemands={this.handleListDemands.bind(this)}
         onListUserDemands={this.handleListUserDemands.bind(this)}
         onListTransactions={this.handleListTransactions.bind(this)}

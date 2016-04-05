@@ -2,6 +2,7 @@ import React, { Component, View, TouchableOpacity } from 'react-native'
 import Colors from "../Colors"
 import DemandHeader from "./DemandHeader"
 import DemandButtons from "./DemandButtons"
+import DemandUserButtons from "./DemandUserButtons"
 
 export default class DemandMiniature extends Component {
   handleView() {
@@ -22,7 +23,8 @@ export default class DemandMiniature extends Component {
         }}>
           <DemandHeader {...this.props} />
         </View>
-        <DemandButtons {...this.props} />
+        { currentUser.id !== demand.user.id && <DemandButtons {...this.props} /> }
+        { currentUser.id === demand.user.id && <DemandUserButtons {...this.props} /> }
       </TouchableOpacity>
     )
   }

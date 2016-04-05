@@ -11,7 +11,7 @@ import NoDemands from "../components/NoDemands"
 
 export default class Demands extends Component {
   render() {
-    const { demands, currentUser, listing, canList, onList, onAccept, onRefuse, onFlag, onView } = this.props
+    const { demands, currentUser, listing, canList, onList, onAccept, onRefuse, onFlag, onComplete, onCancel, onReactivate, onView } = this.props
     return (
       <View>
         { demands.map(demand => (
@@ -22,6 +22,9 @@ export default class Demands extends Component {
             onAccept={onAccept}
             onFlag={onFlag}
             onRefuse={onRefuse}
+            onComplete={onComplete}
+            onCancel={onCancel}
+            onReactivate={onReactivate}
             onView={onView}
           />
         )) }
