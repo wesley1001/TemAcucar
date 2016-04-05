@@ -34,7 +34,7 @@ export default class DemandUserButtons extends Component {
     } else {
       demand = this.props.demand
     }
-    const { state } = demand
+    const { state, completing, canceling, reactivating } = demand
     const canComplete = (state === 'sending' || state === 'active')
     const canCancel = (state === 'sending' || state === 'active')
     const canReactivate = (state === 'completed' || state === 'canceled')
@@ -48,18 +48,21 @@ export default class DemandUserButtons extends Component {
       }}>
         { canComplete && <DemandButton
           onPress={this.handleComplete.bind(this)}
+          isLoading={completing}
           style={{ backgroundColor: Colors.green }}
         >
           Já consegui
         </DemandButton> }
         { canCancel && <DemandButton
           onPress={this.handleCancel.bind(this)}
+          isLoading={canceling}
           style={{ backgroundColor: Colors.ice, marginLeft: 4 }}
         >
           Cancelar pedido
         </DemandButton> }
         { canReactivate && <DemandButton
           onPress={this.handleReactivate.bind(this)}
+          isLoading={reactivating}
           style={{ backgroundColor: Colors.ice, marginLeft: 4 }}
         >
           Reativar pedido

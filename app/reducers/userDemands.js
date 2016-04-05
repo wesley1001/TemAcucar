@@ -31,12 +31,45 @@ export default function userDemands(state = initialState, action) {
         list: [action.demand].concat(state.list),
         offset: state.offset + 1,
       }
+    case 'DEMANDS_COMPLETE_REQUEST':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, completing: true}
+          } else {
+            return demand
+          }
+        }),
+      }
     case 'DEMANDS_COMPLETE_SUCCESS':
       return {
         ...state, 
         list: state.list.map(demand => {
           if (demand.id === action.demand.id) {
             return action.demand
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_COMPLETE_FAILURE':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, completing: false}
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_CANCEL_REQUEST':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, canceling: true}
           } else {
             return demand
           }
@@ -53,12 +86,45 @@ export default function userDemands(state = initialState, action) {
           }
         }),
       }
+    case 'DEMANDS_CANCEL_FAILURE':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, canceling: false}
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_REACTIVATE_REQUEST':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, reactivating: true}
+          } else {
+            return demand
+          }
+        }),
+      }
     case 'DEMANDS_REACTIVATE_SUCCESS':
       return {
         ...state, 
         list: state.list.map(demand => {
           if (demand.id === action.demand.id) {
             return action.demand
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_REACTIVATE_FAILURE':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, reactivating: false}
           } else {
             return demand
           }
