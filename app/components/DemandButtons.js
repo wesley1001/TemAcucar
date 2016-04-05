@@ -37,6 +37,7 @@ export default class DemandButtons extends Component {
     const { creatingTransaction } = demand
     return (
       <View style={{
+        backgroundColor: Colors.white,
         alignSelf: 'stretch',
         flexDirection: 'row',
         padding: 10,

@@ -24,7 +24,7 @@ export default class ViewDemand extends Component {
   }
 
   render() {
-    const { demand, demands, onFlagDemand, onCreateTransaction, onRefuseDemand } = this.props
+    const { auth: { currentUser }, demand, demands, onFlagDemand, onCreateTransaction, onRefuseDemand } = this.props
     return (
       <View style={{
         flex: 1,
@@ -41,10 +41,14 @@ export default class ViewDemand extends Component {
             alignSelf: 'stretch',
             marginBottom: 20,
           }}>
-            <DemandHeader demand={demand} fullDescription={true} />
+            <DemandHeader
+              demand={demand}
+              currentUser={currentUser}
+              fullDescription={true} />
           </View>
         </View>
         <DemandButtons
+          currentUser={currentUser}
           demand={demand}
           demands={demands.list}
           onAccept={onCreateTransaction}

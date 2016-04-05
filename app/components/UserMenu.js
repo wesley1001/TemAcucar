@@ -3,7 +3,7 @@ import Colors from "../Colors"
 import Sentence from "./Sentence"
 import UserMenuItem from "./UserMenuItem"
 
-export default UserMenu = ({ auth: { currentUser }, onSignOut }) => (
+export default UserMenu = ({ currentUser, onSignOut, onUserDemands }) => (
   <View style={{
     flex: 1,
     justifyContent: 'flex-start',
@@ -33,7 +33,7 @@ export default UserMenu = ({ auth: { currentUser }, onSignOut }) => (
         </Sentence>
       </View>
     </View>
-    <UserMenuItem onPress={onSignOut} icon="list">
+    <UserMenuItem onPress={onUserDemands} icon="list">
       Meus pedidos
     </UserMenuItem>
     <UserMenuItem onPress={onSignOut} icon="power-settings-new">

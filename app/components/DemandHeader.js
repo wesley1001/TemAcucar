@@ -6,7 +6,7 @@ import Sentence from "./Sentence"
 import UserImage from "./UserImage"
 import TimeAgo from "./TimeAgo"
 
-export default DemandHeader = ({ fullDescription, demand: { user, name, description, distance, created_at }}) => (
+export default DemandHeader = ({ fullDescription, currentUser, demand: { user, name, description, distance, created_at }}) => (
   <View style={{
     alignItems: 'center',
     justifyContent: 'center',
@@ -67,7 +67,7 @@ export default DemandHeader = ({ fullDescription, demand: { user, name, descript
       fontFamily: 'BoosterNextFY-Bold',
       marginTop: 14,
     }}>
-      {user.first_name} precisa de um(a)
+      { currentUser.id === user.id ? 'Você' : user.first_name } precisa de um(a)
     </Text>
     <Text style={{
       marginHorizontal: 10,

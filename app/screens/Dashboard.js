@@ -43,11 +43,16 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { users, demands, transactions, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onViewTransaction, onBack } = this.props
+    const { users, demands, transactions, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onViewTransaction, onSignOut, onUserDemands, onBack } = this.props
     const { drawerOpen } = this.props.dashboard
     const { currentUser } = this.props.auth
     const { latitude, longitude } = currentUser   
-    const userMenu = (<UserMenu {...this.props} onClose={this.handleMenuClose.bind(this)} />)
+    const userMenu = (<UserMenu 
+      currentUser={currentUser}
+      onSignOut={onSignOut}
+      onUserDemands={onUserDemands}
+      onClose={this.handleMenuClose.bind(this)}
+    />)
     return (
       <DrawerLayout
         drawerWidth={Dimensions.get('window').width * 0.9}
@@ -77,7 +82,7 @@ export default class Dashboard extends Component {
                   /> 
                 }
                 <Demands
-                  {...this.props}
+                  currentUser={currentUser}
                   demands={demands.list}
                   listing={demands.listing}
                   canList={demands.canList}
@@ -90,13 +95,13 @@ export default class Dashboard extends Component {
               </Tab>
               <Tab tabLabel="chat">
                 <TransactionDemands
+                  currentUser={currentUser}
                   demands={transactions.list}
                   listing={transactions.listing}
                   canList={transactions.canList}
                   onList={onListTransactions}
                   onView={onViewTransaction}
                   onBack={onBack}
-                  currentUser={currentUser}
                 />
               </Tab>
               <Tab tabLabel="notifications">

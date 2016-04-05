@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as DashboardActions from '../actions/DashboardActions'
 import * as UsersActions from '../actions/UsersActions'
 import * as DemandsActions from '../actions/DemandsActions'
+import * as UserDemandsActions from '../actions/UserDemandsActions'
 import * as TransactionsActions from '../actions/TransactionsActions'
 import * as MessagesActions from '../actions/MessagesActions'
 import { Actions } from 'react-native-router-flux'
@@ -15,6 +16,7 @@ class DashboardContainer extends Component {
     const { dispatch, auth: { credentials, currentUser } } = this.props
     dispatch(UsersActions.list(credentials, currentUser))
     this.handleListDemands()
+    this.handleListUserDemands()
     this.handleListTransactions()
   }
 
@@ -33,6 +35,13 @@ class DashboardContainer extends Component {
     const { credentials, currentUser } = auth
     const { offset } = demands
     dispatch(DemandsActions.list(credentials, currentUser, offset))
+  }
+
+  handleListUserDemands() {
+    const { dispatch, auth, userDemands } = this.props
+    const { credentials, currentUser } = auth
+    const { offset } = userDemands
+    dispatch(UserDemandsActions.list(credentials, currentUser, offset))
   }
 
   handleListTransactions() {
@@ -70,6 +79,10 @@ class DashboardContainer extends Component {
     Actions.viewTransaction({ transaction })
   }
 
+  handleUserDemands() {
+    Actions.userDemands()
+  }
+
   handleBack() {
     Actions.pop()
   }
@@ -103,13 +116,15 @@ class DashboardContainer extends Component {
   }
 
   render() {
-    const { users, demands, transactions } = this.props
+    const { users, demands, userDemands, transactions } = this.props
     if (users.listing)
       return (<Loading status="Carregando mapa com seus vizinhos..." />)
     if (transactions.listing && transactions.list.length === 0)
       return (<Loading status="Carregando seu histórico de transações..." />)
     if (demands.listing && demands.list.length === 0)
       return (<Loading status="Carregando pedidos na sua vizinhança..." />)
+    if (userDemands.listing && userDemands.list.length === 0)
+      return (<Loading status="Carregando seus pedidos..." />)
     return (
       <DashboardRouter
         {...this.props}
@@ -121,6 +136,7 @@ class DashboardContainer extends Component {
         onRefuseDemand={this.handleRefuseDemand.bind(this)}
         onFlagDemand={this.handleFlagDemand.bind(this)}
         onListDemands={this.handleListDemands.bind(this)}
+        onListUserDemands={this.handleListUserDemands.bind(this)}
         onListTransactions={this.handleListTransactions.bind(this)}
         onNewDemand={this.handleNewDemand.bind(this)}
         onCreateDemand={this.handleCreateDemand.bind(this)}
@@ -129,6 +145,7 @@ class DashboardContainer extends Component {
         onCreateTransaction={this.handleCreateTransaction.bind(this)}
         onViewCreatedTransaction={this.handleViewCreatedTransaction.bind(this)}
         onCreateMessage={this.handleCreateMessage.bind(this)}
+        onUserDemands={this.handleUserDemands.bind(this)}
       />
     )
   }
@@ -137,6 +154,7 @@ class DashboardContainer extends Component {
 export default connect(state => ({
   dashboard: state.dashboard,
   users: state.users,
+  userDemands: state.userDemands,
   demands: state.demands,
   transactions: state.transactions,
 }))(DashboardContainer)

@@ -10,7 +10,7 @@ export default class DemandMiniature extends Component {
   }
 
   render() {
-    const { demand } = this.props
+    const { demand, currentUser } = this.props
     return (
       <TouchableOpacity onPress={this.handleView.bind(this)}>
         <View style={{
@@ -20,7 +20,7 @@ export default class DemandMiniature extends Component {
           paddingVertical: 10,
           flex: 1,
         }}>
-          <DemandHeader demand={demand} />
+          <DemandHeader {...this.props} />
         </View>
         <DemandButtons {...this.props} />
       </TouchableOpacity>

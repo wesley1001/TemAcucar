@@ -8,6 +8,7 @@ import location from './reducers/location'
 import dashboard from './reducers/dashboard'
 import users from './reducers/users'
 import demands from './reducers/demands'
+import userDemands from './reducers/userDemands'
 import transactions from './reducers/transactions'
 import messages from './reducers/messages'
 
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   location,
   dashboard,
   demands,
+  userDemands,
   users,
   transactions,
   messages,
