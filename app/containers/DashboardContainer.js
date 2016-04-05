@@ -1,7 +1,9 @@
 import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 import * as DashboardActions from '../actions/DashboardActions'
-import * as NeighborsActions from '../actions/NeighborsActions'
+import * as UsersActions from '../actions/UsersActions'
+import * as DemandsActions from '../actions/DemandsActions'
+import * as UserDemandsActions from '../actions/UserDemandsActions'
 import * as TransactionsActions from '../actions/TransactionsActions'
 import * as MessagesActions from '../actions/MessagesActions'
 import { Actions } from 'react-native-router-flux'
@@ -12,8 +14,10 @@ import DashboardRouter from "../routers/DashboardRouter"
 class DashboardContainer extends Component {
   componentWillMount() {
     const { dispatch, auth: { credentials, currentUser } } = this.props
-    dispatch(NeighborsActions.list(credentials, currentUser))
+    dispatch(UsersActions.list(credentials, currentUser))
     this.handleListDemands()
+    this.handleListUserDemands()
+    this.handleListTransactions()
   }
 
   handleDrawerOpen() {
@@ -27,22 +31,54 @@ class DashboardContainer extends Component {
   }
 
   handleListDemands() {
-    const { dispatch, auth, dashboard } = this.props
+    const { dispatch, auth, demands } = this.props
     const { credentials, currentUser } = auth
-    const { demandsOffset } = dashboard
-    dispatch(DashboardActions.listDemands(credentials, currentUser, demandsOffset))
+    const { offset } = demands
+    dispatch(DemandsActions.list(credentials, currentUser, offset))
+  }
+
+  handleListUserDemands() {
+    const { dispatch, auth, userDemands } = this.props
+    const { credentials, currentUser } = auth
+    const { offset } = userDemands
+    dispatch(UserDemandsActions.list(credentials, currentUser, offset))
+  }
+
+  handleListTransactions() {
+    const { dispatch, auth, transactions } = this.props
+    const { credentials, currentUser } = auth
+    const { offset } = transactions
+    dispatch(TransactionsActions.list(credentials, currentUser, offset))
   }
 
   handleRefuseDemand(demand) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
-    dispatch(DashboardActions.refuseDemand(credentials, currentUser, demand))
+    dispatch(DemandsActions.refuse(credentials, currentUser, demand))
   }
 
   handleFlagDemand(demand) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
-    dispatch(DashboardActions.flagDemand(credentials, currentUser, demand))
+    dispatch(DemandsActions.flag(credentials, currentUser, demand))
+  }
+
+  handleCompleteDemand(demand) {
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(DemandsActions.complete(credentials, currentUser, demand))
+  }
+
+  handleCancelDemand(demand) {
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(DemandsActions.cancel(credentials, currentUser, demand))
+  }
+
+  handleReactivateDemand(demand) {
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(DemandsActions.reactivate(credentials, currentUser, demand))
   }
 
   handleNewDemand() {
@@ -61,30 +97,34 @@ class DashboardContainer extends Component {
     Actions.viewTransaction({ transaction })
   }
 
+  handleUserDemands() {
+    Actions.userDemands()
+  }
+
   handleBack() {
     Actions.pop()
   }
 
   handleViewCreatedDemand() {
-    const { createdDemand } = this.props.dashboard
-    Actions.viewCreatedDemand({ demand: createdDemand })
+    const { lastCreated } = this.props.demands
+    Actions.viewCreatedDemand({ demand: lastCreated })
   }
 
   handleViewCreatedTransaction() {
-    const { createdTransaction } = this.props.dashboard
-    Actions.viewCreatedTransaction({ transaction: createdTransaction })
+    const { lastCreated } = this.props.transactions
+    Actions.viewCreatedTransaction({ transaction: lastCreated })
   }
 
   handleCreateDemand(demand) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
-    dispatch(DashboardActions.createDemand(credentials, currentUser, demand))
+    dispatch(DemandsActions.create(credentials, currentUser, demand))
   }
 
-  handleCreateTransaction(demand) {
+  handleCreateTransaction(transaction) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
-    dispatch(TransactionsActions.create(credentials, currentUser, demand))
+    dispatch(TransactionsActions.create(credentials, currentUser, transaction))
   }
 
   handleCreateMessage(message) {
@@ -94,9 +134,15 @@ class DashboardContainer extends Component {
   }
 
   render() {
-    const { neighbors, dashboard } = this.props
-    if (neighbors.loading || dashboard.loadingDemands)
-      return (<Loading />)
+    const { users, demands, userDemands, transactions } = this.props
+    if (users.listing)
+      return (<Loading status="Carregando mapa com seus vizinhos..." />)
+    if (transactions.listing && transactions.list.length === 0)
+      return (<Loading status="Carregando seu histórico de transações..." />)
+    if (demands.listing && demands.list.length === 0)
+      return (<Loading status="Carregando pedidos na sua vizinhança..." />)
+    if (userDemands.listing && userDemands.list.length === 0)
+      return (<Loading status="Carregando seus pedidos..." />)
     return (
       <DashboardRouter
         {...this.props}
@@ -107,7 +153,12 @@ class DashboardContainer extends Component {
         onViewDemand={this.handleViewDemand.bind(this)}
         onRefuseDemand={this.handleRefuseDemand.bind(this)}
         onFlagDemand={this.handleFlagDemand.bind(this)}
-        onLoadMoreDemands={this.handleListDemands.bind(this)}
+        onCompleteDemand={this.handleCompleteDemand.bind(this)}
+        onCancelDemand={this.handleCancelDemand.bind(this)}
+        onReactivateDemand={this.handleReactivateDemand.bind(this)}
+        onListDemands={this.handleListDemands.bind(this)}
+        onListUserDemands={this.handleListUserDemands.bind(this)}
+        onListTransactions={this.handleListTransactions.bind(this)}
         onNewDemand={this.handleNewDemand.bind(this)}
         onCreateDemand={this.handleCreateDemand.bind(this)}
         onViewCreatedDemand={this.handleViewCreatedDemand.bind(this)}
@@ -115,6 +166,7 @@ class DashboardContainer extends Component {
         onCreateTransaction={this.handleCreateTransaction.bind(this)}
         onViewCreatedTransaction={this.handleViewCreatedTransaction.bind(this)}
         onCreateMessage={this.handleCreateMessage.bind(this)}
+        onUserDemands={this.handleUserDemands.bind(this)}
       />
     )
   }
@@ -122,5 +174,8 @@ class DashboardContainer extends Component {
 
 export default connect(state => ({
   dashboard: state.dashboard,
-  neighbors: state.neighbors,
+  users: state.users,
+  userDemands: state.userDemands,
+  demands: state.demands,
+  transactions: state.transactions,
 }))(DashboardContainer)

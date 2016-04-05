@@ -9,7 +9,7 @@ export function create(credentials, currentUser, message) {
       transaction_id: message.transaction_id,
       text: message.text,
     },
-    requestAttributes: { message },
+    requestAttributes: { message, currentUser },
     credentials,
     currentUser: () => currentUser,
     processResponse: (response) => {
@@ -26,7 +26,7 @@ export function list(credentials, currentUser, transaction, offset = 0) {
     requestAttributes: { transaction, offset },
     currentUser: () => currentUser,
     processResponse: (response) => {
-      return { messages: JSON.parse(response._bodyText) }
+      return { list: JSON.parse(response._bodyText) }
     },
   })
 }

@@ -8,15 +8,21 @@ import ViewDemand from "../screens/ViewDemand"
 import ViewCreatedDemand from "../screens/ViewCreatedDemand"
 import ViewTransaction from "../screens/ViewTransaction"
 import ViewCreatedTransaction from "../screens/ViewCreatedTransaction"
+import UserDemands from "../screens/UserDemands"
 
-export default DashboardRouter = (props) => (
-  <StyledRouter {...props}>
-    <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-    <Route name="dashboard" component={Dashboard} initial={true} hideNavBar={true} type="reset" />
-    <Route name="newDemand" component={NewDemand} schema="default" />
-    <Route name="viewDemand" component={ViewDemand} schema="default" />
-    <Route name="viewCreatedDemand" component={ViewCreatedDemand} schema="default" type="replace" />
-    <Route name="viewTransaction" component={ViewTransaction} schema="default" hideNavBar={true} />
-    <Route name="viewCreatedTransaction" component={ViewCreatedTransaction} schema="default" type="replace" hideNavBar={true} />
-  </StyledRouter>
-)
+export default class DashboardRouter extends Component {
+  render() {
+    return (
+      <StyledRouter {...this.props}>
+        <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
+        <Route name="dashboard" component={Dashboard} initial={true} hideNavBar={true} type="reset" />
+        <Route name="newDemand" component={NewDemand} schema="default" />
+        <Route name="viewDemand" component={ViewDemand} schema="default" />
+        <Route name="viewCreatedDemand" component={ViewCreatedDemand} schema="default" type="replace" />
+        <Route name="viewTransaction" component={ViewTransaction} schema="default" hideNavBar={true} />
+        <Route name="viewCreatedTransaction" component={ViewCreatedTransaction} schema="default" type="replace" hideNavBar={true} />
+        <Route name="userDemands" component={UserDemands} schema="default" />
+      </StyledRouter>
+    )
+  }
+}

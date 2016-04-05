@@ -1,15 +1,9 @@
-import React, {
-  Platform,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
-
+import React, { Platform, View } from 'react-native'
 import Colors from "../Colors"
 import Sentence from "./Sentence"
+import UserMenuItem from "./UserMenuItem"
 
-export default UserMenu = ({ auth: { currentUser }, onSignOut }) => (
+export default UserMenu = ({ currentUser, onSignOut, onUserDemands }) => (
   <View style={{
     flex: 1,
     justifyContent: 'flex-start',
@@ -39,23 +33,11 @@ export default UserMenu = ({ auth: { currentUser }, onSignOut }) => (
         </Sentence>
       </View>
     </View>
-    <TouchableOpacity onPress={onSignOut} style={{
-      alignSelf: 'stretch',
-      padding: 10,
-      flexDirection: 'row',
-      alignItems: 'center'
-    }}>
-      <Icon name="power-settings-new" style={{ 
-        fontSize: 24,
-        color: Colors.white,
-        marginRight: 10,
-      }} />
-      <Sentence style={{
-        fontSize: 16,
-        color: Colors.white,
-      }}>
-        Sair
-      </Sentence>
-    </TouchableOpacity>
+    <UserMenuItem onPress={onUserDemands} icon="list">
+      Meus pedidos
+    </UserMenuItem>
+    <UserMenuItem onPress={onSignOut} icon="power-settings-new">
+      Sair
+    </UserMenuItem>
   </View>
 )

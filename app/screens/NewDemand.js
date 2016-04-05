@@ -17,16 +17,16 @@ const validators = {
 
 class NewDemand extends Component {
   componentWillReceiveProps(nextProps) {
-    const { onViewCreatedDemand, dashboard } = nextProps
-    const { creatingDemand, createDemandError } = dashboard
-    const oldCreatingDemand = this.props.dashboard.creatingDemand
-    if (oldCreatingDemand && !creatingDemand && !createDemandError) {
+    const { onViewCreatedDemand, demands } = nextProps
+    const { creating, createError } = demands
+    const oldCreating = this.props.demands.creating
+    if (oldCreating && !creating && !createError) {
       onViewCreatedDemand()
     }
   }
 
   render() {
-    const { onCreateDemand, fields: { name, description }, dashboard: { createDemandError, creatingDemand } } = this.props
+    const { onCreateDemand, fields: { name, description }, demands: { createError, creating } } = this.props
     const length = (description && description.value ? description.value.length : 0)
     const proportion = Math.round((length / 80) * 100)
     const progress = (proportion > 92 ? 100 : (proportion > 0 ? proportion + 8 : proportion))
@@ -109,10 +109,10 @@ class NewDemand extends Component {
               { progressMessage }
             </Sentence>
           </View>
-          { createDemandError && <FormError message={DemandValidators.errorMessage(createDemandError)} /> }
+          { createError && <FormError message={DemandValidators.errorMessage(createError)} /> }
           <FormSubmit
             {...this.props}
-            isLoading={creatingDemand}
+            isLoading={creating}
             onSubmit={onCreateDemand}
           >
             Pedir

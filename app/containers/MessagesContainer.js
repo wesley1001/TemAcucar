@@ -19,10 +19,16 @@ class MessagesContainer extends Component {
   }
 
   render() {
+    const { auth, messages } = this.props
+    const { currentUser } = auth
     return (
       <Messages
         {...this.props}
-        onLoadMore={this.handleList.bind(this)}
+        messages={messages.list}
+        listing={messages.listing}
+        canList={messages.canList}
+        currentUser={currentUser}
+        onList={this.handleList.bind(this)}
       />
     )
   }

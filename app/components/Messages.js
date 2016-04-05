@@ -8,13 +8,12 @@ import Message from "../components/Message"
 
 export default class Messages extends Component {
   render() {
-    const { onLoadMore, auth, messages: { messages, loading, creating, canLoadMore } } = this.props
-    const { currentUser } = auth
+    const { onList, currentUser, messages, listing, canList } = this.props
     let lastDate = null
     let date = null
     return (
       <View>
-        { !loading && messages.length === 0 &&
+        { !listing && messages.length === 0 &&
           <View style={{
             backgroundColor: Colors.beige,
             borderRadius: 4,
@@ -28,10 +27,10 @@ export default class Messages extends Component {
             </Sentence>
           </View>
         }
-        { canLoadMore && !loading &&
-          <LoadMore onPress={onLoadMore} />
+        { canList && !listing &&
+          <LoadMore onPress={onList} />
         }
-        { loading && <GiftedSpinner style={{ marginTop: 10, marginBottom: 20 }} /> }
+        { listing && <GiftedSpinner style={{ marginTop: 10, marginBottom: 20 }} /> }
         { messages.map((message) => {
           const compareDate = moment(message.created_at).format("DD/MM/YYYY")
           date = null
@@ -47,9 +46,8 @@ export default class Messages extends Component {
               date = compareDate
             }
           }
-          return (<Message {...this.props} key={message.id} message={message} fromCurrentUser={currentUser.id === message.user.id} date={date} />)
+          return (<Message key={message.id} message={message} fromCurrentUser={currentUser.id === message.user_id} date={date} />)
         }) }
-        { creating && <GiftedSpinner style={{ marginTop: 0, marginBottom: 10 }} /> }
       </View>
     )
   }

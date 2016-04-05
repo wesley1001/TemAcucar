@@ -7,8 +7,6 @@ export default TransactionDemandHeader = (props) => (
   <View style={{
     backgroundColor: (props.index % 2 == 0 ? Colors.pink : Colors.blue),
     padding: 10,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
     flexDirection: 'row',
     alignItems: 'center',
   }}>

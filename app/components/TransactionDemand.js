@@ -7,8 +7,7 @@ import Transactions from "./Transactions"
 
 export default TransactionDemand = (props) => (
   <View style={{
-    margin: 10,
-    marginBottom: 0,
+    marginBottom: 10,
   }}>
     <TransactionDemandHeader {...props} />
     <Transactions {...props} />

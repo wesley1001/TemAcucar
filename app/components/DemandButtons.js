@@ -1,16 +1,16 @@
 import React, { Component, Alert, View } from 'react-native'
 import Colors from "../Colors"
-import Button from "./Button"
+import DemandButton from "./DemandButton"
 
 export default class DemandButtons extends Component {
-  handleCreateTransaction() {
-    const { demand, onCreateTransaction } = this.props
-    onCreateTransaction(demand)
+  handleAccept() {
+    const { demand, onAccept } = this.props
+    onAccept(demand)
   }
 
   handleRefuse() {
-    const { demand, onRefuseDemand } = this.props
-    onRefuseDemand(demand)
+    const { demand, onRefuse } = this.props
+    onRefuse(demand)
   }
 
   handleFlag() {
@@ -18,8 +18,8 @@ export default class DemandButtons extends Component {
       'Pedido impróprio?',
       'Você tem certeza que quer denunciar este pedido como impróprio?',
       [{ text: 'Cancelar', style: 'cancel' }, { text: 'OK', onPress: () => {
-        const { demand, onFlagDemand } = this.props
-        onFlagDemand(demand)
+        const { demand, onFlag } = this.props
+        onFlag(demand)
       }}]
     )
   }
@@ -37,59 +37,33 @@ export default class DemandButtons extends Component {
     const { creatingTransaction } = demand
     return (
       <View style={{
+        backgroundColor: Colors.white,
         alignSelf: 'stretch',
         flexDirection: 'row',
         padding: 10,
         paddingTop: 0,
       }}>
-        <Button
-          onPress={this.handleCreateTransaction.bind(this)}
+        <DemandButton
+          onPress={this.handleAccept.bind(this)}
           isLoading={creatingTransaction}
-          style={{
-            flex: 1,
-            paddingVertical: 0,
-            height: 30,
-          }}
-          textStyle={{
-            fontSize: 12,
-            lineHeight: 16,
-          }}
         >
           Ajudar
-        </Button>
-        <Button
+        </DemandButton>
+        <DemandButton
           onPress={this.handleRefuse.bind(this)}
           style={{
-            flex: 1,
             backgroundColor: Colors.blue,
-            borderColor: Colors.darkBlue,
-            paddingVertical: 0,
-            height: 30,
             marginHorizontal: 4,
-          }}
-          textStyle={{
-            fontSize: 12,
-            lineHeight: 16,
           }}
         >
           Não posso
-        </Button>
-        <Button
+        </DemandButton>
+        <DemandButton
           onPress={this.handleFlag.bind(this)}
-          style={{
-            flex: 1,
-            backgroundColor: Colors.ice,
-            borderColor: Colors.darkIce,
-            paddingVertical: 0,
-            height: 30,
-          }}
-          textStyle={{
-            fontSize: 12,
-            lineHeight: 16,
-          }}
+          style={{ backgroundColor: Colors.ice }}
         >
           Denunciar
-        </Button>
+        </DemandButton>
       </View>
     )
   }

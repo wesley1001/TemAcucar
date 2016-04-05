@@ -5,8 +5,7 @@ import Sentence from "./Sentence"
 export default NoTransactionDemands = () => (
   <Sentence style={{
     alignSelf: 'stretch',
-    fontSize: 12,
-    padding: 10,
+    margin: 10,
     textAlign: 'center',
   }}>
     Você ainda não realizou nenhuma transação. Que tal começar agora mesmo fazendo um pedido?
