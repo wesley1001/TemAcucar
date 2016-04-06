@@ -3,7 +3,7 @@ import Colors from "../Colors"
 import Sentence from "./Sentence"
 import UserMenuItem from "./UserMenuItem"
 
-export default UserMenu = ({ currentUser, onSignOut, onUserDemands }) => (
+export default UserMenu = ({ currentUser, onSignOut, onUserDemands, onAdminDemands }) => (
   <View style={{
     flex: 1,
     justifyContent: 'flex-start',
@@ -36,6 +36,9 @@ export default UserMenu = ({ currentUser, onSignOut, onUserDemands }) => (
     <UserMenuItem onPress={onUserDemands} icon="list">
       Meus pedidos
     </UserMenuItem>
+    { currentUser.admin && <UserMenuItem onPress={onAdminDemands} icon="settings">
+      Admin de pedidos
+    </UserMenuItem> }
     <UserMenuItem onPress={onSignOut} icon="power-settings-new">
       Sair
     </UserMenuItem>

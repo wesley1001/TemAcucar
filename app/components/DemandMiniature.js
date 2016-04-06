@@ -11,7 +11,8 @@ export default class DemandMiniature extends Component {
   }
 
   render() {
-    const { demand, currentUser } = this.props
+    const { demand, currentUser, admin } = this.props
+    const Buttons = (currentUser.id === demand.user.id || admin ? DemandUserButtons : DemandButtons)
     return (
       <TouchableOpacity onPress={this.handleView.bind(this)}>
         <View style={{
@@ -23,8 +24,7 @@ export default class DemandMiniature extends Component {
         }}>
           <DemandHeader {...this.props} />
         </View>
-        { currentUser.id !== demand.user.id && <DemandButtons {...this.props} /> }
-        { currentUser.id === demand.user.id && <DemandUserButtons {...this.props} /> }
+        <Buttons {...this.props} />
       </TouchableOpacity>
     )
   }

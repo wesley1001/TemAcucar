@@ -25,7 +25,7 @@ export default class DemandUserButtons extends Component {
   }
 
   render() {
-    const { demands } = this.props
+    const { demands, admin } = this.props
     // This is a hack to update state of demand on ViewDemand
     let demand
     if (demands) {
@@ -51,7 +51,7 @@ export default class DemandUserButtons extends Component {
           isLoading={completing}
           style={{ backgroundColor: Colors.green }}
         >
-          Já consegui
+          { admin ? 'Concluir pedido' : 'Já consegui' }
         </DemandButton> }
         { canCancel && <DemandButton
           onPress={this.handleCancel.bind(this)}

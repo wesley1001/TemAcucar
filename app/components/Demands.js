@@ -11,7 +11,7 @@ import NoDemands from "../components/NoDemands"
 
 export default class Demands extends Component {
   render() {
-    const { demands, currentUser, listing, canList, onList, onAccept, onRefuse, onFlag, onComplete, onCancel, onReactivate, onView } = this.props
+    const { demands, currentUser, listing, canList, onList, onAccept, onRefuse, onFlag, onComplete, onCancel, onReactivate, onView, admin } = this.props
     return (
       <View>
         { demands.map(demand => (
@@ -26,6 +26,7 @@ export default class Demands extends Component {
             onCancel={onCancel}
             onReactivate={onReactivate}
             onView={onView}
+            admin={admin}
           />
         )) }
         { listing && <GiftedSpinner style={{ marginTop: 10 }} /> }

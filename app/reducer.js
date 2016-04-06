@@ -9,6 +9,7 @@ import dashboard from './reducers/dashboard'
 import users from './reducers/users'
 import demands from './reducers/demands'
 import userDemands from './reducers/userDemands'
+import adminDemands from './reducers/adminDemands'
 import transactions from './reducers/transactions'
 import messages from './reducers/messages'
 
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   dashboard,
   demands,
   userDemands,
+  adminDemands,
   users,
   transactions,
   messages,
