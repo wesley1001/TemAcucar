@@ -101,7 +101,6 @@ export default class DemandHeader extends Component {
         }}>
           { fullHeader ? description : truncate(description, 120) }
         </Sentence>
-        { fullHeader && <DemandState state={state} style={{marginTop: 14}} /> }
         <View style={{
           position: 'absolute',
           top: 0,
