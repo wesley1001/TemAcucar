@@ -66,7 +66,7 @@ export default class DemandUserButtons extends Component {
           { canReactivate && <DemandButton
             onPress={this.handleReactivate.bind(this)}
             isLoading={reactivating}
-            style={{ marginTop: 10, backgroundColor: Colors.ice, marginLeft: 4 }}
+            style={{ marginTop: 10, backgroundColor: Colors.ice }}
           >
             Reativar pedido
           </DemandButton> }
