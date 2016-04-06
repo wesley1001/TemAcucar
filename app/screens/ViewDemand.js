@@ -25,7 +25,9 @@ export default class ViewDemand extends Component {
   }
 
   render() {
-    const { auth: { currentUser }, demand, demands, userDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onCompleteDemand, onCancelDemand, onReactivateDemand } = this.props
+    const { auth: { currentUser }, demand, demands, userDemands, adminDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onCompleteDemand, onCancelDemand, onReactivateDemand, admin } = this.props
+    const showUserButtons = (currentUser.id === demand.user.id || admin)
+    const demandsList = ( admin ? adminDemands.list : (currentUser.id === demand.user.id ? userDemands.list : demands.list) )
     return (
       <View style={{
         flex: 1,
@@ -44,12 +46,12 @@ export default class ViewDemand extends Component {
           }}>
             <DemandHeader
               demand={demand}
-              demands={currentUser.id === demand.user.id ? userDemands.list : demands.list}
+              demands={demandsList}
               currentUser={currentUser}
               fullHeader={true} />
           </View>
         </View>
-        { currentUser.id !== demand.user.id && <DemandButtons
+        { !showUserButtons && <DemandButtons
           currentUser={currentUser}
           demand={demand}
           demands={demands.list}
@@ -57,10 +59,11 @@ export default class ViewDemand extends Component {
           onRefuse={onRefuseDemand}
           onFlag={onFlagDemand}
         /> }
-        { currentUser.id === demand.user.id && <DemandUserButtons
+        { showUserButtons && <DemandUserButtons
+          admin={admin}
           currentUser={currentUser}
           demand={demand}
-          demands={userDemands.list}
+          demands={demandsList}
           onComplete={onCompleteDemand}
           onCancel={onCancelDemand}
           onReactivate={onReactivateDemand}

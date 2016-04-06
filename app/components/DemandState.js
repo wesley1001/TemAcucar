@@ -10,7 +10,7 @@ export default DemandState = ({ state, style }) => (
     flexDirection: 'row',
     alignItems: 'center',
   }, style]}>
-    <Icon name={(state === 'completed' ? 'check-circle' : (state === 'canceled' ? 'cancel' : 'schedule'))} style={{ 
+    <Icon name={(state === 'completed' ? 'check-circle' : (state === 'canceled' ? 'cancel' : (state === 'flagged' ? 'report' : 'schedule')))} style={{ 
       color: Colors.white,
       fontSize: 14,
       marginRight: 6,
@@ -21,7 +21,7 @@ export default DemandState = ({ state, style }) => (
       lineHeight: 10,
       color: Colors.white,
     }}>
-      Pedido {(state === 'completed' ? 'bem-sucedido' : (state === 'canceled' ? 'cancelado' : (state === 'sending' ? 'enviando convites' : 'em andamento')))}
+      Pedido {(state === 'completed' ? 'bem-sucedido' : (state === 'canceled' ? 'cancelado' : (state === 'sending' ? 'enviando convites' : (state === 'flagged' ? 'denunciado como impróprio' : 'em andamento'))))}
     </Sentence>
   </View>
 )

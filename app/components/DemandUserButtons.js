@@ -37,7 +37,7 @@ export default class DemandUserButtons extends Component {
     const { state, completing, canceling, reactivating } = demand
     const canComplete = (state === 'sending' || state === 'active')
     const canCancel = (state === 'sending' || state === 'active')
-    const canReactivate = (state === 'completed' || state === 'canceled')
+    const canReactivate = (state === 'completed' || state === 'canceled' || (state === 'flagged' && admin))
     return (
       <View style={{
         backgroundColor: Colors.white,

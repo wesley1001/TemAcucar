@@ -3,7 +3,7 @@ import Colors from "../Colors"
 import Sentence from "./Sentence"
 import UserMenuItem from "./UserMenuItem"
 
-export default UserMenu = ({ currentUser, onSignOut, onUserDemands, onAdminDemands }) => (
+export default UserMenu = ({ currentUser, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands }) => (
   <View style={{
     flex: 1,
     justifyContent: 'flex-start',
@@ -33,11 +33,14 @@ export default UserMenu = ({ currentUser, onSignOut, onUserDemands, onAdminDeman
         </Sentence>
       </View>
     </View>
-    <UserMenuItem onPress={onUserDemands} icon="list">
+    <UserMenuItem onPress={onUserDemands} icon="view-list">
       Meus pedidos
     </UserMenuItem>
-    { currentUser.admin && <UserMenuItem onPress={onAdminDemands} icon="settings">
-      Admin de pedidos
+    { currentUser.admin && <UserMenuItem onPress={onAdminDemands} icon="playlist-add-check">
+      Todos os pedidos
+    </UserMenuItem> }
+    { currentUser.admin && <UserMenuItem onPress={onFlaggedDemands} icon="report">
+      Pedidos impróprios
     </UserMenuItem> }
     <UserMenuItem onPress={onSignOut} icon="power-settings-new">
       Sair

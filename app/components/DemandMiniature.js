@@ -6,8 +6,8 @@ import DemandUserButtons from "./DemandUserButtons"
 
 export default class DemandMiniature extends Component {
   handleView() {
-    const { demand, onView } = this.props
-    onView(demand)
+    const { demand, onView, admin } = this.props
+    onView(demand, admin)
   }
 
   render() {
