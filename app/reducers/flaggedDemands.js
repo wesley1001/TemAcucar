@@ -1,18 +1,18 @@
 const initialState = {
   list: [],
-  listing: true,
+  listing: false,
   offset: 0,
   canList: false,
 }
 
-export default function userDemands(state = initialState, action) {
+export default function flaggedDemands(state = initialState, action) {
   switch (action.type) {
-    case 'USER_DEMANDS_LIST_REQUEST':
+    case 'FLAGGED_DEMANDS_LIST_REQUEST':
       return {
         ...state, 
         listing: true,
       }
-    case 'USER_DEMANDS_LIST_SUCCESS':
+    case 'FLAGGED_DEMANDS_LIST_SUCCESS':
       return {
         ...state, 
         list: state.list.concat(action.list),
@@ -20,15 +20,16 @@ export default function userDemands(state = initialState, action) {
         offset: state.offset + action.list.length,
         canList: (action.list.length >= 10 ? true : false),
       }
-    case 'USER_DEMANDS_LIST_FAILURE':
+    case 'FLAGGED_DEMANDS_LIST_FAILURE':
       return {
         ...state, 
         listing: false,
       }
-    case 'DEMANDS_CREATE_SUCCESS':
+    case 'DEMANDS_FLAG_REQUEST':
+      const demand = { ...action.demand, state: 'flagged' }
       return {
         ...state, 
-        list: [action.demand].concat(state.list),
+        list: [demand].concat(state.list),
         offset: state.offset + 1,
       }
     case 'DEMANDS_COMPLETE_REQUEST':

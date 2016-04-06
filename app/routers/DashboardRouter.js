@@ -9,6 +9,8 @@ import ViewCreatedDemand from "../screens/ViewCreatedDemand"
 import ViewTransaction from "../screens/ViewTransaction"
 import ViewCreatedTransaction from "../screens/ViewCreatedTransaction"
 import UserDemands from "../screens/UserDemands"
+import AdminDemands from "../screens/AdminDemands"
+import FlaggedDemands from "../screens/FlaggedDemands"
 
 export default class DashboardRouter extends Component {
   render() {
@@ -22,6 +24,8 @@ export default class DashboardRouter extends Component {
         <Route name="viewTransaction" component={ViewTransaction} schema="default" hideNavBar={true} />
         <Route name="viewCreatedTransaction" component={ViewCreatedTransaction} schema="default" type="replace" hideNavBar={true} />
         <Route name="userDemands" component={UserDemands} schema="default" />
+        <Route name="adminDemands" component={AdminDemands} schema="default" />
+        <Route name="flaggedDemands" component={FlaggedDemands} schema="default" />
       </StyledRouter>
     )
   }

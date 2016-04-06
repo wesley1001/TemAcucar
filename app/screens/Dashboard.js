@@ -43,7 +43,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { users, demands, transactions, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onViewTransaction, onSignOut, onUserDemands, onBack } = this.props
+    const { users, demands, transactions, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onViewTransaction, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands, onBack } = this.props
     const { drawerOpen } = this.props.dashboard
     const { currentUser } = this.props.auth
     const { latitude, longitude } = currentUser   
@@ -51,6 +51,8 @@ export default class Dashboard extends Component {
       currentUser={currentUser}
       onSignOut={onSignOut}
       onUserDemands={onUserDemands}
+      onAdminDemands={onAdminDemands}
+      onFlaggedDemands={onFlaggedDemands}
       onClose={this.handleMenuClose.bind(this)}
     />)
     return (

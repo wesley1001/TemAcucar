@@ -11,7 +11,6 @@
   "dependencies": {
     "apsl-react-native-button": "2.4.2",
     "fbjs": "^0.6.0",
-    "haversine": "1.0.0",
     "moment": "2.11.1",
     "object-key-filter": "0.0.4",
     "react-native": "0.20.0",
@@ -27,7 +26,6 @@
     "react-native-router-flux": "danielweinmann/react-native-router-flux#route_props",
     "react-native-scrollable-tab-view": "0.4.0",
     "react-native-simple-store": "0.1.0",
-    "react-native-slider": "jeanregisser/react-native-slider#34fcb5532a74e083cd6939c213d743e5f6463eeb",
     "react-native-stateless-form": "0.2.1",
     "react-native-vector-icons": "1.1.1",
     "react-redux": "4.3.0",

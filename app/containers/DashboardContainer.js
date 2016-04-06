@@ -4,6 +4,8 @@ import * as DashboardActions from '../actions/DashboardActions'
 import * as UsersActions from '../actions/UsersActions'
 import * as DemandsActions from '../actions/DemandsActions'
 import * as UserDemandsActions from '../actions/UserDemandsActions'
+import * as AdminDemandsActions from '../actions/AdminDemandsActions'
+import * as FlaggedDemandsActions from '../actions/FlaggedDemandsActions'
 import * as TransactionsActions from '../actions/TransactionsActions'
 import * as MessagesActions from '../actions/MessagesActions'
 import { Actions } from 'react-native-router-flux'
@@ -18,6 +20,10 @@ class DashboardContainer extends Component {
     this.handleListDemands()
     this.handleListUserDemands()
     this.handleListTransactions()
+    if (currentUser.admin) {
+      this.handleListAdminDemands()
+      this.handleListFlaggedDemands()
+    }
   }
 
   handleDrawerOpen() {
@@ -42,6 +48,20 @@ class DashboardContainer extends Component {
     const { credentials, currentUser } = auth
     const { offset } = userDemands
     dispatch(UserDemandsActions.list(credentials, currentUser, offset))
+  }
+
+  handleListAdminDemands() {
+    const { dispatch, auth, adminDemands } = this.props
+    const { credentials, currentUser } = auth
+    const { offset } = adminDemands
+    dispatch(AdminDemandsActions.list(credentials, currentUser, offset))
+  }
+
+  handleListFlaggedDemands() {
+    const { dispatch, auth, flaggedDemands } = this.props
+    const { credentials, currentUser } = auth
+    const { offset } = flaggedDemands
+    dispatch(FlaggedDemandsActions.list(credentials, currentUser, offset))
   }
 
   handleListTransactions() {
@@ -89,8 +109,8 @@ class DashboardContainer extends Component {
     Actions.dashboard()
   }
 
-  handleViewDemand(demand) {
-    Actions.viewDemand({ demand })
+  handleViewDemand(demand, admin = false) {
+    Actions.viewDemand({ demand, admin })
   }
 
   handleViewTransaction(transaction) {
@@ -99,6 +119,14 @@ class DashboardContainer extends Component {
 
   handleUserDemands() {
     Actions.userDemands()
+  }
+
+  handleAdminDemands() {
+    Actions.adminDemands()
+  }
+
+  handleFlaggedDemands() {
+    Actions.flaggedDemands()
   }
 
   handleBack() {
@@ -134,7 +162,7 @@ class DashboardContainer extends Component {
   }
 
   render() {
-    const { users, demands, userDemands, transactions } = this.props
+    const { users, demands, userDemands, adminDemands, flaggedDemands, transactions } = this.props
     if (users.listing)
       return (<Loading status="Carregando mapa com seus vizinhos..." />)
     if (transactions.listing && transactions.list.length === 0)
@@ -143,6 +171,10 @@ class DashboardContainer extends Component {
       return (<Loading status="Carregando pedidos na sua vizinhança..." />)
     if (userDemands.listing && userDemands.list.length === 0)
       return (<Loading status="Carregando seus pedidos..." />)
+    if (adminDemands.listing && adminDemands.list.length === 0)
+      return (<Loading status="Carregando admin de pedidos..." />)
+    if (flaggedDemands.listing && flaggedDemands.list.length === 0)
+      return (<Loading status="Carregando admin de pedidos impróprios..." />)
     return (
       <DashboardRouter
         {...this.props}
@@ -158,6 +190,8 @@ class DashboardContainer extends Component {
         onReactivateDemand={this.handleReactivateDemand.bind(this)}
         onListDemands={this.handleListDemands.bind(this)}
         onListUserDemands={this.handleListUserDemands.bind(this)}
+        onListAdminDemands={this.handleListAdminDemands.bind(this)}
+        onListFlaggedDemands={this.handleListFlaggedDemands.bind(this)}
         onListTransactions={this.handleListTransactions.bind(this)}
         onNewDemand={this.handleNewDemand.bind(this)}
         onCreateDemand={this.handleCreateDemand.bind(this)}
@@ -167,6 +201,8 @@ class DashboardContainer extends Component {
         onViewCreatedTransaction={this.handleViewCreatedTransaction.bind(this)}
         onCreateMessage={this.handleCreateMessage.bind(this)}
         onUserDemands={this.handleUserDemands.bind(this)}
+        onAdminDemands={this.handleAdminDemands.bind(this)}
+        onFlaggedDemands={this.handleFlaggedDemands.bind(this)}
       />
     )
   }
@@ -176,6 +212,8 @@ export default connect(state => ({
   dashboard: state.dashboard,
   users: state.users,
   userDemands: state.userDemands,
+  adminDemands: state.adminDemands,
+  flaggedDemands: state.flaggedDemands,
   demands: state.demands,
   transactions: state.transactions,
 }))(DashboardContainer)
