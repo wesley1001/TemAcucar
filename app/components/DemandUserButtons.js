@@ -37,36 +37,40 @@ export default class DemandUserButtons extends Component {
     const { state, completing, canceling, reactivating } = demand
     const canComplete = (state === 'sending' || state === 'active')
     const canCancel = (state === 'sending' || state === 'active')
-    const canReactivate = (state === 'completed' || state === 'canceled' || (state === 'flagged' && admin))
+    const canReactivate = (state === 'completed' || ((state === 'flagged' || state === 'canceled') && admin))
     return (
       <View style={{
         backgroundColor: Colors.white,
         alignSelf: 'stretch',
-        flexDirection: 'row',
         padding: 10,
         paddingTop: 0,
       }}>
-        { canComplete && <DemandButton
-          onPress={this.handleComplete.bind(this)}
-          isLoading={completing}
-          style={{ backgroundColor: Colors.green }}
-        >
-          { admin ? 'Concluir pedido' : 'Já consegui' }
-        </DemandButton> }
-        { canCancel && <DemandButton
-          onPress={this.handleCancel.bind(this)}
-          isLoading={canceling}
-          style={{ backgroundColor: Colors.ice, marginLeft: 4 }}
-        >
-          Cancelar pedido
-        </DemandButton> }
-        { canReactivate && <DemandButton
-          onPress={this.handleReactivate.bind(this)}
-          isLoading={reactivating}
-          style={{ backgroundColor: Colors.ice, marginLeft: 4 }}
-        >
-          Reativar pedido
-        </DemandButton> }
+        <DemandState state={state} />
+        <View style={{
+          flexDirection: 'row',
+        }}>
+          { canComplete && <DemandButton
+            onPress={this.handleComplete.bind(this)}
+            isLoading={completing}
+            style={{ marginTop: 10, backgroundColor: Colors.green }}
+          >
+            { admin ? 'Concluir pedido' : 'Já consegui' }
+          </DemandButton> }
+          { canCancel && <DemandButton
+            onPress={this.handleCancel.bind(this)}
+            isLoading={canceling}
+            style={{ marginTop: 10, backgroundColor: Colors.ice, marginLeft: 4 }}
+          >
+            Cancelar pedido
+          </DemandButton> }
+          { canReactivate && <DemandButton
+            onPress={this.handleReactivate.bind(this)}
+            isLoading={reactivating}
+            style={{ marginTop: 10, backgroundColor: Colors.ice }}
+          >
+            Reativar pedido
+          </DemandButton> }
+        </View>
       </View>
     )
   }

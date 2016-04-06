@@ -9,6 +9,7 @@ export default DemandState = ({ state, style }) => (
     paddingHorizontal: 10,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   }, style]}>
     <Icon name={(state === 'completed' ? 'check-circle' : (state === 'canceled' ? 'cancel' : (state === 'flagged' ? 'report' : 'schedule')))} style={{ 
       color: Colors.white,

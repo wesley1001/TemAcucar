@@ -42,7 +42,7 @@ export default class ViewDemand extends Component {
           <View style={{
             flex: 1,
             alignSelf: 'stretch',
-            marginBottom: 20,
+            marginBottom: 10,
           }}>
             <DemandHeader
               demand={demand}
