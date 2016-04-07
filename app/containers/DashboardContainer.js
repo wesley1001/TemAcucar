@@ -19,11 +19,11 @@ class DashboardContainer extends Component {
   componentWillMount() {
     const { dispatch, auth: { credentials, currentUser } } = this.props
     dispatch(UsersActions.list(credentials, currentUser))
-    dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     this.handleListDemands()
     this.handleListUserDemands()
     this.handleListTransactions()
     this.handleListReadNotifications()
+    this.handleListUnreadNotifications()
     if (currentUser.admin) {
       this.handleListAdminDemands()
       this.handleListFlaggedDemands()
@@ -73,6 +73,15 @@ class DashboardContainer extends Component {
     const { credentials, currentUser } = auth
     const { offset } = transactions
     dispatch(TransactionsActions.list(credentials, currentUser, offset))
+  }
+
+  handleListUnreadNotifications() {
+    const { dispatch, auth, unreadNotifications } = this.props
+    const { credentials, currentUser } = auth
+    if (!unreadNotifications.listing) {
+      dispatch(UnreadNotificationsActions.list(credentials, currentUser))
+    }
+    setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
   }
 
   handleListReadNotifications() {

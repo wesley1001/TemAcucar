@@ -1,7 +1,7 @@
 const initialState = {
   list: [],
   count: 0,
-  listing: true,
+  listing: false,
   readingAll: false,
 }
 

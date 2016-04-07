@@ -66,7 +66,6 @@ export default class Dashboard extends Component {
       onFlaggedDemands={onFlaggedDemands}
       onClose={this.handleMenuClose.bind(this)}
     />)
-    console.log('render', unreadNotifications, readNotifications)
     return (
       <DrawerLayout
         drawerWidth={Dimensions.get('window').width * 0.9}
