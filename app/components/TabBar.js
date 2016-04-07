@@ -17,6 +17,7 @@ export default class TabBar extends Component {
   }
 
   renderTabOption(name, page) {
+    const { notificationsCount } = this.props
     const isActive = (this.props.activeTab === page)
     const IconComponent = (page == 0 ? Icon : Icon)
     return (
@@ -28,7 +29,7 @@ export default class TabBar extends Component {
         backgroundColor: (isActive ? Colors.darkBlue : Colors.blue),
       }}>
         <IconComponent name={name} size={36} color={isActive ? Colors.white : Colors.darkBlue} />
-        { page === 2 && 
+        { page === 2 && notificationsCount > 0 &&
           <View style={{
             position: 'absolute',
             right: 36,
@@ -48,7 +49,7 @@ export default class TabBar extends Component {
               fontSize: 11,
               lineHeight: 14,
             }}>
-              3
+              {notificationsCount}
             </Text>
           </View>
         }
