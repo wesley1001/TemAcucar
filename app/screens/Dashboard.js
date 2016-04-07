@@ -43,6 +43,13 @@ export default class Dashboard extends Component {
     this.drawer.closeDrawer()
   }
 
+  handleChangeTab(tab) {
+    const { unreadNotifications: { list }, onReadAllNotifications } = this.props
+    if (tab.i === 2 && list.length > 0) {
+      onReadAllNotifications()
+    }
+  }
+
   render() {
     const { users, demands, transactions, unreadNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onViewTransaction, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands, onBack } = this.props
     const { drawerOpen } = this.props.dashboard
@@ -75,6 +82,7 @@ export default class Dashboard extends Component {
             <ScrollableTabView
               locked={true}
               renderTabBar={() => <TabBar notificationsCount={unreadNotifications.list.length} />}
+              onChangeTab={this.handleChangeTab.bind(this)}
             >
               <Tab tabLabel="home">
                 <NeighborsMap 
@@ -111,7 +119,7 @@ export default class Dashboard extends Component {
                   listing={false}
                   canList={false}
                 />
-                { /* TODO render NoNotifications when both unreadNotifications and readNotifications are empty and readNotifications is not liting */ }
+                { /* TODO render NoNotifications when both unreadNotifications and readNotifications are empty and readNotifications is not listing */ }
               </Tab>
             </ScrollableTabView>
           </View>

@@ -103,6 +103,12 @@ class DashboardContainer extends Component {
     dispatch(DemandsActions.reactivate(credentials, currentUser, demand))
   }
 
+  handleReadAllNotifications() {
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(UnreadNotificationsActions.readAll(credentials, currentUser))
+  }
+
   handleNewDemand() {
     Actions.newDemand()
   }
@@ -205,6 +211,7 @@ class DashboardContainer extends Component {
         onUserDemands={this.handleUserDemands.bind(this)}
         onAdminDemands={this.handleAdminDemands.bind(this)}
         onFlaggedDemands={this.handleFlaggedDemands.bind(this)}
+        onReadAllNotifications={this.handleReadAllNotifications.bind(this)}
       />
     )
   }

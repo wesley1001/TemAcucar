@@ -21,6 +21,11 @@ export default function unreadNotifications(state = initialState, action) {
         ...state, 
         listing: false,
       }
+    case 'UNREAD_NOTIFICATIONS_READ_ALL_REQUEST':
+      return {
+        ...state, 
+        list: [],
+      }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState
     default:

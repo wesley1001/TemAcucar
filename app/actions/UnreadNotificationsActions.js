@@ -11,3 +11,13 @@ export function list(credentials, currentUser) {
     },
   })
 }
+
+export function readAll(credentials, currentUser) {
+  return apiAction({
+    prefix: 'UNREAD_NOTIFICATIONS_READ_ALL',
+    path: '/notifications/read-all',
+    method: 'put',
+    credentials,
+    currentUser: () => currentUser,
+  })
+}
