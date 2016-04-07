@@ -21,6 +21,7 @@
     "react-native-facebook-login": "1.0.3",
     "react-native-geocoder": "0.3.1",
     "react-native-gifted-spinner": "0.0.3",
+    "react-native-html-render": "danielweinmann/react-native-html-render#2661bd07d6dd7e572bcb395c283adc29162ab030",
     "react-native-linear-gradient": "^1.5.2",
     "react-native-maps": "lelandrichardson/react-native-maps#46c7eec03532d979eb7d33c3daa2dc5527f05efa",
     "react-native-router-flux": "danielweinmann/react-native-router-flux#route_props",

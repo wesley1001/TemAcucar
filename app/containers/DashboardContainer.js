@@ -8,6 +8,7 @@ import * as AdminDemandsActions from '../actions/AdminDemandsActions'
 import * as FlaggedDemandsActions from '../actions/FlaggedDemandsActions'
 import * as TransactionsActions from '../actions/TransactionsActions'
 import * as MessagesActions from '../actions/MessagesActions'
+import * as UnreadNotificationsActions from '../actions/UnreadNotificationsActions'
 import { Actions } from 'react-native-router-flux'
 
 import Loading from "../screens/Loading"
@@ -17,6 +18,7 @@ class DashboardContainer extends Component {
   componentWillMount() {
     const { dispatch, auth: { credentials, currentUser } } = this.props
     dispatch(UsersActions.list(credentials, currentUser))
+    dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     this.handleListDemands()
     this.handleListUserDemands()
     this.handleListTransactions()
@@ -162,7 +164,7 @@ class DashboardContainer extends Component {
   }
 
   render() {
-    const { users, demands, userDemands, adminDemands, flaggedDemands, transactions } = this.props
+    const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications } = this.props
     if (users.listing)
       return (<Loading status="Carregando mapa com seus vizinhos..." />)
     if (transactions.listing && transactions.list.length === 0)
@@ -216,4 +218,5 @@ export default connect(state => ({
   flaggedDemands: state.flaggedDemands,
   demands: state.demands,
   transactions: state.transactions,
+  unreadNotifications: state.unreadNotifications,
 }))(DashboardContainer)
