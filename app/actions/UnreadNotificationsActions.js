@@ -12,12 +12,15 @@ export function list(credentials, currentUser) {
   })
 }
 
-export function readAll(credentials, currentUser) {
+export function readAll(credentials, currentUser, list) {
   return apiAction({
     prefix: 'UNREAD_NOTIFICATIONS_READ_ALL',
     path: '/notifications/read-all',
     method: 'put',
     credentials,
     currentUser: () => currentUser,
+    processResponse: (response) => {
+      return { list }
+    },
   })
 }
