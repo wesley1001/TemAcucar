@@ -1,8 +1,9 @@
 import React, { View } from 'react-native'
 import Colors from "../Colors"
 import HtmlSentence from "./HtmlSentence"
+import TimeAgo from "./TimeAgo"
 
-export default Notification = ({ notification: { read, text, triggering_user } }) => (
+export default Notification = ({ notification: { read, text, triggering_user, created_at } }) => (
   <View style={{
     backgroundColor: (read ? Colors.white : Colors.beige),
     borderColor: Colors.ice,
@@ -22,6 +23,10 @@ export default Notification = ({ notification: { read, text, triggering_user } }
         }}>
           {text}
         </HtmlSentence>
+        <TimeAgo time={created_at} style={{
+          color: Colors.ice,
+          marginTop: 4,
+        }} />
       </View>
     </View>
   </View>
