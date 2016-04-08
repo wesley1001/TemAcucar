@@ -14,6 +14,7 @@ import flaggedDemands from './reducers/flaggedDemands'
 import transactions from './reducers/transactions'
 import messages from './reducers/messages'
 import unreadNotifications from './reducers/unreadNotifications'
+import readNotifications from './reducers/readNotifications'
 
 const reducer = combineReducers({
   form: formReducer,
@@ -31,6 +32,7 @@ const reducer = combineReducers({
   transactions,
   messages,
   unreadNotifications,
+  readNotifications,
 })
 
 export default reducer

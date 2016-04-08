@@ -1,4 +1,4 @@
-import React, { Component, Dimensions, View, PanResponder } from 'react-native'
+import React, { Component, Dimensions, View, PanResponder, InteractionManager } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
 import LinearGradient from 'react-native-linear-gradient'
@@ -13,6 +13,7 @@ import NeighborsMap from "../components/NeighborsMap"
 import Demands from "../components/Demands"
 import TransactionDemands from "../components/TransactionDemands"
 import Notifications from "../components/Notifications"
+import NoNotifications from "../components/NoNotifications"
 
 export default class Dashboard extends Component {
   componentWillMount() {
@@ -44,14 +45,16 @@ export default class Dashboard extends Component {
   }
 
   handleChangeTab(tab) {
-    const { unreadNotifications: { list }, onReadAllNotifications } = this.props
-    if (tab.i === 2 && list.length > 0) {
-      onReadAllNotifications()
+    const { unreadNotifications: { list, readingAll }, onReadAllNotifications } = this.props
+    if (tab.i === 2 && list.length > 0 && !readingAll) {
+      InteractionManager.runAfterInteractions(() => {
+        onReadAllNotifications()
+      })
     }
   }
 
   render() {
-    const { users, demands, transactions, unreadNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onViewTransaction, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands, onBack } = this.props
+    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onViewTransaction, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands, onBack } = this.props
     const { drawerOpen } = this.props.dashboard
     const { currentUser } = this.props.auth
     const { latitude, longitude } = currentUser   
@@ -81,7 +84,7 @@ export default class Dashboard extends Component {
           <View style={{ flex: 1 }}>
             <ScrollableTabView
               locked={true}
-              renderTabBar={() => <TabBar notificationsCount={unreadNotifications.list.length} />}
+              renderTabBar={() => <TabBar notificationsCount={unreadNotifications.count} />}
               onChangeTab={this.handleChangeTab.bind(this)}
             >
               <Tab tabLabel="home">
@@ -119,7 +122,14 @@ export default class Dashboard extends Component {
                   listing={false}
                   canList={false}
                 />
-                { /* TODO render NoNotifications when both unreadNotifications and readNotifications are empty and readNotifications is not listing */ }
+                <Notifications
+                  notifications={readNotifications.list}
+                  listing={readNotifications.listing}
+                  canList={readNotifications.canList}
+                />
+                { unreadNotifications.list.length === 0 && readNotifications.list.length === 0 && !readNotifications.listing &&
+                  <NoNotifications />
+                }
               </Tab>
             </ScrollableTabView>
           </View>

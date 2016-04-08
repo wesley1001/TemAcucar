@@ -9,6 +9,7 @@ import * as FlaggedDemandsActions from '../actions/FlaggedDemandsActions'
 import * as TransactionsActions from '../actions/TransactionsActions'
 import * as MessagesActions from '../actions/MessagesActions'
 import * as UnreadNotificationsActions from '../actions/UnreadNotificationsActions'
+import * as ReadNotificationsActions from '../actions/ReadNotificationsActions'
 import { Actions } from 'react-native-router-flux'
 
 import Loading from "../screens/Loading"
@@ -18,10 +19,11 @@ class DashboardContainer extends Component {
   componentWillMount() {
     const { dispatch, auth: { credentials, currentUser } } = this.props
     dispatch(UsersActions.list(credentials, currentUser))
-    dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     this.handleListDemands()
     this.handleListUserDemands()
     this.handleListTransactions()
+    this.handleListReadNotifications()
+    this.handleListUnreadNotifications()
     if (currentUser.admin) {
       this.handleListAdminDemands()
       this.handleListFlaggedDemands()
@@ -73,6 +75,22 @@ class DashboardContainer extends Component {
     dispatch(TransactionsActions.list(credentials, currentUser, offset))
   }
 
+  handleListUnreadNotifications() {
+    const { dispatch, auth, unreadNotifications } = this.props
+    const { credentials, currentUser } = auth
+    if (!unreadNotifications.listing) {
+      dispatch(UnreadNotificationsActions.list(credentials, currentUser))
+    }
+    setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
+  }
+
+  handleListReadNotifications() {
+    const { dispatch, auth, readNotifications } = this.props
+    const { credentials, currentUser } = auth
+    const { offset } = readNotifications
+    dispatch(ReadNotificationsActions.list(credentials, currentUser, offset))
+  }
+
   handleRefuseDemand(demand) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
@@ -104,9 +122,9 @@ class DashboardContainer extends Component {
   }
 
   handleReadAllNotifications() {
-    const { dispatch, auth } = this.props
+    const { dispatch, auth, unreadNotifications: { list } } = this.props
     const { credentials, currentUser } = auth
-    dispatch(UnreadNotificationsActions.readAll(credentials, currentUser))
+    dispatch(UnreadNotificationsActions.readAll(credentials, currentUser, list))
   }
 
   handleNewDemand() {
@@ -170,7 +188,7 @@ class DashboardContainer extends Component {
   }
 
   render() {
-    const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications } = this.props
+    const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
     if (users.listing)
       return (<Loading status="Carregando mapa com seus vizinhos..." />)
     if (transactions.listing && transactions.list.length === 0)
@@ -179,6 +197,8 @@ class DashboardContainer extends Component {
       return (<Loading status="Carregando pedidos na sua vizinhança..." />)
     if (userDemands.listing && userDemands.list.length === 0)
       return (<Loading status="Carregando seus pedidos..." />)
+    if (readNotifications.listing && readNotifications.list.length === 0)
+      return (<Loading status="Carregando notificações..." />)
     if (adminDemands.listing && adminDemands.list.length === 0)
       return (<Loading status="Carregando admin de pedidos..." />)
     if (flaggedDemands.listing && flaggedDemands.list.length === 0)
@@ -201,6 +221,7 @@ class DashboardContainer extends Component {
         onListAdminDemands={this.handleListAdminDemands.bind(this)}
         onListFlaggedDemands={this.handleListFlaggedDemands.bind(this)}
         onListTransactions={this.handleListTransactions.bind(this)}
+        onListReadNotifications={this.handleListReadNotifications.bind(this)}
         onNewDemand={this.handleNewDemand.bind(this)}
         onCreateDemand={this.handleCreateDemand.bind(this)}
         onViewCreatedDemand={this.handleViewCreatedDemand.bind(this)}
@@ -226,4 +247,5 @@ export default connect(state => ({
   demands: state.demands,
   transactions: state.transactions,
   unreadNotifications: state.unreadNotifications,
+  readNotifications: state.readNotifications,
 }))(DashboardContainer)
