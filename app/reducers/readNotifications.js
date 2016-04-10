@@ -28,7 +28,8 @@ export default function readNotifications(state = initialState, action) {
     case 'UNREAD_NOTIFICATIONS_READ_ALL_SUCCESS':
       return {
         ...state, 
-        list: action.list.map((notification) => ({...notification, read: true})).concat(state.list),
+        list: action.list.concat(state.list),
+        offset: state.offset + action.list.length,
       }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState

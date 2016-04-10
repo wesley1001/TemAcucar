@@ -45,8 +45,8 @@ export default class Dashboard extends Component {
   }
 
   handleChangeTab(tab) {
-    const { unreadNotifications: { list, readingAll }, onReadAllNotifications } = this.props
-    if (tab.i === 2 && list.length > 0 && !readingAll) {
+    const { unreadNotifications: { count, readingAll }, onReadAllNotifications } = this.props
+    if (tab.i === 2 && count > 0 && !readingAll) {
       InteractionManager.runAfterInteractions(() => {
         onReadAllNotifications()
       })
@@ -54,7 +54,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onViewTransaction, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands, onBack } = this.props
+    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands, onBack } = this.props
     const { drawerOpen } = this.props.dashboard
     const { currentUser } = this.props.auth
     const { latitude, longitude } = currentUser   
@@ -126,6 +126,7 @@ export default class Dashboard extends Component {
                   notifications={readNotifications.list}
                   listing={readNotifications.listing}
                   canList={readNotifications.canList}
+                  onList={onListReadNotifications}
                 />
                 { unreadNotifications.list.length === 0 && readNotifications.list.length === 0 && !readNotifications.listing &&
                   <NoNotifications />
