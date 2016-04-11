@@ -130,6 +130,23 @@ export default function userDemands(state = initialState, action) {
           }
         }),
       }
+    case 'UNREAD_NOTIFICATIONS_LIST_SUCCESS':
+      const updatedDemands = action.list.filter(notification => (
+        notification.demand &&
+        state.list.map(demand => demand.id).indexOf(notification.demand.id) > -1
+      )).map(notification => notification.demand)
+      const updatedIds = updatedDemands.map(demand => demand.id)
+      return {
+        ...state,
+        list: state.list.map(demand => {
+          const index = updatedIds.indexOf(demand.id)
+          if (index > -1) {
+            return updatedDemands[index]
+          } else {
+            return demand
+          }
+        }),
+      }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState
     default:
