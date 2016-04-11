@@ -196,9 +196,14 @@ class DashboardContainer extends Component {
   }
 
   handleViewNotification(notification) {
-    const { transaction } = notification
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(UnreadNotificationsActions.read(credentials, currentUser, notification))
+    const { transaction, demand } = notification
     if (transaction) {
       Actions.viewTransaction({ transaction })
+    } else if (demand) {
+      Actions.viewDemand({ demand })
     }
   }
 

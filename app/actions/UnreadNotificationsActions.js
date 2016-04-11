@@ -12,6 +12,17 @@ export function list(credentials, currentUser) {
   })
 }
 
+export function read(credentials, currentUser, notification) {
+  return apiAction({
+    prefix: 'UNREAD_NOTIFICATIONS_READ',
+    path: '/notifications/read-all',
+    method: 'put',
+    requestAttributes: { notification },
+    credentials,
+    currentUser: () => currentUser,
+  })
+}
+
 export function readAll(credentials, currentUser, list) {
   return apiAction({
     prefix: 'UNREAD_NOTIFICATIONS_READ_ALL',
