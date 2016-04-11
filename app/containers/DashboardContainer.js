@@ -203,7 +203,7 @@ class DashboardContainer extends Component {
     if (transaction) {
       Actions.viewTransaction({ transaction })
     } else if (demand) {
-      Actions.viewDemand({ demand })
+      Actions.viewDemand({ demand, admin: notification.admin })
     }
   }
 

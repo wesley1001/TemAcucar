@@ -36,7 +36,7 @@ export default class DemandUserButtons extends Component {
     }
     const { state, completing, canceling, reactivating } = demand
     const canComplete = (state === 'sending' || state === 'active')
-    const canCancel = (state === 'sending' || state === 'active')
+    const canCancel = (state === 'sending' || state === 'active'  || (state === 'flagged' && admin))
     const canReactivate = (state === 'completed' || ((state === 'flagged' || state === 'canceled') && admin))
     return (
       <View style={{
@@ -59,7 +59,7 @@ export default class DemandUserButtons extends Component {
           { canCancel && <DemandButton
             onPress={this.handleCancel.bind(this)}
             isLoading={canceling}
-            style={{ marginTop: 10, backgroundColor: Colors.ice, marginLeft: 4 }}
+            style={{ marginTop: 10, backgroundColor: Colors.ice, marginLeft: (canComplete ? 4 : 0), marginRight: (canReactivate ? 4 : 0) }}
           >
             Cancelar pedido
           </DemandButton> }
