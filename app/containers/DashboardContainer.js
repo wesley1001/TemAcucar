@@ -15,8 +15,10 @@ import { Actions } from 'react-native-router-flux'
 import Loading from "../screens/Loading"
 import DashboardRouter from "../routers/DashboardRouter"
 
+
 class DashboardContainer extends Component {
   componentWillMount() {
+    this.timer = null
     const { dispatch, auth: { credentials, currentUser } } = this.props
     dispatch(UsersActions.list(credentials, currentUser))
     this.handleListDemands()
@@ -27,6 +29,12 @@ class DashboardContainer extends Component {
     if (currentUser.admin) {
       this.handleListAdminDemands()
       this.handleListFlaggedDemands()
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.timer) {
+      clearTimeout(this.timer)
     }
   }
 
@@ -76,12 +84,12 @@ class DashboardContainer extends Component {
   }
 
   handleListUnreadNotifications() {
-    const { dispatch, auth, unreadNotifications } = this.props
+    const { dispatch, auth, unreadNotifications: { listing, readingAll } } = this.props
     const { credentials, currentUser } = auth
-    if (!unreadNotifications.listing) {
+    if (!listing && !readingAll) {
       dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     }
-    setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
+    this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
   }
 
   handleListReadNotifications() {
@@ -187,6 +195,18 @@ class DashboardContainer extends Component {
     dispatch(MessagesActions.create(credentials, currentUser, message))
   }
 
+  handleViewNotification(notification) {
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(UnreadNotificationsActions.read(credentials, currentUser, notification))
+    const { transaction, demand } = notification
+    if (transaction) {
+      Actions.viewTransaction({ transaction })
+    } else if (demand) {
+      Actions.viewDemand({ demand, admin: notification.admin })
+    }
+  }
+
   render() {
     const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
     if (users.listing)
@@ -233,6 +253,7 @@ class DashboardContainer extends Component {
         onAdminDemands={this.handleAdminDemands.bind(this)}
         onFlaggedDemands={this.handleFlaggedDemands.bind(this)}
         onReadAllNotifications={this.handleReadAllNotifications.bind(this)}
+        onViewNotification={this.handleViewNotification.bind(this)}
       />
     )
   }

@@ -83,7 +83,7 @@ class ViewTransaction extends Component {
         paddingBottom: (inputFocused ? focusedHeight : blurredHeight),
       }}>
         <View style={{
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.darkBlue,
         }}>
           <View style={{
             marginTop: (Platform.OS == 'ios' ? 20 : 0),

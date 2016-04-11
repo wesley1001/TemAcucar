@@ -26,9 +26,24 @@ export default function readNotifications(state = initialState, action) {
         listing: false,
       }
     case 'UNREAD_NOTIFICATIONS_READ_ALL_SUCCESS':
+      const newNotifications = action.list.filter(notification => (
+        state.list.map(notification => notification.id).indexOf(notification.id) < 0
+      ))
       return {
         ...state, 
-        list: action.list.map((notification) => ({...notification, read: true})).concat(state.list),
+        list: newNotifications.concat(state.list),
+        offset: state.offset + newNotifications.length,
+      }
+    case 'UNREAD_NOTIFICATIONS_READ_REQUEST':
+      return {
+        ...state, 
+        list: state.list.map(notification => {
+          if (notification.id === action.notification.id) {
+            return { ...action.notification, read: true }
+          } else {
+            return notification
+          }
+        }),
       }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState

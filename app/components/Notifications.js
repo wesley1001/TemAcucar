@@ -5,13 +5,14 @@ import Notification from "../components/Notification"
 
 export default class Notifications extends Component {
   render() {
-    const { notifications, listing, canList, onList } = this.props
+    const { notifications, listing, canList, onList, onView } = this.props
     return (
       <View >
         { notifications.map((notification) => (
           <Notification
             key={notification.id}
             notification={notification}
+            onView={onView}
           />
         )) }
         { listing && <GiftedSpinner style={{ marginTop: 10 }} /> }
