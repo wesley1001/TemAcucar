@@ -195,6 +195,13 @@ class DashboardContainer extends Component {
     dispatch(MessagesActions.create(credentials, currentUser, message))
   }
 
+  handleViewNotification(notification) {
+    const { transaction } = notification
+    if (transaction) {
+      Actions.viewTransaction({ transaction })
+    }
+  }
+
   render() {
     const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
     if (users.listing)
@@ -241,6 +248,7 @@ class DashboardContainer extends Component {
         onAdminDemands={this.handleAdminDemands.bind(this)}
         onFlaggedDemands={this.handleFlaggedDemands.bind(this)}
         onReadAllNotifications={this.handleReadAllNotifications.bind(this)}
+        onViewNotification={this.handleViewNotification.bind(this)}
       />
     )
   }

@@ -1,6 +1,7 @@
 import moment from 'moment'
 
 const initialState = {
+  transaction: null,
   list: [],
   listing: true,
   offset: 0,
@@ -16,6 +17,7 @@ export default function messages(state = initialState, action) {
         ...state, 
         list: (action.offset === 0 ? [] : state.list),
         listing: true,
+        transaction: action.transaction,
       }
     case 'MESSAGES_LIST_SUCCESS':
       return {
@@ -55,6 +57,18 @@ export default function messages(state = initialState, action) {
         ...state,
         creating: false,
         createError: action.error,
+      }
+    case 'UNREAD_NOTIFICATIONS_LIST_SUCCESS':
+      if (!state.transaction || state.listing)
+        return state
+      const newMessages = action.list.filter(notification => (
+        notification.message && 
+        notification.transaction.id === state.transaction.id &&
+        state.list.map(message => message.id).indexOf(notification.message.id) < 0
+      )).map(notification => notification.message)
+      return {
+        ...state,
+        list: state.list.concat(newMessages)
       }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState

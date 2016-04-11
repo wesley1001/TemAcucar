@@ -54,7 +54,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands, onBack } = this.props
+    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands, onViewNotification, onBack } = this.props
     const { drawerOpen } = this.props.dashboard
     const { currentUser } = this.props.auth
     const { latitude, longitude } = currentUser   
@@ -121,12 +121,14 @@ export default class Dashboard extends Component {
                   notifications={unreadNotifications.list}
                   listing={false}
                   canList={false}
+                  onView={onViewNotification}
                 />
                 <Notifications
                   notifications={readNotifications.list}
                   listing={readNotifications.listing}
                   canList={readNotifications.canList}
                   onList={onListReadNotifications}
+                  onView={onViewNotification}
                 />
                 { unreadNotifications.list.length === 0 && readNotifications.list.length === 0 && !readNotifications.listing &&
                   <NoNotifications />
