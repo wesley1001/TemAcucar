@@ -135,6 +135,10 @@ class DashboardContainer extends Component {
     dispatch(UnreadNotificationsActions.readAll(credentials, currentUser, list))
   }
 
+  handleAbout() {
+    Actions.about()
+  }
+
   handleNewDemand() {
     Actions.newDemand()
   }
@@ -242,6 +246,7 @@ class DashboardContainer extends Component {
         onListFlaggedDemands={this.handleListFlaggedDemands.bind(this)}
         onListTransactions={this.handleListTransactions.bind(this)}
         onListReadNotifications={this.handleListReadNotifications.bind(this)}
+        onAbout={this.handleAbout.bind(this)}
         onNewDemand={this.handleNewDemand.bind(this)}
         onCreateDemand={this.handleCreateDemand.bind(this)}
         onViewCreatedDemand={this.handleViewCreatedDemand.bind(this)}

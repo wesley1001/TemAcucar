@@ -14,6 +14,9 @@ export default class HtmlSentence extends Component {
     } else if (name === 'b') {
       text = children[0].text
       style = { fontFamily: 'OpenSans-Bold' }
+    } else if (name === 'i') {
+      text = children[0].text
+      style = { fontFamily: 'OpenSans-Italic' }
     }
     return (
       <Sentence {...this.props} style={[style, this.props.style]}>

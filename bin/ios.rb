@@ -13,6 +13,7 @@ file = File.open("./ios/TemAcucar/Info.sample.plist", "rb")
 contents = file.read
 contents.gsub!("`${CODEPUSH_DEPLOYMENT_KEY}`", config[:CODEPUSH_DEPLOYMENT_KEY_IOS])
 contents.gsub!("`${FACEBOOK_APP_ID}`", config[:FACEBOOK_APP_ID])
+contents.gsub!("`${BUILD}`", config[:BUILD])
 File.write("./ios/TemAcucar/Info.plist", contents)
 
 puts "Generating AppDelegate.m with injected .env vars..."

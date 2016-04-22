@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import Colors from "../Colors"
 import Sentence from "./Sentence"
 
-export default UserMenuItem = ({ onPress, icon, children}) => (
+export default UserMenuItem = ({ onPress, icon, children, type }) => (
   <TouchableOpacity onPress={onPress} style={{
     alignSelf: 'stretch',
     padding: 10,
@@ -13,12 +13,12 @@ export default UserMenuItem = ({ onPress, icon, children}) => (
   }}>
     <Icon name={icon} style={{ 
       fontSize: 24,
-      color: Colors.white,
+      color: (type == "light" ? Colors.pink : Colors.white),
       marginRight: 10,
     }} />
     <Sentence style={{
       fontSize: 16,
-      color: Colors.white,
+      color: (type == "light" ? Colors.pink : Colors.white),
     }}>
       {children}
     </Sentence>

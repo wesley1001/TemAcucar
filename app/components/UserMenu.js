@@ -3,7 +3,7 @@ import Colors from "../Colors"
 import Sentence from "./Sentence"
 import UserMenuItem from "./UserMenuItem"
 
-export default UserMenu = ({ currentUser, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands }) => (
+export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands }) => (
   <View style={{
     flex: 1,
     justifyContent: 'flex-start',
@@ -36,13 +36,26 @@ export default UserMenu = ({ currentUser, onSignOut, onUserDemands, onAdminDeman
     <UserMenuItem onPress={onUserDemands} icon="view-list">
       Meus pedidos
     </UserMenuItem>
+    <UserMenuItem onPress={onUserDemands} icon="place">
+      Alterar endereço
+    </UserMenuItem>
     { currentUser.admin && <UserMenuItem onPress={onAdminDemands} icon="playlist-add-check">
       Todos os pedidos
     </UserMenuItem> }
     { currentUser.admin && <UserMenuItem onPress={onFlaggedDemands} icon="report">
       Pedidos impróprios
     </UserMenuItem> }
-    <UserMenuItem onPress={onSignOut} icon="power-settings-new">
+    <View style={{
+      marginTop: 10,
+      marginHorizontal: 10,
+      borderTopWidth: 0.3,
+      borderColor: Colors.pink,
+      alignSelf: 'stretch',
+    }} />
+    <UserMenuItem onPress={onAbout} icon="perm-device-information" type="light">
+      Sobre
+    </UserMenuItem>
+    <UserMenuItem onPress={onSignOut} icon="power-settings-new" type="light">
       Sair
     </UserMenuItem>
   </View>

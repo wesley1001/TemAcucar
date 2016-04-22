@@ -22,7 +22,7 @@ export default DemandState = ({ state, style }) => (
       lineHeight: 10,
       color: Colors.white,
     }}>
-      Pedido {(state === 'completed' ? 'bem-sucedido' : (state === 'canceled' ? 'cancelado' : (state === 'sending' ? 'enviando convites' : (state === 'flagged' ? 'denunciado como impróprio' : 'em andamento'))))}
+      Pedido {(state === 'completed' ? 'bem-sucedido' : (state === 'canceled' ? 'cancelado' : (state === 'notifying' ? 'enviando convites' : (state === 'flagged' ? 'denunciado como impróprio' : 'em andamento'))))}
     </Sentence>
   </View>
 )
