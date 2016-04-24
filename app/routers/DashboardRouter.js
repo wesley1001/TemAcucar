@@ -13,6 +13,7 @@ import UserDemands from "../screens/UserDemands"
 import UserReviews from "../screens/UserReviews"
 import AdminDemands from "../screens/AdminDemands"
 import FlaggedDemands from "../screens/FlaggedDemands"
+import LocationSetter from "../containers/LocationSetter"
 
 export default class DashboardRouter extends Component {
   render() {
@@ -30,6 +31,7 @@ export default class DashboardRouter extends Component {
         <Route name="userReviews" component={UserReviews} schema="default" />
         <Route name="adminDemands" component={AdminDemands} schema="default" />
         <Route name="flaggedDemands" component={FlaggedDemands} schema="default" />
+        <Route name="setLocation" component={LocationSetter} schema="default" />
       </StyledRouter>
     )
   }

@@ -54,7 +54,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onAdminDemands, onFlaggedDemands, onViewNotification, onAbout } = this.props
+    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands, onViewNotification, onAbout } = this.props
     const { drawerOpen } = this.props.dashboard
     const { currentUser } = this.props.auth
     const { latitude, longitude } = currentUser   
@@ -64,6 +64,7 @@ export default class Dashboard extends Component {
       onSignOut={onSignOut}
       onUserDemands={onUserDemands}
       onUserReviews={onUserReviews}
+      onSetLocation={onSetLocation}
       onAdminDemands={onAdminDemands}
       onFlaggedDemands={onFlaggedDemands}
       onClose={this.handleMenuClose.bind(this)}

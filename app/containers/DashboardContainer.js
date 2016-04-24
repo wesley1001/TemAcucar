@@ -20,8 +20,6 @@ class DashboardContainer extends Component {
   componentWillMount() {
     this.timer = null
     const { dispatch, auth: { credentials, currentUser } } = this.props
-    dispatch(UsersActions.list(credentials, currentUser))
-    this.handleListDemands()
     this.handleListUserDemands()
     this.handleListTransactions()
     this.handleListReadNotifications()
@@ -35,6 +33,15 @@ class DashboardContainer extends Component {
   componentWillUnmount() {
     if (this.timer) {
       clearTimeout(this.timer)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { dispatch, users, demands, auth: { credentials, currentUser } } = nextProps
+    if (users.startingUp && !users.listing) {
+      dispatch(UsersActions.list(credentials, currentUser))
+    } else if (demands.startingUp && !demands.listing) {
+      this.handleListDemands()
     }
   }
 
@@ -163,6 +170,10 @@ class DashboardContainer extends Component {
     Actions.userReviews()
   }
 
+  handleSetLocation() {
+    Actions.setLocation()
+  }
+
   handleAdminDemands() {
     Actions.adminDemands()
   }
@@ -213,12 +224,12 @@ class DashboardContainer extends Component {
 
   render() {
     const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
-    if (users.listing)
+    if (users.startingUp || users.listing)
       return (<Loading status="Carregando mapa com seus vizinhos..." />)
+    if (demands.startingUp || (demands.listing && demands.list.length === 0))
+      return (<Loading status="Carregando pedidos na sua vizinhança..." />)
     if (transactions.listing && transactions.list.length === 0)
       return (<Loading status="Carregando seu histórico de transações..." />)
-    if (demands.listing && demands.list.length === 0)
-      return (<Loading status="Carregando pedidos na sua vizinhança..." />)
     if (userDemands.listing && userDemands.list.length === 0)
       return (<Loading status="Carregando seus pedidos..." />)
     if (readNotifications.listing && readNotifications.list.length === 0)
@@ -255,6 +266,7 @@ class DashboardContainer extends Component {
         onCreateMessage={this.handleCreateMessage.bind(this)}
         onUserDemands={this.handleUserDemands.bind(this)}
         onUserReviews={this.handleUserReviews.bind(this)}
+        onSetLocation={this.handleSetLocation.bind(this)}
         onAdminDemands={this.handleAdminDemands.bind(this)}
         onFlaggedDemands={this.handleFlaggedDemands.bind(this)}
         onReadAllNotifications={this.handleReadAllNotifications.bind(this)}

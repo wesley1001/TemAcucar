@@ -3,7 +3,7 @@ import Colors from "../Colors"
 import Sentence from "./Sentence"
 import UserMenuItem from "./UserMenuItem"
 
-export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onUserReviews, onAdminDemands, onFlaggedDemands }) => (
+export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands }) => (
   <View style={{
     flex: 1,
     justifyContent: 'flex-start',
@@ -39,7 +39,7 @@ export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onU
     <UserMenuItem onPress={onUserReviews} icon="star">
       Minhas avaliações
     </UserMenuItem>
-    <UserMenuItem onPress={onUserDemands} icon="place">
+    <UserMenuItem onPress={onSetLocation} icon="place">
       Alterar endereço
     </UserMenuItem>
     { currentUser.admin && <UserMenuItem onPress={onAdminDemands} icon="playlist-add-check">

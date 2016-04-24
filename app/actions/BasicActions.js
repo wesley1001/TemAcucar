@@ -89,11 +89,11 @@ export function apiDispatchAction(dispatch, options) {
         type: `${prefix}_SUCCESS`,
         ...(processResponse && processResponse(response)),
       }
+      dispatch(successAction)
       if (newCredentials.accessToken) {
         successAction.credentials = newCredentials
         StoredAuthActions.set(dispatch, newCredentials, keyFilter(currentUser(response), ['password', 'facebook']))
       }
-      dispatch(successAction)
     } else {
       dispatch({
         type: `${prefix}_FAILURE`,
