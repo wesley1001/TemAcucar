@@ -1,7 +1,7 @@
 import React, { View } from 'react-native'
 import Colors from "../Colors"
 import Sentence from "./Sentence"
-import DemandHeader from "./TransactionDemandHeader"
+import TransactionDemandHeader from "./TransactionDemandHeader"
 import TransactionDemandFooter from "./TransactionDemandFooter"
 import Transactions from "./Transactions"
 

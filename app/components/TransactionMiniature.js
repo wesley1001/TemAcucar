@@ -28,10 +28,10 @@ export default class TransacionMiniature extends Component {
           flex: 1,
         }}>
           <Sentence style={{
-            fontFamily: 'BoosterNextFY-Black',
+            fontFamily: 'BoosterNextFY-Bold',
             fontSize: 12,
             lineHeight: (Platform.OS === 'ios' ? 12 : 14),
-            color: Colors.pink,
+            color: Colors.brown,
           }}>
             { user.id === currentUser.id ? 'Conversa comigo' : `${user.first_name} ${user.last_name}` }
           </Sentence>

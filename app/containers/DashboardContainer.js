@@ -167,10 +167,6 @@ class DashboardContainer extends Component {
     Actions.flaggedDemands()
   }
 
-  handleBack() {
-    Actions.pop()
-  }
-
   handleViewCreatedDemand() {
     const { lastCreated } = this.props.demands
     Actions.viewCreatedDemand({ demand: lastCreated })
@@ -230,7 +226,6 @@ class DashboardContainer extends Component {
     return (
       <DashboardRouter
         {...this.props}
-        onBack={this.handleBack.bind(this)}
         onDashboard={this.handleDashboard.bind(this)}
         onDrawerOpen={this.handleDrawerOpen.bind(this)}
         onDrawerClose={this.handleDrawerClose.bind(this)}

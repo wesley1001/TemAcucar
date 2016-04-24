@@ -18,13 +18,13 @@ export default class DashboardRouter extends Component {
     return (
       <StyledRouter {...this.props}>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-        <Route name="dashboard" component={Dashboard} initial={true} hideNavBar={true} type="reset" />
+        <Route name="dashboard" component={Dashboard} initial={true}type="reset" />
         <Route name="about" component={About} schema="default" />
         <Route name="newDemand" component={NewDemand} schema="default" />
         <Route name="viewDemand" component={ViewDemand} schema="default" />
         <Route name="viewCreatedDemand" component={ViewCreatedDemand} schema="default" type="replace" />
-        <Route name="viewTransaction" component={ViewTransaction} schema="default" hideNavBar={true} />
-        <Route name="viewCreatedTransaction" component={ViewCreatedTransaction} schema="default" type="replace" hideNavBar={true} />
+        <Route name="viewTransaction" component={ViewTransaction} schema="default" />
+        <Route name="viewCreatedTransaction" component={ViewCreatedTransaction} schema="default" type="replace" />
         <Route name="userDemands" component={UserDemands} schema="default" />
         <Route name="adminDemands" component={AdminDemands} schema="default" />
         <Route name="flaggedDemands" component={FlaggedDemands} schema="default" />

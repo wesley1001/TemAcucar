@@ -24,7 +24,7 @@ class RequestPassword extends Component {
   render() {
     const { onRequestPassword, fields: { email }, auth: { requestPasswordError, requestingPassword } } = this.props
     return (
-      <FormScreen>
+      <FormScreen navBar={true} navBarTitle="Esqueceu sua senha?">
         <EmailInput {...email} />
         { requestPasswordError && <FormError message={UserValidators.errorMessage(requestPasswordError)} /> }
         <FormSubmit

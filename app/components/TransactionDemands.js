@@ -6,7 +6,7 @@ import NoTransactionDemands from "../components/NoTransactionDemands"
 
 export default class TransactionDemands extends Component {
   render() {
-    const { onList, onView, onComplete, onCancel, onReactivate, onBack, demands, listing, canList, currentUser } = this.props
+    const { onList, onView, onViewDemand, onComplete, onCancel, onReactivate, demands, listing, canList, currentUser } = this.props
     return (
       <View >
         { demands.map((demand, index) => (
@@ -16,9 +16,9 @@ export default class TransactionDemands extends Component {
             index={index}
             currentUser={currentUser}
             onView={onView}
+            onViewDemand={onViewDemand}
             onComplete={onComplete}
             onCancel={onCancel}
-            onBack={onBack}
           />
         )) }
         { listing && <GiftedSpinner style={{ marginTop: 10 }} /> }

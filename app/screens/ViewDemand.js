@@ -1,7 +1,10 @@
-import React, { Component, View } from 'react-native'
+import React, { Component, ScrollView, View, Platform } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
+import truncate from 'truncate'
 
 import Colors from "../Colors"
 import Sentence from "../components/Sentence"
+import NavBar from "../components/NavBar"
 import DemandHeader from "../components/DemandHeader"
 import DemandButtons from "../components/DemandButtons"
 import DemandUserButtons from "../components/DemandUserButtons"
@@ -31,43 +34,66 @@ export default class ViewDemand extends Component {
     return (
       <View style={{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colors.white,
+        alignSelf: 'stretch',
       }}>
-        <View style={{
-          alignSelf: 'stretch',
-          paddingHorizontal: 10,
+        <NavBar title={truncate(demand.name, 40)} />
+        <ScrollView style={{
+          flex: 1,
+          backgroundColor: Colors.white,
+          paddingTop: 20,
         }}>
           <View style={{
-            flex: 1,
             alignSelf: 'stretch',
-            marginBottom: 10,
+            alignItems: 'center',
+            paddingHorizontal: 10,
+            paddingBottom: 100,
           }}>
-            <DemandHeader
-              demand={demand}
-              demands={demandsList}
-              currentUser={currentUser}
-              fullHeader={true} />
+            <View style={{
+              flex: 1,
+              alignSelf: 'stretch',
+              marginBottom: 10,
+            }}>
+              <DemandHeader
+                demand={demand}
+                demands={demandsList}
+                currentUser={currentUser}
+                fullHeader={true} />
+            </View>
           </View>
+        </ScrollView>
+        <View style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}>
+          <LinearGradient
+            colors={['rgba(255,255,255,0)', Colors.white]}
+            locations={[0,0.5]}
+            style={{
+              flex: 1,
+              paddingHorizontal: 10,
+              paddingTop: 40,
+            }}>
+              { !showUserButtons && <DemandButtons
+                currentUser={currentUser}
+                demand={demand}
+                demands={demands.list}
+                onAccept={onCreateTransaction}
+                onRefuse={onRefuseDemand}
+                onFlag={onFlagDemand}
+              /> }
+              { showUserButtons && <DemandUserButtons
+                admin={admin}
+                currentUser={currentUser}
+                demand={demand}
+                demands={demandsList}
+                onComplete={onCompleteDemand}
+                onCancel={onCancelDemand}
+                onReactivate={onReactivateDemand}
+              /> }
+          </LinearGradient>
         </View>
-        { !showUserButtons && <DemandButtons
-          currentUser={currentUser}
-          demand={demand}
-          demands={demands.list}
-          onAccept={onCreateTransaction}
-          onRefuse={onRefuseDemand}
-          onFlag={onFlagDemand}
-        /> }
-        { showUserButtons && <DemandUserButtons
-          admin={admin}
-          currentUser={currentUser}
-          demand={demand}
-          demands={demandsList}
-          onComplete={onCompleteDemand}
-          onCancel={onCancelDemand}
-          onReactivate={onReactivateDemand}
-        /> }
       </View>
     )
   }

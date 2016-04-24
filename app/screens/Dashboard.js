@@ -54,7 +54,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands, onViewNotification, onAbout, onBack } = this.props
+    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands, onViewNotification, onAbout } = this.props
     const { drawerOpen } = this.props.dashboard
     const { currentUser } = this.props.auth
     const { latitude, longitude } = currentUser   
@@ -114,9 +114,9 @@ export default class Dashboard extends Component {
                   canList={transactions.canList}
                   onList={onListTransactions}
                   onView={onViewTransaction}
+                  onViewDemand={onViewDemand}
                   onComplete={onCompleteDemand}
                   onCancel={onCancelDemand}
-                  onBack={onBack}
                 />
               </Tab>
               <Tab tabLabel="notifications">

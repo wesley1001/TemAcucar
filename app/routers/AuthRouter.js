@@ -28,8 +28,8 @@ export default class AuthRouter extends Component {
     return (
       <StyledRouter {...this.props}>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-        <Route name="welcome" component={Welcome} schema="default" initial={!signInFailed} hideNavBar={true} />
-        <Route name="signInFailed" component={SignInFailed} type="reset" initial={signInFailed} hideNavBar={true} />
+        <Route name="welcome" component={Welcome} schema="default" initial={!signInFailed} />
+        <Route name="signInFailed" component={SignInFailed} type="reset" initial={signInFailed} />
         <Route name="signIn" component={SignIn} schema="default" />
         <Route name="signUp" component={SignUp} schema="default" />
         <Route name="signInForm" component={SignInForm} schema="default" />
