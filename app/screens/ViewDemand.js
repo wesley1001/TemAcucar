@@ -1,9 +1,9 @@
 import React, { Component, ScrollView, View, Platform } from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
 import truncate from 'truncate'
 
 import Colors from "../Colors"
 import ReviewsContainer from "../containers/ReviewsContainer"
+import BottomGradient from "../components/BottomGradient"
 import Sentence from "../components/Sentence"
 import NavBar from "../components/NavBar"
 import DemandHeader from "../components/DemandHeader"
@@ -69,39 +69,25 @@ export default class ViewDemand extends Component {
             <ReviewsContainer {...this.props} user={demand.user} />
           </View>
         </ScrollView>
-        <View style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-        }}>
-          <LinearGradient
-            colors={['rgba(255,255,255,0)', Colors.white]}
-            locations={[0,0.5]}
-            style={{
-              flex: 1,
-              paddingHorizontal: 10,
-              paddingTop: 40,
-            }}>
-              { showButtons && <DemandButtons
-                currentUser={currentUser}
-                demand={demand}
-                demands={demands.list}
-                onAccept={onCreateTransaction}
-                onRefuse={onRefuseDemand}
-                onFlag={onFlagDemand}
-              /> }
-              { showUserButtons && <DemandUserButtons
-                admin={admin}
-                currentUser={currentUser}
-                demand={demand}
-                demands={demandsList}
-                onComplete={onCompleteDemand}
-                onCancel={onCancelDemand}
-                onReactivate={onReactivateDemand}
-              /> }
-          </LinearGradient>
-        </View>
+        <BottomGradient>
+          { showButtons && <DemandButtons
+            currentUser={currentUser}
+            demand={demand}
+            demands={demands.list}
+            onAccept={onCreateTransaction}
+            onRefuse={onRefuseDemand}
+            onFlag={onFlagDemand}
+          /> }
+          { showUserButtons && <DemandUserButtons
+            admin={admin}
+            currentUser={currentUser}
+            demand={demand}
+            demands={demandsList}
+            onComplete={onCompleteDemand}
+            onCancel={onCancelDemand}
+            onReactivate={onReactivateDemand}
+          /> }
+        </BottomGradient>
       </View>
     )
   }

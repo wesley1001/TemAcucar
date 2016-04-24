@@ -1,7 +1,6 @@
 import React, { Component, Dimensions, View, PanResponder, InteractionManager } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
-import LinearGradient from 'react-native-linear-gradient'
 
 import Colors from "../Colors"
 import Button from "../components/Button"
@@ -9,6 +8,7 @@ import TopBar from "../components/TopBar"
 import UserMenu from "../components/UserMenu"
 import TabBar from "../components/TabBar"
 import Tab from "../components/Tab"
+import BottomGradient from "../components/BottomGradient"
 import NeighborsMap from "../components/NeighborsMap"
 import Demands from "../components/Demands"
 import TransactionDemands from "../components/TransactionDemands"
@@ -139,34 +139,22 @@ export default class Dashboard extends Component {
               </Tab>
             </ScrollableTabView>
           </View>
-          <View style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
+          <BottomGradient style={{
+            paddingTop: 50,
           }}>
-            <LinearGradient
-              colors={['rgba(255,255,255,0)', Colors.white]}
-              locations={[0,0.5]}
+            <Button
+              onPress={onNewDemand}
               style={{
-                flex: 1,
-                padding: 10,
-                paddingTop: 50,
-              }}>
-              <Button
-                onPress={onNewDemand}
-                style={{
-                  alignSelf: 'stretch',
-                }}
-                textStyle={{
-                  fontSize: 16,
-                  lineHeight: 20,
-                }}
-              >
-                Pedir
-              </Button>
-            </LinearGradient>
-          </View>
+                alignSelf: 'stretch',
+              }}
+              textStyle={{
+                fontSize: 16,
+                lineHeight: 20,
+              }}
+            >
+              Pedir
+            </Button>
+          </BottomGradient>
         </View>
       </DrawerLayout>
     )
