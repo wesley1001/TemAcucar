@@ -250,8 +250,8 @@ export default function auth(state = initialState, action) {
     default:
       // Here I defined a standard for the whole app. If an action passes a credentials object, it will update BOTH auth.credentials AND auth.currentUser states.
       // WARNING: do not pass action.credentials object to any action unless it contains real and current auth credentials for the current user.
-      // WARNING: do not pass action.currentUser object to any action unless it contains pertinent information of the current user.
-      if (action.credentials) {
+      // WARNING: do not pass action.currentUser object to any action unless it contains updated information of the current user.
+      if ( action.credentials ) {
         return {
           ...state, 
           currentUser: {
