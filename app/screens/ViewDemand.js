@@ -55,7 +55,10 @@ export default class ViewDemand extends Component {
             <View style={{
               flex: 1,
               alignSelf: 'stretch',
-              marginBottom: 10,
+              paddingBottom: 20,
+              marginBottom: 20,
+              borderBottomWidth: 0.5,
+              borderColor: Colors.beige,
             }}>
               <DemandHeader
                 demand={demand}
