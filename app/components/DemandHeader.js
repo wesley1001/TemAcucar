@@ -8,7 +8,7 @@ import TimeAgo from "./TimeAgo"
 
 export default class DemandHeader extends Component {
   render() {
-    const { fullHeader, currentUser, demands } = this.props
+    const { fullHeader, currentUser, demands, hideDescription, verb } = this.props
     // This is a hack to update demand on ViewDemand
     let demand
     if (demands) {
@@ -18,6 +18,7 @@ export default class DemandHeader extends Component {
       demand = this.props.demand
     }
     const { user, name, description, distance, created_at, state } = demand
+    const verbToUse = verb || 'precisa de'
     return (
       <View style={{
         alignItems: 'center',
@@ -79,7 +80,7 @@ export default class DemandHeader extends Component {
           fontFamily: 'BoosterNextFY-Bold',
           marginTop: 14,
         }}>
-          { currentUser.id === user.id ? 'Você' : user.first_name } precisa de um(a)
+          { currentUser.id === user.id ? 'Você' : user.first_name } { verbToUse } um(a)
         </Text>
         <Text style={{
           marginHorizontal: 10,
@@ -91,16 +92,18 @@ export default class DemandHeader extends Component {
         }}>
           { name.toUpperCase() }
         </Text>
-        <Sentence style={{
-          fontSize: 10,
-          marginHorizontal: 10,
-          marginTop: 4,
-          lineHeight: (Platform.OS === 'ios' ? 10 : 12),
-          fontFamily: 'BoosterNextFY-Regular',
-          textAlign: 'center',
-        }}>
-          { fullHeader ? description : truncate(description, 120) }
-        </Sentence>
+        { !hideDescription && 
+          <Sentence style={{
+            fontSize: 10,
+            marginHorizontal: 10,
+            marginTop: 4,
+            lineHeight: (Platform.OS === 'ios' ? 10 : 12),
+            fontFamily: 'BoosterNextFY-Regular',
+            textAlign: 'center',
+          }}>
+            { fullHeader ? description : truncate(description, 120) }
+          </Sentence>
+        }
         <View style={{
           position: 'absolute',
           top: 0,

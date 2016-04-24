@@ -16,8 +16,8 @@ export default class TransacionMiniature extends Component {
     const { user, last_message_text } = transaction
     return (
       <TouchableOpacity onPress={this.handleView.bind(this)} style={{
-        borderColor: Colors.ice,
-        borderBottomWidth: 0.5,
+        borderColor: Colors.beige,
+        borderBottomWidth: 1,
         padding: 10,
         flexDirection: 'row',
         alignItems: 'center',
@@ -33,7 +33,7 @@ export default class TransacionMiniature extends Component {
             lineHeight: (Platform.OS === 'ios' ? 12 : 14),
             color: Colors.pink,
           }}>
-            { user.id === currentUser.id ? 'Eu' : `${user.first_name} ${user.last_name}` }
+            { user.id === currentUser.id ? 'Conversa comigo' : `${user.first_name} ${user.last_name}` }
           </Sentence>
           <Sentence style={{
             fontSize: 12,
