@@ -21,10 +21,10 @@ moment.locale('pt-br', {
   }
 })
 
-export default TimeAgo = ({ time, style}) => (
+export default TimeAgo = ({ time, style, lowerCase }) => (
   <Sentence style={[{
     fontSize: 9,
   }, style]}>
-    { moment(time).fromNow() }
+    { lowerCase ? moment(time).fromNow().toLowerCase() : moment(time).fromNow() }
   </Sentence>
 )

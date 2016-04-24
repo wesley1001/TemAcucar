@@ -3,6 +3,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import truncate from 'truncate'
 
 import Colors from "../Colors"
+import ReviewsContainer from "../containers/ReviewsContainer"
 import Sentence from "../components/Sentence"
 import NavBar from "../components/NavBar"
 import DemandHeader from "../components/DemandHeader"
@@ -46,7 +47,7 @@ export default class ViewDemand extends Component {
             alignSelf: 'stretch',
             alignItems: 'center',
             paddingHorizontal: 10,
-            paddingBottom: 100,
+            paddingBottom: 110,
           }}>
             <View style={{
               flex: 1,
@@ -59,6 +60,7 @@ export default class ViewDemand extends Component {
                 currentUser={currentUser}
                 fullHeader={true} />
             </View>
+            <ReviewsContainer {...this.props} user={demand.user} />
           </View>
         </ScrollView>
         <View style={{
