@@ -29,8 +29,11 @@ export default class ViewDemand extends Component {
   }
 
   render() {
-    const { auth: { currentUser }, demand, demands, userDemands, adminDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onCompleteDemand, onCancelDemand, onReactivateDemand, admin } = this.props
+    const { auth: { currentUser }, demand, demands, transactions, userDemands, adminDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onCompleteDemand, onCancelDemand, onReactivateDemand, admin } = this.props
+    const transactionDemands = transactions.list
     const showUserButtons = (currentUser.id === demand.user.id || admin)
+    const showButtons = !showUserButtons && (demand.state === 'notifying' || demand.state === 'active') && transactionDemands.map(demand => demand.id).indexOf(demand.id) < 0
+
     const demandsList = ( admin ? adminDemands.list : (currentUser.id === demand.user.id ? userDemands.list : demands.list) )
     return (
       <View style={{
@@ -77,7 +80,7 @@ export default class ViewDemand extends Component {
               paddingHorizontal: 10,
               paddingTop: 40,
             }}>
-              { !showUserButtons && <DemandButtons
+              { showButtons && <DemandButtons
                 currentUser={currentUser}
                 demand={demand}
                 demands={demands.list}
