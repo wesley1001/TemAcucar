@@ -159,6 +159,10 @@ class DashboardContainer extends Component {
     Actions.userDemands()
   }
 
+  handleUserReviews() {
+    Actions.userReviews()
+  }
+
   handleAdminDemands() {
     Actions.adminDemands()
   }
@@ -250,6 +254,7 @@ class DashboardContainer extends Component {
         onViewCreatedTransaction={this.handleViewCreatedTransaction.bind(this)}
         onCreateMessage={this.handleCreateMessage.bind(this)}
         onUserDemands={this.handleUserDemands.bind(this)}
+        onUserReviews={this.handleUserReviews.bind(this)}
         onAdminDemands={this.handleAdminDemands.bind(this)}
         onFlaggedDemands={this.handleFlaggedDemands.bind(this)}
         onReadAllNotifications={this.handleReadAllNotifications.bind(this)}

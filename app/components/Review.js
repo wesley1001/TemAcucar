@@ -24,7 +24,7 @@ export default Review = ({ review: { rating, text, reviewer, created_at } }) => 
       textAlign: 'center',
       fontSize: 10,
     }}>
-      { text || `${reviewer.first_name} não descreveu sua avaliação.` }
+      { text || `${reviewer.first_name} não descreveu sua experiência.` }
     </Sentence>
     <View style={{
       flexDirection: 'row',

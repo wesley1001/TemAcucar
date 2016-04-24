@@ -54,7 +54,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onAdminDemands, onFlaggedDemands, onViewNotification, onAbout } = this.props
+    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onAdminDemands, onFlaggedDemands, onViewNotification, onAbout } = this.props
     const { drawerOpen } = this.props.dashboard
     const { currentUser } = this.props.auth
     const { latitude, longitude } = currentUser   
@@ -63,6 +63,7 @@ export default class Dashboard extends Component {
       onAbout={onAbout}
       onSignOut={onSignOut}
       onUserDemands={onUserDemands}
+      onUserReviews={onUserReviews}
       onAdminDemands={onAdminDemands}
       onFlaggedDemands={onFlaggedDemands}
       onClose={this.handleMenuClose.bind(this)}
@@ -139,13 +140,13 @@ export default class Dashboard extends Component {
               </Tab>
             </ScrollableTabView>
           </View>
-          <BottomGradient style={{
-            paddingTop: 50,
-          }}>
+          <BottomGradient>
             <Button
               onPress={onNewDemand}
               style={{
                 alignSelf: 'stretch',
+                marginBottom: 10,
+                marginTop: 10,
               }}
               textStyle={{
                 fontSize: 16,
