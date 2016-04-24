@@ -42,6 +42,12 @@ export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onU
     <UserMenuItem onPress={onSetLocation} icon="place">
       Alterar endereço
     </UserMenuItem>
+    { !currentUser.facebook_uid && <UserMenuItem onPress={onSetLocation} icon="facebook-official" iconSet="FontAwesome" iconStyle={{
+      fontSize: 22,
+      marginLeft: 4,
+    }}>
+      Conectar Facebook
+    </UserMenuItem> }
     { currentUser.admin && <UserMenuItem onPress={onAdminDemands} icon="playlist-add-check">
       Todos os pedidos
     </UserMenuItem> }
