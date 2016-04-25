@@ -14,6 +14,7 @@ import Demands from "../components/Demands"
 import TransactionDemands from "../components/TransactionDemands"
 import Notifications from "../components/Notifications"
 import NoNotifications from "../components/NoNotifications"
+import FacebookTip from "../components/FacebookTip"
 
 export default class Dashboard extends Component {
   componentWillMount() {
@@ -50,6 +51,13 @@ export default class Dashboard extends Component {
       InteractionManager.runAfterInteractions(() => {
         onReadAllNotifications()
       })
+    }
+  }
+
+  renderTips() {
+    const { users, onFacebook, auth: { currentUser, facebookConnecting } } = this.props
+    if ( !currentUser.facebook_uid ) {
+      return (<FacebookTip onPress={onFacebook} loading={facebookConnecting} />)
     }
   }
 
@@ -98,6 +106,7 @@ export default class Dashboard extends Component {
                   longitude={longitude}
                   users={users.list}
                 /> 
+                { this.renderTips() }
                 <Demands
                   currentUser={currentUser}
                   demands={demands.list}
