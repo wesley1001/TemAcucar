@@ -18,7 +18,9 @@ const Colors = {
   facebook: '#516DAC',
   darkFacebook: '#314D8C',
   red: '#E9122B',
+  darkRed: '#D9021B',
   green: '#2CB36E',
+  darkGreen: '#0C934E',
 }
 
 export default Colors

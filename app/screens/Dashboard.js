@@ -1,6 +1,7 @@
 import React, { Component, Dimensions, View, PanResponder, InteractionManager } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
+import Toast from 'react-native-root-toast'
 
 import Colors from "../Colors"
 import Button from "../components/Button"
@@ -39,7 +40,13 @@ export default class Dashboard extends Component {
   }
 
   handleMenuOpen() {
-    this.drawer.openDrawer()
+    Toast.show('Muito bem :D seu café está pronto e quentinho!', {
+      duration: Toast.durations.LONG,
+      backgroundColor: Colors.darkGreen,
+      shadowColor: 'rgba(0,0,0,0.5)',
+      opacity: 1,
+    })
+    // this.drawer.openDrawer()
   }
 
   handleMenuClose() {
