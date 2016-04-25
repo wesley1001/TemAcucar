@@ -62,8 +62,9 @@ class Authenticator extends Component {
   }
 
   handleFacebook() {
-    const { dispatch } = this.props
-    dispatch(AuthActions.facebook())
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(AuthActions.facebook(credentials, currentUser))
   }
 
   handleSignIn(currentUser) {

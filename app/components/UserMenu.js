@@ -3,7 +3,7 @@ import Colors from "../Colors"
 import Sentence from "./Sentence"
 import UserMenuItem from "./UserMenuItem"
 
-export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands }) => (
+export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onUserReviews, onSetLocation, onFacebook, facebookConnecting, onAdminDemands, onFlaggedDemands }) => (
   <View style={{
     flex: 1,
     justifyContent: 'flex-start',
@@ -42,11 +42,11 @@ export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onU
     <UserMenuItem onPress={onSetLocation} icon="place">
       Alterar endereço
     </UserMenuItem>
-    { !currentUser.facebook_uid && <UserMenuItem onPress={onSetLocation} icon="facebook-official" iconSet="FontAwesome" iconStyle={{
+    { !currentUser.facebook_uid && <UserMenuItem onPress={onFacebook} icon="facebook-official" iconSet="FontAwesome" iconStyle={{
       fontSize: 22,
       marginLeft: 4,
     }}>
-      Conectar Facebook
+      { facebookConnecting ? 'Conectando...' : 'Conectar Facebook' }
     </UserMenuItem> }
     { currentUser.admin && <UserMenuItem onPress={onAdminDemands} icon="playlist-add-check">
       Todos os pedidos

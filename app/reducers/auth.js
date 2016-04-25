@@ -6,6 +6,7 @@ const initialState = {
   signingIn: false,
   signingOut: false,
   facebookSigningIn: false,
+  facebookConnecting: false,
   requestingPassword: false,
   resetPassword: false,
   resetingPassword: false,
@@ -191,6 +192,33 @@ export default function auth(state = initialState, action) {
         facebookSigningIn: false,
         facebookError: action.error,
         startingUp: false,
+      }
+    case 'AUTH_FACEBOOK_CONNECT_REQUEST':
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          ...action.currentUser,
+        },
+        facebookError: null,
+        facebookConnecting: true,
+      }
+    case 'AUTH_FACEBOOK_CONNECT_SUCCESS':
+      return {
+        ...state, 
+        currentUser: {
+          ...state.currentUser, 
+          ...action.currentUser,
+        },
+        credentials: action.credentials,
+        facebookConnecting: false,
+        facebookError: null,
+      }
+    case 'AUTH_FACEBOOK_CONNECT_FAILURE':
+      return {
+        ...state, 
+        facebookConnecting: false,
+        facebookError: action.error,
       }
     case 'AUTH_REQUEST_PASSWORD_REQUEST':
       return {
