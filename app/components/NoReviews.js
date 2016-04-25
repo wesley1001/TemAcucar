@@ -7,7 +7,7 @@ export default NoReviews = ({ user, currentUser }) => (
     alignSelf: 'stretch',
     margin: 10,
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: 10,
   }}>
     {user.id === currentUser.id ? 'Você' : user.first_name} ainda não recebeu nenhuma avaliação.
   </Sentence>

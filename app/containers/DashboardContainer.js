@@ -231,7 +231,7 @@ class DashboardContainer extends Component {
     const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
     if (users.startingUp || users.listing)
       return (<Loading status="Carregando mapa com seus vizinhos..." />)
-    if (demands.startingUp || (demands.listing && demands.list.length === 0))
+    if (demands.startingUp)
       return (<Loading status="Carregando pedidos na sua vizinhança..." />)
     if (transactions.listing && transactions.list.length === 0)
       return (<Loading status="Carregando seu histórico de transações..." />)

@@ -12,6 +12,7 @@ export default class Demands extends Component {
     const tipProps = { currentUser, neighborsCount, onShare, onFacebook, facebookConnecting }
     return (
       <View>
+        { demands.length === 0 && !listing  && <NoDemands /> }
         { demands.length === 0 && showTip && <DemandsTip {...tipProps} /> }
         { demands.map((demand, index) => (
           <View key={demand.id}>
@@ -32,7 +33,6 @@ export default class Demands extends Component {
         )) }
         { demands.length === 1 && showTip && <DemandsTip {...tipProps} /> }
         { listing && <GiftedSpinner style={{ marginTop: 10 }} /> }
-        { demands.length === 0 && !listing && !showTip && <NoDemands /> }
         { canList && !listing &&
           <LoadMore onPress={onList} />
         }

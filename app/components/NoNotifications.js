@@ -7,6 +7,7 @@ export default NoNotifications = () => (
     alignSelf: 'stretch',
     margin: 10,
     textAlign: 'center',
+    fontSize: 10,
   }}>
     Nenhuma novidade ainda. Que tal começar a interagir agora mesmo fazendo um pedido?
   </Sentence>
