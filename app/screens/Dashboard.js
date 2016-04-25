@@ -57,7 +57,7 @@ export default class Dashboard extends Component {
   renderTips() {
     const { users, onFacebook, auth: { currentUser, facebookConnecting } } = this.props
     if ( !currentUser.facebook_uid ) {
-      return (<FacebookTip onPress={onFacebook} loading={facebookConnecting} />)
+      return (<FacebookTip onPress={onFacebook} loading={facebookConnecting} title={ users.list.length < 20 && 'Você tem poucos vizinhos cadastrados. Que tal chamar seus amigos?' } />)
     }
   }
 
