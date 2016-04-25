@@ -14,8 +14,6 @@ import Demands from "../components/Demands"
 import TransactionDemands from "../components/TransactionDemands"
 import Notifications from "../components/Notifications"
 import NoNotifications from "../components/NoNotifications"
-import FacebookTip from "../components/FacebookTip"
-import ShareTip from "../components/ShareTip"
 
 export default class Dashboard extends Component {
   componentWillMount() {
@@ -55,17 +53,8 @@ export default class Dashboard extends Component {
     }
   }
 
-  renderTip() {
-    const { users, onFacebook, onShare, auth: { currentUser, facebookConnecting } } = this.props
-    const title = (users.list.length < 30 && 'Você tem poucos vizinhos cadastrados. Que tal chamar seus amigos?')
-    if ( !currentUser.facebook_uid ) {
-      return (<FacebookTip onPress={onFacebook} loading={facebookConnecting} title={title} />)
-    }
-    return (<ShareTip onPress={onShare} title={title} />)
-  }
-
   render() {
-    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands, onViewNotification, onFacebook, onAbout } = this.props
+    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands, onViewNotification, onShare, onFacebook, onAbout } = this.props
     const { drawerOpen } = this.props.dashboard
     const { currentUser, facebookConnecting } = this.props.auth
     const { latitude, longitude } = currentUser   
@@ -109,7 +98,6 @@ export default class Dashboard extends Component {
                   longitude={longitude}
                   users={users.list}
                 /> 
-                { this.renderTip() }
                 <Demands
                   currentUser={currentUser}
                   demands={demands.list}
@@ -120,6 +108,11 @@ export default class Dashboard extends Component {
                   onRefuse={onRefuseDemand}
                   onFlag={onFlagDemand}
                   onView={onViewDemand}
+                  onShare={onShare}
+                  onFacebook={onFacebook}
+                  facebookConnecting={facebookConnecting}
+                  neighborsCount={users.list.length}
+                  showTip={true}
                 />
               </Tab>
               <Tab tabLabel="chat">

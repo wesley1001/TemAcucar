@@ -6,7 +6,7 @@ export function show(message, type = "success") {
     dispatch({ type: 'TOAST_SHOW' })
     Toast.show(message, {
       duration: Toast.durations.LONG,
-      backgroundColor: (type === "success" ? Colors.darkGreen : Colors.darkRed),
+      backgroundColor: (type === "success" ? Colors.green : Colors.red),
       shadowColor: 'rgba(0,0,0,0.5)',
       opacity: 1,
     })
