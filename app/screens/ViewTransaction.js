@@ -100,6 +100,7 @@ class ViewTransaction extends Component {
               fontSize: 10,
               lineHeight: (Platform.OS === 'ios' ? 10 : 14),
               color: Colors.white,
+              marginBottom: 2,
             }}>
               {truncate(demand.name, 40)}
             </Sentence>

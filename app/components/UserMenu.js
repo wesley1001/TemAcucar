@@ -55,7 +55,8 @@ export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onU
       Pedidos impróprios
     </UserMenuItem> }
     <View style={{
-      marginTop: 10,
+      marginTop: 20,
+      marginBottom: 10,
       marginHorizontal: 10,
       borderTopWidth: 0.3,
       borderColor: Colors.pink,

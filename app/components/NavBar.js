@@ -30,8 +30,8 @@ export default class NavBar extends Component {
               fontSize: 12,
               lineHeight: (Platform.OS === 'ios' ? 12 : 16),
               color: Colors.white,
-              marginTop: 6,
-              marginBottom: 2,
+              marginTop: 8,
+              marginBottom: 6,
             }}>
               {title || ' ' }
             </Sentence>
@@ -43,8 +43,8 @@ export default class NavBar extends Component {
           }}>
             <Icon name="keyboard-arrow-left" style={{
               color: Colors.pink,
-              fontSize: 24,
-              marginVertical: (Platform.OS === 'ios' ? 6 : 9),
+              fontSize: 32,
+              marginTop: (Platform.OS === 'ios' ? 3 : 5),
               marginHorizontal: 12,
             }} />
           </TouchableOpacity>
