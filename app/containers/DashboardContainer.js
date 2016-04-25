@@ -1,5 +1,7 @@
 import React, { Component } from 'react-native'
+import Communications from 'react-native-communications'
 import { connect } from 'react-redux'
+
 import * as DashboardActions from '../actions/DashboardActions'
 import * as UsersActions from '../actions/UsersActions'
 import * as DemandsActions from '../actions/DemandsActions'
@@ -14,7 +16,6 @@ import { Actions } from 'react-native-router-flux'
 
 import Loading from "../screens/Loading"
 import DashboardRouter from "../routers/DashboardRouter"
-
 
 class DashboardContainer extends Component {
   componentWillMount() {
@@ -222,6 +223,10 @@ class DashboardContainer extends Component {
     }
   }
 
+  handleShare() {
+    Communications.web('https://www.facebook.com/sharer/sharer.php?u=http://www.temacucar.com/')
+  }
+
   render() {
     const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
     if (users.startingUp || users.listing)
@@ -271,6 +276,7 @@ class DashboardContainer extends Component {
         onFlaggedDemands={this.handleFlaggedDemands.bind(this)}
         onReadAllNotifications={this.handleReadAllNotifications.bind(this)}
         onViewNotification={this.handleViewNotification.bind(this)}
+        onShare={this.handleShare.bind(this)}
       />
     )
   }
