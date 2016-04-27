@@ -1,7 +1,6 @@
 import React, { Platform, Component } from 'react-native'
 import { connect } from 'react-redux'
 import Communications from 'react-native-communications'
-import Package from '../../package.json'
 import codePush from "react-native-code-push"
 import Config from 'react-native-config'
 
@@ -29,7 +28,7 @@ class VersionChecker extends Component {
     const { list } = this.props.versions
     let returnVersion = null
     list.forEach(version => {
-      if(version.number == Package.version) {
+      if(version.number == Config.BUILD) {
         returnVersion = version
       }
     })

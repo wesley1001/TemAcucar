@@ -35,18 +35,10 @@ export function get(currentUser) {
 
 export function set(dispatch, credentials, currentUser) {
   if (credentials && currentUser) {
-    dispatch({
-      type: 'STORED_AUTH_SET_REQUEST',
-      credentials,
-      currentUser,
-    })
+    dispatch({ type: 'STORED_AUTH_SET_REQUEST' })
     SimpleStore.save('storedAuth', { credentials, currentUser })
     .then(() => {
-      dispatch({
-        type: 'STORED_AUTH_SET_SUCCESS',
-        credentials,
-        currentUser,
-      })
+      dispatch({ type: 'STORED_AUTH_SET_SUCCESS' })
     })
     .catch(error => {
       dispatch({

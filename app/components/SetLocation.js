@@ -5,8 +5,6 @@ import MapView from 'react-native-maps'
 
 import UserValidators from '../validators/UserValidators'
 import Colors from "../Colors"
-import Loading from "./Loading"
-import Headline from "../components/Headline"
 import Form from "../components/Form"
 import FormTextInput from "../components/FormTextInput"
 import FormSubmit from "../components/FormSubmit"
@@ -57,32 +55,13 @@ class SetLocation extends Component {
   }
 
   render() {
-    const { valid, dirty, fields, location: { searching, settingLocation } } = this.props
+    const { valid, dirty, fields, location: { startingUp, searching, settingLocation } } = this.props
     const { thoroughfare, subThoroughfare, complement, subLocality, locality, administrativeArea } = fields
     return (
       <View style={{
         flex: 1,
-        paddingTop: (Platform.OS === 'ios' ? 20 : 0),
-        backgroundColor: Colors.beige,
       }}>
         <Form>
-          <View elevation={3} style={{
-            backgroundColor: Colors.beige,
-            alignSelf: 'stretch',
-            shadowColor: 'black',
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            overflow: 'visible',
-            transform: [{'translate': [0,0,1]}],
-          }}>
-            <Headline style={{
-              fontSize: 20,
-              marginTop: 10,
-              marginBottom: 10
-            }}>
-              Onde você mora?
-            </Headline>
-          </View>
           { this.renderMap() }
           <FormTextInput 
             name='thoroughfare'

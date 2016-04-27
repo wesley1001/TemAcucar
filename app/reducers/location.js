@@ -75,12 +75,14 @@ export default function location(state = initialState, action) {
         latitude: action.latitude,
         longitude: action.longitude,
         searching: false,
+        startingUp: false,
         searchError: null,
       }
     case 'LOCATION_SEARCH_FAILURE':
       return {
         ...state, 
         searching: false,
+        startingUp: false,
         searchError: action.error,
       }
     case 'LOCATION_SET_LOCATION_REQUEST':

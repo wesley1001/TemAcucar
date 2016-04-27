@@ -1,4 +1,4 @@
-import React, { Text } from 'react-native'
+import React from 'react-native'
 import Link from "./Link"
 
 export default LoadMore = (props) => (

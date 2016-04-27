@@ -1,6 +1,7 @@
 const initialState = {
   list: [],
-  listing: true,
+  startingUp: true,
+  listing: false,
   offset: 0,
   canList: false,
   creating: false,
@@ -22,11 +23,13 @@ export default function demands(state = initialState, action) {
         listing: false,
         offset: state.offset + action.list.length,
         canList: (action.list.length >= 10 ? true : false),
+        startingUp: false,
       }
     case 'DEMANDS_LIST_FAILURE':
       return {
         ...state, 
         listing: false,
+        startingUp: false,
       }
     case 'DEMANDS_REFUSE_REQUEST':
       return {
@@ -88,6 +91,8 @@ export default function demands(state = initialState, action) {
           }
         }),
       }
+    case 'LOCATION_SET_LOCATION_SUCCESS':
+      return initialState
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState
     default:

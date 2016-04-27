@@ -9,6 +9,7 @@ import Form from "../components/Form"
 import FormTextInput from "../components/FormTextInput"
 import FormError from "../components/FormError"
 import FormSubmit from "../components/FormSubmit"
+import NavBar from "../components/NavBar"
 
 const validators = {
   name: DemandValidators.name,
@@ -48,16 +49,9 @@ class NewDemand extends Component {
       <View style={{
         flex: 1,
         backgroundColor: Colors.beige,
-        paddingTop: 40 + (Platform.OS === 'ios' ? 24 : 16),
       }}>
+        <NavBar title="O que você precisa?" />
         <Form>
-          <Headline style={{
-            fontSize: 20,
-            marginTop: 30,
-            marginBottom: 20,
-          }}>
-            O que você precisa?
-          </Headline>
           <FormTextInput 
             name='name'
             title='Nome'

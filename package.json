@@ -1,6 +1,6 @@
 {
   "name": "TemAcucar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -22,8 +22,9 @@
     "react-native-geocoder": "0.3.1",
     "react-native-gifted-spinner": "0.0.3",
     "react-native-html-render": "danielweinmann/react-native-html-render#2661bd07d6dd7e572bcb395c283adc29162ab030",
-    "react-native-linear-gradient": "^1.5.2",
+    "react-native-linear-gradient": "1.5.2",
     "react-native-maps": "lelandrichardson/react-native-maps#46c7eec03532d979eb7d33c3daa2dc5527f05efa",
+    "react-native-root-toast": "danielweinmann/react-native-root-toast#ae617ced994bf696750b36c878139e33a8830767",
     "react-native-router-flux": "danielweinmann/react-native-router-flux#route_props",
     "react-native-scrollable-tab-view": "0.4.0",
     "react-native-simple-store": "0.1.0",

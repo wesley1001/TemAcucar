@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import reducer from '../reducer'
-import VersionChecker from './VersionChecker'
+import ToastContainer from './ToastContainer'
 
 const loggerMiddleware = createLogger({
   predicate: (getState, action) => __DEV__
@@ -23,6 +23,6 @@ const store = configureStore()
 
 export default Root = () => (
   <Provider store={store}>
-    <VersionChecker />
+    <ToastContainer />
   </Provider>
 )

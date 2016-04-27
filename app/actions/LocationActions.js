@@ -100,7 +100,7 @@ export function search(searchAddress, initializeForm) {
           complement: searchAddress.complement,
           ...address,
         })
-        initializeForm(processedAddress)
+        initializeForm && initializeForm(processedAddress)
         dispatch({
           type: 'LOCATION_SEARCH_SUCCESS',
           address: processedAddress,

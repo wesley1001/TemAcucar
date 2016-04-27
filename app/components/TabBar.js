@@ -1,13 +1,6 @@
-import React, {
-  Component,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
-
+import React, { Component, View, Text, TouchableOpacity } from 'react-native'
 import Colors from "../Colors"
+import Icon from "./Icon"
 
 export default class TabBar extends Component {
   constructor(props, context) {
@@ -19,7 +12,6 @@ export default class TabBar extends Component {
   renderTabOption(name, page) {
     const { notificationsCount } = this.props
     const isActive = (this.props.activeTab === page)
-    const IconComponent = (page == 0 ? Icon : Icon)
     return (
       <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} style={{
         flex: 1,
@@ -28,7 +20,7 @@ export default class TabBar extends Component {
         height: 60,
         backgroundColor: (isActive ? Colors.darkBlue : Colors.blue),
       }}>
-        <IconComponent name={name} size={36} color={isActive ? Colors.white : Colors.darkBlue} />
+        <Icon name={name} size={36} color={isActive ? Colors.white : Colors.darkBlue} />
         { page === 2 && notificationsCount > 0 &&
           <View style={{
             position: 'absolute',

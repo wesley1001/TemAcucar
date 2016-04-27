@@ -1,13 +1,7 @@
-import React, {
-  Platform,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-} from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import React, { Platform, View, Text, Image, TouchableOpacity } from 'react-native'
 import Colors from "../Colors"
 import Sentence from "./Sentence"
+import Icon from "./Icon"
 
 export default TopBar = ({ onMenuOpen }) => (
   <View style={{

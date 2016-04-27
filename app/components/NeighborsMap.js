@@ -52,7 +52,7 @@ export default NeighborsMap = ({ latitude, longitude, users }) => (
           textAlign: 'center',
           fontSize: 12,
         }}>
-          { `${users.length} vizinhos` }
+          { `${users.length} ${users.length === 1 ? 'vizinho' : 'vizinhos'}` }
         </Sentence>
       </View>
     </View>

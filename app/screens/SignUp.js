@@ -8,7 +8,7 @@ import Button from "../components/Button"
 import SignInLink from "../components/SignInLink"
 
 export default SignUp = ({ onFacebook }) => (
-  <SimpleScreen>
+  <SimpleScreen navBar={true} navBarTitle="Quer se cadastrar?">
     <Button onPress={onFacebook} style={{ backgroundColor: Colors.facebook, borderColor: Colors.darkFacebook }}>
       Cadastre-se com o Facebook
     </Button>

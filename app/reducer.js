@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
+import toast from './reducers/toast'
 import versions from './reducers/versions'
 import auth from './reducers/auth'
 import terms from './reducers/terms'
@@ -13,11 +14,13 @@ import adminDemands from './reducers/adminDemands'
 import flaggedDemands from './reducers/flaggedDemands'
 import transactions from './reducers/transactions'
 import messages from './reducers/messages'
+import reviews from './reducers/reviews'
 import unreadNotifications from './reducers/unreadNotifications'
 import readNotifications from './reducers/readNotifications'
 
 const reducer = combineReducers({
   form: formReducer,
+  toast,
   versions,
   auth,
   terms,
@@ -31,6 +34,7 @@ const reducer = combineReducers({
   users,
   transactions,
   messages,
+  reviews,
   unreadNotifications,
   readNotifications,
 })

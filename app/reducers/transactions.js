@@ -54,6 +54,127 @@ export default function transactions(state = initialState, action) {
         creating: false,
         createError: action.error,
       }
+    case 'DEMANDS_COMPLETE_REQUEST':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, completing: true}
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_COMPLETE_SUCCESS':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return { ...action.demand, transactions: demand.transactions }
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_COMPLETE_FAILURE':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, completing: false}
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_CANCEL_REQUEST':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, canceling: true}
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_CANCEL_SUCCESS':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return { ...action.demand, transactions: demand.transactions }
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_CANCEL_FAILURE':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, canceling: false}
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_REACTIVATE_REQUEST':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, reactivating: true}
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_REACTIVATE_SUCCESS':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return { ...action.demand, transactions: demand.transactions }
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'DEMANDS_REACTIVATE_FAILURE':
+      return {
+        ...state, 
+        list: state.list.map(demand => {
+          if (demand.id === action.demand.id) {
+            return {...demand, reactivating: false}
+          } else {
+            return demand
+          }
+        }),
+      }
+    case 'UNREAD_NOTIFICATIONS_LIST_SUCCESS':
+      if (state.listing)
+        return state
+      const newTransactions = action.list.filter(notification => (
+        notification.message && 
+        notification.transaction &&
+        [].concat(...state.list.map(demand => demand.transactions)).map(transaction => transaction.id).indexOf(notification.transaction.id) < 0
+      )).map(notification => notification.transaction)
+      const newDemands = newTransactions.map(transaction => {
+        let transactions = []
+        const index = state.list.map(demand => demand.id).indexOf(transaction.demand.id)
+        if (index > -1)
+          transactions = state.list[index].transactions
+        return { ...transaction.demand, transactions: [transaction].concat(transactions) }
+      })
+      const oldDemands = state.list.filter(demand => (
+        newDemands.map(newDemand => newDemand.id).indexOf(demand.id) < 0
+      ))
+      return {
+        ...state,
+        list: newDemands.concat(oldDemands)
+      }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState
     default:

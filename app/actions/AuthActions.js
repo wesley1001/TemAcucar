@@ -27,8 +27,6 @@ export function signIn(currentUser) {
   return dispatch => {
     if (currentUser.email && currentUser.password) {
       dispatch(email(currentUser))
-    } else if (currentUser.facebook) {
-      dispatch(facebook())
     }
   }
 }
@@ -54,7 +52,7 @@ export function signUp(currentUser) {
   })
 }
 
-function facebookLogin(callback) {
+function facebookGetCredentials(callback) {
   FBLoginManager.loginWithPermissions(["public_profile", "email", "user_friends"], (facebookError, facebookData) => {
     if (Platform.OS == 'ios') {
       callback(facebookData, facebookError)
@@ -64,9 +62,55 @@ function facebookLogin(callback) {
   })
 }
 
-export function facebook() {
+export function facebook(credentials, currentUser) {
   return dispatch => {
-    facebookLogin((data, facebookError) => {
+    if (credentials) {
+      dispatch(facebookConnect(credentials, currentUser))
+    } else {
+      dispatch(facebookSignIn())
+    }
+  }
+}
+
+function facebookConnect(credentials, currentUser) {
+  return dispatch => {
+    facebookGetCredentials((data, facebookError) => {
+      if (!facebookError) {
+        const facebook = data.credentials
+        apiDispatchAction(dispatch, {
+          prefix: 'AUTH_FACEBOOK_CONNECT',
+          path: '/users/facebook',
+          method: 'put',
+          params: {
+            facebook_token: facebook.token,
+          },
+          credentials,
+          requestAttributes: {
+            currentUser: {
+              ...currentUser,
+              facebook,
+            },
+          },
+          currentUser: (response) => {
+            return JSON.parse(response._bodyText)
+          },
+          processResponse: (response) => {
+            return { currentUser: JSON.parse(response._bodyText) }
+          },
+        })
+      } else {
+        dispatch({
+          type: 'AUTH_FACEBOOK_CONNECT_FAILURE',
+          error: { id: 'facebook_connect_error', message: facebookError },
+        })
+      }
+    })
+  }  
+}
+
+function facebookSignIn() {
+  return dispatch => {
+    facebookGetCredentials((data, facebookError) => {
       if (!facebookError) {
         const facebook = data.credentials
         apiDispatchAction(dispatch, {
@@ -89,7 +133,7 @@ export function facebook() {
       } else {
         dispatch({
           type: 'AUTH_FACEBOOK_FAILURE',
-          error: { id: 'facebook_auth_error', message: facebookError },
+          error: { id: 'facebook_sign_in_error', message: facebookError },
         })
       }
     })

@@ -25,7 +25,7 @@ export default function readNotifications(state = initialState, action) {
         ...state, 
         listing: false,
       }
-    case 'UNREAD_NOTIFICATIONS_READ_ALL_SUCCESS':
+    case 'UNREAD_NOTIFICATIONS_READ_ALL_REQUEST':
       const newNotifications = action.list.filter(notification => (
         state.list.map(notification => notification.id).indexOf(notification.id) < 0
       ))

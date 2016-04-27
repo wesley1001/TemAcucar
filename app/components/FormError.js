@@ -4,7 +4,7 @@ import TextBox from "./TextBox"
 
 export default FormError = ({ message }) => (
   <TextBox style={{
-    color: Colors.pink, 
+    color: Colors.red, 
     marginTop: 24,
   }}>
     {message}

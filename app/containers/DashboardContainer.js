@@ -1,5 +1,7 @@
 import React, { Component } from 'react-native'
+import Communications from 'react-native-communications'
 import { connect } from 'react-redux'
+
 import * as DashboardActions from '../actions/DashboardActions'
 import * as UsersActions from '../actions/UsersActions'
 import * as DemandsActions from '../actions/DemandsActions'
@@ -15,13 +17,10 @@ import { Actions } from 'react-native-router-flux'
 import Loading from "../screens/Loading"
 import DashboardRouter from "../routers/DashboardRouter"
 
-
 class DashboardContainer extends Component {
   componentWillMount() {
     this.timer = null
     const { dispatch, auth: { credentials, currentUser } } = this.props
-    dispatch(UsersActions.list(credentials, currentUser))
-    this.handleListDemands()
     this.handleListUserDemands()
     this.handleListTransactions()
     this.handleListReadNotifications()
@@ -35,6 +34,15 @@ class DashboardContainer extends Component {
   componentWillUnmount() {
     if (this.timer) {
       clearTimeout(this.timer)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { dispatch, users, demands, auth: { credentials, currentUser } } = nextProps
+    if (users.startingUp && !users.listing) {
+      dispatch(UsersActions.list(credentials, currentUser))
+    } else if (demands.startingUp && !demands.listing) {
+      this.handleListDemands()
     }
   }
 
@@ -89,7 +97,7 @@ class DashboardContainer extends Component {
     if (!listing && !readingAll) {
       dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     }
-    this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
+    // this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
   }
 
   handleListReadNotifications() {
@@ -135,6 +143,10 @@ class DashboardContainer extends Component {
     dispatch(UnreadNotificationsActions.readAll(credentials, currentUser, list))
   }
 
+  handleAbout() {
+    Actions.about()
+  }
+
   handleNewDemand() {
     Actions.newDemand()
   }
@@ -155,16 +167,20 @@ class DashboardContainer extends Component {
     Actions.userDemands()
   }
 
+  handleUserReviews() {
+    Actions.userReviews()
+  }
+
+  handleSetLocation() {
+    Actions.setLocation()
+  }
+
   handleAdminDemands() {
     Actions.adminDemands()
   }
 
   handleFlaggedDemands() {
     Actions.flaggedDemands()
-  }
-
-  handleBack() {
-    Actions.pop()
   }
 
   handleViewCreatedDemand() {
@@ -207,14 +223,18 @@ class DashboardContainer extends Component {
     }
   }
 
+  handleShare() {
+    Communications.web('https://www.facebook.com/sharer/sharer.php?u=http://www.temacucar.com/')
+  }
+
   render() {
     const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
-    if (users.listing)
+    if (users.startingUp || users.listing)
       return (<Loading status="Carregando mapa com seus vizinhos..." />)
+    if (demands.startingUp)
+      return (<Loading status="Carregando pedidos na sua vizinhança..." />)
     if (transactions.listing && transactions.list.length === 0)
       return (<Loading status="Carregando seu histórico de transações..." />)
-    if (demands.listing && demands.list.length === 0)
-      return (<Loading status="Carregando pedidos na sua vizinhança..." />)
     if (userDemands.listing && userDemands.list.length === 0)
       return (<Loading status="Carregando seus pedidos..." />)
     if (readNotifications.listing && readNotifications.list.length === 0)
@@ -226,7 +246,6 @@ class DashboardContainer extends Component {
     return (
       <DashboardRouter
         {...this.props}
-        onBack={this.handleBack.bind(this)}
         onDashboard={this.handleDashboard.bind(this)}
         onDrawerOpen={this.handleDrawerOpen.bind(this)}
         onDrawerClose={this.handleDrawerClose.bind(this)}
@@ -242,6 +261,7 @@ class DashboardContainer extends Component {
         onListFlaggedDemands={this.handleListFlaggedDemands.bind(this)}
         onListTransactions={this.handleListTransactions.bind(this)}
         onListReadNotifications={this.handleListReadNotifications.bind(this)}
+        onAbout={this.handleAbout.bind(this)}
         onNewDemand={this.handleNewDemand.bind(this)}
         onCreateDemand={this.handleCreateDemand.bind(this)}
         onViewCreatedDemand={this.handleViewCreatedDemand.bind(this)}
@@ -250,10 +270,13 @@ class DashboardContainer extends Component {
         onViewCreatedTransaction={this.handleViewCreatedTransaction.bind(this)}
         onCreateMessage={this.handleCreateMessage.bind(this)}
         onUserDemands={this.handleUserDemands.bind(this)}
+        onUserReviews={this.handleUserReviews.bind(this)}
+        onSetLocation={this.handleSetLocation.bind(this)}
         onAdminDemands={this.handleAdminDemands.bind(this)}
         onFlaggedDemands={this.handleFlaggedDemands.bind(this)}
         onReadAllNotifications={this.handleReadAllNotifications.bind(this)}
         onViewNotification={this.handleViewNotification.bind(this)}
+        onShare={this.handleShare.bind(this)}
       />
     )
   }

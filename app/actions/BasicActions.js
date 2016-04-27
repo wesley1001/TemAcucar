@@ -85,15 +85,14 @@ export function apiDispatchAction(dispatch, options) {
   .then(response => {
     if(response.ok) {
       const newCredentials = responseCredentials(response)
-      let successAction = {
-        type: `${prefix}_SUCCESS`,
-        ...(processResponse && processResponse(response)),
-      }
       if (newCredentials.accessToken) {
-        successAction.credentials = newCredentials
         StoredAuthActions.set(dispatch, newCredentials, keyFilter(currentUser(response), ['password', 'facebook']))
       }
-      dispatch(successAction)
+      dispatch({
+        type: `${prefix}_SUCCESS`,
+        ...(newCredentials.accessToken && { credentials: newCredentials }),
+        ...(processResponse && processResponse(response)),
+      })
     } else {
       dispatch({
         type: `${prefix}_FAILURE`,

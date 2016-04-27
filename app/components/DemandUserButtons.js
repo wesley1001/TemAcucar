@@ -25,7 +25,7 @@ export default class DemandUserButtons extends Component {
   }
 
   render() {
-    const { demands, admin } = this.props
+    const { demands, admin, onComplete, onCancel, onReactivate } = this.props
     // This is a hack to update state of demand on ViewDemand
     let demand
     if (demands) {
@@ -35,9 +35,9 @@ export default class DemandUserButtons extends Component {
       demand = this.props.demand
     }
     const { state, completing, canceling, reactivating } = demand
-    const canComplete = (state === 'sending' || state === 'active')
-    const canCancel = (state === 'sending' || state === 'active'  || (state === 'flagged' && admin))
-    const canReactivate = (state === 'completed' || ((state === 'flagged' || state === 'canceled') && admin))
+    const canComplete = (onComplete && (state === 'notifying' || state === 'active'))
+    const canCancel = (onCancel && (state === 'notifying' || state === 'active'  || (state === 'flagged' && admin)))
+    const canReactivate = (onReactivate && (state === 'completed' || ((state === 'flagged' || state === 'canceled') && admin)))
     return (
       <View style={{
         backgroundColor: Colors.white,

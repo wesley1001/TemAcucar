@@ -1,7 +1,11 @@
-import React, { Component, View } from 'react-native'
+import React, { Component, ScrollView, View, Platform } from 'react-native'
+import truncate from 'truncate'
 
 import Colors from "../Colors"
+import ReviewsContainer from "../containers/ReviewsContainer"
+import BottomGradient from "../components/BottomGradient"
 import Sentence from "../components/Sentence"
+import NavBar from "../components/NavBar"
 import DemandHeader from "../components/DemandHeader"
 import DemandButtons from "../components/DemandButtons"
 import DemandUserButtons from "../components/DemandUserButtons"
@@ -25,49 +29,65 @@ export default class ViewDemand extends Component {
   }
 
   render() {
-    const { auth: { currentUser }, demand, demands, userDemands, adminDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onCompleteDemand, onCancelDemand, onReactivateDemand, admin } = this.props
+    const { auth: { currentUser }, demand, demands, transactions, userDemands, adminDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onCompleteDemand, onCancelDemand, onReactivateDemand, admin } = this.props
+    const transactionDemands = transactions.list
     const showUserButtons = (currentUser.id === demand.user.id || admin)
+    const showButtons = !showUserButtons && (demand.state === 'notifying' || demand.state === 'active') && transactionDemands.map(demand => demand.id).indexOf(demand.id) < 0
+
     const demandsList = ( admin ? adminDemands.list : (currentUser.id === demand.user.id ? userDemands.list : demands.list) )
     return (
       <View style={{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colors.white,
+        alignSelf: 'stretch',
       }}>
-        <View style={{
-          alignSelf: 'stretch',
-          paddingHorizontal: 10,
+        <NavBar title={truncate(demand.name, 40)} />
+        <ScrollView style={{
+          flex: 1,
+          backgroundColor: Colors.white,
+          paddingTop: 20,
         }}>
           <View style={{
-            flex: 1,
             alignSelf: 'stretch',
-            marginBottom: 10,
+            alignItems: 'center',
+            paddingHorizontal: 10,
+            paddingBottom: 110,
           }}>
-            <DemandHeader
-              demand={demand}
-              demands={demandsList}
-              currentUser={currentUser}
-              fullHeader={true} />
+            <View style={{
+              flex: 1,
+              alignSelf: 'stretch',
+              paddingBottom: 20,
+              marginBottom: 20,
+              borderBottomWidth: 0.5,
+              borderColor: Colors.beige,
+            }}>
+              <DemandHeader
+                demand={demand}
+                demands={demandsList}
+                currentUser={currentUser}
+                fullHeader={true} />
+            </View>
+            <ReviewsContainer {...this.props} user={demand.user} />
           </View>
-        </View>
-        { !showUserButtons && <DemandButtons
-          currentUser={currentUser}
-          demand={demand}
-          demands={demands.list}
-          onAccept={onCreateTransaction}
-          onRefuse={onRefuseDemand}
-          onFlag={onFlagDemand}
-        /> }
-        { showUserButtons && <DemandUserButtons
-          admin={admin}
-          currentUser={currentUser}
-          demand={demand}
-          demands={demandsList}
-          onComplete={onCompleteDemand}
-          onCancel={onCancelDemand}
-          onReactivate={onReactivateDemand}
-        /> }
+        </ScrollView>
+        <BottomGradient>
+          { showButtons && <DemandButtons
+            currentUser={currentUser}
+            demand={demand}
+            demands={demands.list}
+            onAccept={onCreateTransaction}
+            onRefuse={onRefuseDemand}
+            onFlag={onFlagDemand}
+          /> }
+          { showUserButtons && <DemandUserButtons
+            admin={admin}
+            currentUser={currentUser}
+            demand={demand}
+            demands={demandsList}
+            onComplete={onCompleteDemand}
+            onCancel={onCancelDemand}
+            onReactivate={onReactivateDemand}
+          /> }
+        </BottomGradient>
       </View>
     )
   }

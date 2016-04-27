@@ -6,6 +6,7 @@ const RCTUIManager = NativeModules.UIManager
 
 import Colors from "../Colors"
 import MessageValidators from '../validators/MessageValidators'
+import NavBar from "../components/NavBar"
 import Icon from "../components/Icon"
 import Sentence from "../components/Sentence"
 import UserImage from "../components/UserImage"
@@ -69,7 +70,7 @@ class ViewTransaction extends Component {
   }
 
   render() {
-    const { onBack, transaction, auth, fields: { text } } = this.props
+    const { transaction, auth, fields: { text } } = this.props
     const { currentUser } = auth
     const { demand } = transaction
     const user = (transaction.user.id === currentUser.id ? transaction.demand.user : transaction.user)
@@ -82,55 +83,34 @@ class ViewTransaction extends Component {
         flex: 1,
         paddingBottom: (inputFocused ? focusedHeight : blurredHeight),
       }}>
-        <View style={{
-          backgroundColor: Colors.darkBlue,
-        }}>
+        <NavBar>
           <View style={{
-            marginTop: (Platform.OS == 'ios' ? 20 : 0),
             alignItems: 'center',
             justifyContent: 'center',
-            flexDirection: 'row',
-            paddingVertical: 6,
           }}>
-            <View style={{
-              alignItems: 'center',
-              justifyContent: 'center',
+            <Sentence style={{
+              fontFamily: 'BoosterNextFY-Black',
+              fontSize: 12,
+              lineHeight: (Platform.OS === 'ios' ? 12 : 16),
+              color: Colors.white,
             }}>
-              <Sentence style={{
-                fontFamily: 'BoosterNextFY-Black',
-                fontSize: 12,
-                lineHeight: (Platform.OS === 'ios' ? 12 : 16),
-                color: Colors.white,
-              }}>
-                {user.first_name} {user.last_name}
-              </Sentence>
-              <Sentence style={{
-                fontSize: 10,
-                lineHeight: (Platform.OS === 'ios' ? 10 : 14),
-                color: Colors.white,
-              }}>
-                {truncate(demand.name, 40)}
-              </Sentence>
-            </View>
-            <UserImage size={28} source={{uri: user.image_url}} style={{
-              position: 'absolute',
-              top: (Platform.OS === 'ios' ? 4 : 7),
-              right: 12,
-            }} />
-            <TouchableOpacity onPress={onBack} style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
+              {user.first_name} {user.last_name}
+            </Sentence>
+            <Sentence style={{
+              fontSize: 10,
+              lineHeight: (Platform.OS === 'ios' ? 10 : 14),
+              color: Colors.white,
+              marginBottom: 2,
             }}>
-              <Icon name="keyboard-arrow-left" style={{
-                color: Colors.white,
-                fontSize: 24,
-                marginVertical: (Platform.OS === 'ios' ? 6 : 9),
-                marginHorizontal: 12,
-              }} />
-            </TouchableOpacity>
+              {truncate(demand.name, 40)}
+            </Sentence>
           </View>
-        </View>
+          <UserImage size={28} source={{uri: user.image_url}} style={{
+            position: 'absolute',
+            top: (Platform.OS === 'ios' ? 4 : 7),
+            right: 12,
+          }} />
+        </NavBar>
         <ScrollView ref='scrollView' onContentSizeChange={this.handleSize.bind(this)} style={{
           flex: 1,
           padding: 10,

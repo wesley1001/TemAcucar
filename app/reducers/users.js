@@ -1,6 +1,7 @@
 const initialState = {
   list: [],
-  listing: true,
+  startingUp: true,
+  listing: false,
 }
 
 export default function users(state = initialState, action) {
@@ -15,12 +16,16 @@ export default function users(state = initialState, action) {
         ...state, 
         list: action.list,
         listing: false,
+        startingUp: false,
       }
     case 'USERS_LIST_FAILURE':
       return {
         ...state, 
         listing: false,
+        startingUp: false,
       }
+    case 'LOCATION_SET_LOCATION_SUCCESS':
+      return initialState
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState
     default:

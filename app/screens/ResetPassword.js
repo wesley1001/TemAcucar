@@ -19,7 +19,7 @@ class ResetPassword extends Component {
     const { onResetPassword, fields, auth: { resetPasswordError, resetingPassword } } = this.props
     const { reset_password_token, password } = fields
     return (
-      <FormScreen>
+      <FormScreen navBar={true} navBarTitle="Confira seu email">
         <FormTextInput 
           name='reset_password_token'
           title='Código'

@@ -1,14 +1,21 @@
 import React, { View } from 'react-native'
 import Colors from "../Colors"
 import DemandState from "./DemandState"
+import DemandUserButtons from "./DemandUserButtons"
 
-export default TransactionDemandFooter = ({ demand: { state }}) => (
+export default TransactionDemandFooter = ({ demand, currentUser, onComplete, onCancel, onReactivate }) => (
   <View style={{
-    backgroundColor: Colors.beige,
-    padding: 10,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    backgroundColor: Colors.white,
+    padding: (currentUser.id === demand.user.id ? 0 : 10),
+    paddingTop: 10,
   }}>
-    <DemandState state={state} />
+    { currentUser.id === demand.user.id && <DemandUserButtons
+      currentUser={currentUser}
+      demand={demand}
+      onComplete={onComplete}
+      onCancel={onCancel}
+      onReactivate={onReactivate}
+    /> }
+    { currentUser.id !== demand.user.id && <DemandState state={demand.state} style={{flex: 1}} /> }
   </View>
 )

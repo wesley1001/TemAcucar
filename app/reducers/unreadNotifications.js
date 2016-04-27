@@ -34,12 +34,12 @@ export default function unreadNotifications(state = initialState, action) {
       return {
         ...state, 
         count: 0,
+        list: [],
         readingAll: true,
       }
     case 'UNREAD_NOTIFICATIONS_READ_ALL_SUCCESS':
       return {
         ...state, 
-        list: [],
         readingAll: false,
       }
     case 'UNREAD_NOTIFICATIONS_READ_ALL_FAILURE':

@@ -1,16 +1,26 @@
-import React, { View } from 'react-native'
+import React, { Component, TouchableOpacity } from 'react-native'
 import Colors from "../Colors"
-import TransactionDemandDescription from "./TransactionDemandDescription"
-import TransactionDemandTimeAgo from "./TransactionDemandTimeAgo"
+import DemandHeader from "./DemandHeader"
 
-export default TransactionDemandHeader = (props) => (
-  <View style={{
-    backgroundColor: (props.index % 2 == 0 ? Colors.pink : Colors.blue),
-    padding: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-  }}>
-    { props.index % 2 == 0 ? <TransactionDemandDescription {...props} /> : <TransactionDemandTimeAgo {...props} /> }
-    { props.index % 2 == 0 ? <TransactionDemandTimeAgo {...props} /> : <TransactionDemandDescription {...props} /> }
-  </View>
-)
+export default class TransactionDemandHeader extends Component {
+  handleView() {
+    const { demand, onViewDemand } = this.props
+    onViewDemand(demand)
+  }
+
+  render() {
+    return(
+      <TouchableOpacity onPress={this.handleView.bind(this)} style={{
+        padding: 10,
+        borderColor: Colors.beige,
+        borderBottomWidth: 1,
+      }}>
+        <DemandHeader
+          {...this.props}
+          verb='pediu'
+          hideDescription={true}
+        />
+      </TouchableOpacity>
+    )
+  }
+}

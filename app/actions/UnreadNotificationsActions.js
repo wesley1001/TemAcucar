@@ -28,10 +28,8 @@ export function readAll(credentials, currentUser, list) {
     prefix: 'UNREAD_NOTIFICATIONS_READ_ALL',
     path: '/notifications/read-all',
     method: 'put',
+    requestAttributes: { list },
     credentials,
     currentUser: () => currentUser,
-    processResponse: (response) => {
-      return { list }
-    },
   })
 }

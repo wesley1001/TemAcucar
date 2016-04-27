@@ -1,2 +1,5 @@
 echo "Setting up $ENV environment..."
-cp "./.env.$ENV" "./.env"
+cp "./.env.$ENV" "./.env.temp"
+echo "Injecting BUILD version..."
+cat "./.env.temp" "./BUILD" > "./.env"
+rm "./.env.temp"
