@@ -10,9 +10,9 @@ import Loading from "../screens/Loading"
 import NetworkError from "../screens/NetworkError"
 import ExpiredVersion from "../screens/ExpiredVersion"
 import UpdateVersion from "../screens/UpdateVersion"
-import Authenticator from './Authenticator'
+import AuthContainer from './AuthContainer'
 
-class VersionChecker extends Component {
+class VersionsContainer extends Component {
   daysRemaining(version) {
     return Math.round(((new Date(version.expiry)).getTime() - Date.now()) / 1000 / 60 / 60 / 24)
   }
@@ -74,10 +74,10 @@ class VersionChecker extends Component {
       return (<ExpiredVersion onUpdate={this.handleUpdate.bind(this)} />)
     if (!this.isCurrent() && !ignoreUpdate)
       return (<UpdateVersion version={version} onIgnore={this.handleIgnore.bind(this)} onUpdate={this.handleUpdate.bind(this)} daysRemaining={this.daysRemaining(version)} />)
-    return (<Authenticator />)
+    return (<AuthContainer />)
   }
 }
 
 export default connect(state => ({
   versions: state.versions,
-}))(VersionChecker)
+}))(VersionsContainer)

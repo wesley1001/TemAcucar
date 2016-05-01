@@ -5,14 +5,14 @@ import Communications from 'react-native-communications'
 import * as TermsActions from '../actions/TermsActions'
 import * as ConfigActions from '../actions/ConfigActions'
 
-import LocationSetter from "./LocationSetter"
+import LocationContainer from "./LocationContainer"
 import Loading from "../screens/Loading"
 import RejectedTerms from "../screens/RejectedTerms"
 import Terms from "../screens/Terms"
 import ReviewEmailRouter from "../routers/ReviewEmailRouter"
 import DashboardContainer from "./DashboardContainer"
 
-class Configurator extends Component {
+class ConfigContainer extends Component {
   handleAcceptTerms() {
     const { dispatch, auth: { credentials } } = this.props
     dispatch(TermsActions.accept(credentials))
@@ -69,7 +69,7 @@ class Configurator extends Component {
     if (!currentUser.reviewed_email)
       return (<ReviewEmailRouter {...this.props} onConfirm={this.handleConfirmEmail.bind(this)} onUpdateEmail={this.handleUpdateEmail.bind(this)} />)
     if (!currentUser.latitude || !currentUser.longitude || !currentUser.reviewed_location)
-      return (<LocationSetter {...this.props} />)
+      return (<LocationContainer {...this.props} />)
     return (<DashboardContainer {...this.props} />)
   }
 }
@@ -77,4 +77,4 @@ class Configurator extends Component {
 export default connect(state => ({
   config: state.config,
   terms: state.terms,
-}))(Configurator)
+}))(ConfigContainer)

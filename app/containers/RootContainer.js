@@ -21,7 +21,7 @@ function configureStore(initialState) {
 
 const store = configureStore()
 
-export default Root = () => (
+export default RootContainer = () => (
   <Provider store={store}>
     <ToastContainer />
   </Provider>

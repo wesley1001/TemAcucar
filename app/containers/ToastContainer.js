@@ -2,7 +2,7 @@ import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 
 import * as ToastActions from '../actions/ToastActions'
-import VersionChecker from './VersionChecker'
+import VersionsContainer from './VersionsContainer'
 
 class ToastContainer extends Component {
   componentWillReceiveProps(nextProps) {
@@ -14,7 +14,7 @@ class ToastContainer extends Component {
 
   render() {
     return (
-      <VersionChecker />
+      <VersionsContainer />
     )
   }
 }
