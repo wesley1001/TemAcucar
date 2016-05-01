@@ -58,57 +58,57 @@ class SetLocation extends Component {
     const { valid, dirty, fields, location: { startingUp, searching, settingLocation } } = this.props
     const { thoroughfare, subThoroughfare, complement, subLocality, locality, administrativeArea } = fields
     return (
-      <View style={{
-        flex: 1,
-      }}>
-        <Form>
-          { this.renderMap() }
-          <FormTextInput 
-            name='thoroughfare'
-            title='Logradouro'
-            placeholder='Sua rua, avenida, etc'
-            {...thoroughfare}
-          />
-          <FormTextInput 
-            name='subThoroughfare'
-            title='Número'
-            placeholder='Número de sua casa ou edifício'
-            {...subThoroughfare}
-          />
-          <FormTextInput 
-            name='complement'
-            title='Complemento'
-            placeholder='Número de seu apto, bloco, etc'
-            {...complement}
-          />
-          <FormTextInput 
-            name='subLocality'
-            title='Bairro'
-            placeholder='Seu bairro'
-            {...subLocality}
-          />
-          <FormTextInput 
-            name='locality'
-            title='Cidade'
-            placeholder='Sua cidade'
-            {...locality}
-          />
-          <FormTextInput 
-            name='administrativeArea'
-            title='Estado'
-            placeholder='Seu estado'
-            {...administrativeArea}
-          />
-          <FormSubmit
-            {...this.props}
-            isDisabled={ !valid }
-            isLoading={searching || settingLocation}
-            onSubmit={this.handleSubmit.bind(this)}
-          >
-            {dirty || !valid ? 'Buscar endereço e confirmar' : 'Confirmar endereço e continuar'}
-          </FormSubmit>
-        </Form>
-      </View>
+      <Form>
+        { this.renderMap() }
+        <FormTextInput 
+          name='thoroughfare'
+          title='Logradouro'
+          placeholder='Sua rua, avenida, etc'
+          {...thoroughfare}
+        />
+        <FormTextInput 
+          name='subThoroughfare'
+          title='Número'
+          placeholder='Número de sua casa ou edifício'
+          {...subThoroughfare}
+        />
+        <FormTextInput 
+          name='complement'
+          title='Complemento'
+          placeholder='Número de seu apto, bloco, etc'
+          {...complement}
+        />
+        <FormTextInput 
+          name='subLocality'
+          title='Bairro'
+          placeholder='Seu bairro'
+          {...subLocality}
+        />
+        <FormTextInput 
+          name='locality'
+          title='Cidade'
+          placeholder='Sua cidade'
+          {...locality}
+        />
+        <FormTextInput 
+          name='administrativeArea'
+          title='Estado'
+          placeholder='Seu estado'
+          {...administrativeArea}
+        />
+        <FormSubmit
+          {...this.props}
+          isDisabled={ !valid }
+          isLoading={searching || settingLocation}
+          onSubmit={this.handleSubmit.bind(this)}
+          style={{
+            margin: 15,
+            marginBottom: 0,
+          }}
+        >
+          {dirty || !valid ? 'Buscar endereço e confirmar' : 'Confirmar endereço e continuar'}
+        </FormSubmit>
+      </Form>
     )
   }
 }

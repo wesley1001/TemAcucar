@@ -5,7 +5,7 @@ const Colors = {
   darkPink: '#CB4C58',
   white: '#fff',
   beige: '#F4F0E7',
-  // beige: '#E6E2D4',
+  darkBeige: '#FEE7D6',
   yellow: '#FFFAD6',
   darkYellow: '#F0AD4E',
   blue: '#4AA2B0',

@@ -6,7 +6,7 @@ import Button from "../components/Button"
 
 export default UpdateVersion = ({ onIgnore, onUpdate, daysRemaining }) => (
   <SimpleScreen headline="Nova versão disponível">
-    <TextBox style={{marginBottom: 36}}>
+    <TextBox style={{marginBottom: 20}}>
       Há uma nova versão disponível. { daysRemaining <= 14 && `Sua versão vai expirar em ${daysRemaining} ${( daysRemaining == 1 ? 'dia' : 'dias')}. ` }Que tal atualizar?
     </TextBox>
     <Button onPress={onUpdate}>

@@ -18,9 +18,9 @@ export default class TabBar extends Component {
         justifyContent: 'center',
         alignItems: 'center',
         height: 60,
-        backgroundColor: (isActive ? Colors.darkBlue : Colors.blue),
+        backgroundColor: (isActive ? Colors.pink : Colors.beige),
       }}>
-        <Icon name={name} size={36} color={isActive ? Colors.white : Colors.darkBlue} />
+        <Icon name={name} size={36} color={isActive ? Colors.yellow : Colors.ice} />
         { page === 2 && notificationsCount > 0 &&
           <View style={{
             position: 'absolute',
@@ -52,7 +52,7 @@ export default class TabBar extends Component {
   render() {
     return (
       <View elevation={3} style={{
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.beige,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

@@ -11,7 +11,7 @@ export default RejectedTerms = ({ onCancelRejectTerms, onContact }) => (
         Escreva para <Text onPress={onContact} style={{fontFamily: 'OpenSans-Bold'}}>contato@temacucar.com</Text> caso queira compartilhar o motivo de ter recusado os termos. Vai ser um prazer falar com você!
       </Sentence>
       <Sentence>
-        Caso você tenha recusado sem querer, clique no botão abaixo para ler novamente.
+        Caso você tenha recusado sem querer, clique no botão abaixo para ler uma vez mais.
       </Sentence>
     </View>
     <Button onPress={onCancelRejectTerms}>

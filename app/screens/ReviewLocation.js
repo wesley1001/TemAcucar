@@ -1,14 +1,12 @@
 import React, { View } from 'react-native'
 import Colors from "../Colors"
+import BorderedView from "../components/BorderedView"
 import SetLocationHeader from "../components/SetLocationHeader"
 import SetLocation from "../components/SetLocation"
 
 export default ReviewLocation = (props) => (
-  <View style={{
-    flex: 1,
-    backgroundColor: Colors.beige,
-  }}>
+  <BorderedView>
     <SetLocationHeader />
     <SetLocation {...props} />
-  </View>
+  </BorderedView>
 )

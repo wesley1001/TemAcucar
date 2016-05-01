@@ -28,7 +28,7 @@ export default ShareTip = ({ title, onPress }) => (
         lineHeight: 16,
       }}
     >
-      Convide seus vizinhos
+      Compartilhe no Facebook
     </Button>
   </Tip>
 )

@@ -83,7 +83,7 @@ export default class Dashboard extends Component {
         <View {...this.panResponder.panHandlers} style={{
           flex: 1, 
           alignSelf: 'stretch',
-          backgroundColor: Colors.brown,
+          backgroundColor: Colors.blue,
         }} >
           <TopBar onMenuOpen={this.handleMenuOpen.bind(this)} />
           <View style={{ flex: 1 }}>
@@ -161,7 +161,7 @@ export default class Dashboard extends Component {
                 lineHeight: 20,
               }}
             >
-              Pedir
+              Fazer pedido
             </Button>
           </BottomGradient>
         </View>

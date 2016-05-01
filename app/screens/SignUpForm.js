@@ -29,7 +29,7 @@ class SignUpForm extends Component {
         <FormTextInput 
           name='first_name'
           title='Nome'
-          placeholder='Digite seu primeiro nome'
+          placeholder='Digite seu nome'
           icon='account-circle'
           autoCapitalize='words'
           {...first_name}

@@ -26,9 +26,13 @@ class FormTextInput extends Component {
         titleStyle={[{
           fontFamily: 'OpenSans',
           color: Colors.brown,
+          fontSize: 12,
+          lineHeight: 12,
         }, titleStyle]}
         inputStyle={[{
           color: Colors.pink,
+          fontSize: 12,
+          lineHeight: 12,
         }, inputStyle]}
         icon={ icon && <Icon name={icon} color={Colors.brown} /> }
         validIcon={ <Icon name='check' color='green' /> }

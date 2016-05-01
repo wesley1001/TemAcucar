@@ -3,14 +3,14 @@ import Button from "./Button"
 
 export default FormSubmit = (props) => (
   <Button
-    style={{
-      alignSelf: 'stretch',
-      margin: 24,
-      marginBottom: 24,
-    }}
     isDisabled={!props.dirty || !props.valid || props.submitting}
     onPress={props.handleSubmit(props.onSubmit)}
     {...props}
+    style={[{
+      alignSelf: 'stretch',
+      margin: 15,
+      marginBottom: 20,
+    }, props.style]}
   >
     {props.children}
   </Button>
