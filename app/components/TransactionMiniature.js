@@ -16,7 +16,8 @@ export default class TransacionMiniature extends Component {
     const { user, last_message_text } = transaction
     return (
       <TouchableOpacity onPress={this.handleView.bind(this)} style={{
-        backgroundColor: (user.id === currentUser.id ? Colors.pink : (index % 2 === 0 ? Colors.blue : Colors.darkBlue)),
+        borderColor: Colors.ice,
+        borderBottomWidth: 0.5,
         padding: 10,
         flexDirection: 'row',
         alignItems: 'center',
@@ -30,20 +31,20 @@ export default class TransacionMiniature extends Component {
             fontFamily: 'BoosterNextFY-Bold',
             fontSize: 12,
             lineHeight: (Platform.OS === 'ios' ? 12 : 14),
-            color: Colors.white,
+            color: Colors.brown,
           }}>
             { user.id === currentUser.id ? 'Conversa comigo' : `${user.first_name} ${user.last_name}` }
           </Sentence>
           <Sentence style={{
             fontSize: 12,
             lineHeight: (Platform.OS === 'ios' ? 12 : 16),
-            color: Colors.white,
+            color: Colors.ice,
           }}>
             { truncate((last_message_text ? last_message_text : 'Escreva uma mensagem para ' + transaction.demand.user.first_name), 35) }
           </Sentence>
         </View>
         <Icon name="keyboard-arrow-right" style={{
-          color: Colors.white,
+          color: Colors.brown,
         }} />
       </TouchableOpacity>
     )
