@@ -25,6 +25,19 @@ export default class DemandMiniature extends Component {
           <DemandHeader {...this.props} />
         </View>
         <Buttons {...this.props} />
+        <View style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+        }}>
+          <Icon name="keyboard-arrow-right" style={{
+            backgroundColor: 'transparent',
+            fontSize: 48,
+            color: Colors.beige,
+            marginTop: 44,
+          }} />
+        </View> 
       </TouchableOpacity>
     )
   }

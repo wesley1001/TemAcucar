@@ -115,19 +115,6 @@ export default class DemandHeader extends Component {
         }}>
           <UserImage source={{uri: user.image_url}} />
         </View>
-        { !fullHeader && <View style={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          right: 0,
-        }}>
-          <Icon name="keyboard-arrow-right" style={{
-            backgroundColor: 'transparent',
-            fontSize: 48,
-            color: Colors.beige,
-            marginTop: 30,
-          }} />
-        </View> }
       </View>
     )
   }

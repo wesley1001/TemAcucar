@@ -14,7 +14,10 @@ export default BorderedScreen = ({ children, navBar, navBarTitle }) => (
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: Colors.white,
-      borderColor: Colors.pink,
+      borderLeftColor: Colors.mediumPink,
+      borderRightColor: Colors.mediumPink,
+      borderTopColor: (Platform.OS === 'ios' ? Colors.mediumDarkPink : Colors.mediumPink),
+      borderBottomColor: (Platform.OS === 'ios' ? Colors.mediumDarkPink : Colors.mediumPink),
       borderWidth: 8,
     }}>
       <View style={{
@@ -26,7 +29,7 @@ export default BorderedScreen = ({ children, navBar, navBarTitle }) => (
         justifyContent: 'center',
       }}>
         <View style={{
-          borderColor: Colors.darkBeige,
+          borderColor: Colors.mediumLightBeige,
           borderWidth: 8,
           flex: 1,
           alignSelf: 'stretch',

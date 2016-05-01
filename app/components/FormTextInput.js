@@ -22,7 +22,8 @@ class FormTextInput extends Component {
         ref='input'
         { ...this.props }
         style={[{
-          borderColor: Colors.ice,
+          borderColor: Colors.mediumLightBeige,
+          backgroundColor: Colors.lightBeige,
         }, style]}
         titleStyle={[{
           fontFamily: 'OpenSans',
@@ -32,6 +33,7 @@ class FormTextInput extends Component {
         }, titleStyle]}
         inputStyle={[{
           color: Colors.pink,
+          backgroundColor: Colors.lightBeige,
           fontSize: 12,
           lineHeight,
         }, inputStyle]}

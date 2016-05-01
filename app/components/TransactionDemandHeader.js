@@ -12,8 +12,6 @@ export default class TransactionDemandHeader extends Component {
     return(
       <TouchableOpacity onPress={this.handleView.bind(this)} style={{
         padding: 10,
-        borderColor: Colors.beige,
-        borderBottomWidth: 1,
       }}>
         <DemandHeader
           {...this.props}

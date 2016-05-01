@@ -16,6 +16,6 @@ export default TransactionDemandFooter = ({ demand, currentUser, onComplete, onC
       onCancel={onCancel}
       onReactivate={onReactivate}
     /> }
-    { currentUser.id !== demand.user.id && <DemandState state={demand.state} style={{flex: 1}} /> }
+    { currentUser.id !== demand.user.id && <DemandState state={demand.state} /> }
   </View>
 )
