@@ -24,6 +24,7 @@ export default class DashboardRouter extends Component {
         <Route name="viewDemand" component={ViewDemandContainer} schema="default" />
         <Route name="viewCreatedDemand" component={ViewDemandContainer} schema="default" type="replace" />
         <Route name="viewTransaction" component={ViewTransaction} schema="default" />
+        <Route name="viewCreatedTransaction" component={ViewTransaction} schema="default" type="replace" />
         <Route name="userDemands" component={UserDemands} schema="default" />
         <Route name="userReviews" component={UserReviews} schema="default" />
         <Route name="adminDemands" component={AdminDemands} schema="default" />

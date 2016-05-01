@@ -190,7 +190,7 @@ class DashboardContainer extends Component {
 
   handleViewCreatedTransaction() {
     const { lastCreated } = this.props.transactions
-    Actions.viewTransaction({ transaction: lastCreated })
+    Actions.viewCreatedTransaction({ transaction: lastCreated })
   }
 
   handleCreateDemand(demand) {
