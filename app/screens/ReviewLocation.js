@@ -1,12 +1,12 @@
 import React, { View } from 'react-native'
 import Colors from "../Colors"
-import BorderedView from "../components/BorderedView"
+import BorderedScreen from "../components/BorderedScreen"
 import SetLocationHeader from "../components/SetLocationHeader"
 import SetLocation from "../components/SetLocation"
 
 export default ReviewLocation = (props) => (
-  <BorderedView>
+  <BorderedScreen>
     <SetLocationHeader />
     <SetLocation {...props} />
-  </BorderedView>
+  </BorderedScreen>
 )

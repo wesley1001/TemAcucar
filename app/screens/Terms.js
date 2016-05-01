@@ -1,14 +1,14 @@
 import React, { Component, View, ScrollView, Platform } from 'react-native'
 
 import Colors from "../Colors"
-import BorderedView from "../components/BorderedView"
+import BorderedScreen from "../components/BorderedScreen"
 import Button from "../components/Button"
 import TextBox from "../components/TextBox"
 import Headline from "../components/Headline"
 import Paragraph from "../components/Paragraph"
 
 export default Terms = ({ onAcceptTerms, onRejectTerms, onScroll, scrolledToBottom }) => (
-  <BorderedView>
+  <BorderedScreen>
     <View style={{
       flex: 1,
       justifyContent: 'center',
@@ -336,5 +336,5 @@ export default Terms = ({ onAcceptTerms, onRejectTerms, onScroll, scrolledToBott
         </Button>
       </View>
     </View>
-  </BorderedView>
+  </BorderedScreen>
 )

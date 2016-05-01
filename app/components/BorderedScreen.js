@@ -2,7 +2,7 @@ import React, { Platform, View } from 'react-native'
 import Colors from "../Colors"
 import NavBar from "./NavBar"
 
-export default BorderedView = ({ children, navBar, navBarTitle }) => (
+export default BorderedScreen = ({ children, navBar, navBarTitle }) => (
   <View style={{
     flex: 1,
     backgroundColor: Colors.blue,

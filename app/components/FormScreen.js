@@ -1,12 +1,12 @@
 import React, { Platform, View, Image } from 'react-native'
 
 import Colors from "../Colors"
-import BorderedView from "./BorderedView"
+import BorderedScreen from "./BorderedScreen"
 import NavBar from "./NavBar"
 import Form from "./Form"
 
 export default FormScreen = (props) => (
-  <BorderedView navBar={props.navBar} navBarTitle={props.navBarTitle}>
+  <BorderedScreen navBar={props.navBar} navBarTitle={props.navBarTitle}>
     <Form {...props}>
       <View style={{
         alignSelf: 'stretch',
@@ -21,5 +21,5 @@ export default FormScreen = (props) => (
       </View>
       { props.children }
     </Form>
-  </BorderedView>
+  </BorderedScreen>
 )
