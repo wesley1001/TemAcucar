@@ -9,8 +9,8 @@ import Button from "../components/Button"
 
 export default ReviewEmail = ({ auth: { currentUser: { email } }, onConfirm }) => (
   <SimpleScreen>
-    <Headline style={{fontSize: 18, marginBottom: 10}}>{email}</Headline>
-    <TextBox style={{marginBottom: 36}}>
+    <Headline style={{fontSize: 14, marginBottom: 10}}>{email}</Headline>
+    <TextBox style={{marginBottom: 20}}>
       Este é o seu email do dia-a-dia? Nunca enviaremos spam, mas precisamos do seu email para te colocar em contato com seus vizinhos :)
     </TextBox>
     <Button onPress={onConfirm}>

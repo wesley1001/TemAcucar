@@ -14,7 +14,7 @@ export default class NavBar extends Component {
     const { children, title } = this.props
     return (
       <View style={{
-        backgroundColor: Colors.brown,
+        backgroundColor: Colors.blue,
       }}>
         <View style={{
           marginTop: (Platform.OS == 'ios' ? 20 : 0),
@@ -42,7 +42,7 @@ export default class NavBar extends Component {
             left: 0,
           }}>
             <Icon name="keyboard-arrow-left" style={{
-              color: Colors.pink,
+              color: Colors.yellow,
               fontSize: 32,
               marginTop: (Platform.OS === 'ios' ? 3 : 5),
               marginHorizontal: 12,

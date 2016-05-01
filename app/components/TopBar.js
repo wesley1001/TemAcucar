@@ -32,7 +32,7 @@ export default TopBar = ({ onMenuOpen }) => (
       justifyContent: 'center',
     }}>
       <Icon name="menu" style={{
-        color: Colors.pink,
+        color: Colors.yellow,
         fontSize: 28,
       }} />
     </TouchableOpacity>

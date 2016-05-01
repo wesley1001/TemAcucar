@@ -7,7 +7,7 @@ import SetLocation from "../components/SetLocation"
 export default EditLocation = (props) => (
   <View style={{
     flex: 1,
-    backgroundColor: Colors.beige,
+    backgroundColor: Colors.white,
   }}>
     <NavBar title="Alterar endereço" />
     { props.location.startingUp ? <GiftedSpinner style={{ marginTop: 20 }} /> : <SetLocation {...props} /> }

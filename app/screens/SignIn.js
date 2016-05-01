@@ -9,11 +9,11 @@ import SignUpLink from "../components/SignUpLink"
 
 export default SignIn = ({ onFacebook }) => (
   <SimpleScreen navBar={true} navBarTitle="Já possui cadastro?">
-    <Button onPress={onFacebook} style={{ backgroundColor: Colors.facebook, borderColor: Colors.darkFacebook }}>
+    <Button onPress={onFacebook} style={{ backgroundColor: Colors.facebook, borderColor: Colors.darkFacebook, paddingHorizontal: 20 }}>
       Faça login com seu Facebook
     </Button>
     <OrSeparator />
-    <Button onPress={Actions.signInForm} style={{marginBottom: 20}}>
+    <Button onPress={Actions.signInForm} style={{marginBottom: 20, paddingHorizontal: 20}}>
       Entre com seu email e senha
     </Button>
     <SignUpLink />

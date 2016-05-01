@@ -5,7 +5,6 @@ import DemandUserButtons from "./DemandUserButtons"
 
 export default TransactionDemandFooter = ({ demand, currentUser, onComplete, onCancel, onReactivate }) => (
   <View style={{
-    backgroundColor: Colors.white,
     padding: (currentUser.id === demand.user.id ? 0 : 10),
     paddingTop: 10,
   }}>
@@ -16,6 +15,6 @@ export default TransactionDemandFooter = ({ demand, currentUser, onComplete, onC
       onCancel={onCancel}
       onReactivate={onReactivate}
     /> }
-    { currentUser.id !== demand.user.id && <DemandState state={demand.state} style={{flex: 1}} /> }
+    { currentUser.id !== demand.user.id && <DemandState state={demand.state} /> }
   </View>
 )

@@ -40,7 +40,6 @@ export default class DemandUserButtons extends Component {
     const canReactivate = (onReactivate && (state === 'completed' || ((state === 'flagged' || state === 'canceled') && admin)))
     return (
       <View style={{
-        backgroundColor: Colors.white,
         alignSelf: 'stretch',
         padding: 10,
         paddingTop: 0,

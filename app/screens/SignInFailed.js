@@ -7,7 +7,7 @@ import Button from "../components/Button"
 
 export default SignInFailed = () => (
   <SimpleScreen headline="Ooops! Seu login falhou :(">
-    <TextBox style={{marginBottom: 36}}>
+    <TextBox style={{marginBottom: 20}}>
       Se você é usuário da versão antiga do Tem Açúcar, vai ser preciso criar uma nova senha.
     </TextBox>
     <Button onPress={Actions.requestPassword}>

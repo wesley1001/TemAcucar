@@ -12,17 +12,17 @@ export default class TransacionMiniature extends Component {
   }
 
   render() {
-    const { transaction, currentUser } = this.props
+    const { transaction, currentUser, index } = this.props
     const { user, last_message_text } = transaction
     return (
       <TouchableOpacity onPress={this.handleView.bind(this)} style={{
-        borderColor: Colors.beige,
-        borderBottomWidth: 1,
+        borderColor: Colors.ice,
+        borderBottomWidth: 0.5,
         padding: 10,
         flexDirection: 'row',
         alignItems: 'center',
       }}>
-        <UserImage size={24} source={{uri: user.image_url}} style={{marginRight: 6}} />
+        <UserImage size={32} source={{uri: user.image_url}} style={{marginRight: 10}} />
         <View style={{
           flexDirection: 'column',
           flex: 1,
@@ -43,7 +43,9 @@ export default class TransacionMiniature extends Component {
             { truncate((last_message_text ? last_message_text : 'Escreva uma mensagem para ' + transaction.demand.user.first_name), 35) }
           </Sentence>
         </View>
-        <Icon name="keyboard-arrow-right" />
+        <Icon name="keyboard-arrow-right" style={{
+          color: Colors.brown,
+        }} />
       </TouchableOpacity>
     )
   }

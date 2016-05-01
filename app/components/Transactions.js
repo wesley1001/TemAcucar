@@ -4,12 +4,9 @@ import Colors from "../Colors"
 import TransactionMiniature from "./TransactionMiniature"
 
 export default Transactions = (props) => (
-  <View style={{
-    backgroundColor: Colors.white,
-  }}>
-    { props.demand.transactions.length === 0 && <GiftedSpinner style={{ margin: 20 }} /> }
-    { props.demand.transactions.map(transaction => (
-      <TransactionMiniature {...props} key={transaction.id} transaction={transaction} />
+  <View>
+    { props.demand.transactions.map((transaction, index) => (
+      <TransactionMiniature {...props} key={transaction.id} transaction={transaction} index={index} />
     )) }
   </View>
 )

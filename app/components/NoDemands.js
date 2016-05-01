@@ -11,7 +11,7 @@ export default NoDemands = () => (
       textAlign: 'center',
       fontSize: 10,
     }}>
-      Nenhum pedido encontrado. Que tal começar agora mesmo fazendo um pedido?
+      Você ainda não recebeu pedidos dos seus vizinhos. Que tal agitar sua vizinhança pedido algo que você precisa?
     </Sentence>
   </Tip>
 )
