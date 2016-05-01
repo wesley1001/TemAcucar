@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react-native'
+import React, { Platform, Component, PropTypes } from 'react-native'
 import { InlineTextInput } from 'react-native-stateless-form'
 
 import Colors from "../Colors"
@@ -16,6 +16,7 @@ class FormTextInput extends Component {
   render() {
     const { icon, error, style, titleStyle, inputStyle } = this.props
     const message = ( error && error.length > 0 ? error[0] : null)
+    const lineHeight = (Platform.OS === 'ios' ? 12 : 16)
     return (
       <InlineTextInput
         ref='input'
@@ -27,12 +28,12 @@ class FormTextInput extends Component {
           fontFamily: 'OpenSans',
           color: Colors.brown,
           fontSize: 12,
-          lineHeight: 12,
+          lineHeight,
         }, titleStyle]}
         inputStyle={[{
           color: Colors.pink,
           fontSize: 12,
-          lineHeight: 12,
+          lineHeight,
         }, inputStyle]}
         icon={ icon && <Icon name={icon} color={Colors.brown} /> }
         validIcon={ <Icon name='check' color='green' /> }
