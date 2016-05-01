@@ -2,6 +2,7 @@ import React, { Component, View, Text, Platform } from 'react-native'
 import truncate from 'truncate'
 
 import Colors from "../Colors"
+import Icon from "./Icon"
 import Sentence from "./Sentence"
 import UserImage from "./UserImage"
 import TimeAgo from "./TimeAgo"
@@ -83,14 +84,14 @@ export default class DemandHeader extends Component {
           { currentUser.id === user.id ? 'Você' : user.first_name } { verbToUse } um(a)
         </Text>
         <Text style={{
-          marginHorizontal: 10,
+          marginHorizontal: 30,
           textAlign: 'center',
           color: Colors.pink,
           fontSize: 12,
           lineHeight: (Platform.OS === 'ios' ? 14 : 16),
           fontFamily: 'BoosterNextFY-Black',
         }}>
-          { name.toUpperCase() }
+          { fullHeader ? name.toUpperCase() : truncate(name.toUpperCase(), 30) }
         </Text>
         { !hideDescription && 
           <Sentence style={{
@@ -101,7 +102,7 @@ export default class DemandHeader extends Component {
             fontFamily: 'BoosterNextFY-Regular',
             textAlign: 'center',
           }}>
-            { fullHeader ? description : truncate(description, 120) }
+            { fullHeader ? description : truncate(description, 110) }
           </Sentence>
         }
         <View style={{
@@ -114,6 +115,19 @@ export default class DemandHeader extends Component {
         }}>
           <UserImage source={{uri: user.image_url}} />
         </View>
+        { !fullHeader && <View style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+        }}>
+          <Icon name="keyboard-arrow-right" style={{
+            backgroundColor: 'transparent',
+            fontSize: 48,
+            color: Colors.beige,
+            marginTop: 30,
+          }} />
+        </View> }
       </View>
     )
   }

@@ -18,9 +18,9 @@ export default class TabBar extends Component {
         justifyContent: 'center',
         alignItems: 'center',
         height: 60,
-        backgroundColor: (isActive ? Colors.pink : Colors.beige),
+        backgroundColor: (isActive ? Colors.beige : Colors.beige),
       }}>
-        <Icon name={name} size={36} color={isActive ? Colors.yellow : Colors.ice} />
+        <Icon name={name} size={36} color={isActive ? Colors.brown : Colors.ice} />
         { page === 2 && notificationsCount > 0 &&
           <View style={{
             position: 'absolute',

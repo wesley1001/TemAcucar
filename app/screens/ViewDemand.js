@@ -40,7 +40,7 @@ export default class ViewDemand extends Component {
         flex: 1,
         alignSelf: 'stretch',
       }}>
-        <NavBar title={truncate(demand.name, 40)} />
+        <NavBar title={truncate(demand.name, 30)} />
         <ScrollView style={{
           flex: 1,
           backgroundColor: Colors.white,
