@@ -153,6 +153,22 @@ export default function transactions(state = initialState, action) {
           }
         }),
       }
+    case 'MESSAGES_CREATE_REQUEST':
+      return {
+        ...state,
+        list: state.list.map(demand => {
+          return {
+            ...demand,
+            transactions: demand.transactions.map(transaction => {
+              if (transaction.id === action.message.transaction_id) {
+                return { ...transaction, last_message_text: action.message.text }
+              } else {
+                return transaction
+              }
+            })
+          }
+        }),
+      }
     case 'UNREAD_NOTIFICATIONS_LIST_SUCCESS':
       if (state.listing)
         return state
@@ -173,7 +189,20 @@ export default function transactions(state = initialState, action) {
       ))
       return {
         ...state,
-        list: newDemands.concat(oldDemands)
+        list: newDemands.concat(oldDemands.map(demand => {
+          return {
+            ...demand,
+            transactions: demand.transactions.map(transaction => {
+              const notifications = action.list.filter(notification => (notification.message && notification.transaction))
+              const index = notifications.map(notification => notification.transaction.id).indexOf(transaction.id)
+              if (index > -1) {
+                return notifications[index].transaction
+              } else {
+                return transaction
+              }
+            })
+          }
+        }))
       }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState

@@ -14,9 +14,10 @@ export default class DemandMiniature extends Component {
     const { demand, currentUser, admin } = this.props
     const Buttons = (currentUser.id === demand.user.id || (admin && currentUser.admin) ? DemandUserButtons : DemandButtons)
     return (
-      <TouchableOpacity onPress={this.handleView.bind(this)}>
+      <TouchableOpacity onPress={this.handleView.bind(this)} style={{
+        backgroundColor: Colors.white,
+      }}>
         <View style={{
-          backgroundColor: Colors.white,
           borderTopWidth: 4,
           borderColor: Colors.beige,
           paddingVertical: 10,

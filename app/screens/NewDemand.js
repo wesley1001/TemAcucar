@@ -4,12 +4,12 @@ import { reduxForm } from 'redux-form'
 
 import Colors from "../Colors"
 import DemandValidators from '../validators/DemandValidators'
+import BorderedScreen from "../components/BorderedScreen"
 import Sentence from "../components/Sentence"
 import Form from "../components/Form"
 import FormTextInput from "../components/FormTextInput"
 import FormError from "../components/FormError"
 import FormSubmit from "../components/FormSubmit"
-import NavBar from "../components/NavBar"
 
 const validators = {
   name: DemandValidators.name,
@@ -39,18 +39,14 @@ class NewDemand extends Component {
       )
     )
     const progressColor = (
-      progress < 35 ? Colors.pink : (
-        progress < 75 ? Colors.darkYellow : (
-          progress < 100 ? Colors.green : Colors.lightBlue
+      progress < 35 ? Colors.mediumLightBeige : (
+        progress < 75 ? Colors.lightPink : (
+          progress < 100 ? Colors.mediumPink : Colors.lightBlue
         )
       )
     )
     return (
-      <View style={{
-        flex: 1,
-        backgroundColor: Colors.beige,
-      }}>
-        <NavBar title="O que você precisa?" />
+      <BorderedScreen navBar={true} navBarTitle="O que você precisa?">
         <Form>
           <FormTextInput 
             name='name'
@@ -71,7 +67,7 @@ class NewDemand extends Component {
             {...description}
           />
           <View style={{
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.beige,
             borderRadius: 12,
             margin: 20,
             marginBottom: 0,
@@ -109,10 +105,10 @@ class NewDemand extends Component {
             isLoading={creating}
             onSubmit={onCreateDemand}
           >
-            Pedir
+            Pedir emprestado
           </FormSubmit>
         </Form>
-      </View>
+      </BorderedScreen>
     )
   }
 }

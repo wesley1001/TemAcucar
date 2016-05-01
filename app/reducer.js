@@ -17,6 +17,7 @@ import messages from './reducers/messages'
 import reviews from './reducers/reviews'
 import unreadNotifications from './reducers/unreadNotifications'
 import readNotifications from './reducers/readNotifications'
+import viewDemand from './reducers/viewDemand'
 
 const reducer = combineReducers({
   form: formReducer,
@@ -37,6 +38,7 @@ const reducer = combineReducers({
   reviews,
   unreadNotifications,
   readNotifications,
+  viewDemand,
 })
 
 export default reducer
