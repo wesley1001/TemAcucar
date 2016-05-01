@@ -44,7 +44,7 @@ export default class TransacionMiniature extends Component {
           </Sentence>
         </View>
         <Icon name="keyboard-arrow-right" style={{
-          color: Colors.brown,
+          color: Colors.ice,
         }} />
       </TouchableOpacity>
     )
