@@ -65,6 +65,8 @@ export default function toast(state = initialState, action) {
       return failure("Não foi possível enviar sua mensagem")
     case 'REVIEWS_LIST_FAILURE':
       return failure("Não foi possível carregar as avaliações")
+    case 'REVIEWS_CREATE_SUCCESS':
+      return success("Sua avaliação foi criada com sucesso! :D")
     case 'USER_DEMANDS_LIST_FAILURE':
       return failure("Não foi possível carregar seus pedidos")
     case 'ADMIN_DEMANDS_LIST_FAILURE':

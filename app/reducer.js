@@ -15,6 +15,7 @@ import flaggedDemands from './reducers/flaggedDemands'
 import transactions from './reducers/transactions'
 import messages from './reducers/messages'
 import reviews from './reducers/reviews'
+import createdReview from './reducers/createdReview'
 import unreadNotifications from './reducers/unreadNotifications'
 import readNotifications from './reducers/readNotifications'
 import viewDemand from './reducers/viewDemand'
@@ -36,6 +37,7 @@ const reducer = combineReducers({
   transactions,
   messages,
   reviews,
+  createdReview,
   unreadNotifications,
   readNotifications,
   viewDemand,

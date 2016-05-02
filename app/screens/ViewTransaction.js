@@ -56,6 +56,15 @@ class ViewTransaction extends Component {
     this.shouldSubmit = true
   }
 
+  newReviewFunction(rating) {
+    return (() => { this.handleNewReview(rating.toString()) }).bind(this)
+  }
+
+  handleNewReview(rating) {
+    const { onNewReview, transaction } = this.props
+    onNewReview(transaction, rating)
+  }
+
   scrollToBottom() {
     RCTUIManager.measure(React.findNodeHandle(this.refs.scrollView), (left, top, width, height) => {
       this.scrollHeight = height
@@ -72,7 +81,8 @@ class ViewTransaction extends Component {
   render() {
     const { transaction, auth, fields: { text } } = this.props
     const { currentUser } = auth
-    const { demand } = transaction
+    const { demand, can_review_ids } = transaction
+    const canReview = can_review_ids.indexOf(currentUser.id) > -1
     const user = (transaction.user.id === currentUser.id ? transaction.demand.user : transaction.user)
     const { inputFocused } = this.state
     const blurredHeight = 44
@@ -111,6 +121,27 @@ class ViewTransaction extends Component {
             right: 12,
           }} />
         </NavBar>
+        { canReview && <View style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 10,
+          backgroundColor: Colors.mediumLightBeige,
+        }}>
+          <Sentence style={{
+            fontFamily: 'OpenSans-Bold',
+            fontSize: 12,
+            lineHeight: (Platform.OS === 'ios' ? 16 : 16),
+            marginRight: 6,
+          }}>
+            Avaliar { user.first_name }
+          </Sentence>
+          { [1, 2, 3, 4, 5].map((index) => (
+            <TouchableOpacity key={index} onPress={this.newReviewFunction(index)}>
+              <Icon name="star-border" style={{ color: Colors.darkYellow }} />
+            </TouchableOpacity>
+          )) }
+        </View> }
         <ScrollView ref='scrollView' onContentSizeChange={this.handleSize.bind(this)} style={{
           flex: 1,
           padding: 10,

@@ -5,6 +5,7 @@ import StyledRouter from "../components/StyledRouter"
 import Dashboard from "../screens/Dashboard"
 import About from "../screens/About"
 import NewDemand from "../screens/NewDemand"
+import NewReview from "../screens/NewReview"
 import ViewTransaction from "../screens/ViewTransaction"
 import UserDemands from "../screens/UserDemands"
 import UserReviews from "../screens/UserReviews"
@@ -21,6 +22,7 @@ export default class DashboardRouter extends Component {
         <Route name="dashboard" component={Dashboard} initial={true}type="reset" />
         <Route name="about" component={About} schema="default" />
         <Route name="newDemand" component={NewDemand} schema="default" />
+        <Route name="newReview" component={NewReview} schema="default" />
         <Route name="viewDemand" component={ViewDemandContainer} schema="default" />
         <Route name="viewCreatedDemand" component={ViewDemandContainer} schema="default" type="replace" />
         <Route name="viewTransaction" component={ViewTransaction} schema="default" />
