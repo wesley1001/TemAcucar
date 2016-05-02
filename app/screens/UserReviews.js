@@ -6,6 +6,7 @@ import ReviewsContainer from "../containers/ReviewsContainer"
 export default UserReviews = (props) => (
   <View style={{
     flex: 1,
+    backgroundColor: Colors.white,
   }}>
     <NavBar title="Minhas avaliações" />
     <ScrollView style={{

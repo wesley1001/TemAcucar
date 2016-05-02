@@ -6,6 +6,7 @@ import Demands from "../components/Demands"
 export default UserDemands = ({ auth: {currentUser}, userDemands, onListUserDemands, onCompleteDemand, onCancelDemand, onReactivateDemand, onViewDemand }) => (
   <View style={{
     flex: 1,
+    backgroundColor: Colors.white,
   }}>
     <NavBar title="Meus pedidos" />
     <ScrollView style={{

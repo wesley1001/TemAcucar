@@ -1,4 +1,4 @@
-import React, { Component, View, Platform, Dimensions } from 'react-native'
+import React, { Component, View, Image, Platform, Dimensions } from 'react-native'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
 import MapView from 'react-native-maps'
@@ -57,7 +57,9 @@ class NewDemand extends Component {
           longitudeDelta: parseFloat(0.02 * radius),
         }}
       >
-        <MapView.Marker coordinate={{latitude, longitude}} image={require('../img/marker.png')} />
+        <MapView.Marker coordinate={{latitude, longitude}}>
+          <Image source={require('../img/icon.png')} style={{width: 15, height: 15}} />
+        </MapView.Marker>
       </MapView>
     )
   }
@@ -184,7 +186,7 @@ class NewDemand extends Component {
               textAlign: 'center',
               backgroundColor: 'transparent',
               position: 'absolute',
-              paddingTop: 3,
+              marginTop: 3,
               top: 0,
               left: 0,
               right: 0,
