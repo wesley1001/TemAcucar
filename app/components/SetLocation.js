@@ -26,9 +26,8 @@ class SetLocation extends Component {
 
   handleSubmit() {
     const { dirty, values, initializeForm, onSearch, onSetLocation } = this.props
-    if (dirty) {
+    if (dirty)
       return onSearch(values, initializeForm)
-    }
     onSetLocation()
   }
 

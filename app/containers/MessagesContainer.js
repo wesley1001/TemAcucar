@@ -23,7 +23,6 @@ class MessagesContainer extends Component {
     const { currentUser } = auth
     return (
       <Messages
-        {...this.props}
         messages={messages.list}
         listing={messages.listing}
         canList={messages.canList}

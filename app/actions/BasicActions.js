@@ -108,6 +108,7 @@ export function apiDispatchAction(dispatch, options) {
   .catch(error => {
     dispatch({
       type: `${prefix}_FAILURE`,
+      ...requestAttributes,
       error: parseError(error),
     })
   })

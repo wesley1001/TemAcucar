@@ -6,9 +6,9 @@ import VersionsContainer from './VersionsContainer'
 
 class ToastContainer extends Component {
   componentWillReceiveProps(nextProps) {
-    const { dispatch, toast: { show, message } } = nextProps
+    const { dispatch, toast: { show, message, type } } = nextProps
     if (show) {
-      dispatch(ToastActions.show(message))
+      dispatch(ToastActions.show(message, type))
     }
   }
 

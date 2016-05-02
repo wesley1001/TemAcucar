@@ -113,7 +113,7 @@ export function search(searchAddress, initializeForm) {
           error: {id: 'location_search_failure', message: error},
         })
       }
-    })        
+    })
   }  
 }
 

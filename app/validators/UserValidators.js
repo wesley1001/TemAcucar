@@ -94,7 +94,7 @@ export default UserValidators = {
       case 'unauthorized':
         return 'Código inválido. Confira seu email ;)'
       default:
-        return 'Oops! Ocorreu um erro. Tente novamente.'
+        return 'Oops! Ocorreu um erro ao acessar nosso servidor. Por favor, tente novamente.'
     }
   }
 }
