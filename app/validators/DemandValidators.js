@@ -1,4 +1,10 @@
 export default DemandValidators = {
+  radius: {
+    title: 'Raio',
+    validate: [{
+      validator: 'isNumeric',
+    }]
+  },
   name: {
     title: 'O que você precisa?',
     validate: [{
