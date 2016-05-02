@@ -1,7 +1,7 @@
 import React, { Component, Navigator } from 'react-native'
 import { Route, Schema, Actions } from 'react-native-router-flux'
 
-import StyledRouter from "../components/StyledRouter"
+import Router from "../components/Router"
 import Welcome from "../screens/Welcome"
 import SignIn from "../screens/SignIn"
 import SignUp from "../screens/SignUp"
@@ -26,7 +26,7 @@ export default class AuthRouter extends Component {
   render() {
     const signInFailed = this.signInFailed(this.props)
     return (
-      <StyledRouter {...this.props}>
+      <Router {...this.props}>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
         <Route name="welcome" component={Welcome} schema="default" initial={!signInFailed} />
         <Route name="signInFailed" component={SignInFailed} type="reset" initial={signInFailed} />
@@ -36,7 +36,7 @@ export default class AuthRouter extends Component {
         <Route name="signUpForm" component={SignUpForm} schema="default" />
         <Route name="requestPassword" component={RequestPassword} schema="default" />
         <Route name="resetPassword" component={ResetPassword} schema="default" />
-      </StyledRouter>
+      </Router>
     )
   }
 }

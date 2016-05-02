@@ -1,7 +1,7 @@
 import React, { Component, Navigator } from 'react-native'
 import { Route, Schema } from 'react-native-router-flux'
 
-import StyledRouter from "../components/StyledRouter"
+import Router from "../components/Router"
 import Dashboard from "../screens/Dashboard"
 import About from "../screens/About"
 import NewDemand from "../screens/NewDemand"
@@ -17,7 +17,7 @@ import ViewDemandContainer from "../containers/ViewDemandContainer"
 export default class DashboardRouter extends Component {
   render() {
     return (
-      <StyledRouter {...this.props}>
+      <Router {...this.props}>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
         <Route name="dashboard" component={Dashboard} initial={true}type="reset" />
         <Route name="about" component={About} schema="default" />
@@ -32,7 +32,7 @@ export default class DashboardRouter extends Component {
         <Route name="adminDemands" component={AdminDemands} schema="default" />
         <Route name="flaggedDemands" component={FlaggedDemands} schema="default" />
         <Route name="setLocation" component={LocationContainer} schema="default" />
-      </StyledRouter>
+      </Router>
     )
   }
 }
