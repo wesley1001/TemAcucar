@@ -1,3 +1,6 @@
+import React, { Platform } from 'react-native'
+import Notification from 'react-native-system-notification'
+import striptags from 'striptags'
 import { apiAction } from './BasicActions'
 
 export function list(credentials, currentUser) {
@@ -32,4 +35,19 @@ export function readAll(credentials, currentUser, list) {
     credentials,
     currentUser: () => currentUser,
   })
+}
+
+export function notify(notification) {
+  return dispatch => {
+    dispatch({
+      type: 'UNREAD_NOTIFICATIONS_NOTIFY',
+      notification,
+    })
+    if (Platform.OS === 'android') {
+      Notification.create({
+        message: striptags(notification.text),
+        payload: { notification }
+      })
+    }
+  }
 }

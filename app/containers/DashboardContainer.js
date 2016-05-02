@@ -93,12 +93,17 @@ class DashboardContainer extends Component {
   }
 
   handleListUnreadNotifications() {
-    const { dispatch, auth, unreadNotifications: { listing, readingAll } } = this.props
+    const { dispatch, auth, unreadNotifications: { list, listing, readingAll } } = this.props
     const { credentials, currentUser } = auth
     if (!listing && !readingAll) {
       dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     }
-    // this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
+    list.map(notification => {
+      if (!notification.notified) {
+        dispatch(UnreadNotificationsActions.notify(notification))
+      }
+    })
+    this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
   }
 
   handleListReadNotifications() {

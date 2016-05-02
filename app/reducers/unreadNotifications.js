@@ -7,6 +7,14 @@ const initialState = {
 
 export default function unreadNotifications(state = initialState, action) {
   switch (action.type) {
+    case 'UNREAD_NOTIFICATIONS_NOTIFY':
+      return {
+        ...state, 
+        list: state.list.map(notification => ({
+          ...notification,
+          notified: (notification.id === action.notification.id ? true : notification.notified)
+        })),
+      }
     case 'UNREAD_NOTIFICATIONS_LIST_REQUEST':
       return {
         ...state, 
