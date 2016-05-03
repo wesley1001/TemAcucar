@@ -1,3 +1,14 @@
 import { AppRegistry } from 'react-native'
-import RootContainer from './app/containers/RootContainer'
-AppRegistry.registerComponent('TemAcucar', () => RootContainer)
+import Notification from 'react-native-system-notification'
+import GcmAndroid from 'react-native-gcm-android'
+import GcmContainer from './app/containers/GcmContainer'
+
+const notification = GcmAndroid.launchNotification
+if (notification) {
+  Notification.create({
+    message: notification.text,
+  })
+  GcmAndroid.stopService()
+} else {
+  AppRegistry.registerComponent('TemAcucar', () => GcmContainer)
+}

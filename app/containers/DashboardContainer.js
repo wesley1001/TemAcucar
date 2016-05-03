@@ -98,11 +98,6 @@ class DashboardContainer extends Component {
     if (!listing && !readingAll) {
       dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     }
-    list.map(notification => {
-      if (!notification.notified) {
-        dispatch(UnreadNotificationsActions.notify(notification))
-      }
-    })
     this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
   }
 

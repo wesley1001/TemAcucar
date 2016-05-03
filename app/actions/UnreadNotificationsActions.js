@@ -36,18 +36,3 @@ export function readAll(credentials, currentUser, list) {
     currentUser: () => currentUser,
   })
 }
-
-export function notify(notification) {
-  return dispatch => {
-    dispatch({
-      type: 'UNREAD_NOTIFICATIONS_NOTIFY',
-      notification,
-    })
-    if (Platform.OS === 'android') {
-      Notification.create({
-        message: striptags(notification.text),
-        payload: { notification }
-      })
-    }
-  }
-}

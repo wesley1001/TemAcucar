@@ -1,7 +1,7 @@
 import React, { Platform, Component } from 'react-native'
 import { connect } from 'react-redux'
 import Communications from 'react-native-communications'
-import codePush from "react-native-code-push"
+// import codePush from "react-native-code-push"
 import Config from 'react-native-config'
 
 import * as VersionsActions from '../actions/VersionsActions'

@@ -1,3 +1,3 @@
 import { AppRegistry } from 'react-native'
-import RootContainer from './app/containers/RootContainer'
-AppRegistry.registerComponent('TemAcucar', () => RootContainer)
+import ProviderContainer from './app/containers/ProviderContainer'
+AppRegistry.registerComponent('TemAcucar', () => ProviderContainer)
