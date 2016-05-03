@@ -8,6 +8,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.magus.fblogin.FacebookLoginPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
+import com.oney.gcm.GcmPackage;
 import io.neson.react.notification.NotificationPackage;
 // 1. Import the plugin class
 import com.microsoft.codepush.react.CodePush;
@@ -63,6 +64,7 @@ public class MainActivity extends ReactActivity {
         new FacebookLoginPackage(),
         new AirPackage(),
         new LinearGradientPackage(),
+        new GcmPackage(),
         new NotificationPackage(this),
         new MainReactPackage(),
         this._codePush.getReactPackage()
