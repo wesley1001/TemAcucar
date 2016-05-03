@@ -11,30 +11,11 @@ import DemandButtons from "../components/DemandButtons"
 import DemandUserButtons from "../components/DemandUserButtons"
 
 export default class ViewDemand extends Component {
-  componentWillReceiveProps(nextProps) {
-    // After accepting demand, it shows the created transaction
-    const { onViewCreatedTransaction, transactions } = nextProps
-    const { creating, createError } = transactions
-    const oldCreating = this.props.transactions.creating
-    if (oldCreating && !creating && !createError) {
-      onViewCreatedTransaction()
-      return
-    }
-    // After refusing or flagging demand, it goes to dashboard
-    const { onDashboard, demands: { list } } = nextProps
-    const oldList = this.props.demands.list
-    if (list.length !== oldList.length && oldList.length > 0) {
-      onDashboard()
-    }
-  }
-
   render() {
-    const { auth: { currentUser }, demand, demands, transactions, userDemands, adminDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onCompleteDemand, onCancelDemand, onReactivateDemand, admin } = this.props
+    const { auth: { currentUser }, demand, transactions, userDemands, adminDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onCompleteDemand, onCancelDemand, onReactivateDemand, admin } = this.props
     const transactionDemands = transactions.list
-    const showUserButtons = (currentUser.id === demand.user.id || admin)
+    const showUserButtons = (currentUser.id === demand.user.id || (admin && currentUser.admin))
     const showButtons = !showUserButtons && (demand.state === 'notifying' || demand.state === 'active') && transactionDemands.map(demand => demand.id).indexOf(demand.id) < 0
-
-    const demandsList = ( admin ? adminDemands.list : (currentUser.id === demand.user.id ? userDemands.list : demands.list) )
     return (
       <View style={{
         flex: 1,
@@ -62,7 +43,6 @@ export default class ViewDemand extends Component {
             }}>
               <DemandHeader
                 demand={demand}
-                demands={demandsList}
                 currentUser={currentUser}
                 fullHeader={true} />
             </View>
@@ -73,7 +53,6 @@ export default class ViewDemand extends Component {
           { showButtons && <DemandButtons
             currentUser={currentUser}
             demand={demand}
-            demands={demands.list}
             onAccept={onCreateTransaction}
             onRefuse={onRefuseDemand}
             onFlag={onFlagDemand}
@@ -82,7 +61,6 @@ export default class ViewDemand extends Component {
             admin={admin}
             currentUser={currentUser}
             demand={demand}
-            demands={demandsList}
             onComplete={onCompleteDemand}
             onCancel={onCancelDemand}
             onReactivate={onReactivateDemand}

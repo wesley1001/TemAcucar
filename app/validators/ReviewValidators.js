@@ -1,6 +1,12 @@
-export default MessageValidators = {
+export default ReviewValidators = {
+  rating: {
+    title: 'Avaliação',
+    validate: [{
+      validator: 'isNumeric',
+    }]
+  },
   text: {
-    title: 'Texto',
+    title: 'Descreva sua experiência',
     validate: [{
       validator: 'isLength',
       arguments: [1, 255],

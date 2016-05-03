@@ -7,7 +7,7 @@ export function create(credentials, currentUser, review) {
     method: 'post',
     params: {
       transaction_id: review.transaction_id,
-      rating: review.rating,
+      rating: parseInt(review.rating),
       text: review.text,
     },
     requestAttributes: { review },

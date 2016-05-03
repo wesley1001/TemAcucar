@@ -2,19 +2,19 @@ import React, { Component } from 'react-native'
 import { connect } from 'react-redux'
 
 import * as ToastActions from '../actions/ToastActions'
-import VersionChecker from './VersionChecker'
+import VersionsContainer from './VersionsContainer'
 
 class ToastContainer extends Component {
   componentWillReceiveProps(nextProps) {
-    const { dispatch, toast: { show, message } } = nextProps
+    const { dispatch, toast: { show, message, type } } = nextProps
     if (show) {
-      dispatch(ToastActions.show(message))
+      dispatch(ToastActions.show(message, type))
     }
   }
 
   render() {
     return (
-      <VersionChecker />
+      <VersionsContainer />
     )
   }
 }

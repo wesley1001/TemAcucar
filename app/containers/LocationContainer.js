@@ -6,7 +6,7 @@ import Loading from "../screens/Loading"
 import ReviewLocation from "../screens/ReviewLocation"
 import EditLocation from "../screens/EditLocation"
 
-class LocationSetter extends Component {
+class LocationContainer extends Component {
   componentWillMount() {
     const { dispatch, auth: { currentUser } } = this.props
     const { latitude, longitude } = currentUser
@@ -59,4 +59,4 @@ class LocationSetter extends Component {
 
 export default connect(state => ({
   location: state.location,
-}))(LocationSetter)
+}))(LocationContainer)

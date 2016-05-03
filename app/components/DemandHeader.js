@@ -9,15 +9,7 @@ import TimeAgo from "./TimeAgo"
 
 export default class DemandHeader extends Component {
   render() {
-    const { fullHeader, currentUser, demands, hideDescription, verb } = this.props
-    // This is a hack to update demand on ViewDemand
-    let demand
-    if (demands) {
-      const viewDemand = this.props.demand
-      demand = demands.filter(demand => demand.id === viewDemand.id)[0] || viewDemand
-    } else {
-      demand = this.props.demand
-    }
+    const { demand, fullHeader, currentUser, hideDescription, verb } = this.props
     const { user, name, description, distance, created_at, state } = demand
     const verbToUse = verb || 'precisa de'
     return (

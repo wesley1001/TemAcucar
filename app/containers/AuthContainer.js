@@ -5,9 +5,9 @@ import * as StoredAuthActions from '../actions/StoredAuthActions'
 
 import Loading from "../screens/Loading"
 import AuthRouter from "../routers/AuthRouter"
-import Configurator from "./Configurator"
+import ConfigContainer from "./ConfigContainer"
 
-class Authenticator extends Component {
+class AuthContainer extends Component {
   componentDidMount() {
     const { dispatch, auth: { currentUser } } = this.props
     dispatch(StoredAuthActions.get(currentUser))
@@ -111,10 +111,10 @@ class Authenticator extends Component {
       return (<Loading />)
     if (this.isSignedOut())
       return (<AuthRouter auth={auth} {...authEvents} />)
-    return (<Configurator auth={auth} {...authEvents} />)
+    return (<ConfigContainer auth={auth} {...authEvents} />)
   }
 }
 
 export default connect(state => ({
   auth: state.auth,
-}))(Authenticator)
+}))(AuthContainer)

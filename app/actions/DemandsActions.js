@@ -46,6 +46,7 @@ export function create(credentials, currentUser, demand) {
     path: '/demands',
     method: 'post',
     params: {
+      radius: parseFloat(parseInt(demand.radius) / 1000),
       name: demand.name,
       description: demand.description,
     },

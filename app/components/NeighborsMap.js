@@ -1,4 +1,4 @@
-import React, { View } from 'react-native'
+import React, { View, Image } from 'react-native'
 import MapView from 'react-native-maps'
 import Colors from "../Colors"
 
@@ -28,8 +28,9 @@ export default NeighborsMap = ({ latitude, longitude, users }) => (
               latitude: user.latitude,
               longitude: user.longitude
             }}
-            image={require('../img/marker.png')}
-          />
+          >
+            <Image source={require('../img/icon.png')} style={{width: 15, height: 15}} />
+          </MapView.Marker>
         )) }
       </MapView>
     </View>

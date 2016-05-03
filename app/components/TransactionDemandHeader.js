@@ -16,7 +16,7 @@ export default class TransactionDemandHeader extends Component {
       <TouchableOpacity onPress={this.handleView.bind(this)} style={{
         padding: 10,
         backgroundColor: (index % 2 == 0 ? Colors.pink : Colors.blue),
-        borderRadius: 8,
+        // borderRadius: 8,
         flexDirection: 'row',
         alignItems: 'center',
       }}>

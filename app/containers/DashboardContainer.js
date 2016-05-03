@@ -10,6 +10,7 @@ import * as AdminDemandsActions from '../actions/AdminDemandsActions'
 import * as FlaggedDemandsActions from '../actions/FlaggedDemandsActions'
 import * as TransactionsActions from '../actions/TransactionsActions'
 import * as MessagesActions from '../actions/MessagesActions'
+import * as ReviewsActions from '../actions/ReviewsActions'
 import * as UnreadNotificationsActions from '../actions/UnreadNotificationsActions'
 import * as ReadNotificationsActions from '../actions/ReadNotificationsActions'
 import { Actions } from 'react-native-router-flux'
@@ -92,12 +93,17 @@ class DashboardContainer extends Component {
   }
 
   handleListUnreadNotifications() {
-    const { dispatch, auth, unreadNotifications: { listing, readingAll } } = this.props
+    const { dispatch, auth, unreadNotifications: { list, listing, readingAll } } = this.props
     const { credentials, currentUser } = auth
     if (!listing && !readingAll) {
       dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     }
-    // this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
+    list.map(notification => {
+      if (!notification.notified) {
+        dispatch(UnreadNotificationsActions.notify(notification))
+      }
+    })
+    this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
   }
 
   handleListReadNotifications() {
@@ -149,6 +155,10 @@ class DashboardContainer extends Component {
 
   handleNewDemand() {
     Actions.newDemand()
+  }
+
+  handleNewReview(transaction, initialRating) {
+    Actions.newReview({ transaction, initialRating })
   }
 
   handleDashboard() {
@@ -211,15 +221,23 @@ class DashboardContainer extends Component {
     dispatch(MessagesActions.create(credentials, currentUser, message))
   }
 
+  handleCreateReview(review) {
+    const { dispatch, auth } = this.props
+    const { credentials, currentUser } = auth
+    dispatch(ReviewsActions.create(credentials, currentUser, review))
+  }
+
   handleViewNotification(notification) {
     const { dispatch, auth } = this.props
     const { credentials, currentUser } = auth
     dispatch(UnreadNotificationsActions.read(credentials, currentUser, notification))
-    const { transaction, demand } = notification
-    if (transaction) {
+    const { transaction, demand, review, admin } = notification
+    if (review) {
+      this.handleUserReviews()
+    } else if (transaction) {
       Actions.viewTransaction({ transaction })
     } else if (demand) {
-      Actions.viewDemand({ demand, admin: notification.admin })
+      Actions.viewDemand({ demand, admin })
     }
   }
 
@@ -269,6 +287,8 @@ class DashboardContainer extends Component {
         onCreateTransaction={this.handleCreateTransaction.bind(this)}
         onViewCreatedTransaction={this.handleViewCreatedTransaction.bind(this)}
         onCreateMessage={this.handleCreateMessage.bind(this)}
+        onNewReview={this.handleNewReview.bind(this)}
+        onCreateReview={this.handleCreateReview.bind(this)}
         onUserDemands={this.handleUserDemands.bind(this)}
         onUserReviews={this.handleUserReviews.bind(this)}
         onSetLocation={this.handleSetLocation.bind(this)}
@@ -290,6 +310,7 @@ export default connect(state => ({
   flaggedDemands: state.flaggedDemands,
   demands: state.demands,
   transactions: state.transactions,
+  createdReview: state.createdReview,
   unreadNotifications: state.unreadNotifications,
   readNotifications: state.readNotifications,
 }))(DashboardContainer)
