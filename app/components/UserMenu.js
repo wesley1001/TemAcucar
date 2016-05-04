@@ -3,7 +3,7 @@ import Colors from "../Colors"
 import Sentence from "./Sentence"
 import UserMenuItem from "./UserMenuItem"
 
-export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onUserReviews, onSetLocation, onFacebook, facebookConnecting, onAdminDemands, onFlaggedDemands }) => (
+export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onUserReviews, onSetLocation, onFacebook, facebookConnecting, onAdminDemands, onFlaggedDemands, signingOut }) => (
   <View style={{
     flex: 1,
     justifyContent: 'flex-start',
@@ -66,7 +66,7 @@ export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onU
       Sobre
     </UserMenuItem>
     <UserMenuItem onPress={onSignOut} icon="power-settings-new" type="light">
-      Sair
+      { signingOut ? 'Saindo...' : 'Sair' }
     </UserMenuItem>
   </View>
 )

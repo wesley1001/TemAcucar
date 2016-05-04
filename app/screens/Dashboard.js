@@ -60,7 +60,7 @@ export default class Dashboard extends Component {
 
   render() {
     const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands, onViewNotification, onShare, onFacebook, onAbout } = this.props
-    const { drawerOpen } = this.props.dashboard
+    const { drawerOpen, signingOut } = this.props.dashboard
     const { currentUser, facebookConnecting } = this.props.auth
     const { latitude, longitude } = currentUser   
     const userMenu = (<UserMenu 
@@ -74,6 +74,7 @@ export default class Dashboard extends Component {
       onFlaggedDemands={onFlaggedDemands}
       onFacebook={onFacebook}
       facebookConnecting={facebookConnecting}
+      signingOut={signingOut}
       onClose={this.handleMenuClose.bind(this)}
     />)
     return (

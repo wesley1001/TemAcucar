@@ -39,11 +39,14 @@ class DashboardContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, users, demands, auth: { credentials, currentUser } } = nextProps
+    const { dispatch, users, demands, auth: { credentials, currentUser }, dashboard: { signingOut }, unreadNotifications, onSignOut } = nextProps
     if (users.startingUp && !users.listing) {
       dispatch(UsersActions.list(credentials, currentUser))
     } else if (demands.startingUp && !demands.listing) {
       this.handleListDemands()
+    }
+    if (signingOut && !unreadNotifications.listing) {
+      onSignOut()
     }
   }
 
@@ -240,6 +243,14 @@ class DashboardContainer extends Component {
     Communications.web('https://www.facebook.com/sharer/sharer.php?u=http://www.temacucar.com/')
   }
 
+  handleSignOut() {
+    if (this.timer) {
+      clearTimeout(this.timer)
+    }
+    const { dispatch } = this.props
+    dispatch(DashboardActions.signOut())
+  }
+
   render() {
     const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
     if (users.startingUp || users.listing)
@@ -292,6 +303,7 @@ class DashboardContainer extends Component {
         onReadAllNotifications={this.handleReadAllNotifications.bind(this)}
         onViewNotification={this.handleViewNotification.bind(this)}
         onShare={this.handleShare.bind(this)}
+        onSignOut={this.handleSignOut.bind(this)}
       />
     )
   }

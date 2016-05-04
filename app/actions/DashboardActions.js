@@ -11,3 +11,9 @@ export function closeDrawer() {
     dispatch({ type: 'DASHBOARD_CLOSE_DRAWER' })
   }
 }
+
+export function signOut() {
+  return dispatch => {
+    dispatch({ type: 'DASHBOARD_SIGN_OUT' })
+  }
+}
