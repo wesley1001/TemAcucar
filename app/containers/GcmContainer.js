@@ -14,6 +14,7 @@ class GcmContainer extends Component {
     })   
     GcmAndroid.addEventListener('notification', (notification) => {
       Notification.create({
+        subject: notification.data.subject,
         message: notification.data.text,
       })
     })
