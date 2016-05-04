@@ -1,4 +1,5 @@
 import React, { Component, View, ScrollView, Platform, NativeModules, TouchableOpacity, TextInput } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
 import truncate from 'truncate'
@@ -26,6 +27,7 @@ class ViewTransaction extends Component {
   componentDidMount() {
     const { initializeForm, transaction } = this.props
     initializeForm({transaction_id: transaction.id})
+    GoogleAnalytics.trackScreenView('ViewTransaction')
   }
 
   componentDidUpdate() {

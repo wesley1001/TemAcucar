@@ -1,4 +1,5 @@
 import React, { Component, View, Platform, TouchableOpacity } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
 
@@ -21,6 +22,7 @@ class NewReview extends Component {
   componentDidMount() {
     const { initializeForm, transaction, initialRating } = this.props
     initializeForm({transaction_id: transaction.id, rating: initialRating})
+    GoogleAnalytics.trackScreenView('NewReview')
   }
 
   componentWillReceiveProps(nextProps) {

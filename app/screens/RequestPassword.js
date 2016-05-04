@@ -1,4 +1,5 @@
 import React, { Component } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
 import { Actions } from 'react-native-router-flux'
@@ -14,6 +15,10 @@ const validators = {
 }
 
 class RequestPassword extends Component {
+  componentDidMount() {
+    GoogleAnalytics.trackScreenView('RequestPassword')
+  }
+
   componentWillReceiveProps(nextProps) {
     const { resetPassword } = nextProps.auth
     if (resetPassword && (resetPassword != this.props.auth.resetPassword)) {

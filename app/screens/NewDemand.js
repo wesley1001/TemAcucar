@@ -1,4 +1,5 @@
 import React, { Component, View, Image, Platform, Dimensions } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
 import MapView from 'react-native-maps'
@@ -23,6 +24,7 @@ class NewDemand extends Component {
   componentDidMount() {
     const { initializeForm } = this.props
     initializeForm({radius: '2000'})
+    GoogleAnalytics.trackScreenView('NewDemand')
   }
 
   componentWillReceiveProps(nextProps) {

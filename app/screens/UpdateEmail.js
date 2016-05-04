@@ -1,4 +1,5 @@
 import React, { Component } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
 
@@ -12,6 +13,10 @@ const validators = {
 }
 
 class UpdateEmail extends Component {
+  componentDidMount() {
+    GoogleAnalytics.trackScreenView('UpdateEmail')
+  }
+
   render() {
     const { onUpdateEmail, fields: { email }, config: { updateEmailError, updatingEmail } } = this.props
     return (

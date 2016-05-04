@@ -1,4 +1,5 @@
 import React, { Component } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
 import { Actions } from 'react-native-router-flux'
@@ -21,6 +22,10 @@ const validators = {
 }
 
 class SignUpForm extends Component {
+  componentDidMount() {
+    GoogleAnalytics.trackScreenView('SignUpForm')
+  }
+
   render() {
     const { onSignUp, fields, auth: { signingUp, signUpError } } = this.props
     const { first_name, last_name, email, password } = fields

@@ -1,4 +1,5 @@
 import React, { Component, Dimensions, View, PanResponder, InteractionManager } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
 
@@ -16,6 +17,10 @@ import Notifications from "../components/Notifications"
 import NoNotifications from "../components/NoNotifications"
 
 export default class Dashboard extends Component {
+  componentDidMount() {
+    GoogleAnalytics.trackScreenView('Dashboard')
+  }
+
   componentWillMount() {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponderCapture: () => {
