@@ -8,11 +8,11 @@ import DemandsTip from "./DemandsTip"
 
 export default class Demands extends Component {
   render() {
-    const { demands, currentUser, listing, canList, onList, onAccept, onRefuse, onFlag, onComplete, onCancel, onReactivate, onView, onShare, onFacebook, facebookConnecting, admin, neighborsCount, showTip } = this.props
+    const { demands, currentUser, listing, canList, onList, onAccept, onRefuse, onFlag, onComplete, onCancel, onReactivate, onView, onShare, onFacebook, facebookConnecting, admin, neighborsCount, showTip, noDemandsText } = this.props
     const tipProps = { currentUser, neighborsCount, onShare, onFacebook, facebookConnecting }
     return (
       <View>
-        { demands.length === 0 && !listing  && <NoDemands /> }
+        { demands.length === 0 && !listing  && <NoDemands text={noDemandsText} /> }
         { demands.length === 0 && showTip && <DemandsTip {...tipProps} /> }
         { demands.map((demand, index) => (
           <View key={demand.id}>

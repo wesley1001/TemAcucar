@@ -7,12 +7,12 @@ import Button from "../components/Button"
 
 export default Welcome = () => (
   <SimpleScreen headline="Compartilhe coisas com seus vizinhos">
-    <Button onPress={Actions.signIn}>
-      Já possuo cadastro
-    </Button>
-    <OrSeparator />
     <Button onPress={Actions.signUp}>
       Quero me cadastrar
+    </Button>
+    <OrSeparator />
+    <Button onPress={Actions.signIn}>
+      Já possuo cadastro
     </Button>
   </SimpleScreen>
 )

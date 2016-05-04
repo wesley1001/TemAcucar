@@ -4,7 +4,7 @@ import Tip from "./Tip"
 import Sentence from "./Sentence"
 import Button from "./Button"
 
-export default ShareTip = ({ title, onPress }) => (
+export default ShareTip = ({ title, callToAction, onPress }) => (
   <Tip>
     <Sentence style={{
       fontSize: 10,
@@ -12,7 +12,7 @@ export default ShareTip = ({ title, onPress }) => (
       textAlign: 'center',
       marginHorizontal: 40,
     }}>
-      { title || 'Quer compartilhar cada vez mais?' }
+      { title || 'Tá muito feliz e quer espalhar o amor? Conte pra todo mundo que o Tem Açúcar existe!' }
     </Sentence>
     <Button
       onPress={onPress}
@@ -28,7 +28,7 @@ export default ShareTip = ({ title, onPress }) => (
         lineHeight: 16,
       }}
     >
-      Compartilhe no Facebook
+      { callToAction || 'Compartilhe no Facebook' }
     </Button>
   </Tip>
 )

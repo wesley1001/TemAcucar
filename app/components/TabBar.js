@@ -1,4 +1,4 @@
-import React, { Component, View, Text, TouchableOpacity } from 'react-native'
+import React, { Component, View, Text, TouchableOpacity, Dimensions } from 'react-native'
 import Colors from "../Colors"
 import Icon from "./Icon"
 
@@ -12,30 +12,32 @@ export default class TabBar extends Component {
   renderTabOption(name, page) {
     const { notificationsCount } = this.props
     const isActive = (this.props.activeTab === page)
+    const height = Dimensions.get('window').height
+    const width = Dimensions.get('window').width
     return (
       <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         height: 60,
-        backgroundColor: (isActive ? Colors.lightBeige : Colors.lightBeige),
+        backgroundColor: (isActive ? Colors.pink : Colors.lightBeige),
       }}>
-        <Icon name={name} size={36} color={isActive ? Colors.brown : Colors.ice} />
+        <Icon name={name} size={36} color={isActive ? Colors.lightBeige : Colors.ice} />
         { page === 2 && notificationsCount > 0 &&
           <View style={{
             position: 'absolute',
-            right: 36,
-            top: 8,
+            right: width * 0.11,
+            top: height * 0.015,
             height: 18,
             width: 18,
-            backgroundColor: Colors.pink,
+            backgroundColor: (isActive ? Colors.lightBeige : Colors.pink),
             borderWidth: 1,
-            borderColor: Colors.pink,
+            borderColor: (isActive ? Colors.lightBeige : Colors.pink),
             borderRadius: 9,
           }}>
             <Text style={{
               backgroundColor: 'transparent',
-              color: Colors.white,
+              color: (isActive ? Colors.pink : Colors.lightBeige),
               fontFamily: 'BoosterNextFY-Black',
               textAlign: 'center',
               fontSize: 11,

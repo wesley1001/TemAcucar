@@ -25,7 +25,7 @@ class SignUpForm extends Component {
     const { onSignUp, fields, auth: { signingUp, signUpError } } = this.props
     const { first_name, last_name, email, password } = fields
     return (
-      <FormScreen navBar={true} navBarTitle="Crie sua conta com seu email">
+      <FormScreen navBar={true} navBarTitle="Crie sua conta com seu e-mail">
         <FormTextInput 
           name='first_name'
           title='Nome'

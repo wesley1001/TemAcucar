@@ -14,7 +14,7 @@ export default SignIn = ({ onFacebook }) => (
     </Button>
     <OrSeparator />
     <Button onPress={Actions.signInForm} style={{marginBottom: 20, paddingHorizontal: 20}}>
-      Entre com seu email e senha
+      Entre com seu e-mail e senha
     </Button>
     <SignUpLink />
   </SimpleScreen>

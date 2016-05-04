@@ -10,7 +10,7 @@ export default SetLocationHeader = (props) => (
   }}>
     <Headline style={{
       fontSize: 20,
-      marginTop: 15,
+      marginTop: 10,
       marginBottom: 5,
     }}>
       Onde você mora?

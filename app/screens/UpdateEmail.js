@@ -15,7 +15,7 @@ class UpdateEmail extends Component {
   render() {
     const { onUpdateEmail, fields: { email }, config: { updateEmailError, updatingEmail } } = this.props
     return (
-      <FormScreen name="updateEmail" validators={validators} navBar={true} navBarTitle="Atualize seu email">
+      <FormScreen name="updateEmail" validators={validators} navBar={true} navBarTitle="Atualize seu e-mail">
         <EmailInput {...email} />
         { updateEmailError && <FormError message={UserValidators.errorMessage(updateEmailError)} /> }
         <FormSubmit
@@ -23,7 +23,7 @@ class UpdateEmail extends Component {
           isLoading={updatingEmail}
           onSubmit={onUpdateEmail}
         >
-          Atualizar meu email
+          Atualizar meu e-mail
         </FormSubmit>
       </FormScreen>
     )

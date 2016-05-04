@@ -11,13 +11,13 @@ export default ReviewEmail = ({ auth: { currentUser: { email } }, onConfirm }) =
   <SimpleScreen>
     <Headline style={{fontSize: 14, marginBottom: 10}}>{email}</Headline>
     <TextBox style={{marginBottom: 20}}>
-      Este é o seu email do dia-a-dia? Nunca enviaremos spam, mas precisamos do seu email para te colocar em contato com seus vizinhos :)
+      Você usa esse e-mail diariamente? Não vamos te mandar spam mas precisamos do seu e-mail para te conectar com seus vizinhos.
     </TextBox>
     <Button onPress={onConfirm}>
-      Sim, é este mesmo
+      Sim, uso este e-mail
     </Button>
     <OrSeparator />
-    <Button onPress={Actions.updateEmail}>
+    <Button onPress={Actions.updateEmail} style={{paddingHorizontal: 34}}>
       Não, quero alterar
     </Button>
   </SimpleScreen>

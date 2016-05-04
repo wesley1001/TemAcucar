@@ -161,7 +161,7 @@ export default class Dashboard extends Component {
                 lineHeight: 20,
               }}
             >
-              Fazer pedido
+              Pedir emprestado
             </Button>
           </BottomGradient>
         </View>

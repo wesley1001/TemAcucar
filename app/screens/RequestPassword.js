@@ -32,7 +32,7 @@ class RequestPassword extends Component {
           isLoading={requestingPassword}
           onSubmit={onRequestPassword}
         >
-          Enviar instruções por email
+          Enviar instruções por e-mail
         </FormSubmit>
       </FormScreen>
     )

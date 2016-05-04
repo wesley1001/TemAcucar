@@ -22,6 +22,7 @@ export default UserDemands = ({ auth: {currentUser}, userDemands, onListUserDema
         onCancel={onCancelDemand}
         onReactivate={onReactivateDemand}
         onView={onViewDemand}
+        noDemandsText="Você ainda não fez nenhum pedido"
       />
     </ScrollView>
   </View>

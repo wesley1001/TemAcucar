@@ -21,7 +21,7 @@ class SignInForm extends Component {
   render() {
     const { onSignIn, fields: { email, password } } = this.props
     return (
-      <FormScreen navBar={true} navBarTitle="Entre com seu email e senha">
+      <FormScreen navBar={true} navBarTitle="Entre com seu e-mail e senha">
         <EmailInput {...email} />
         <PasswordInput {...password} />
         <FormSubmit {...this.props} onSubmit={onSignIn}>
