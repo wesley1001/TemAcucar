@@ -91,7 +91,7 @@ class ViewTransaction extends Component {
     return (
       <View style={{
         flex: 1,
-        paddingBottom: (inputFocused ? focusedHeight : blurredHeight),
+        paddingBottom: (inputFocused ? focusedHeight : blurredHeight) + (Platform.os === 'ios' ? 0 : 10),
       }}>
         <NavBar>
           <View style={{
