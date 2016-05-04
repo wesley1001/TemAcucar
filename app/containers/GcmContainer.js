@@ -1,13 +1,16 @@
 import React, { Component } from 'react-native'
+import { connect } from 'react-redux'
 import Notification from 'react-native-system-notification'
 import GcmAndroid from 'react-native-gcm-android'
-import ProviderContainer from './ProviderContainer'
 
-export default class GcmContainer extends Component {
+import * as GcmActions from '../actions/GcmActions'
+import ToastContainer from './ToastContainer'
+
+class GcmContainer extends Component {
   componentDidMount() {
     GcmAndroid.addEventListener('register', (token) => {
-      console.log('GCM register', token)
-      // TODO store token in state and then send to the server after auth
+      const { dispatch } = this.props
+      dispatch(GcmActions.register(token))
     })   
     GcmAndroid.addEventListener('notification', (notification) => {
       Notification.create({
@@ -18,6 +21,10 @@ export default class GcmContainer extends Component {
   }
 
   render() {
-    return (<ProviderContainer />)
+    return (<ToastContainer />)
   }
 }
+
+export default connect(state => ({
+  gcm: state.gcm,
+}))(GcmContainer)

@@ -1,9 +1,10 @@
-import React from 'react-native'
+import React, { Platform } from 'react-native'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import reducer from '../reducer'
+import GcmContainer from './GcmContainer'
 import ToastContainer from './ToastContainer'
 
 const loggerMiddleware = createLogger({
@@ -20,9 +21,10 @@ function configureStore(initialState) {
 }
 
 const store = configureStore()
+const Container = (Platform.OS === 'ios' ? ToastContainer : GcmContainer)
 
 export default ProviderContainer = () => (
   <Provider store={store}>
-    <ToastContainer />
+    <Container />
   </Provider>
 )
