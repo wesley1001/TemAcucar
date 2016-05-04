@@ -74,7 +74,7 @@ class VersionsContainer extends Component {
       return (<ExpiredVersion onUpdate={this.handleUpdate.bind(this)} />)
     if (!this.isCurrent() && !ignoreUpdate)
       return (<UpdateVersion version={version} onIgnore={this.handleIgnore.bind(this)} onUpdate={this.handleUpdate.bind(this)} daysRemaining={this.daysRemaining(version)} />)
-    return (<AuthContainer />)
+    return (<AuthContainer {...this.props} />)
   }
 }
 

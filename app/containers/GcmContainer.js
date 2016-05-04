@@ -21,7 +21,7 @@ class GcmContainer extends Component {
   }
 
   render() {
-    return (<ToastContainer />)
+    return (<ToastContainer {...this.props} />)
   }
 }
 

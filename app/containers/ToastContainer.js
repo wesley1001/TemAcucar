@@ -14,7 +14,7 @@ class ToastContainer extends Component {
 
   render() {
     return (
-      <VersionsContainer />
+      <VersionsContainer {...this.props} />
     )
   }
 }
