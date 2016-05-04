@@ -24,7 +24,6 @@ class AuthContainer extends Component {
       const { gcm, auth: { currentUser, refreshedUser } } = nextProps
       const oldRefreshedUser = this.props.auth.refreshedUser
       if (refreshedUser && !oldRefreshedUser && currentUser.gcm_token !== gcm.token) {
-        console.log('oldProps', this.props, 'nextProps', nextProps)
         dispatch(GcmActions.store(credentials, gcm.token))
       }
     }
