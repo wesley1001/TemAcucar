@@ -23,8 +23,10 @@ function configureStore(initialState) {
 const store = configureStore()
 const Container = (Platform.OS === 'ios' ? ToastContainer : GcmContainer)
 
-export default ProviderContainer = () => (
+// This old style module.exports is needed because we cannot use import on index.android.js. That's the only way to work with GCM notifications.
+var ProviderContainer = () => (
   <Provider store={store}>
     <Container />
   </Provider>
 )
+module.exports = ProviderContainer
