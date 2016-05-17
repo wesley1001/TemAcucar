@@ -42,7 +42,7 @@ export default function toast(state = initialState, action) {
     case 'DEMANDS_FLAG_REQUEST':
       return success("Muito obrigado! Em breve nossos moderadores irão verificar o pedido :) enquanto isso, não vamos mostrá-lo para mais ninguém.")
     case 'DEMANDS_CREATE_SUCCESS':
-      return success("Seu pedido foi criado com sucesso! :D")
+      return success("Vamos perguntar para seus vizinhos e você será notificado assim que responderem :D")
     case 'DEMANDS_COMPLETE_SUCCESS':
       return success("Pedido concluido com sucesso! :D")
     case 'DEMANDS_COMPLETE_FAILURE':
