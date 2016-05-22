@@ -39,10 +39,8 @@ class DashboardContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, users, demands, auth: { credentials, currentUser }, dashboard: { signingOut }, unreadNotifications, onSignOut } = nextProps
-    if (users.startingUp && !users.listing) {
-      dispatch(UsersActions.list(credentials, currentUser))
-    } else if (demands.startingUp && !demands.listing) {
+    const { dispatch, demands, auth: { credentials, currentUser }, dashboard: { signingOut }, unreadNotifications, onSignOut } = nextProps
+    if (demands.startingUp && !demands.listing) {
       this.handleListDemands()
     }
     if (signingOut && !unreadNotifications.listing) {
@@ -101,7 +99,7 @@ class DashboardContainer extends Component {
     if (!listing && !readingAll) {
       dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     }
-    this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
+    // this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
   }
 
   handleListReadNotifications() {
@@ -252,9 +250,7 @@ class DashboardContainer extends Component {
   }
 
   render() {
-    const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
-    if (users.startingUp || users.listing)
-      return (<Loading status="Carregando mapa com seus vizinhos..." />)
+    const { demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
     if (demands.startingUp)
       return (<Loading status="Carregando pedidos na sua vizinhança..." />)
     if (transactions.listing && transactions.list.length === 0)
@@ -311,7 +307,6 @@ class DashboardContainer extends Component {
 
 export default connect(state => ({
   dashboard: state.dashboard,
-  users: state.users,
   userDemands: state.userDemands,
   adminDemands: state.adminDemands,
   flaggedDemands: state.flaggedDemands,

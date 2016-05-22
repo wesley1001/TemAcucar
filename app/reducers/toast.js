@@ -2,6 +2,7 @@ const initialState = {
   show: false,
   type: null,
   message: null,
+  duration: 3500,
 }
 
 const success = (message) => ({ show: true, type: "success", message })
@@ -21,6 +22,8 @@ export default function toast(state = initialState, action) {
       return networkError
     case 'CONFIG_CONFIRM_EMAIL_FAILURE':
       return networkError
+    case 'CONFIG_SHOW_TOAST':
+      return tip("Falta pouco! Agora é só confirmar seu email e seu endereço :D")
     case 'LOCATION_GET_COORDINATES_FAILURE':
       return tip("Não foi possível detectar sua localização. Por favor, informe seu endereço.")
     case 'LOCATION_GET_ADDRESS_SUCCESS':

@@ -54,6 +54,9 @@ export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onU
     { currentUser.admin && <UserMenuItem onPress={onFlaggedDemands} icon="report">
       Pedidos impróprios
     </UserMenuItem> }
+    <UserMenuItem onPress={onAbout} icon="perm-device-information">
+      Sobre
+    </UserMenuItem>
     <View style={{
       marginTop: 20,
       marginBottom: 10,
@@ -62,9 +65,6 @@ export default UserMenu = ({ currentUser, onAbout, onSignOut, onUserDemands, onU
       borderColor: Colors.pink,
       alignSelf: 'stretch',
     }} />
-    <UserMenuItem onPress={onAbout} icon="perm-device-information" type="light">
-      Sobre
-    </UserMenuItem>
     <UserMenuItem onPress={onSignOut} icon="power-settings-new" type="light">
       { signingOut ? 'Saindo...' : 'Sair' }
     </UserMenuItem>

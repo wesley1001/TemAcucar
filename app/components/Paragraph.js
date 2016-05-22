@@ -7,7 +7,7 @@ export default Paragraph = ({ children }) => (
     alignSelf: 'stretch',
     marginBottom: 20,
     fontSize: 12,
-    lineHeight: 14,
+    lineHeight: 16,
   }}>
     {children}
   </Sentence>

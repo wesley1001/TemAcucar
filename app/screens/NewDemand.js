@@ -48,6 +48,11 @@ class NewDemand extends Component {
     const height = Dimensions.get('window').height
     return (
       <MapView
+        showsUserLocation={false}
+        zoomEnabled={false}
+        rotateEnabled={false}
+        scrollEnabled={false}
+        pitchEnabled={false}
         style={{
           height: height * (height < 570 ? 0.12 : 0.25),
           alignSelf: 'stretch',

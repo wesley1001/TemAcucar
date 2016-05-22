@@ -11,6 +11,7 @@ import Button from "../components/Button"
 export default class ReviewEmail extends Component {
   componentDidMount() {
     GoogleAnalytics.trackScreenView('ReviewEmail')
+    this.props.onShowToast()
   }
 
   render() {

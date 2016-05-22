@@ -1,39 +1,13 @@
-import React, { View, Image } from 'react-native'
+import React, { View, Image, Dimensions } from 'react-native'
 import MapView from 'react-native-maps'
 import Colors from "../Colors"
 
-export default NeighborsMap = ({ latitude, longitude, users }) => (
+export default NeighborsMap = ({ url, count }) => (
   <View>
-    <View style={{
-      backgroundColor: Colors.beige,
-      height: 150,
-    }}>
-      <MapView
-        showsUserLocation={false}
-        style={{
-          height: 150,
-          alignSelf: 'stretch',
-        }}
-        region={{
-          latitude: parseFloat(latitude), 
-          longitude: parseFloat(longitude),
-          latitudeDelta: 0.02,
-          longitudeDelta: 0.02,
-        }}
-      >
-        { users.map(user => (
-          <MapView.Marker 
-            key={user.id}
-            coordinate={{
-              latitude: user.latitude,
-              longitude: user.longitude
-            }}
-          >
-            <Image source={require('../img/icon.png')} style={{width: 15, height: 15}} />
-          </MapView.Marker>
-        )) }
-      </MapView>
-    </View>
+    <Image source={{uri: url}} style={{
+      height: Dimensions.get('window').width * (240/600),
+      width: Dimensions.get('window').width,
+    }}/>
     <View style={{
       position: 'absolute',
       bottom: 10,
@@ -53,7 +27,7 @@ export default NeighborsMap = ({ latitude, longitude, users }) => (
           textAlign: 'center',
           fontSize: 12,
         }}>
-          { `${users.length} ${users.length === 1 ? 'vizinho' : 'vizinhos'}` }
+          { `${count} ${count === 1 ? 'vizinho' : 'vizinhos'}` }
         </Sentence>
       </View>
     </View>

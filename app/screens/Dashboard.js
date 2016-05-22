@@ -59,10 +59,11 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands, onViewNotification, onShare, onFacebook, onAbout } = this.props
+    const { demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands, onViewNotification, onShare, onFacebook, onAbout } = this.props
     const { drawerOpen, signingOut } = this.props.dashboard
     const { currentUser, facebookConnecting } = this.props.auth
-    const { latitude, longitude } = currentUser   
+    const { latitude, longitude, neighbors_count, neighbors_image_url } = currentUser
+    console.log('neighbors_image_url', neighbors_image_url)
     const userMenu = (<UserMenu 
       currentUser={currentUser}
       onAbout={onAbout}
@@ -100,9 +101,8 @@ export default class Dashboard extends Component {
             >
               <Tab tabLabel="home">
                 <NeighborsMap 
-                  latitude={latitude}
-                  longitude={longitude}
-                  users={users.list}
+                  url={neighbors_image_url}
+                  count={neighbors_count}
                 /> 
                 <Demands
                   currentUser={currentUser}
@@ -117,7 +117,7 @@ export default class Dashboard extends Component {
                   onShare={onShare}
                   onFacebook={onFacebook}
                   facebookConnecting={facebookConnecting}
-                  neighborsCount={users.list.length}
+                  neighborsCount={neighbors_count}
                   showTip={true}
                 />
               </Tab>
