@@ -63,13 +63,15 @@ Xcode 7.0 or higher is required. It can be installed from the App Store.
 Use this if you didn't need to rebuild and just want to publish new JS + assets (works only on device, wont work on Appetize.io).
 
 ```
-rm -rf ./ios/release/
-mkdir ./ios/release
-react-native bundle \
---platform ios \
---entry-file index.ios.js \
---bundle-output ./ios/release/main.jsbundle \
---assets-dest ./ios/release \
---dev false
-code-push release TemAcucar-iOS ./ios/release 0.0.1 --description "Release Changelog" --mandatory
+bin/bundle-ios
+code-push release TemAcucar-iOS ./release/ios-bundle 0.0.1 --description "Release Changelog" --mandatory
+```
+
+### Releasing Android bundle to CodePush
+
+Use this if you didn't need to rebuild and just want to publish new JS + assets (works only on device, wont work on Appetize.io).
+
+```
+bin/bundle-android
+code-push release TemAcucar-Android ./release/android-bundle 0.0.1 --description "Release Changelog" --mandatory
 ```
