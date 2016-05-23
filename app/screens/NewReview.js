@@ -77,7 +77,10 @@ class NewReview extends Component {
           }}>
             { [1, 2, 3, 4, 5].map((index) => (
               <TouchableOpacity key={index} onPress={this.ratingChangeFunction(index)}>
-                <Icon name={(index > rating ? "star-border" : "star")} style={{ color: Colors.darkYellow }} />
+                <Icon name={(index > rating ? "star-border" : "star")} style={{
+                  color: Colors.darkYellow,
+                  fontSize: 30,
+                }} />
               </TouchableOpacity>
             )) }
           </View>
@@ -92,6 +95,14 @@ class NewReview extends Component {
             }}
             {...text}
           />
+          <Sentence style={{
+            fontSize: 14,
+            lineHeight: 18,
+            textAlign: 'center',
+            margin: 10,
+          }}>
+            Sua avaliação ficará exposta publicamente no perfil de {user.first_name}
+          </Sentence>
           { createError && <FormError message={ReviewValidators.errorMessage(createError)} /> }
           <FormSubmit
             {...this.props}
