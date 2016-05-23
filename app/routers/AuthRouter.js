@@ -8,6 +8,7 @@ import SignUp from "../screens/SignUp"
 import SignInForm from "../screens/SignInForm"
 import SignUpForm from "../screens/SignUpForm"
 import SignInFailed from "../screens/SignInFailed"
+import SignUpFailed from "../screens/SignUpFailed"
 import RequestPassword from "../screens/RequestPassword"
 import ResetPassword from "../screens/ResetPassword"
 
@@ -34,6 +35,7 @@ export default class AuthRouter extends Component {
         <Route name="signUp" component={SignUp} schema="default" />
         <Route name="signInForm" component={SignInForm} schema="default" />
         <Route name="signUpForm" component={SignUpForm} schema="default" />
+        <Route name="signUpFailed" component={SignUpFailed} schema="default" />
         <Route name="requestPassword" component={RequestPassword} schema="default" />
         <Route name="resetPassword" component={ResetPassword} schema="default" />
       </Router>

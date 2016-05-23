@@ -39,7 +39,7 @@ export default function toast(state = initialState, action) {
     case 'USERS_LIST_FAILURE':
       return failure("Não foi possível carregar o mapa com seus vizinhos")
     case 'DEMANDS_REFUSE_REQUEST':
-      return success("Pronto! Já não vamos mais mostrar este pedido para você :D")
+      return success("Sem problemas, avisaremos seu vizinho. Obrigada :D")
     case 'DEMANDS_FLAG_REQUEST':
       return success("Muito obrigado! Em breve nossos moderadores irão verificar o pedido :) enquanto isso, não vamos mostrá-lo para mais ninguém.")
     case 'DEMANDS_CREATE_SUCCESS':
