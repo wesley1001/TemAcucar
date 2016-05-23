@@ -69,19 +69,19 @@ class SetLocation extends Component {
         <FormTextInput 
           name='thoroughfare'
           title='Logradouro'
-          placeholder='Sua rua, avenida, etc'
+          placeholder='Sua rua, etc'
           {...thoroughfare}
         />
         <FormTextInput 
           name='subThoroughfare'
           title='Número'
-          placeholder='Número de sua casa ou edifício'
+          placeholder='Seu número'
           {...subThoroughfare}
         />
         <FormTextInput 
           name='complement'
           title='Complemento'
-          placeholder='Número de seu apto, bloco, etc'
+          placeholder='Apto, bloco, etc'
           {...complement}
         />
         <FormTextInput 

@@ -21,10 +21,17 @@ class ResetPassword extends Component {
   }
 
   render() {
-    const { onResetPassword, fields, auth: { resetPasswordError, resetingPassword } } = this.props
+    const { onResetPassword, fields, auth: { resetPasswordError, resetingPassword, currentUser: { email } } } = this.props
     const { reset_password_token, password } = fields
     return (
       <FormScreen navBar={true} navBarTitle="Confira seu e-mail">
+        <Headline style={{
+          fontSize: 14, 
+          lineHeight: 20, 
+          marginBottom: 10
+        }}>
+          Confira seu e-mail: enviamos seu código para {email} ;)
+        </Headline>
         <FormTextInput 
           name='reset_password_token'
           title='Código'
