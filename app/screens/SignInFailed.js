@@ -18,11 +18,11 @@ export default class SignInFailed extends Component {
           Se você está cadastrado na versão antiga do Tem Açúcar, precisa criar uma nova senha.
         </TextBox>
         <Button onPress={Actions.requestPassword}>
-          Criar uma nova senha
+          Criar nova senha
         </Button>
         <OrSeparator />
         <Button onPress={Actions.signIn} style={{paddingHorizontal: 34}}>
-          Tentar uma vez mais
+          Tentar outra vez
         </Button>
       </SimpleScreen>
     )

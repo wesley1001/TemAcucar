@@ -21,7 +21,7 @@ export default UserValidators = {
     },
     {
       validator: 'isEmail',
-      message: '{TITLE} deve ser válido',
+      message: 'Complete seu e-mail',
     }]
   },
   password: {
@@ -29,7 +29,7 @@ export default UserValidators = {
     validate: [{
       validator: 'isLength',
       arguments: [8, 255],
-      message: 'Senha muito curta',
+      message: 'Crie uma senha maior',
     }]
   },
   reset_password_token: {

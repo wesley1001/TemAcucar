@@ -17,7 +17,7 @@ export default class DemandButtons extends Component {
     Alert.alert(
       'Pedido impróprio?',
       'Você tem certeza que quer denunciar este pedido como impróprio?',
-      [{ text: 'Cancelar', style: 'cancel' }, { text: 'OK', onPress: () => {
+      [{ text: 'Não', style: 'cancel' }, { text: 'Sim', onPress: () => {
         const { demand, onFlag } = this.props
         onFlag(demand)
       }}]

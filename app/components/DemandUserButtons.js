@@ -12,7 +12,7 @@ export default class DemandUserButtons extends Component {
     Alert.alert(
       'Cancelar pedido?',
       'Você tem certeza que quer cancelar este pedido?',
-      [{ text: 'Cancelar', style: 'cancel' }, { text: 'OK', onPress: () => {
+      [{ text: 'Não', style: 'cancel' }, { text: 'Sim', onPress: () => {
         const { demand, onCancel } = this.props
         onCancel(demand)
       }}]

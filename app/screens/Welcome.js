@@ -18,8 +18,8 @@ export default class Welcome extends Component {
           Quero me cadastrar
         </Button>
         <OrSeparator />
-        <Button onPress={Actions.signIn}>
-          Já possuo cadastro
+        <Button onPress={Actions.signIn} style={{paddingHorizontal: 35}}>
+          Já tenho cadastro
         </Button>
       </SimpleScreen>
     )

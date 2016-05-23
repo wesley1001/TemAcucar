@@ -30,7 +30,7 @@ class SignInForm extends Component {
         <EmailInput {...email} />
         <PasswordInput {...password} />
         <FormSubmit {...this.props} onSubmit={onSignIn}>
-          Fazer login
+          Entrar
         </FormSubmit>
         <FormFooter>
           <Link onPress={Actions.requestPassword} style={{marginBottom: 10}}>

@@ -18,11 +18,11 @@ export default class SignIn extends Component {
     return(
       <SimpleScreen navBar={true} navBarTitle="Já possui cadastro?">
         <Button onPress={onFacebook} style={{ backgroundColor: Colors.facebook, borderColor: Colors.darkFacebook, paddingHorizontal: 20 }}>
-          Faça login com seu Facebook
+          Entre com seu Facebook
         </Button>
         <OrSeparator />
-        <Button onPress={Actions.signInForm} style={{marginBottom: 20, paddingHorizontal: 20}}>
-          Entre com seu e-mail e senha
+        <Button onPress={Actions.signInForm} style={{marginBottom: 20, paddingHorizontal: 32}}>
+          Entre com seu e-mail
         </Button>
         <SignUpLink />
       </SimpleScreen>
