@@ -7,7 +7,7 @@ export default TransactionDemandTimeAgo = ({ index, demand: { created_at, user }
   <View style={{
     flexDirection: 'column',
     flex: 1,
-    alignItems: (index % 2 == 0 ? 'flex-end' : 'flex-start'),
+    alignItems: 'flex-end',
   }}>
     <Icon name="schedule" style={{ 
       color: (currentUser.id === user.id ? Colors.lightPink : Colors.lightBlue),

@@ -19,8 +19,8 @@ export default class TransactionDemandHeader extends Component {
         flexDirection: 'row',
         alignItems: 'center',
       }}>
-        { index % 2 == 0 ? <TransactionDemandDescription {...this.props} /> : <TransactionDemandTimeAgo {...this.props} /> }
-        { index % 2 == 0 ? <TransactionDemandTimeAgo {...this.props} /> : <TransactionDemandDescription {...this.props} /> }
+        <TransactionDemandDescription {...this.props} />
+        <TransactionDemandTimeAgo {...this.props} />
       </TouchableOpacity>
     )
   }

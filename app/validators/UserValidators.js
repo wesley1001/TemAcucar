@@ -29,7 +29,7 @@ export default UserValidators = {
     validate: [{
       validator: 'isLength',
       arguments: [8, 255],
-      message: 'Crie uma senha maior',
+      message: 'Use uma senha maior',
     }]
   },
   reset_password_token: {

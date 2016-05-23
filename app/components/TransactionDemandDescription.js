@@ -9,11 +9,10 @@ export default TransactionDemandDescription = ({ index, demand: { user, name }, 
     flexDirection: 'row',
     alignItems: 'center',
   }}>
-    { index % 2 == 0 && <UserImage source={{uri: user.image_url}} style={{marginRight: 6}} /> }
+    <UserImage source={{uri: user.image_url}} style={{marginRight: 6}} />
     <View style={{
       flexDirection: 'column',
       flex: 2,
-      alignItems: (index % 2 == 0 ? 'flex-start' : 'flex-end'),
     }}>
       <Sentence style={{
         color: Colors.white,
@@ -29,6 +28,5 @@ export default TransactionDemandDescription = ({ index, demand: { user, name }, 
         {truncate(name, 25)}
       </Sentence>
     </View>
-    { index % 2 != 0 && <UserImage source={{uri: user.image_url}} style={{marginLeft: 6}} /> }
   </View>
 )
