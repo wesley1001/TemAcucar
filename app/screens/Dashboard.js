@@ -63,7 +63,6 @@ export default class Dashboard extends Component {
     const { drawerOpen, signingOut } = this.props.dashboard
     const { currentUser, facebookConnecting } = this.props.auth
     const { latitude, longitude, neighbors_count, neighbors_image_url } = currentUser
-    console.log('neighbors_image_url', neighbors_image_url)
     const userMenu = (<UserMenu 
       currentUser={currentUser}
       onAbout={onAbout}
