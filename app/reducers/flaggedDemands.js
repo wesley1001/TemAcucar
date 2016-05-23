@@ -3,6 +3,7 @@ const initialState = {
   listing: false,
   offset: 0,
   canList: false,
+  listError: null,
 }
 
 export default function flaggedDemands(state = initialState, action) {
@@ -11,6 +12,7 @@ export default function flaggedDemands(state = initialState, action) {
       return {
         ...state, 
         listing: true,
+        listError: null,
       }
     case 'FLAGGED_DEMANDS_LIST_SUCCESS':
       return {
@@ -19,11 +21,13 @@ export default function flaggedDemands(state = initialState, action) {
         listing: false,
         offset: state.offset + action.list.length,
         canList: (action.list.length >= 10 ? true : false),
+        listError: null,
       }
     case 'FLAGGED_DEMANDS_LIST_FAILURE':
       return {
         ...state, 
         listing: false,
+        listError: action.error,
       }
     case 'DEMANDS_FLAG_REQUEST':
       const demand = { ...action.demand, state: 'flagged' }

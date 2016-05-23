@@ -1,4 +1,5 @@
 import React, { Component, Dimensions, View, PanResponder, InteractionManager } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import DrawerLayout from 'react-native-drawer-layout'
 
@@ -16,6 +17,10 @@ import Notifications from "../components/Notifications"
 import NoNotifications from "../components/NoNotifications"
 
 export default class Dashboard extends Component {
+  componentDidMount() {
+    GoogleAnalytics.trackScreenView('Dashboard')
+  }
+
   componentWillMount() {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponderCapture: () => {
@@ -54,10 +59,10 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { users, demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands, onViewNotification, onShare, onFacebook, onAbout } = this.props
-    const { drawerOpen } = this.props.dashboard
+    const { demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands, onViewNotification, onShare, onFacebook, onAbout } = this.props
+    const { drawerOpen, signingOut } = this.props.dashboard
     const { currentUser, facebookConnecting } = this.props.auth
-    const { latitude, longitude } = currentUser   
+    const { latitude, longitude, neighbors_count, neighbors_image_url } = currentUser
     const userMenu = (<UserMenu 
       currentUser={currentUser}
       onAbout={onAbout}
@@ -69,6 +74,7 @@ export default class Dashboard extends Component {
       onFlaggedDemands={onFlaggedDemands}
       onFacebook={onFacebook}
       facebookConnecting={facebookConnecting}
+      signingOut={signingOut}
       onClose={this.handleMenuClose.bind(this)}
     />)
     return (
@@ -94,9 +100,8 @@ export default class Dashboard extends Component {
             >
               <Tab tabLabel="home">
                 <NeighborsMap 
-                  latitude={latitude}
-                  longitude={longitude}
-                  users={users.list}
+                  url={neighbors_image_url}
+                  count={neighbors_count}
                 /> 
                 <Demands
                   currentUser={currentUser}
@@ -111,7 +116,7 @@ export default class Dashboard extends Component {
                   onShare={onShare}
                   onFacebook={onFacebook}
                   facebookConnecting={facebookConnecting}
-                  neighborsCount={users.list.length}
+                  neighborsCount={neighbors_count}
                   showTip={true}
                 />
               </Tab>
@@ -161,7 +166,7 @@ export default class Dashboard extends Component {
                 lineHeight: 20,
               }}
             >
-              Fazer pedido
+              Pedir emprestado
             </Button>
           </BottomGradient>
         </View>

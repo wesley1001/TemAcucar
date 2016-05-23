@@ -1,6 +1,7 @@
 import React, { Component } from 'react-native'
 import Communications from 'react-native-communications'
 import { connect } from 'react-redux'
+import codePush from "react-native-code-push"
 
 import * as DashboardActions from '../actions/DashboardActions'
 import * as UsersActions from '../actions/UsersActions'
@@ -16,6 +17,7 @@ import * as ReadNotificationsActions from '../actions/ReadNotificationsActions'
 import { Actions } from 'react-native-router-flux'
 
 import Loading from "../screens/Loading"
+import NetworkError from "../screens/NetworkError"
 import DashboardRouter from "../routers/DashboardRouter"
 
 class DashboardContainer extends Component {
@@ -39,11 +41,12 @@ class DashboardContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, users, demands, auth: { credentials, currentUser } } = nextProps
-    if (users.startingUp && !users.listing) {
-      dispatch(UsersActions.list(credentials, currentUser))
-    } else if (demands.startingUp && !demands.listing) {
+    const { dispatch, demands, auth: { credentials, currentUser }, dashboard: { signingOut }, unreadNotifications, onSignOut } = nextProps
+    if (demands.startingUp && !demands.listing) {
       this.handleListDemands()
+    }
+    if (signingOut && !unreadNotifications.listing) {
+      onSignOut()
     }
   }
 
@@ -98,12 +101,7 @@ class DashboardContainer extends Component {
     if (!listing && !readingAll) {
       dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     }
-    list.map(notification => {
-      if (!notification.notified) {
-        dispatch(UnreadNotificationsActions.notify(notification))
-      }
-    })
-    this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
+    // this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
   }
 
   handleListReadNotifications() {
@@ -245,10 +243,22 @@ class DashboardContainer extends Component {
     Communications.web('https://www.facebook.com/sharer/sharer.php?u=http://www.temacucar.com/')
   }
 
+  handleSignOut() {
+    if (this.timer) {
+      clearTimeout(this.timer)
+    }
+    const { dispatch } = this.props
+    dispatch(DashboardActions.signOut())
+  }
+
+  handleTryAgain() {
+    codePush.restartApp()
+  }
+
   render() {
-    const { users, demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
-    if (users.startingUp || users.listing)
-      return (<Loading status="Carregando mapa com seus vizinhos..." />)
+    const { demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
+    if (demands.listError || transactions.listError || userDemands.listError || adminDemands.listError || flaggedDemands.listError)
+      return (<NetworkError onTryAgain={this.handleTryAgain.bind(this)} />)
     if (demands.startingUp)
       return (<Loading status="Carregando pedidos na sua vizinhança..." />)
     if (transactions.listing && transactions.list.length === 0)
@@ -297,6 +307,7 @@ class DashboardContainer extends Component {
         onReadAllNotifications={this.handleReadAllNotifications.bind(this)}
         onViewNotification={this.handleViewNotification.bind(this)}
         onShare={this.handleShare.bind(this)}
+        onSignOut={this.handleSignOut.bind(this)}
       />
     )
   }
@@ -304,7 +315,6 @@ class DashboardContainer extends Component {
 
 export default connect(state => ({
   dashboard: state.dashboard,
-  users: state.users,
   userDemands: state.userDemands,
   adminDemands: state.adminDemands,
   flaggedDemands: state.flaggedDemands,

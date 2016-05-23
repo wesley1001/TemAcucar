@@ -1,4 +1,5 @@
 import React, { Component } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
 import { Actions } from 'react-native-router-flux'
@@ -18,10 +19,14 @@ const validators = {
 }
 
 class SignInForm extends Component {
+  componentDidMount() {
+    GoogleAnalytics.trackScreenView('SignInForm')
+  }
+
   render() {
     const { onSignIn, fields: { email, password } } = this.props
     return (
-      <FormScreen navBar={true} navBarTitle="Entre com seu email e senha">
+      <FormScreen navBar={true} navBarTitle="Entre com seu e-mail e senha">
         <EmailInput {...email} />
         <PasswordInput {...password} />
         <FormSubmit {...this.props} onSubmit={onSignIn}>

@@ -1,4 +1,5 @@
 import React, { Component, View, ScrollView, Platform, NativeModules, TouchableOpacity, TextInput } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
 import truncate from 'truncate'
@@ -26,6 +27,7 @@ class ViewTransaction extends Component {
   componentDidMount() {
     const { initializeForm, transaction } = this.props
     initializeForm({transaction_id: transaction.id})
+    GoogleAnalytics.trackScreenView('ViewTransaction')
   }
 
   componentDidUpdate() {
@@ -91,7 +93,7 @@ class ViewTransaction extends Component {
     return (
       <View style={{
         flex: 1,
-        paddingBottom: (inputFocused ? focusedHeight : blurredHeight),
+        paddingBottom: (inputFocused ? focusedHeight : blurredHeight) + (Platform.os === 'ios' ? 0 : 10),
       }}>
         <NavBar>
           <View style={{
@@ -138,7 +140,10 @@ class ViewTransaction extends Component {
           </Sentence>
           { [1, 2, 3, 4, 5].map((index) => (
             <TouchableOpacity key={index} onPress={this.newReviewFunction(index)}>
-              <Icon name="star-border" style={{ color: Colors.darkYellow }} />
+              <Icon name="star-border" style={{
+                color: Colors.darkYellow,
+                fontSize: 30,
+              }} />
             </TouchableOpacity>
           )) }
         </View> }

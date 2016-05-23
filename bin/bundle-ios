@@ -1,0 +1,8 @@
+rm -rf ./release/ios-bundle
+mkdir ./release/ios-bundle
+react-native bundle \
+--platform ios \
+--entry-file index.ios.js \
+--bundle-output ./release/ios-bundle/main.jsbundle \
+--assets-dest ./release/ios-bundle \
+--dev false

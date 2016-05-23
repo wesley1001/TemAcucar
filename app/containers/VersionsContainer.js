@@ -47,7 +47,7 @@ class VersionsContainer extends Component {
   }
 
   handleUpdate() {
-    const url = (Platform.OS === 'ios' ? Config.APP_STORE_URL : Config.PLAY_STORE_URL)
+    const url = (Platform.OS === 'ios' ? "https://itunes.apple.com/app/id567264775?mt=8" : "https://play.google.com/store/apps/details?id=br.com.easytaxi")
     Communications.web(url)
   }
 
@@ -69,12 +69,12 @@ class VersionsContainer extends Component {
     if (startingUp || listing)
       return (<Loading />)
     if (listError)
-      return (<NetworkError error={listError} onTryAgain={this.handleTryAgain.bind(this)} />)
+      return (<NetworkError onTryAgain={this.handleTryAgain.bind(this)} />)
     if (this.isExpired())
       return (<ExpiredVersion onUpdate={this.handleUpdate.bind(this)} />)
     if (!this.isCurrent() && !ignoreUpdate)
       return (<UpdateVersion version={version} onIgnore={this.handleIgnore.bind(this)} onUpdate={this.handleUpdate.bind(this)} daysRemaining={this.daysRemaining(version)} />)
-    return (<AuthContainer />)
+    return (<AuthContainer {...this.props} />)
   }
 }
 

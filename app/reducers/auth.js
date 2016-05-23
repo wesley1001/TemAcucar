@@ -264,6 +264,11 @@ export default function auth(state = initialState, action) {
     case 'AUTH_RESET_PASSWORD_SUCCESS':
       return {
         ...state, 
+        currentUser: {
+          ...state.currentUser, 
+          ...action.currentUser,
+        },
+        credentials: action.credentials,
         resetingPassword: false,
         resetPasswordError: null,
         resetPassword: false,

@@ -2,6 +2,7 @@ const initialState = {
   show: false,
   type: null,
   message: null,
+  duration: 3500,
 }
 
 const success = (message) => ({ show: true, type: "success", message })
@@ -21,6 +22,8 @@ export default function toast(state = initialState, action) {
       return networkError
     case 'CONFIG_CONFIRM_EMAIL_FAILURE':
       return networkError
+    case 'CONFIG_SHOW_TOAST':
+      return tip("Falta pouco! Agora é só confirmar seu email e seu endereço :D")
     case 'LOCATION_GET_COORDINATES_FAILURE':
       return tip("Não foi possível detectar sua localização. Por favor, informe seu endereço.")
     case 'LOCATION_GET_ADDRESS_SUCCESS':
@@ -35,14 +38,12 @@ export default function toast(state = initialState, action) {
       return networkError
     case 'USERS_LIST_FAILURE':
       return failure("Não foi possível carregar o mapa com seus vizinhos")
-    case 'DEMANDS_LIST_FAILURE':
-      return failure("Não foi possível carregar os pedidos na sua vizinhança")
     case 'DEMANDS_REFUSE_REQUEST':
       return success("Pronto! Já não vamos mais mostrar este pedido para você :D")
     case 'DEMANDS_FLAG_REQUEST':
       return success("Muito obrigado! Em breve nossos moderadores irão verificar o pedido :) enquanto isso, não vamos mostrá-lo para mais ninguém.")
     case 'DEMANDS_CREATE_SUCCESS':
-      return success("Seu pedido foi criado com sucesso! :D")
+      return success("Vamos perguntar para seus vizinhos e você será notificado assim que responderem :D")
     case 'DEMANDS_COMPLETE_SUCCESS':
       return success("Pedido concluido com sucesso! :D")
     case 'DEMANDS_COMPLETE_FAILURE':
@@ -55,8 +56,6 @@ export default function toast(state = initialState, action) {
       return success("Pedido reativado com sucesso! :D")
     case 'DEMANDS_REACTIVATE_FAILURE':
       return failure("Não foi possível reativar este pedido")
-    case 'TRANSACTIONS_LIST_FAILURE':
-      return failure("Não foi possível carregar suas transações")
     case 'TRANSACTIONS_CREATE_FAILURE':
       return failure("Não foi possível criar sua transação")
     case 'MESSAGES_LIST_FAILURE':
@@ -67,12 +66,6 @@ export default function toast(state = initialState, action) {
       return failure("Não foi possível carregar as avaliações")
     case 'REVIEWS_CREATE_SUCCESS':
       return success("Sua avaliação foi criada com sucesso! :D")
-    case 'USER_DEMANDS_LIST_FAILURE':
-      return failure("Não foi possível carregar seus pedidos")
-    case 'ADMIN_DEMANDS_LIST_FAILURE':
-      return failure("Não foi possível carregar o admin de pedidos")
-    case 'FLAGGED_DEMANDS_LIST_FAILURE':
-      return failure("Não foi possível carregar o admin de pedidos impróprios")
     default:
       return state
   }

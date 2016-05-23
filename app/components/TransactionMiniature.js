@@ -13,7 +13,7 @@ export default class TransacionMiniature extends Component {
 
   render() {
     const { transaction, currentUser, index } = this.props
-    const { user, last_message_text } = transaction
+    const { user, demand, last_message_text } = transaction
     return (
       <TouchableOpacity onPress={this.handleView.bind(this)} style={{
         borderColor: Colors.ice,
@@ -22,7 +22,7 @@ export default class TransacionMiniature extends Component {
         flexDirection: 'row',
         alignItems: 'center',
       }}>
-        <UserImage size={32} source={{uri: user.image_url}} style={{marginRight: 10}} />
+        <UserImage size={32} source={{uri: (user.id === currentUser.id ? demand.user.image_url : user.image_url)}} style={{marginRight: 10}} />
         <View style={{
           flexDirection: 'column',
           flex: 1,
@@ -33,7 +33,7 @@ export default class TransacionMiniature extends Component {
             lineHeight: (Platform.OS === 'ios' ? 12 : 14),
             color: Colors.brown,
           }}>
-            { user.id === currentUser.id ? 'Conversa comigo' : `${user.first_name} ${user.last_name}` }
+            { user.id === currentUser.id ? `${demand.user.first_name} ${demand.user.last_name}` : `${user.first_name} ${user.last_name}` }
           </Sentence>
           <Sentence style={{
             fontSize: 12,

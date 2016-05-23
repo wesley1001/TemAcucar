@@ -1,4 +1,5 @@
 import React, { Component } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
 
@@ -15,11 +16,22 @@ const validators = {
 }
 
 class ResetPassword extends Component {
+  componentDidMount() {
+    GoogleAnalytics.trackScreenView('ResetPassword')
+  }
+
   render() {
-    const { onResetPassword, fields, auth: { resetPasswordError, resetingPassword } } = this.props
+    const { onResetPassword, fields, auth: { resetPasswordError, resetingPassword, currentUser: { email } } } = this.props
     const { reset_password_token, password } = fields
     return (
-      <FormScreen navBar={true} navBarTitle="Confira seu email">
+      <FormScreen navBar={true} navBarTitle="Confira seu e-mail">
+        <Headline style={{
+          fontSize: 14, 
+          lineHeight: 20, 
+          marginBottom: 10
+        }}>
+          Confira seu e-mail: enviamos seu código para {email} ;)
+        </Headline>
         <FormTextInput 
           name='reset_password_token'
           title='Código'

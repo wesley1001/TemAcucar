@@ -12,7 +12,7 @@ export default FacebookTip = ({ onPress, loading, title }) => (
       textAlign: 'center',
       marginHorizontal: 40,
     }}>
-      { title || 'Quer ter acesso a funcionalidades exclusivas?' }
+      { title || 'Quer ter acesso a funcionalidades incríveis?' }
     </Sentence>
     <Button
       onPress={onPress}

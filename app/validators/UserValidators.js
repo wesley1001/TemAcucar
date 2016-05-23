@@ -14,7 +14,7 @@ export default UserValidators = {
     }]
   },
   email: {
-    title: 'Email',
+    title: 'E-mail',
     validate: [{
       validator: 'isLength',
       arguments: [1, 255],
@@ -90,9 +90,9 @@ export default UserValidators = {
       case 'not_found':
         return 'Usuário não encontrado.'
       case 'email_is_already_taken':
-        return 'Email já cadastrado para outro usuário.'
+        return 'E-mail já cadastrado para outro usuário.'
       case 'unauthorized':
-        return 'Código inválido. Confira seu email ;)'
+        return 'Código inválido. Confira seu e-mail ;)'
       default:
         return 'Oops! Ocorreu um erro ao acessar nosso servidor. Por favor, tente novamente.'
     }

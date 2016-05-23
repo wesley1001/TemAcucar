@@ -37,6 +37,11 @@ class SetLocation extends Component {
     const delta = (height < 570 ? 0.0025 : 0.005)
     return (
       <MapView
+        showsUserLocation={false}
+        zoomEnabled={false}
+        rotateEnabled={false}
+        scrollEnabled={false}
+        pitchEnabled={false}
         style={{
           height: height * (height < 570 ? 0.12 : 0.25),
           alignSelf: 'stretch',
@@ -64,19 +69,19 @@ class SetLocation extends Component {
         <FormTextInput 
           name='thoroughfare'
           title='Logradouro'
-          placeholder='Sua rua, avenida, etc'
+          placeholder='Sua rua, etc'
           {...thoroughfare}
         />
         <FormTextInput 
           name='subThoroughfare'
           title='Número'
-          placeholder='Número de sua casa ou edifício'
+          placeholder='Seu número'
           {...subThoroughfare}
         />
         <FormTextInput 
           name='complement'
           title='Complemento'
-          placeholder='Número de seu apto, bloco, etc'
+          placeholder='(opcional)'
           {...complement}
         />
         <FormTextInput 

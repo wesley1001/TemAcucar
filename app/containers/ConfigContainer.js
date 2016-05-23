@@ -55,6 +55,11 @@ class ConfigContainer extends Component {
     dispatch(ConfigActions.updateEmail(data.email, currentUser.email, credentials))
   }
 
+  handleShowToast() {
+    const { dispatch } = this.props
+    dispatch(ConfigActions.showToast())
+  }
+
   render() {
     const { auth, terms, config } = this.props
     const { currentUser } = auth
@@ -67,7 +72,7 @@ class ConfigContainer extends Component {
     if (!currentUser.accepted_terms)
       return (<Terms onAcceptTerms={this.handleAcceptTerms.bind(this)} onRejectTerms={this.handleRejectTerms.bind(this)} onScroll={this.handleScrollTerms.bind(this)} scrolledToBottom={scrolledToBottom} />)
     if (!currentUser.reviewed_email)
-      return (<ReviewEmailRouter {...this.props} onConfirm={this.handleConfirmEmail.bind(this)} onUpdateEmail={this.handleUpdateEmail.bind(this)} />)
+      return (<ReviewEmailRouter {...this.props} onConfirm={this.handleConfirmEmail.bind(this)} onUpdateEmail={this.handleUpdateEmail.bind(this)} onShowToast={this.handleShowToast.bind(this)} />)
     if (!currentUser.latitude || !currentUser.longitude || !currentUser.reviewed_location)
       return (<LocationContainer {...this.props} />)
     return (<DashboardContainer {...this.props} />)

@@ -1,7 +1,8 @@
-import React, { Component } from 'react-native'
+import React, { Component, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import * as AuthActions from '../actions/AuthActions'
 import * as StoredAuthActions from '../actions/StoredAuthActions'
+import * as GcmActions from '../actions/GcmActions'
 
 import Loading from "../screens/Loading"
 import AuthRouter from "../routers/AuthRouter"
@@ -17,6 +18,14 @@ class AuthContainer extends Component {
     const { dispatch, auth: { credentials } } = nextProps
     if (this.shouldRefreshUser(nextProps)) {
       dispatch(AuthActions.refreshUser(credentials))
+    }
+    // After refreshing user, checks if it needs to send new GCM token to the server
+    if (Platform.OS === 'android') {
+      const { gcm, auth: { currentUser, refreshedUser } } = nextProps
+      const oldRefreshedUser = this.props.auth.refreshedUser
+      if (refreshedUser && !oldRefreshedUser && currentUser.gcm_token !== gcm.token) {
+        dispatch(GcmActions.store(credentials, gcm.token))
+      }
     }
   }
 

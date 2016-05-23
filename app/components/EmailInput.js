@@ -15,7 +15,7 @@ class EmailInput extends Component {
       <FormTextInput 
         ref='input'
         name='email'
-        title='Email'
+        title='E-mail'
         placeholder='digite@seu.email'
         icon='mail-outline'
         autoCapitalize='none'

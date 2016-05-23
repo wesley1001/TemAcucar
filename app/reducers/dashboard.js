@@ -1,5 +1,6 @@
 const initialState = {
   drawerOpen: false,
+  signingOut: false,
 }
 
 export default function dashboard(state = initialState, action) {
@@ -13,6 +14,11 @@ export default function dashboard(state = initialState, action) {
       return {
         ...state, 
         drawerOpen: false,
+      }
+    case 'DASHBOARD_SIGN_OUT':
+      return {
+        ...state, 
+        signingOut: true,
       }
     case 'LOCATION_SET_LOCATION_SUCCESS':
       return initialState

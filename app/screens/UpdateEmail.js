@@ -1,4 +1,5 @@
 import React, { Component } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import { validateFunction } from 'validate-model'
 import { reduxForm } from 'redux-form'
 
@@ -12,10 +13,14 @@ const validators = {
 }
 
 class UpdateEmail extends Component {
+  componentDidMount() {
+    GoogleAnalytics.trackScreenView('UpdateEmail')
+  }
+
   render() {
     const { onUpdateEmail, fields: { email }, config: { updateEmailError, updatingEmail } } = this.props
     return (
-      <FormScreen name="updateEmail" validators={validators} navBar={true} navBarTitle="Atualize seu email">
+      <FormScreen name="updateEmail" validators={validators} navBar={true} navBarTitle="Atualize seu e-mail">
         <EmailInput {...email} />
         { updateEmailError && <FormError message={UserValidators.errorMessage(updateEmailError)} /> }
         <FormSubmit
@@ -23,7 +28,7 @@ class UpdateEmail extends Component {
           isLoading={updatingEmail}
           onSubmit={onUpdateEmail}
         >
-          Atualizar meu email
+          Atualizar meu e-mail
         </FormSubmit>
       </FormScreen>
     )

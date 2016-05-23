@@ -1,4 +1,5 @@
 import React, { Component, ScrollView, View, Platform } from 'react-native'
+import GoogleAnalytics from 'react-native-google-analytics-bridge'
 import truncate from 'truncate'
 
 import Colors from "../Colors"
@@ -11,6 +12,10 @@ import DemandButtons from "../components/DemandButtons"
 import DemandUserButtons from "../components/DemandUserButtons"
 
 export default class ViewDemand extends Component {
+  componentDidMount() {
+    GoogleAnalytics.trackScreenView('ViewDemand')
+  }
+
   render() {
     const { auth: { currentUser }, demand, transactions, userDemands, adminDemands, onFlagDemand, onCreateTransaction, onRefuseDemand, onCompleteDemand, onCancelDemand, onReactivateDemand, admin } = this.props
     const transactionDemands = transactions.list

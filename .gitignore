@@ -47,3 +47,4 @@ android/release/
 ios/release/
 release/
 *.keystore
+google-services.json

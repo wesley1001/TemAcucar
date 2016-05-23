@@ -3,7 +3,7 @@ import Colors from "../Colors"
 import Sentence from "./Sentence"
 import Tip from "./Tip"
 
-export default NoDemands = () => (
+export default NoDemands = ({ text }) => (
   <Tip>
     <Sentence style={{
       alignSelf: 'stretch',
@@ -11,7 +11,7 @@ export default NoDemands = () => (
       textAlign: 'center',
       fontSize: 10,
     }}>
-      Você ainda não recebeu pedidos dos seus vizinhos. Que tal agitar sua vizinhança pedido algo que você precisa?
+      { `${text || 'Você ainda não recebeu pedidos dos seus vizinhos'}. Que tal agitar sua vizinhança pedindo algo que você precisa?` }
     </Sentence>
   </Tip>
 )
