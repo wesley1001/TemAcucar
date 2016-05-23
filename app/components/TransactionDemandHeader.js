@@ -11,11 +11,11 @@ export default class TransactionDemandHeader extends Component {
   }
 
   render() {
-    const { index } = this.props
+    const { index, currentUser, demand: { user } } = this.props
     return(
       <TouchableOpacity onPress={this.handleView.bind(this)} style={{
         padding: 10,
-        backgroundColor: (index % 2 == 0 ? Colors.pink : Colors.blue),
+        backgroundColor: (currentUser.id === user.id ? Colors.pink : Colors.blue),
         flexDirection: 'row',
         alignItems: 'center',
       }}>
