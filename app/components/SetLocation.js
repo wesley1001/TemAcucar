@@ -81,7 +81,7 @@ class SetLocation extends Component {
         <FormTextInput 
           name='complement'
           title='Complemento'
-          placeholder='Apto, bloco, etc'
+          placeholder='(opcional)'
           {...complement}
         />
         <FormTextInput 

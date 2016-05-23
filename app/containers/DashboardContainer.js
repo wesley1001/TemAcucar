@@ -1,6 +1,7 @@
 import React, { Component } from 'react-native'
 import Communications from 'react-native-communications'
 import { connect } from 'react-redux'
+import codePush from "react-native-code-push"
 
 import * as DashboardActions from '../actions/DashboardActions'
 import * as UsersActions from '../actions/UsersActions'
@@ -16,6 +17,7 @@ import * as ReadNotificationsActions from '../actions/ReadNotificationsActions'
 import { Actions } from 'react-native-router-flux'
 
 import Loading from "../screens/Loading"
+import NetworkError from "../screens/NetworkError"
 import DashboardRouter from "../routers/DashboardRouter"
 
 class DashboardContainer extends Component {
@@ -249,8 +251,14 @@ class DashboardContainer extends Component {
     dispatch(DashboardActions.signOut())
   }
 
+  handleTryAgain() {
+    codePush.restartApp()
+  }
+
   render() {
     const { demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
+    if (demands.listError || transactions.listError || userDemands.listError || adminDemands.listError || flaggedDemands.listError)
+      return (<NetworkError onTryAgain={this.handleTryAgain.bind(this)} />)
     if (demands.startingUp)
       return (<Loading status="Carregando pedidos na sua vizinhança..." />)
     if (transactions.listing && transactions.list.length === 0)

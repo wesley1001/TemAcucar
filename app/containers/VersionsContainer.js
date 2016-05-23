@@ -69,7 +69,7 @@ class VersionsContainer extends Component {
     if (startingUp || listing)
       return (<Loading />)
     if (listError)
-      return (<NetworkError error={listError} onTryAgain={this.handleTryAgain.bind(this)} />)
+      return (<NetworkError onTryAgain={this.handleTryAgain.bind(this)} />)
     if (this.isExpired())
       return (<ExpiredVersion onUpdate={this.handleUpdate.bind(this)} />)
     if (!this.isCurrent() && !ignoreUpdate)

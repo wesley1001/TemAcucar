@@ -7,6 +7,7 @@ const initialState = {
   creating: false,
   createError: null,
   lastCreated: null,
+  listError: null,
 }
 
 export default function demands(state = initialState, action) {
@@ -15,6 +16,7 @@ export default function demands(state = initialState, action) {
       return {
         ...state, 
         listing: true,
+        listError: null,
       }
     case 'DEMANDS_LIST_SUCCESS':
       return {
@@ -24,12 +26,14 @@ export default function demands(state = initialState, action) {
         offset: state.offset + action.list.length,
         canList: (action.list.length >= 10 ? true : false),
         startingUp: false,
+        listError: null,
       }
     case 'DEMANDS_LIST_FAILURE':
       return {
         ...state, 
         listing: false,
         startingUp: false,
+        listError: action.error,
       }
     case 'DEMANDS_REFUSE_REQUEST':
       return {

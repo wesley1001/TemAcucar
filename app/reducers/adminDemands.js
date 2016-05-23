@@ -3,6 +3,7 @@ const initialState = {
   listing: false,
   offset: 0,
   canList: false,
+  listError: null,
 }
 
 export default function adminDemands(state = initialState, action) {
@@ -11,6 +12,7 @@ export default function adminDemands(state = initialState, action) {
       return {
         ...state, 
         listing: true,
+        listError: null,
       }
     case 'ADMIN_DEMANDS_LIST_SUCCESS':
       return {
@@ -19,11 +21,13 @@ export default function adminDemands(state = initialState, action) {
         listing: false,
         offset: state.offset + action.list.length,
         canList: (action.list.length >= 10 ? true : false),
+        listError: null,
       }
     case 'ADMIN_DEMANDS_LIST_FAILURE':
       return {
         ...state, 
         listing: false,
+        listError: action.error,
       }
     case 'DEMANDS_CREATE_SUCCESS':
       return {

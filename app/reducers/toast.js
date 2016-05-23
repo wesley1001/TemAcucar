@@ -38,8 +38,6 @@ export default function toast(state = initialState, action) {
       return networkError
     case 'USERS_LIST_FAILURE':
       return failure("Não foi possível carregar o mapa com seus vizinhos")
-    case 'DEMANDS_LIST_FAILURE':
-      return failure("Não foi possível carregar os pedidos na sua vizinhança")
     case 'DEMANDS_REFUSE_REQUEST':
       return success("Pronto! Já não vamos mais mostrar este pedido para você :D")
     case 'DEMANDS_FLAG_REQUEST':
@@ -58,8 +56,6 @@ export default function toast(state = initialState, action) {
       return success("Pedido reativado com sucesso! :D")
     case 'DEMANDS_REACTIVATE_FAILURE':
       return failure("Não foi possível reativar este pedido")
-    case 'TRANSACTIONS_LIST_FAILURE':
-      return failure("Não foi possível carregar suas transações")
     case 'TRANSACTIONS_CREATE_FAILURE':
       return failure("Não foi possível criar sua transação")
     case 'MESSAGES_LIST_FAILURE':
@@ -70,12 +66,6 @@ export default function toast(state = initialState, action) {
       return failure("Não foi possível carregar as avaliações")
     case 'REVIEWS_CREATE_SUCCESS':
       return success("Sua avaliação foi criada com sucesso! :D")
-    case 'USER_DEMANDS_LIST_FAILURE':
-      return failure("Não foi possível carregar seus pedidos")
-    case 'ADMIN_DEMANDS_LIST_FAILURE':
-      return failure("Não foi possível carregar o admin de pedidos")
-    case 'FLAGGED_DEMANDS_LIST_FAILURE':
-      return failure("Não foi possível carregar o admin de pedidos impróprios")
     default:
       return state
   }

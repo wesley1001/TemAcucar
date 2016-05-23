@@ -2,6 +2,7 @@ const initialState = {
   list: [],
   startingUp: true,
   listing: false,
+  listError: null,
 }
 
 export default function users(state = initialState, action) {
@@ -10,6 +11,7 @@ export default function users(state = initialState, action) {
       return {
         ...state, 
         listing: true,
+        listError: null,
       }
     case 'USERS_LIST_SUCCESS':
       return {
@@ -17,12 +19,14 @@ export default function users(state = initialState, action) {
         list: action.list,
         listing: false,
         startingUp: false,
+        listError: null,
       }
     case 'USERS_LIST_FAILURE':
       return {
         ...state, 
         listing: false,
         startingUp: false,
+        listError: action.error,
       }
     case 'LOCATION_SET_LOCATION_SUCCESS':
       return initialState
