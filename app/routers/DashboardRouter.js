@@ -3,6 +3,7 @@ import { Route, Schema } from 'react-native-router-flux'
 
 import Router from "../components/Router"
 import Dashboard from "../screens/Dashboard"
+import Settings from "../screens/Settings"
 import About from "../screens/About"
 import NewDemand from "../screens/NewDemand"
 import NewReview from "../screens/NewReview"
@@ -20,6 +21,7 @@ export default class DashboardRouter extends Component {
       <Router {...this.props}>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
         <Route name="dashboard" component={Dashboard} initial={true}type="reset" />
+        <Route name="settings" component={Settings} schema="default" />
         <Route name="about" component={About} schema="default" />
         <Route name="newDemand" component={NewDemand} schema="default" />
         <Route name="newReview" component={NewReview} schema="default" />

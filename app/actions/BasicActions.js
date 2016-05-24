@@ -50,6 +50,7 @@ export function updateCurrentUser(prefix, credentials, attributes) {
     method: 'put',
     params: attributes,
     credentials,
+    requestAttributes: { attributes },
     currentUser: (response) => {
       return JSON.parse(response._bodyText)
     },

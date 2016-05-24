@@ -28,10 +28,13 @@ class GcmContainer extends Component {
       }
       const { dispatch } = this.props
       dispatch(GcmActions.notify(notification))
-      Notification.create({
-        subject: data.subject,
-        message: data.sanitized_text,
-      })
+      const createNotification = JSON.parse(data.app_notifications)
+      if (createNotification) {
+        Notification.create({
+          subject: data.subject,
+          message: data.sanitized_text,
+        })
+      }
     })
     GcmAndroid.requestPermissions()
   }

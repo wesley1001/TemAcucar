@@ -5,10 +5,13 @@ import GcmAndroid from 'react-native-gcm-android'
 
 const notification = GcmAndroid.launchNotification
 if (notification) {
-  Notification.create({
-    subject: notification.subject,
-    message: notification.sanitized_text,
-  })
+  const createNotification = JSON.parse(notification.app_notifications)
+  if (createNotification) {
+    Notification.create({
+      subject: notification.subject,
+      message: notification.sanitized_text,
+    })
+  }
   GcmAndroid.stopService()
 } else {
   const ProviderContainer = require('./app/containers/ProviderContainer')

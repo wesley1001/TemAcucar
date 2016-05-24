@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import codePush from "react-native-code-push"
 
 import * as DashboardActions from '../actions/DashboardActions'
+import * as ConfigActions from '../actions/ConfigActions'
 import * as UsersActions from '../actions/UsersActions'
 import * as DemandsActions from '../actions/DemandsActions'
 import * as UserDemandsActions from '../actions/UserDemandsActions'
@@ -139,6 +140,10 @@ class DashboardContainer extends Component {
     dispatch(UnreadNotificationsActions.readAll(credentials, currentUser, list))
   }
 
+  handleSettings() {
+    Actions.settings()
+  }
+
   handleAbout() {
     Actions.about()
   }
@@ -244,6 +249,18 @@ class DashboardContainer extends Component {
     codePush.restartApp()
   }
 
+  handleUpdateEmailNotifications(value) {
+    const { dispatch, auth } = this.props
+    const { credentials } = auth
+    dispatch(ConfigActions.updateEmailNotifications(value, credentials))
+  }
+
+  handleUpdateAppNotifications(value) {
+    const { dispatch, auth } = this.props
+    const { credentials } = auth
+    dispatch(ConfigActions.updateAppNotifications(value, credentials))
+  }
+
   render() {
     const { demands, userDemands, adminDemands, flaggedDemands, transactions, unreadNotifications, readNotifications } = this.props
     if (demands.listError || transactions.listError || userDemands.listError || adminDemands.listError || flaggedDemands.listError)
@@ -266,6 +283,8 @@ class DashboardContainer extends Component {
         onDashboard={this.handleDashboard.bind(this)}
         onDrawerOpen={this.handleDrawerOpen.bind(this)}
         onDrawerClose={this.handleDrawerClose.bind(this)}
+        onUpdateEmailNotifications={this.handleUpdateEmailNotifications.bind(this)}
+        onUpdateAppNotifications={this.handleUpdateAppNotifications.bind(this)}
         onViewDemand={this.handleViewDemand.bind(this)}
         onRefuseDemand={this.handleRefuseDemand.bind(this)}
         onFlagDemand={this.handleFlagDemand.bind(this)}
@@ -278,6 +297,7 @@ class DashboardContainer extends Component {
         onListFlaggedDemands={this.handleListFlaggedDemands.bind(this)}
         onListTransactions={this.handleListTransactions.bind(this)}
         onListReadNotifications={this.handleListReadNotifications.bind(this)}
+        onSettings={this.handleSettings.bind(this)}
         onAbout={this.handleAbout.bind(this)}
         onNewDemand={this.handleNewDemand.bind(this)}
         onCreateDemand={this.handleCreateDemand.bind(this)}

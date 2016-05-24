@@ -24,6 +24,14 @@ export default function toast(state = initialState, action) {
       return networkError
     case 'CONFIG_SHOW_TOAST':
       return tip("Falta pouco! Agora é só confirmar seu email e seu endereço :D")
+    case 'CONFIG_UPDATE_EMAIL_NOTIFICATIONS_SUCCESS':
+      return success("Configuração atualizada com sucesso :D")
+    case 'CONFIG_UPDATE_EMAIL_NOTIFICATIONS_FAILURE':
+      return failure("Ocorreu um erro ao atualizar sua configuração")
+    case 'CONFIG_UPDATE_APP_NOTIFICATIONS_SUCCESS':
+      return success("Configuração atualizada com sucesso :D")
+    case 'CONFIG_UPDATE_APP_NOTIFICATIONS_FAILURE':
+      return failure("Ocorreu um erro ao atualizar sua configuração")
     case 'LOCATION_GET_COORDINATES_FAILURE':
       return tip("Não foi possível detectar sua localização. Por favor, informe seu endereço.")
     case 'LOCATION_GET_ADDRESS_SUCCESS':
