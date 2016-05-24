@@ -7,7 +7,7 @@ const notification = GcmAndroid.launchNotification
 if (notification) {
   Notification.create({
     subject: notification.subject,
-    message: notification.text,
+    message: notification.sanitized_text,
   })
   GcmAndroid.stopService()
 } else {

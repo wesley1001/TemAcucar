@@ -59,6 +59,12 @@ export default function unreadNotifications(state = initialState, action) {
           }
         }),
       }
+    case 'GCM_NOTIFY':
+      return {
+        ...state, 
+        list: [action.notification].concat(state.list),
+        count: state.count + 1,
+      }
     case 'STORED_AUTH_RESET_SUCCESS':
       return initialState
     default:

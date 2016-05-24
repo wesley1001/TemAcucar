@@ -11,3 +11,9 @@ export function store(credentials, token) {
     gcm_token: token,
   })
 }
+
+export function notify(notification) {
+  return dispatch => {
+    dispatch({ type: 'GCM_NOTIFY', notification })
+  }
+}

@@ -22,7 +22,6 @@ import DashboardRouter from "../routers/DashboardRouter"
 
 class DashboardContainer extends Component {
   componentWillMount() {
-    this.timer = null
     const { dispatch, auth: { credentials, currentUser } } = this.props
     this.handleListUserDemands()
     this.handleListTransactions()
@@ -31,12 +30,6 @@ class DashboardContainer extends Component {
     if (currentUser.admin) {
       this.handleListAdminDemands()
       this.handleListFlaggedDemands()
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.timer) {
-      clearTimeout(this.timer)
     }
   }
 
@@ -101,7 +94,6 @@ class DashboardContainer extends Component {
     if (!listing && !readingAll) {
       dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     }
-    // this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
   }
 
   handleListReadNotifications() {
@@ -244,9 +236,6 @@ class DashboardContainer extends Component {
   }
 
   handleSignOut() {
-    if (this.timer) {
-      clearTimeout(this.timer)
-    }
     const { dispatch } = this.props
     dispatch(DashboardActions.signOut())
   }
