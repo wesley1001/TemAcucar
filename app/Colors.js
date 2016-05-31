@@ -11,7 +11,7 @@ const Colors = {
   lightBeige: '#FFFDF4',
   mediumLightBeige: '#FEE7D6',
   mediumDarkBeige: '#E5D2B9',
-  darkBeige: '#D3C0A9',
+  darkBeige: '#C3B099',
   yellow: '#FFFAD6',
   darkYellow: '#F0AD4E',
   blue: '#4AA2B0',

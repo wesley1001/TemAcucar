@@ -4,15 +4,21 @@ import DemandButton from "./DemandButton"
 
 export default class DemandUserButtons extends Component {
   handleComplete() {
-    const { demand, onComplete } = this.props
-    onComplete(demand)
+    Alert.alert(
+      'Concluir pedido?',
+      'Você tem certeza que quer concluir este pedido?',
+      [{ text: 'Não', style: 'cancel' }, { text: 'Sim', onPress: () => {
+        const { demand, onComplete } = this.props
+        onComplete(demand)
+      }}]
+    )
   }
 
   handleCancel() {
     Alert.alert(
       'Cancelar pedido?',
       'Você tem certeza que quer cancelar este pedido?',
-      [{ text: 'Cancelar', style: 'cancel' }, { text: 'OK', onPress: () => {
+      [{ text: 'Não', style: 'cancel' }, { text: 'Sim', onPress: () => {
         const { demand, onCancel } = this.props
         onCancel(demand)
       }}]
@@ -20,8 +26,14 @@ export default class DemandUserButtons extends Component {
   }
 
   handleReactivate() {
-    const { demand, onReactivate } = this.props
-    onReactivate(demand)
+    Alert.alert(
+      'Reativar pedido?',
+      'Você tem certeza que quer reativar este pedido?',
+      [{ text: 'Não', style: 'cancel' }, { text: 'Sim', onPress: () => {
+        const { demand, onReactivate } = this.props
+        onReactivate(demand)
+      }}]
+    )
   }
 
   render() {

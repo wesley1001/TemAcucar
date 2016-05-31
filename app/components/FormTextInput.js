@@ -14,7 +14,7 @@ class FormTextInput extends Component {
   }
 
   render() {
-    const { icon, error, style, titleStyle, inputStyle } = this.props
+    const { icon, error, style, titleStyle, inputStyle, messageStyle } = this.props
     const message = ( error && error.length > 0 ? error[0] : null)
     const lineHeight = (Platform.OS === 'ios' ? 12 : 16)
     return (
@@ -37,9 +37,12 @@ class FormTextInput extends Component {
           fontSize: 12,
           lineHeight,
         }, inputStyle]}
+        messageStyle={[{
+          color: Colors.darkBeige,
+        }, messageStyle]}
         icon={ icon && <Icon name={icon} color={Colors.brown} /> }
-        validIcon={ <Icon name='check' color='green' /> }
-        invalidIcon={ <Icon name='clear' color='red' /> }
+        validIcon={ <Icon name='check' color={Colors.green} /> }
+        invalidIcon={ <Icon name='more-horiz' color={Colors.darkBeige} /> }
         message={message}
       />
     )

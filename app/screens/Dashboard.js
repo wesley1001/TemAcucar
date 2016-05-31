@@ -59,12 +59,13 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands, onViewNotification, onShare, onFacebook, onAbout } = this.props
+    const { demands, transactions, unreadNotifications, readNotifications, onDrawerOpen, onDrawerClose, onNewDemand, onListDemands, onCreateTransaction, onRefuseDemand, onFlagDemand, onCompleteDemand, onCancelDemand,  onViewDemand, onListTransactions, onListReadNotifications, onViewTransaction, onSignOut, onUserDemands, onUserReviews, onSetLocation, onAdminDemands, onFlaggedDemands, onViewNotification, onShare, onFacebook, onAbout, onSettings } = this.props
     const { drawerOpen, signingOut } = this.props.dashboard
     const { currentUser, facebookConnecting } = this.props.auth
     const { latitude, longitude, neighbors_count, neighbors_image_url } = currentUser
     const userMenu = (<UserMenu 
       currentUser={currentUser}
+      onSettings={onSettings}
       onAbout={onAbout}
       onSignOut={onSignOut}
       onUserDemands={onUserDemands}

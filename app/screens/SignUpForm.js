@@ -24,6 +24,15 @@ const validators = {
 class SignUpForm extends Component {
   componentDidMount() {
     GoogleAnalytics.trackScreenView('SignUpForm')
+    this.signUpFailed = false
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { auth: { signingUp, signUpError } } = nextProps
+    if (signUpError && signUpError.id === 'email_is_already_taken' && !signingUp && !this.signUpFailed) {
+      this.signUpFailed = true
+      Actions.signUpFailed()
+    }
   }
 
   render() {

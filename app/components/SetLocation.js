@@ -16,6 +16,7 @@ const validators = {
   subLocality: UserValidators.address_sub_locality,
   locality: UserValidators.address_locality,
   administrativeArea: UserValidators.address_administrative_area,
+  country: UserValidators.address_country,
 }
 
 class SetLocation extends Component {
@@ -36,33 +37,58 @@ class SetLocation extends Component {
     const height = Dimensions.get('window').height
     const delta = (height < 570 ? 0.0025 : 0.005)
     return (
-      <MapView
-        showsUserLocation={false}
-        zoomEnabled={false}
-        rotateEnabled={false}
-        scrollEnabled={false}
-        pitchEnabled={false}
-        style={{
-          height: height * (height < 570 ? 0.12 : 0.25),
-          alignSelf: 'stretch',
-        }}
-        region={{
-          latitude: parseFloat(latitude || -13.5412631), 
-          longitude: parseFloat(longitude || -71.5518237),
-          latitudeDelta: parseFloat(latitude ? delta : 50),
-          longitudeDelta: parseFloat(longitude ? delta : 50),
-        }}
-      >
-        { latitude && longitude && <MapView.Marker coordinate={{latitude, longitude}} >
-          <Image source={require('../img/icon.png')} style={{width: 15, height: 15}} />
-        </MapView.Marker> }
-      </MapView>
+      <View>
+        <MapView
+          showsUserLocation={false}
+          zoomEnabled={false}
+          rotateEnabled={false}
+          scrollEnabled={false}
+          pitchEnabled={false}
+          style={{
+            height: height * (height < 570 ? 0.12 : 0.20),
+            alignSelf: 'stretch',
+          }}
+          region={{
+            latitude: parseFloat(latitude || -13.5412631), 
+            longitude: parseFloat(longitude || -71.5518237),
+            latitudeDelta: parseFloat(latitude ? delta : 50),
+            longitudeDelta: parseFloat(longitude ? delta : 50),
+          }}
+        >
+          { latitude && longitude && <MapView.Marker coordinate={{latitude, longitude}} >
+            <Image source={require('../img/icon.png')} style={{width: 15, height: 15}} />
+          </MapView.Marker> }
+        </MapView>
+        <View style={{
+          position: 'absolute',
+          bottom: 10,
+          left: 0,
+          right: 0,
+          alignItems: 'center',
+        }}>
+          <View style={{
+            backgroundColor: Colors.lightPink,
+            paddingVertical: 4,
+            paddingHorizontal: 30,
+            borderRadius: 12,
+          }}>
+            <Sentence style={{
+              color: Colors.white, 
+              fontFamily: 'OpenSans-Bold', 
+              textAlign: 'center',
+              fontSize: 12,
+            }}>
+              Seu endereço será sempre privado
+            </Sentence>
+          </View>
+        </View>
+      </View>
     )
   }
 
   render() {
     const { valid, dirty, fields, location: { startingUp, searching, settingLocation } } = this.props
-    const { thoroughfare, subThoroughfare, complement, subLocality, locality, administrativeArea } = fields
+    const { thoroughfare, subThoroughfare, complement, subLocality, locality, administrativeArea, country } = fields
     return (
       <Form>
         { this.renderMap() }
@@ -102,6 +128,12 @@ class SetLocation extends Component {
           placeholder='Seu estado'
           {...administrativeArea}
         />
+        <FormTextInput 
+          name='country'
+          title='País'
+          placeholder='Seu país'
+          {...country}
+        />
         <FormSubmit
           {...this.props}
           isDisabled={ !valid }
@@ -121,7 +153,7 @@ class SetLocation extends Component {
 
 SetLocation = reduxForm({
   form: 'setLocation',
-  fields: ['thoroughfare', 'subThoroughfare', 'complement', 'subLocality', 'locality', 'administrativeArea'],
+  fields: ['thoroughfare', 'subThoroughfare', 'complement', 'subLocality', 'locality', 'administrativeArea', 'country'],
   validate: validateFunction(validators),
 })(SetLocation)
 

@@ -6,23 +6,23 @@ import SimpleScreen from "../components/SimpleScreen"
 import OrSeparator from "../components/OrSeparator"
 import Button from "../components/Button"
 
-export default class SignInFailed extends Component {
+export default class SignUpFailed extends Component {
   componentDidMount() {
-    GoogleAnalytics.trackScreenView('SignInFailed')
+    GoogleAnalytics.trackScreenView('SignUpFailed')
   }
 
   render() {
     return(
-      <SimpleScreen headline="Ooops! Seu login falhou :(">
+      <SimpleScreen navBar={true} navBarTitle="Já possui cadastro?" headline="Este e-mail já é cadastrado ;)">
         <TextBox style={{marginBottom: 20}}>
           Se você está cadastrado na versão antiga do Tem Açúcar, precisa criar uma nova senha.
         </TextBox>
-        <Button onPress={Actions.requestPassword}>
+        <Button onPress={Actions.requestPassword} style={{paddingHorizontal: 36}}>
           Criar nova senha
         </Button>
         <OrSeparator />
-        <Button onPress={Actions.signIn} style={{paddingHorizontal: 34}}>
-          Tentar outra vez
+        <Button onPress={Actions.pop}>
+          Tentar outro e-mail
         </Button>
       </SimpleScreen>
     )

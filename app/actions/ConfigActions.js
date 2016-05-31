@@ -19,3 +19,15 @@ export function updateEmail(email, secondaryEmail, credentials) {
     reviewed_email: true,
   })
 }
+
+export function updateEmailNotifications(value, credentials) {
+  return updateCurrentUser('CONFIG_UPDATE_EMAIL_NOTIFICATIONS', credentials, {
+    email_notifications: value,
+  })
+}
+
+export function updateAppNotifications(value, credentials) {
+  return updateCurrentUser('CONFIG_UPDATE_APP_NOTIFICATIONS', credentials, {
+    app_notifications: value,
+  })
+}

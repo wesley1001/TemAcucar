@@ -24,6 +24,14 @@ export default function toast(state = initialState, action) {
       return networkError
     case 'CONFIG_SHOW_TOAST':
       return tip("Falta pouco! Agora é só confirmar seu email e seu endereço :D")
+    case 'CONFIG_UPDATE_EMAIL_NOTIFICATIONS_SUCCESS':
+      return success("Configuração atualizada com sucesso :D")
+    case 'CONFIG_UPDATE_EMAIL_NOTIFICATIONS_FAILURE':
+      return failure("Ocorreu um erro ao atualizar sua configuração")
+    case 'CONFIG_UPDATE_APP_NOTIFICATIONS_SUCCESS':
+      return success("Configuração atualizada com sucesso :D")
+    case 'CONFIG_UPDATE_APP_NOTIFICATIONS_FAILURE':
+      return failure("Ocorreu um erro ao atualizar sua configuração")
     case 'LOCATION_GET_COORDINATES_FAILURE':
       return tip("Não foi possível detectar sua localização. Por favor, informe seu endereço.")
     case 'LOCATION_GET_ADDRESS_SUCCESS':
@@ -39,7 +47,7 @@ export default function toast(state = initialState, action) {
     case 'USERS_LIST_FAILURE':
       return failure("Não foi possível carregar o mapa com seus vizinhos")
     case 'DEMANDS_REFUSE_REQUEST':
-      return success("Pronto! Já não vamos mais mostrar este pedido para você :D")
+      return success("Sem problemas, avisaremos seu vizinho. Obrigada :D")
     case 'DEMANDS_FLAG_REQUEST':
       return success("Muito obrigado! Em breve nossos moderadores irão verificar o pedido :) enquanto isso, não vamos mostrá-lo para mais ninguém.")
     case 'DEMANDS_CREATE_SUCCESS':

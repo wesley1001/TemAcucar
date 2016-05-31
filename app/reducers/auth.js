@@ -280,6 +280,22 @@ export default function auth(state = initialState, action) {
         resetingPassword: false,
         resetPasswordError: action.error,
       }
+    case 'CONFIG_UPDATE_EMAIL_NOTIFICATIONS_REQUEST':
+      return {
+        ...state, 
+        currentUser: {
+          ...state.currentUser, 
+          ...action.attributes,
+        }
+      }
+    case 'CONFIG_UPDATE_APP_NOTIFICATIONS_REQUEST':
+      return {
+        ...state, 
+        currentUser: {
+          ...state.currentUser, 
+          ...action.attributes,
+        }
+      }
     default:
       // Here I defined a standard for the whole app. If an action passes a credentials object, it will update BOTH auth.credentials AND auth.currentUser states.
       // WARNING: do not pass action.credentials object to any action unless it contains real and current auth credentials for the current user.

@@ -172,7 +172,7 @@ class ViewTransaction extends Component {
               height: (inputFocused ? focusedInputHeight : blurredHeight),
               padding: 10,
               color: Colors.brown,
-              backgroundColor: Colors.beige,
+              backgroundColor: Colors.mediumLightBeige,
             }}
             {...text}
             onFocus={this.handleFocus.bind(this)}

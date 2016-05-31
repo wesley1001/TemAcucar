@@ -21,8 +21,8 @@ export default class SignUp extends Component {
           Cadastre-se com o Facebook
         </Button>
         <OrSeparator />
-        <Button onPress={Actions.signUpForm} style={{marginBottom: 20, paddingHorizontal: 20}}>
-          Crie sua conta com seu e-mail
+        <Button onPress={Actions.signUpForm} style={{marginBottom: 20, paddingHorizontal: 27}}>
+          Cadastre-se com seu e-mail
         </Button>
         <SignInLink />
       </SimpleScreen>

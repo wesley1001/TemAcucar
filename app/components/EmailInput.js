@@ -16,7 +16,7 @@ class EmailInput extends Component {
         ref='input'
         name='email'
         title='E-mail'
-        placeholder='digite@seu.email'
+        placeholder='Digite seu e-mail'
         icon='mail-outline'
         autoCapitalize='none'
         keyboardType='email-address'

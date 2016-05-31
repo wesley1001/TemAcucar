@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import codePush from "react-native-code-push"
 
 import * as DashboardActions from '../actions/DashboardActions'
+import * as ConfigActions from '../actions/ConfigActions'
 import * as UsersActions from '../actions/UsersActions'
 import * as DemandsActions from '../actions/DemandsActions'
 import * as UserDemandsActions from '../actions/UserDemandsActions'
@@ -22,7 +23,6 @@ import DashboardRouter from "../routers/DashboardRouter"
 
 class DashboardContainer extends Component {
   componentWillMount() {
-    this.timer = null
     const { dispatch, auth: { credentials, currentUser } } = this.props
     this.handleListUserDemands()
     this.handleListTransactions()
@@ -31,12 +31,6 @@ class DashboardContainer extends Component {
     if (currentUser.admin) {
       this.handleListAdminDemands()
       this.handleListFlaggedDemands()
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.timer) {
-      clearTimeout(this.timer)
     }
   }
 
@@ -101,7 +95,6 @@ class DashboardContainer extends Component {
     if (!listing && !readingAll) {
       dispatch(UnreadNotificationsActions.list(credentials, currentUser))
     }
-    // this.timer = setTimeout(this.handleListUnreadNotifications.bind(this), 10000)
   }
 
   handleListReadNotifications() {
@@ -145,6 +138,10 @@ class DashboardContainer extends Component {
     const { dispatch, auth, unreadNotifications: { list } } = this.props
     const { credentials, currentUser } = auth
     dispatch(UnreadNotificationsActions.readAll(credentials, currentUser, list))
+  }
+
+  handleSettings() {
+    Actions.settings()
   }
 
   handleAbout() {
@@ -244,15 +241,24 @@ class DashboardContainer extends Component {
   }
 
   handleSignOut() {
-    if (this.timer) {
-      clearTimeout(this.timer)
-    }
     const { dispatch } = this.props
     dispatch(DashboardActions.signOut())
   }
 
   handleTryAgain() {
     codePush.restartApp()
+  }
+
+  handleUpdateEmailNotifications(value) {
+    const { dispatch, auth } = this.props
+    const { credentials } = auth
+    dispatch(ConfigActions.updateEmailNotifications(value, credentials))
+  }
+
+  handleUpdateAppNotifications(value) {
+    const { dispatch, auth } = this.props
+    const { credentials } = auth
+    dispatch(ConfigActions.updateAppNotifications(value, credentials))
   }
 
   render() {
@@ -277,6 +283,8 @@ class DashboardContainer extends Component {
         onDashboard={this.handleDashboard.bind(this)}
         onDrawerOpen={this.handleDrawerOpen.bind(this)}
         onDrawerClose={this.handleDrawerClose.bind(this)}
+        onUpdateEmailNotifications={this.handleUpdateEmailNotifications.bind(this)}
+        onUpdateAppNotifications={this.handleUpdateAppNotifications.bind(this)}
         onViewDemand={this.handleViewDemand.bind(this)}
         onRefuseDemand={this.handleRefuseDemand.bind(this)}
         onFlagDemand={this.handleFlagDemand.bind(this)}
@@ -289,6 +297,7 @@ class DashboardContainer extends Component {
         onListFlaggedDemands={this.handleListFlaggedDemands.bind(this)}
         onListTransactions={this.handleListTransactions.bind(this)}
         onListReadNotifications={this.handleListReadNotifications.bind(this)}
+        onSettings={this.handleSettings.bind(this)}
         onAbout={this.handleAbout.bind(this)}
         onNewDemand={this.handleNewDemand.bind(this)}
         onCreateDemand={this.handleCreateDemand.bind(this)}
